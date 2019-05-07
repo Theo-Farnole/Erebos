@@ -48,10 +48,9 @@ public class CharController : MonoBehaviour
         _jumpInput = GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One);
     }
 
-    #region Process Methods
     private void ProcessRunInput()
     {
-        Vector3 delta = Vector3.right * _horizontal * _data.Speed * Time.fixedDeltaTime;
+        Vector3 delta = Vector3.right * _horizontal * _data.Speed;
 
         if (_jumpsAvailable < MAX_JUMPS) // apply air control
         {
@@ -60,7 +59,7 @@ public class CharController : MonoBehaviour
 
         //_rigidbody.MovePosition(transform.position + delta);
         Vector3 vel = _rigidbody.velocity;
-        vel.x = _horizontal;
+        vel.x = delta.x;
         _rigidbody.velocity = vel;
 
         // turn the character where he runs
@@ -87,12 +86,17 @@ public class CharController : MonoBehaviour
         // manage jump input
         if (_jumpInput && _jumpsAvailable > 0)
         {
-            if (_jumpsAvailable == 2)       _rigidbody.AddForce(Vector3.up * _data.FirstJumpForce, ForceMode.Impulse);
-            else if (_jumpsAvailable == 1)  _rigidbody.AddForce(Vector3.up * _data.SecondJumpForce, ForceMode.Impulse);
+            if (_jumpsAvailable == 2)
+            {
+                _rigidbody.AddForce(Vector3.up * _data.FirstJumpForce, ForceMode.Impulse);
+            }
+            else if (_jumpsAvailable == 1)
+            {
+                _rigidbody.AddForce(Vector3.up * _data.SecondJumpForce, ForceMode.Impulse);
+            }
 
             _jumpsAvailable--;
             CharFeedbacks.Instance.PlayJumpPS();
-
         }
     }
 
@@ -100,5 +104,4 @@ public class CharController : MonoBehaviour
     {
         return Physics.Raycast(transform.position, -Vector3.up, _distToGround);
     }
-    #endregion
 }
