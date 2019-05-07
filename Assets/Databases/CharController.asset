@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d0704248eb44b45885021a73811dc7, type: 3}
   m_Name: CharController
   m_EditorClassIdentifier: 
-  _speed: 8
+  _speed: 10
   _firstJumpForce: 10
   _secondJumpForce: 4
-  _stickedJumpForce: 20
+  _stickedJumpForce: 10
   _airControl: 0.862
