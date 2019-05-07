@@ -6,7 +6,7 @@ using UnityEngine;
 [SelectionBase]
 public class CharController : MonoBehaviour
 {
-    const int MAX_JUMPS = 2;
+    public static readonly int MAX_JUMPS = 2;
 
     #region Fields
     [SerializeField] private CharControllerData _data;
@@ -47,13 +47,13 @@ public class CharController : MonoBehaviour
     {
         ProcessRunInput();
         ProcessSticking();
-        NormalJump();
+        ProcessJumpInput();
     }
     #endregion
 
     private void ManageInputs()
     {
-        _horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One, true).x;
+        _horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x;
 
         if (GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
         {
@@ -78,7 +78,7 @@ public class CharController : MonoBehaviour
         }
 
         // turn the character where he runs
-        if (_horizontal != 0)
+        if (_horizontal != 0f)
         {
             Vector3 scale = _model.localScale;
             scale.x = Mathf.Sign(_horizontal);
@@ -88,26 +88,38 @@ public class CharController : MonoBehaviour
 
     private void ProcessSticking()
     {
-        // determinate direction of raycast ...
-        Vector3 dir = Vector3.one;
+        Debug.Log("Sticked: " + _isSticked);
 
-        if (_horizontal < 0)
+        // determinate direction of raycast ...
+        Vector3 dir = Vector3.zero;
+
+        if (_horizontal < 0f)
         {
             dir = Vector3.left;
         }
-        else
+        else if (_horizontal > 0f)
         {
             dir = Vector3.right;
         }
 
         // ... then raycast ...
-        _isSticked = Physics.Raycast(transform.position, dir, _distToSide + 0.1f);
-
-        // .. reset velocity if raycast is true
-        if (_isSticked)
+        if (dir != Vector3.zero)
         {
-            _rigidbody.velocity = Vector3.one;
+            Debug.Log("Raycast on sticking coz' ov: " + _horizontal + " && dir: " + dir);
+            _isSticked = Physics.Raycast(transform.position, dir, _distToSide + 0.1f);
+
+            // .. reset velocity if raycast is true
+            if (_isSticked && false) // tempory disabled
+            {
+                _rigidbody.velocity = Vector3.zero;
+            }
         }
+        else
+        {
+            _isSticked = false;
+        }
+
+        _rigidbody.useGravity = !_isSticked;
     }
 
     #region Jump Methods
@@ -119,24 +131,25 @@ public class CharController : MonoBehaviour
             _jumpsAvailable = MAX_JUMPS;
         }
 
-        if (_isSticked)
-        {
-            StickedJump();
-        }
-        else
-        {
-            NormalJump();
-        }
-    }
-
-
-
-    private void NormalJump()
-    {
-        if (_jumpInput && _jumpsAvailable > 0)
+        if (_jumpInput)
         {
             _jumpInput = false;
 
+            if (_isSticked)
+            {
+                StickedJump();
+            }
+            else
+            {
+                NormalJump();
+            }
+        }
+    }
+
+    private void NormalJump()
+    {
+        if (_jumpsAvailable > 0)
+        {
             if (_jumpsAvailable == 2)
             {
                 _rigidbody.AddForce(Vector3.up * _data.FirstJumpForce, ForceMode.Impulse);
@@ -153,7 +166,21 @@ public class CharController : MonoBehaviour
 
     private void StickedJump()
     {
-        Debug.LogWarning("StickedJump not implemented");
+        float angle = 0f;
+
+        if (_horizontal < 0f)
+        {
+            angle = 45f;
+        }
+        else if (_horizontal > 0f)
+        {
+            angle = 135f;
+        }
+
+        Vector3 dir = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
+        _rigidbody.AddForce(dir * _data.StickedJumpForce, ForceMode.Impulse);
+
+        Debug.Log("StickedJump on angle " + angle);
     }
 
     private bool IsGrounded()

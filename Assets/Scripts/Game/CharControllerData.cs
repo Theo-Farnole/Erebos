@@ -9,6 +9,7 @@ public class CharControllerData : ScriptableObject
     [Header("Jumps settings")]
     [SerializeField] private float _firstJumpForce = 400f;
     [SerializeField] private float _secondJumpForce = 200f;
+    [SerializeField] private float _stickedJumpForce = 200f;
     [Space]
     [Range(0, 1)]
     [SerializeField] private float _airControl = 1f;
@@ -18,4 +19,5 @@ public class CharControllerData : ScriptableObject
     public float AirControl { get => _airControl; }
     public float FirstJumpForce { get => _firstJumpForce; }
     public float SecondJumpForce { get => _secondJumpForce; }
+    public float StickedJumpForce { get => _stickedJumpForce; }
 }
