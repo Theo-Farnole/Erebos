@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CharController
   m_EditorClassIdentifier: 
   _speed: 8
-  _airControl: 0.8
-  _firstJumpForce: 2
-  _secondJumpForce: 0
+  _firstJumpForce: 10
+  _secondJumpForce: 4
+  _airControl: 0.862
