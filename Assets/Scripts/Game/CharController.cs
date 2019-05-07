@@ -10,15 +10,20 @@ public class CharController : MonoBehaviour
 
     #region Fields
     [SerializeField] private float _speed = 3f;
+    [Header("Jumps settings")]
+    [Range(0, 1)]
+    [SerializeField] private float _airControl = 1f;
     [SerializeField] private float _firstJumpForce = 400f;
     [SerializeField] private float _secondJumpForce = 200f;
-    [Space]
+    [Header("Model settings")]
     [SerializeField] private Transform _model = null;
 
-    // jumps var
+    // movements variables
+    private bool _jumpInput = false;
+    private float _horizontal = 0;
     private int _jumpsAvailable = 0;
 
-    // cached var
+    // cached variables
     private float _distToGround;
     private Rigidbody _rigidbody;
     #endregion
@@ -30,31 +35,46 @@ public class CharController : MonoBehaviour
         _distToGround = GetComponent<Collider>().bounds.extents.y;
     }
 
+    void Update()
+    {
+        ManageInputs();
+    }
+
     void FixedUpdate()
     {
-        ManageJump();
-        ManageRun();
+        ProcessJumpInput();
+        ProcessRunInput();
     }
     #endregion
 
-    private void ManageRun()
+    private void ManageInputs()
     {
-        float horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x;
+        _horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x;
+        _jumpInput = GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One);
+    }
 
-        // make move the character
-        Vector3 delta = Vector3.right * horizontal * _speed * Time.fixedDeltaTime;
+    #region Process Methods
+    private void ProcessRunInput()
+    {
+        Vector3 delta = Vector3.right * _horizontal * _speed * Time.fixedDeltaTime;
+
+        if (_jumpsAvailable < MAX_JUMPS) // apply air control
+        {
+            delta *= _airControl;
+        }
+
         _rigidbody.MovePosition(transform.position + delta);
 
         // turn the character where he runs
-        if (horizontal != 0)
+        if (_horizontal != 0)
         {
             Vector3 scale = _model.localScale;
-            scale.x = Mathf.Sign(horizontal);
+            scale.x = Mathf.Sign(_horizontal);
             _model.localScale = scale;
         }
     }
 
-    private void ManageJump()
+    private void ProcessJumpInput()
     {
         if (IsGrounded())
         {
@@ -67,9 +87,7 @@ public class CharController : MonoBehaviour
         }
 
         // manage jump input
-        bool jumpInput = GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One);
-
-        if (jumpInput && _jumpsAvailable > 0)
+        if (_jumpInput && _jumpsAvailable > 0)
         {
             if (_jumpsAvailable == 2)       _rigidbody.AddForce(Vector3.up * _firstJumpForce, ForceMode.Impulse);
             else if (_jumpsAvailable == 1)  _rigidbody.AddForce(Vector3.up * _secondJumpForce, ForceMode.Impulse);
@@ -84,4 +102,5 @@ public class CharController : MonoBehaviour
     {
         return Physics.Raycast(transform.position, -Vector3.up, _distToGround);
     }
+    #endregion
 }
