@@ -44,8 +44,18 @@ public class CharController : MonoBehaviour
 
     private void ManageInputs()
     {
-        _horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x;
-        _jumpInput = GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One);
+        _horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One, true).x;
+
+        if (GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
+        {
+            _jumpInput = true;
+        }
+
+        else if (GamePad.GetButtonUp(GamePad.Button.A, GamePad.Index.One))
+        {
+            _jumpInput = false;
+        }
+
     }
 
     private void ProcessRunInput()
@@ -86,6 +96,9 @@ public class CharController : MonoBehaviour
         // manage jump input
         if (_jumpInput && _jumpsAvailable > 0)
         {
+            _jumpInput = false;
+
+            Debug.Log("JUMP");
             if (_jumpsAvailable == 2)
             {
                 _rigidbody.AddForce(Vector3.up * _data.FirstJumpForce, ForceMode.Impulse);
@@ -102,6 +115,6 @@ public class CharController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, _distToGround);
+        return Physics.Raycast(transform.position, -Vector3.up, _distToGround + 0.1f);
     }
 }

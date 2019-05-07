@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 8
   _airControl: 0.8
-  _firstJumpForce: 12
-  _secondJumpForce: 8
+  _firstJumpForce: 2
+  _secondJumpForce: 0
