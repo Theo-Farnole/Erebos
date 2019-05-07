@@ -102,8 +102,6 @@ public class CharController : MonoBehaviour
         _collision.down = Physics.Raycast(transform.position, Vector3.down, _distToGround + 0.1f);
         _collision.left = Physics.Raycast(transform.position, Vector3.left, _distToSide + 0.1f);
         _collision.right = Physics.Raycast(transform.position, Vector3.right, _distToSide + 0.1f);
-
-        Debug.Log(_collision);
     }
 
     private void ProcessRunInput()
@@ -138,13 +136,10 @@ public class CharController : MonoBehaviour
         }
 
         _rigidbody.useGravity = !_isSticked;
-        Debug.Log("Sticked: " + _isSticked);
     }
 
     private void Stick()
     {
-        Debug.Log("Stick()");
-
         if (!_collision.down && (_horizontal > 0 && _collision.right) || (_horizontal < 0 && _collision.left))
         {
             _isSticked = true;
@@ -154,8 +149,6 @@ public class CharController : MonoBehaviour
 
     private void Unstick()
     {
-        Debug.Log("Unstick()");
-
         if ((_horizontal > 0 && !_collision.right) || (_horizontal < 0 && !_collision.left))
         {
             _isSticked = false;
