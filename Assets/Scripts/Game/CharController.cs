@@ -11,20 +11,26 @@ public class CharController : MonoBehaviour
     [Space]
     [SerializeField] private Transform _model = null;
 
+    // jumps var
+    private bool _isJumping = false;
+    private bool _canJump = true;
+
+    // cached var
     private float _distToGround;
+    private Rigidbody _rigidbody;
     #endregion
 
     #region MonoBehaviour Callbacks
     void Start()
     {
-        // get the distance to ground
+        _rigidbody = GetComponent<Rigidbody>();
         _distToGround = GetComponent<Collider>().bounds.extents.y;
     }
 
     void Update()
     {
-        ManageRun();
         ManageJump();
+        ManageRun();
     }
     #endregion
 
@@ -33,7 +39,8 @@ public class CharController : MonoBehaviour
         float horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x;
 
         // make move the character
-        transform.position += Vector3.right * horizontal * _speed * Time.deltaTime;
+        Vector3 delta = Vector3.right * horizontal * _speed * Time.deltaTime;
+        _rigidbody.MovePosition(transform.position + delta);
 
         // turn the character where he runs
         if (horizontal != 0)
@@ -46,11 +53,17 @@ public class CharController : MonoBehaviour
 
     private void ManageJump()
     {
+        if (IsGrounded())
+        {
+            _canJump = true;
+            _isJumping = false;
+        }
+
         bool jumpInput = GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One);
 
-        if (jumpInput && IsGrounded())
+        if (jumpInput && _canJump)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * _jumpForce);
+            _rigidbody.AddForce(Vector3.up * _jumpForce);
         }
     }
 
