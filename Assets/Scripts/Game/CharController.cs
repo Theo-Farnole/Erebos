@@ -9,12 +9,7 @@ public class CharController : MonoBehaviour
     const int MAX_JUMPS = 2;
 
     #region Fields
-    [SerializeField] private float _speed = 3f;
-    [Header("Jumps settings")]
-    [Range(0, 1)]
-    [SerializeField] private float _airControl = 1f;
-    [SerializeField] private float _firstJumpForce = 400f;
-    [SerializeField] private float _secondJumpForce = 200f;
+    [SerializeField] private CharControllerData _data;
     [Header("Model settings")]
     [SerializeField] private Transform _model = null;
 
@@ -56,14 +51,17 @@ public class CharController : MonoBehaviour
     #region Process Methods
     private void ProcessRunInput()
     {
-        Vector3 delta = Vector3.right * _horizontal * _speed * Time.fixedDeltaTime;
+        Vector3 delta = Vector3.right * _horizontal * _data.Speed * Time.fixedDeltaTime;
 
         if (_jumpsAvailable < MAX_JUMPS) // apply air control
         {
-            delta *= _airControl;
+            delta *= _data.AirControl;
         }
 
-        _rigidbody.MovePosition(transform.position + delta);
+        //_rigidbody.MovePosition(transform.position + delta);
+        Vector3 vel = _rigidbody.velocity;
+        vel.x = _horizontal;
+        _rigidbody.velocity = vel;
 
         // turn the character where he runs
         if (_horizontal != 0)
@@ -89,8 +87,8 @@ public class CharController : MonoBehaviour
         // manage jump input
         if (_jumpInput && _jumpsAvailable > 0)
         {
-            if (_jumpsAvailable == 2)       _rigidbody.AddForce(Vector3.up * _firstJumpForce, ForceMode.Impulse);
-            else if (_jumpsAvailable == 1)  _rigidbody.AddForce(Vector3.up * _secondJumpForce, ForceMode.Impulse);
+            if (_jumpsAvailable == 2)       _rigidbody.AddForce(Vector3.up * _data.FirstJumpForce, ForceMode.Impulse);
+            else if (_jumpsAvailable == 1)  _rigidbody.AddForce(Vector3.up * _data.SecondJumpForce, ForceMode.Impulse);
 
             _jumpsAvailable--;
             CharFeedbacks.Instance.PlayJumpPS();

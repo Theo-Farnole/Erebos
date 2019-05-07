@@ -156,9 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5911be7abd888c7408c3fd4461ca64a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 8
-  _firstJumpForce: 12
-  _secondJumpForce: 5
+  _data: {fileID: 11400000, guid: d0a7af1076c11ed4fbf9384bcc82559f, type: 2}
   _model: {fileID: 1731791828320110730}
 --- !u!114 &149693694
 MonoBehaviour:
