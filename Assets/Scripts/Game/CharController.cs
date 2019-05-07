@@ -60,16 +60,20 @@ public class CharController : MonoBehaviour
 
     private void ProcessRunInput()
     {
-        Vector3 delta = Vector3.right * _horizontal * _data.Speed;
-
-        if (_jumpsAvailable < MAX_JUMPS) // apply air control
-        {
-            delta *= _data.AirControl;
-        }
-
-        //_rigidbody.MovePosition(transform.position + delta);
+        Vector3 speed = Vector3.right * _horizontal * _data.Speed;
         Vector3 vel = _rigidbody.velocity;
-        vel.x = delta.x;
+
+        // on ground
+        if (_jumpsAvailable == MAX_JUMPS) 
+        {
+            vel.x = speed.x;
+        }
+        // air control
+        else
+        {
+            vel.x = speed.x; // tmp var
+            //vel.x += speed.x * Time.fixedDeltaTime * _data.AirControl;
+        }
         _rigidbody.velocity = vel;
 
         // turn the character where he runs
