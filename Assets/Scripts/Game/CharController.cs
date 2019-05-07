@@ -9,6 +9,33 @@ public class CharController : MonoBehaviour
     public static readonly int MAX_JUMPS = 2;
 
     #region Fields
+    class PlayerCollision
+    {
+        const string FORMAT = "^: {0}, v {1}; {2} < > {3}";
+
+        public bool left = false;
+        public bool right = false;
+        public bool up = false;
+        public bool down = false;
+
+        public PlayerCollision() : this(false, false, false, false)
+        {
+        }
+
+        public PlayerCollision(bool left, bool right, bool up, bool down)
+        {
+            this.left = left;
+            this.right = right;
+            this.up = up;
+            this.down = down;
+        }
+
+        public override string ToString()
+        {
+            return string.Format(FORMAT, up, down, left, right);
+        }
+    }
+
     [SerializeField] private CharControllerData _data;
     [Header("Model settings")]
     [SerializeField] private Transform _model = null;
@@ -18,6 +45,7 @@ public class CharController : MonoBehaviour
     private float _horizontal = 0;
 
     // movements variables
+    private PlayerCollision _collision = new PlayerCollision();
     private bool _isSticked = false;
     private int _jumpsAvailable = 0;
 
@@ -45,8 +73,10 @@ public class CharController : MonoBehaviour
 
     void FixedUpdate()
     {
+        UpdatePlayerCollisionVar();
+
         ProcessRunInput();
-        ProcessSticking();
+        ManageSticking();
         ProcessJumpInput();
     }
     #endregion
@@ -66,14 +96,23 @@ public class CharController : MonoBehaviour
         }
     }
 
+    private void UpdatePlayerCollisionVar()
+    {
+        _collision.up = Physics.Raycast(transform.position, Vector3.up, _distToGround + 0.1f);
+        _collision.down = Physics.Raycast(transform.position, Vector3.down, _distToGround + 0.1f);
+        _collision.left = Physics.Raycast(transform.position, Vector3.left, _distToSide + 0.1f);
+        _collision.right = Physics.Raycast(transform.position, Vector3.right, _distToSide + 0.1f);
+
+        Debug.Log(_collision);
+    }
+
     private void ProcessRunInput()
     {
-        Vector3 speed = Vector3.right * _horizontal * _data.Speed;
-
-        if (!_isSticked)
+        // apply velocity if no collision on side
+        if ((_horizontal < 0 && !_collision.left) || (_horizontal > 0 && !_collision.right))
         {
             Vector3 vel = _rigidbody.velocity;
-            vel.x = speed.x;
+            vel.x = _horizontal * _data.Speed;
             _rigidbody.velocity = vel;
         }
 
@@ -86,41 +125,42 @@ public class CharController : MonoBehaviour
         }
     }
 
-    private void ProcessSticking()
+    #region Sticking Methods
+    private void ManageSticking()
     {
-        Debug.Log("Sticked: " + _isSticked);
-
-        // determinate direction of raycast ...
-        Vector3 dir = Vector3.zero;
-
-        if (_horizontal < 0f)
+        if (_isSticked)
         {
-            dir = Vector3.left;
-        }
-        else if (_horizontal > 0f)
-        {
-            dir = Vector3.right;
-        }
-
-        // ... then raycast ...
-        if (dir != Vector3.zero)
-        {
-            Debug.Log("Raycast on sticking coz' ov: " + _horizontal + " && dir: " + dir);
-            _isSticked = Physics.Raycast(transform.position, dir, _distToSide + 0.1f);
-
-            // .. reset velocity if raycast is true
-            if (_isSticked && false) // tempory disabled
-            {
-                _rigidbody.velocity = Vector3.zero;
-            }
+            Unstick();
         }
         else
         {
-            _isSticked = false;
+            Stick();
         }
 
         _rigidbody.useGravity = !_isSticked;
+        Debug.Log("Sticked: " + _isSticked);
     }
+
+    private void Stick()
+    {
+        Debug.Log("Stick()");
+
+        if (!_collision.down && (_horizontal > 0 && _collision.right) || (_horizontal < 0 && _collision.left))
+        {
+            _isSticked = true;
+        }
+    }
+
+    private void Unstick()
+    {
+        Debug.Log("Unstick()");
+
+        if ((_horizontal > 0 && !_collision.right) || (_horizontal < 0 && !_collision.left))
+        {
+            _isSticked = false;
+        }
+    }
+    #endregion
 
     #region Jump Methods
     private void ProcessJumpInput()
@@ -166,15 +206,16 @@ public class CharController : MonoBehaviour
 
     private void StickedJump()
     {
+        _isSticked = false;
         float angle = 0f;
 
-        if (_horizontal < 0f)
+        if (_collision.left)
         {
             angle = 45f;
         }
-        else if (_horizontal > 0f)
+        else if (_collision.right)
         {
-            angle = 135f;
+            angle = -45f;
         }
 
         Vector3 dir = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));

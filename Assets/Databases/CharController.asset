@@ -15,4 +15,5 @@ MonoBehaviour:
   _speed: 8
   _firstJumpForce: 10
   _secondJumpForce: 4
+  _stickedJumpForce: 20
   _airControl: 0.862
