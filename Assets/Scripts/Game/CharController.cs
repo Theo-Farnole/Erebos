@@ -148,6 +148,7 @@ public class CharController : MonoBehaviour
         if (!_collision.down && (_horizontal > 0 && _collision.right) || (_horizontal < 0 && _collision.left))
         {
             _isSticked = true;
+            _rigidbody.velocity = Vector3.zero;
         }
     }
 
