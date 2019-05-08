@@ -18,4 +18,4 @@ MonoBehaviour:
   _secondJumpForce: 9
   _stickedJumpForce: 15
   _fallMultiplier: 1.5
-  _airControlMultiplier: 0.5
+  _airControlMultiplier: 0.2
