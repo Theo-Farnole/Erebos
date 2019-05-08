@@ -14,13 +14,13 @@ public class CharControllerData : ScriptableObject
     [SerializeField] private float _stickedJumpForce = 200f;
     [Space]
     [Range(0, 1)]
-    [SerializeField] private float _airControl = 1f;
+    [SerializeField] private float _airControlMultiplier = 1f;
     
 
     public float Speed { get => _speed; }
     public float MaxVelocityOnX { get => _maxVelocityOnX;  }
 
-    public float AirControl { get => _airControl; }
+    public float AirControlMultiplier { get => _airControlMultiplier; }
     public float FirstJumpForce { get => _firstJumpForce; }
     public float SecondJumpForce { get => _secondJumpForce; }
     public float StickedJumpForce { get => _stickedJumpForce; }

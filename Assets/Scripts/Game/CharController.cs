@@ -118,7 +118,7 @@ public class CharController : MonoBehaviour
             }
             else
             {
-                vel.x += _horizontal * _data.Speed * _data.AirControl;
+                vel.x += _horizontal * _data.Speed * _data.AirControlMultiplier;
             }
 
             vel.x = Mathf.Clamp(vel.x, -_data.MaxVelocityOnX, _data.MaxVelocityOnX);
