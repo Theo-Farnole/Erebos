@@ -5,7 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Erebos/CharController")]
 public class CharControllerData : ScriptableObject
 {
+    [Header("Run settings")]
     [SerializeField] private float _speed = 3f;
+    [SerializeField] private float _maxVelocityOnX = 10f;
     [Header("Jumps settings")]
     [SerializeField] private float _firstJumpForce = 400f;
     [SerializeField] private float _secondJumpForce = 200f;
@@ -16,6 +18,8 @@ public class CharControllerData : ScriptableObject
     
 
     public float Speed { get => _speed; }
+    public float MaxVelocityOnX { get => _maxVelocityOnX;  }
+
     public float AirControl { get => _airControl; }
     public float FirstJumpForce { get => _firstJumpForce; }
     public float SecondJumpForce { get => _secondJumpForce; }

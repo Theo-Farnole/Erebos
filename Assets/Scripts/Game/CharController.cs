@@ -106,11 +106,22 @@ public class CharController : MonoBehaviour
 
     private void ProcessRunInput()
     {
-        // apply velocity if no collision on side
+        // If no collision on side, apply velocity
         if ((_horizontal < 0 && !_collision.left) || (_horizontal > 0 && !_collision.right))
         {
             Vector3 vel = _rigidbody.velocity;
-            vel.x = _horizontal * _data.Speed;
+
+            // If player isn't jumping
+            if (_collision.down)
+            {
+                vel.x = _horizontal * _data.Speed;
+            }
+            else
+            {
+                vel.x += _horizontal * _data.Speed * _data.AirControl;
+            }
+
+            vel.x = Mathf.Clamp(vel.x, -_data.MaxVelocityOnX, _data.MaxVelocityOnX);
             _rigidbody.velocity = vel;
         }
 
