@@ -8,9 +8,7 @@
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
-
-# Never ignore Asset meta data
-![Aa]ssets/**/*.meta
+[Pp]rojectSettings/ProBuilderSettings.json
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # [Aa]ssets/AssetStoreTools*
