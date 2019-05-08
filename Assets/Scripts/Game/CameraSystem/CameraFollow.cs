@@ -21,6 +21,7 @@ public class CameraFollow : MonoBehaviour
     #region MonoBehaviour Callbacks
     void Start()
     {
+
         _target = GameObject.FindGameObjectWithTag("Player").transform;
 
         gameObject.SetActive(_isTheFirstCamera);
