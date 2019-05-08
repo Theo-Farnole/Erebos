@@ -176,6 +176,11 @@ public class CharController : MonoBehaviour
             _jumpsAvailable = MAX_JUMPS;
         }
 
+        if (_rigidbody.velocity.y < 0)
+        {
+            _rigidbody.velocity += Vector3.up * Physics.gravity.y * _data.FallMultiplier * Time.deltaTime;
+        }
+
         if (_jumpInput)
         {
             _jumpInput = false;
@@ -195,6 +200,7 @@ public class CharController : MonoBehaviour
     {
         if (_jumpsAvailable > 0)
         {
+            _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0f);
             if (_jumpsAvailable == 2)
             {
                 _rigidbody.AddForce(Vector3.up * _data.FirstJumpForce, ForceMode.Impulse);
