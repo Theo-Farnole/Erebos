@@ -40,6 +40,7 @@ public class CharController : MonoBehaviour
     [Header("Model settings")]
     [SerializeField] private Transform _model = null;
 
+
     // inputs variables
     private bool _jumpInput = false;
     private float _horizontal = 0;
@@ -47,6 +48,7 @@ public class CharController : MonoBehaviour
     // movements variables
     private PlayerCollision _collision = new PlayerCollision();
     private bool _isSticked = false;
+    private bool _attracted = false;
     private int _jumpsAvailable = 0;
 
     // cached variables
@@ -54,6 +56,10 @@ public class CharController : MonoBehaviour
     private Collider _collider;
     private float _distToGround;
     private float _distToSide;
+    #endregion
+
+    #region Properties
+    public bool Attracted { get => _attracted; set => _attracted = value; }
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -78,6 +84,8 @@ public class CharController : MonoBehaviour
         ProcessRunInput();
         ManageSticking();
         ProcessJumpInput();
+
+        _rigidbody.useGravity = !(_isSticked || _attracted);
     }
     #endregion
 
@@ -144,8 +152,6 @@ public class CharController : MonoBehaviour
         {
             Stick();
         }
-
-        _rigidbody.useGravity = !_isSticked;
     }
 
     private void Stick()
