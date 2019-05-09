@@ -111,18 +111,16 @@ public class CharController : MonoBehaviour
         {
             Vector3 vel = _rigidbody.velocity;
 
-            // If player isn't jumping
-            if (_collision.down)
-            {
-                vel.x = _horizontal * _data.Speed;
-            }
-            else
-            {
-                vel.x += _horizontal * _data.Speed * _data.AirControlMultiplier;
-            }
+            float acceleration = _collision.down ? _data.Speed : _data.AirControlSpeed;
 
+            vel.x += _horizontal * acceleration;
             vel.x = Mathf.Clamp(vel.x, -_data.MaxVelocityOnX, _data.MaxVelocityOnX);
             _rigidbody.velocity = vel;
+        }
+
+        if (_horizontal == 0)
+        {
+            _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y);
         }
 
         // turn the character where he runs
