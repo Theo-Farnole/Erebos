@@ -200,14 +200,17 @@ public class CharController : MonoBehaviour
     {
         if (_jumpsAvailable > 0)
         {
-            _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0f);
             if (_jumpsAvailable == 2)
             {
-                _rigidbody.AddForce(Vector3.up * _data.FirstJumpForce, ForceMode.Impulse);
+                Vector3 vel = _rigidbody.velocity;
+                vel.y = Mathf.Sqrt(2 * _data.FirstJumpHeight * Mathf.Abs(Physics2D.gravity.y));
+                _rigidbody.velocity = vel;
             }
             else if (_jumpsAvailable == 1)
             {
-                _rigidbody.AddForce(Vector3.up * _data.SecondJumpForce, ForceMode.Impulse);
+                Vector3 vel = _rigidbody.velocity;
+                vel.y = Mathf.Sqrt(2 * _data.SecondJumpHeight * Mathf.Abs(Physics2D.gravity.y));
+                _rigidbody.velocity = vel;
             }
 
             _jumpsAvailable--;
