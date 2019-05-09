@@ -36,7 +36,7 @@ public class CharController : MonoBehaviour
         }
     }
 
-    [SerializeField] private CharControllerData _data;
+    [SerializeField] private CharControllerData _data = null;
     [Header("Model settings")]
     [SerializeField] private Transform _model = null;
 
@@ -224,11 +224,11 @@ public class CharController : MonoBehaviour
 
         if (_collision.left)
         {
-            angle = 45f;
+            angle = _data.StickedJumpAngle;
         }
         else if (_collision.right)
         {
-            angle = -45f;
+            angle = -_data.StickedJumpAngle;
         }
 
         Vector3 dir = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
