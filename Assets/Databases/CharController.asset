@@ -16,6 +16,7 @@ MonoBehaviour:
   _maxVelocityOnX: 8
   _firstJumpHeight: 3
   _secondJumpHeight: 4
-  _stickedJumpForce: 15
+  _stickedJumpForce: 17
+  _stickedJumpAngle: 40
   _fallMultiplier: 3
   _airControlSpeed: 0.3
