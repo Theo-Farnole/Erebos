@@ -113,7 +113,7 @@ public class CharController : MonoBehaviour
 
             float acceleration = _collision.down ? _data.Speed : _data.AirControlSpeed;
 
-            vel.x += _horizontal * acceleration;
+            vel.x += _horizontal * acceleration * Time.fixedDeltaTime * _rigidbody.mass;
             vel.x = Mathf.Clamp(vel.x, -_data.MaxVelocityOnX, _data.MaxVelocityOnX);
             _rigidbody.velocity = vel;
         }
@@ -176,7 +176,7 @@ public class CharController : MonoBehaviour
 
         if (_rigidbody.velocity.y < 0)
         {
-            _rigidbody.velocity += Vector3.up * Physics.gravity.y * _data.FallMultiplier * Time.deltaTime;
+            _rigidbody.velocity += Vector3.up * Physics.gravity.y * _data.FallMultiplier * Time.fixedDeltaTime;
         }
 
         if (_jumpInput)
