@@ -118,7 +118,7 @@ public class CharController : MonoBehaviour
             _rigidbody.velocity = vel;
         }
 
-        if (_horizontal == 0)
+        if (_collision.down && _horizontal == 0)
         {
             _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y);
         }
@@ -231,7 +231,7 @@ public class CharController : MonoBehaviour
         }
 
         Vector3 dir = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
-        _rigidbody.AddForce(dir * _data.StickedJumpForce, ForceMode.Impulse);
+        _rigidbody.AddForce(dir * _data.StickedJumpForce * _rigidbody.mass, ForceMode.Impulse);
 
         Debug.Log("StickedJump on angle " + angle);
     }
