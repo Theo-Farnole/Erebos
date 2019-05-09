@@ -118,6 +118,7 @@ public class CharController : MonoBehaviour
             _rigidbody.velocity = vel;
         }
 
+        // reset inertia
         if (_collision.down && _horizontal == 0)
         {
             _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y);
