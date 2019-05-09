@@ -1,0 +1,1 @@
+code from http://www.demonixis.net/ajout-du-multilingue-dans-votre-jeux-avec-unity-3d/
