@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 8
   _maxVelocityOnX: 7
-  _firstJumpForce: 9
-  _secondJumpForce: 9
+  _firstJumpHeight: 3
+  _secondJumpHeight: 4
   _stickedJumpForce: 15
-  _fallMultiplier: 1.5
-  _airControlMultiplier: 0.2
+  _fallMultiplier: 3
+  _airControlSpeed: 0.1
