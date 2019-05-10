@@ -1,16 +1,16 @@
-﻿using System.Collections;
+﻿using GamepadInput;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public static readonly float MAX_OFFSET = 3f;
-    public static readonly float SPEED = 3f;
-
     #region Fields
     public enum Type { Static, Dynamic }
     public Type _cameraType = Type.Static; // set to public in order to hide variables
 
+    [SerializeField] private CameraFollowData _data;
+    [Space]
     [SerializeField] private bool _followOnX = false;
     [SerializeField] private bool _followOnY = false;
     [Space]
@@ -18,7 +18,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private bool _isActive = false;
 
     private Transform _target = null;
-    private Vector3 _offset = Vector3.one;
+    private Vector3 _playerOffset = Vector3.zero;
+    private Vector3 _cameraOffset = Vector3.zero;
     #endregion
 
     #region Properties
@@ -30,7 +31,7 @@ public class CameraFollow : MonoBehaviour
         }
         set
         {
-            _offset = transform.position - _target.position;
+            _playerOffset = transform.position - _target.position;
             _isActive = value;
         }
     }
@@ -42,7 +43,7 @@ public class CameraFollow : MonoBehaviour
         _target = GameObject.FindGameObjectWithTag("Player").transform;
 
         gameObject.SetActive(_isActive);
-        _offset = transform.position - _target.position;
+        _playerOffset = transform.position - _target.position;
     }
 
     void Update()
@@ -59,6 +60,8 @@ public class CameraFollow : MonoBehaviour
                 FollowPlayer();
                 break;
         }
+
+        ProcessInput();
     }
     #endregion
 
@@ -68,14 +71,23 @@ public class CameraFollow : MonoBehaviour
 
         if (_followOnX)
         {
-            pos.x = _target.position.x + _offset.y;
+            pos.x = _target.position.x + _playerOffset.y;
         }
 
         if (_followOnY)
         {
-            pos.y = _target.position.y + _offset.y;
+            pos.y = _target.position.y + _playerOffset.y;
         }
 
         transform.position = pos;
+    }
+
+    void ProcessInput()
+    {
+        Vector2 input = GamePad.GetAxis(GamePad.Axis.RightStick, GamePad.Index.Any);                
+        Vector3 target = (Vector3)input.normalized * _data.MaxOffset;
+
+        _cameraOffset = Vector3.Slerp(_cameraOffset, target, Time.deltaTime * _data.Speed);
+        transform.position += _cameraOffset;
     }
 }
