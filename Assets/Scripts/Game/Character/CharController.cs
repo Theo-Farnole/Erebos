@@ -81,8 +81,6 @@ public class CharController : MonoBehaviour
         ManageSticking();
         ProcessJumpInput();
 
-        Debug.Log("sticking: " + _isSticked);
-
         _rigidbody.useGravity = !_isSticked;
     }
     #endregion
