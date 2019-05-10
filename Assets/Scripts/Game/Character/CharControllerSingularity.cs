@@ -14,14 +14,14 @@ public class CharControllerSingularity : MonoBehaviour
     [SerializeField] private Material _matEthereal;
     [SerializeField] private Material _matVoid;
 
-    private enum Form { Normal, Ethereal, Void };
-    private Form _form = Form.Normal;
+    public enum Form { Normal, Ethereal, Void };
+    public static Form form = Form.Normal;
     #endregion
 
     #region MonoBehaviour Callbacks
     void Awake()
     {
-        _form = Form.Normal;
+        form = Form.Normal;
         UpdateForm();
     }
 
@@ -36,21 +36,21 @@ public class CharControllerSingularity : MonoBehaviour
         // void form
         if (GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f)
         {
-            _form = Form.Void;
+            form = Form.Void;
             UpdateForm();
         }
 
         // ethereal form
         if (GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f)
         {
-            _form = Form.Ethereal;
+            form = Form.Ethereal;
             UpdateForm();
         }
     }
 
     void UpdateForm()
     {
-        switch (_form)
+        switch (form)
         {
             case Form.Normal:
                 _meshRenderer.material = _matNormal;

@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/**
- * TODO:
- *  > cam zoom
- *  > rotate around
- *  > deactive gravity
- * 
- */
-public class BlackSingularity : MonoBehaviour
+public class Singularity : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private BlackSingularityData _data;
+    public enum Type { Ethereal, Void };
+
+    [SerializeField] private Type _type;
+    [SerializeField] private SingularityData _data;
     [Space]
     [SerializeField] private DrawCircle _rangeFeedback;
 
@@ -23,14 +19,13 @@ public class BlackSingularity : MonoBehaviour
     #region MonoBehaviour Callbacks
     void Awake()
     {
-        _rangeFeedback.xradius = _data.Range;
-        _rangeFeedback.yradius = _data.Range;
+        UpdateRangeFeedback();
     }
 
     void Update()
     {
         IsPlayerInRange();
-        
+
         if (_isPlayerInRange)
         {
             AttractPlayer();
@@ -64,6 +59,23 @@ public class BlackSingularity : MonoBehaviour
     void AttractPlayer()
     {
         Vector3 dir = transform.position - _player.position;
-        _player.position += dir * _data.AttractSpeed * Time.deltaTime;
+        _player.position += dir * _data.ReactionForce * Time.deltaTime;
+    }
+
+    public void UpdateRangeFeedback()
+    {
+        Debug.Log("UpdateRangeFeedback()");
+
+        if (_rangeFeedback == null)
+        {
+            Debug.LogError(transform.name + " has no range feedback dragged!");
+            return;
+        }
+
+
+        _rangeFeedback.xradius = _data.Range;
+        _rangeFeedback.yradius = _data.Range;
+
+        _rangeFeedback.UpdateCircle();
     }
 }

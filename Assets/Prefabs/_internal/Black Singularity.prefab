@@ -89,7 +89,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 53d27e1ddc9b3a545b5de7e50d2a3be7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -207,11 +207,60 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 1.5322502, y: 0, z: 4.209823}
+  - {x: 2.0477989, y: 0, z: 3.9845855}
+  - {x: 2.5310524, y: 0, z: 3.6965084}
+  - {x: 2.9743896, y: 0, z: 3.3501353}
+  - {x: 3.3708189, y: 0, z: 2.9509284}
+  - {x: 3.7140884, y: 0, z: 2.505184}
+  - {x: 3.9987848, y: 0, z: 2.0199308}
+  - {x: 4.2204175, y: 0, z: 1.5028228}
+  - {x: 4.375492, y: 0, z: 0.9620143}
+  - {x: 4.461562, y: 0, z: 0.40603432}
+  - {x: 4.477271, y: 0, z: -0.15634906}
+  - {x: 4.4223704, y: 0, z: -0.71626675}
+  - {x: 4.297727, y: 0, z: -1.2648885}
+  - {x: 4.1053057, y: 0, z: -1.7935622}
+  - {x: 3.848141, y: 0, z: -2.2939508}
+  - {x: 3.5302896, y: 0, z: -2.7581618}
+  - {x: 3.1567628, y: 0, z: -3.1788754}
+  - {x: 2.7334516, y: 0, z: -3.5494564}
+  - {x: 2.2670326, y: 0, z: -3.8640604}
+  - {x: 1.764862, y: 0, z: -4.1177254}
+  - {x: 1.2348573, y: 0, z: -4.306452}
+  - {x: 0.6853795, y: 0, z: -4.427263}
+  - {x: 0.12509169, y: 0, z: -4.4782534}
+  - {x: -0.43716782, y: 0, z: -4.458619}
+  - {x: -0.992534, y: 0, z: -4.36867}
+  - {x: -1.5322462, y: 0, z: -4.209824}
+  - {x: -2.0477953, y: 0, z: -3.9845872}
+  - {x: -2.531049, y: 0, z: -3.6965106}
+  - {x: -2.9743862, y: 0, z: -3.3501384}
+  - {x: -3.370816, y: 0, z: -2.9509323}
+  - {x: -3.714086, y: 0, z: -2.5051877}
+  - {x: -3.9987817, y: 0, z: -2.0199368}
+  - {x: -4.2204156, y: 0, z: -1.5028285}
+  - {x: -4.375491, y: 0, z: -0.9620176}
+  - {x: -4.461562, y: 0, z: -0.40603712}
+  - {x: -4.477271, y: 0, z: 0.15634678}
+  - {x: -4.4223704, y: 0, z: 0.7162671}
+  - {x: -4.2977266, y: 0, z: 1.2648895}
+  - {x: -4.105305, y: 0, z: 1.7935635}
+  - {x: -3.848139, y: 0, z: 2.293954}
+  - {x: -3.5302868, y: 0, z: 2.7581654}
+  - {x: -3.1567593, y: 0, z: 3.178879}
+  - {x: -2.7334464, y: 0, z: 3.5494606}
+  - {x: -2.267027, y: 0, z: 3.864064}
+  - {x: -1.7648547, y: 0, z: 4.117728}
+  - {x: -1.2348478, y: 0, z: 4.3064547}
+  - {x: -0.68536854, y: 0, z: 4.4272647}
+  - {x: -0.12508062, y: 0, z: 4.478254}
+  - {x: 0.43718204, y: 0, z: 4.4586177}
+  - {x: 0.9925479, y: 0, z: 4.3686666}
+  - {x: 1.5322607, y: 0, z: 4.2098193}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -262,7 +311,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
   m_Loop: 0
 --- !u!1 &234051148072098632
 GameObject:
@@ -273,7 +322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 234051148072098633}
-  - component: {fileID: 234051148072098638}
+  - component: {fileID: 7986907611852166144}
   m_Layer: 0
   m_Name: Black Singularity
   m_TagString: Untagged
@@ -297,7 +346,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &234051148072098638
+--- !u!114 &7986907611852166144
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -306,8 +355,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 234051148072098632}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 783d5c7d66138d74fb9aef6a9320bf77, type: 3}
+  m_Script: {fileID: 11500000, guid: 22b912184bdb56f42b4f44900efcaced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 1
   _data: {fileID: 11400000, guid: 62baaa86c310acc4da99689c3ffe08f0, type: 2}
   _rangeFeedback: {fileID: 234051147520739371}
