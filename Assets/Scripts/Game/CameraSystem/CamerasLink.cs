@@ -18,6 +18,7 @@ public class CamerasLink : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("OnTriggerEnter with " + other.name);
+
         if (_isTriggered)
             return;
 
@@ -36,11 +37,13 @@ public class CamerasLink : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        // ... then disable current camera and enable other camera.
+        // ... then disable current camera ...
         _firstCamera.gameObject.SetActive(false);
-        _gotoCamera.gameObject.SetActive(true);
+        _firstCamera.GetComponent<CameraFollow>().IsActive = false;
 
+        // ... and enable the goto camera.
+        _gotoCamera.gameObject.SetActive(true);
         _gotoCamera.transform.position = _firstCamera.transform.position;
-        _gotoCamera.GetComponent<CameraFollow>().UpdateOffset();
+        _gotoCamera.GetComponent<CameraFollow>().IsActive = true;
     }
 }
