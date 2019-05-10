@@ -49,6 +49,7 @@ public class CharController : MonoBehaviour
     private PlayerCollision _collision = new PlayerCollision();
     private bool _isSticked = false;
     private int _jumpsAvailable = 0;
+    private bool _isStickingEnable = true;
 
     // cached variables
     private Rigidbody _rigidbody;
@@ -80,6 +81,8 @@ public class CharController : MonoBehaviour
         ManageSticking();
         ProcessJumpInput();
 
+        Debug.Log("sticking: " + _isSticked);
+
         _rigidbody.useGravity = !_isSticked;
     }
     #endregion
@@ -110,7 +113,7 @@ public class CharController : MonoBehaviour
     private void ProcessRunInput()
     {
         // If no collision on side, apply velocity
-        if ((_horizontal < 0 && !_collision.left) || (_horizontal > 0 && !_collision.right))
+        if (!_isSticked && (_horizontal < 0 && !_collision.left) || (_horizontal > 0 && !_collision.right))
         {
             Vector3 vel = _rigidbody.velocity;
 
@@ -122,7 +125,7 @@ public class CharController : MonoBehaviour
         }
 
         // reset inertia
-        if (_collision.down && _horizontal == 0)
+        if (_isSticked || (_collision.down && _horizontal == 0))
         {
             _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y);
         }
@@ -139,6 +142,11 @@ public class CharController : MonoBehaviour
     #region Sticking Methods
     private void ManageSticking()
     {
+        if (!_isStickingEnable && (_horizontal != 0 || _collision.down))
+        {
+            _isStickingEnable = true;
+        }
+
         if (_isSticked)
         {
             Unstick();
@@ -151,7 +159,7 @@ public class CharController : MonoBehaviour
 
     private void Stick()
     {
-        if (!_collision.down && (_horizontal > 0 && _collision.right) || (_horizontal < 0 && _collision.left))
+        if (_isStickingEnable && !_collision.down && (_collision.right || _collision.left))
         {
             _isSticked = true;
             _rigidbody.velocity = Vector3.zero;
@@ -160,9 +168,11 @@ public class CharController : MonoBehaviour
 
     private void Unstick()
     {
-        if ((_horizontal > 0 && !_collision.right) || (_horizontal < 0 && !_collision.left))
+        if (GamePad.GetButton(GamePad.Button.B, GamePad.Index.Any))
         {
+            Debug.Log("Unstick t'entends ?");
             _isSticked = false;
+            _isStickingEnable = false;
         }
     }
     #endregion
@@ -234,8 +244,6 @@ public class CharController : MonoBehaviour
 
         Vector3 dir = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
         _rigidbody.AddForce(dir * _data.StickedJumpForce * _rigidbody.mass, ForceMode.Impulse);
-
-        Debug.Log("StickedJump on angle " + angle);
     }
 
     private bool IsGrounded()
