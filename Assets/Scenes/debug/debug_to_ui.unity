@@ -1742,7 +1742,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Audio Settings
+  m_text: pause.audio
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 27430bf3f9e0cf74eb4f72e8ea6116e0, type: 2}
   m_sharedMaterial: {fileID: 4681205607668456632, guid: 27430bf3f9e0cf74eb4f72e8ea6116e0,
@@ -1812,9 +1812,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1171855938}
-    characterCount: 14
+    characterCount: 11
     spriteCount: 0
-    spaceCount: 1
+    spaceCount: 0
     wordCount: 2
     linkCount: 0
     lineCount: 1
@@ -2192,7 +2192,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Video Settings
+  m_text: pause.video
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 27430bf3f9e0cf74eb4f72e8ea6116e0, type: 2}
   m_sharedMaterial: {fileID: 4681205607668456632, guid: 27430bf3f9e0cf74eb4f72e8ea6116e0,
@@ -2262,9 +2262,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1644141058}
-    characterCount: 14
+    characterCount: 11
     spriteCount: 0
-    spaceCount: 1
+    spaceCount: 0
     wordCount: 2
     linkCount: 0
     lineCount: 1
@@ -2374,7 +2374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.995, y: 8.85}
+  m_AnchoredPosition: {x: -0.9949951, y: 8.85}
   m_SizeDelta: {x: 1.99, y: -17.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1685065306
@@ -2397,7 +2397,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Restart Level
+  m_text: pause.restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 27430bf3f9e0cf74eb4f72e8ea6116e0, type: 2}
   m_sharedMaterial: {fileID: 4681205607668456632, guid: 27430bf3f9e0cf74eb4f72e8ea6116e0,
@@ -2469,7 +2469,7 @@ MonoBehaviour:
     textComponent: {fileID: 1685065306}
     characterCount: 13
     spriteCount: 0
-    spaceCount: 1
+    spaceCount: 0
     wordCount: 2
     linkCount: 0
     lineCount: 1
