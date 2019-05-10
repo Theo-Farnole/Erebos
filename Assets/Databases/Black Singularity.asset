@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc59ddda86f7b348bc8bc6dd512a4f3, type: 3}
   m_Name: Black Singularity
   m_EditorClassIdentifier: 
-  _range: 4.48
-  _reactionForce: 4.96
+  _range: 8
+  _reactionForce: 20000

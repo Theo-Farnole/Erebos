@@ -5,9 +5,6 @@ using UnityEngine;
 public class Singularity : MonoBehaviour
 {
     #region Fields
-    public enum Type { Ethereal, Void };
-
-    [SerializeField] private Type _type;
     [SerializeField] private SingularityData _data;
     [Space]
     [SerializeField] private DrawCircle _rangeFeedback;
@@ -28,7 +25,10 @@ public class Singularity : MonoBehaviour
 
         if (_isPlayerInRange)
         {
-            AttractPlayer();
+            Vector3 dir = (transform.position - _player.position).normalized;
+            _player.GetComponent<Rigidbody>().AddForce(_data.ReactionForce * dir * Time.deltaTime);
+
+            Debug.DrawRay(transform.position, dir * _data.ReactionForce, Color.red);
         }
     }
     #endregion
@@ -52,14 +52,8 @@ public class Singularity : MonoBehaviour
 
         if (_player != null)
         {
-            _player.GetComponent<CharController>().Attracted = isPlayerInRange;
+            _player.GetComponent<CharControllerManager>().Attracted = isPlayerInRange;
         }
-    }
-
-    void AttractPlayer()
-    {
-        Vector3 dir = transform.position - _player.position;
-        _player.position += dir * _data.ReactionForce * Time.deltaTime;
     }
 
     public void UpdateRangeFeedback()

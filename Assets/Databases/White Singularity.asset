@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: White Singularity
   m_EditorClassIdentifier: 
   _range: 8
-  _reactionForce: 3
+  _reactionForce: -200000
