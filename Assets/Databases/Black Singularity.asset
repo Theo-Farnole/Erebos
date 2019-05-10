@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Black Singularity
   m_EditorClassIdentifier: 
   _range: 8
-  _reactionForce: 20000
+  _minRange: 3
+  _reactionForce: 1
+  _anglePerSecond: 360

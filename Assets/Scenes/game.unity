@@ -27901,7 +27901,7 @@ MonoBehaviour:
   _cameraType: 0
   _followOnX: 1
   _followOnY: 1
-  _isTheFirstCamera: 0
+  _isActive: 0
 --- !u!81 &948360699
 AudioListener:
   m_ObjectHideFlags: 0
@@ -33755,7 +33755,7 @@ MonoBehaviour:
   _cameraType: 1
   _followOnX: 1
   _followOnY: 1
-  _isTheFirstCamera: 1
+  _isActive: 1
 --- !u!43 &1175249640
 Mesh:
   m_ObjectHideFlags: 0

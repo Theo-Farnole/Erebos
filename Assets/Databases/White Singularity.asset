@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc59ddda86f7b348bc8bc6dd512a4f3, type: 3}
   m_Name: White Singularity
   m_EditorClassIdentifier: 
-  _range: 8
-  _reactionForce: -200000
+  _range: 2.5
+  _minRange: 1
+  _reactionForce: -9
+  _anglePerSecond: 360
