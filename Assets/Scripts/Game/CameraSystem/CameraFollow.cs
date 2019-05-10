@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    public static readonly float MAX_OFFSET = 3f;
+    public static readonly float SPEED = 3f;
+
     #region Fields
     public enum Type { Static, Dynamic }
     public Type _cameraType = Type.Static; // set to public in order to hide variables
@@ -12,10 +15,25 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private bool _followOnY = false;
     [Space]
     [Tooltip("Is this the first camera of the level?")]
-    [SerializeField] private bool _isTheFirstCamera = false;
+    [SerializeField] private bool _isActive = false;
 
     private Transform _target = null;
     private Vector3 _offset = Vector3.one;
+    #endregion
+
+    #region Properties
+    public bool IsActive
+    {
+        get
+        {
+            return _isActive;
+        }
+        set
+        {
+            _offset = transform.position - _target.position;
+            _isActive = value;
+        }
+    }
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -23,16 +41,29 @@ public class CameraFollow : MonoBehaviour
     {
         _target = GameObject.FindGameObjectWithTag("Player").transform;
 
-        gameObject.SetActive(_isTheFirstCamera);
-        UpdateOffset();
+        gameObject.SetActive(_isActive);
+        _offset = transform.position - _target.position;
     }
 
     void Update()
     {
-        // if camera is static, no need of movements, so no need of Update
-        if (_cameraType == Type.Static)
+        if (!_isActive)
             return;
 
+        switch (_cameraType)
+        {
+            case Type.Static:
+                break;
+
+            case Type.Dynamic:
+                FollowPlayer();
+                break;
+        }
+    }
+    #endregion
+
+    void FollowPlayer()
+    {
         Vector3 pos = transform.position;
 
         if (_followOnX)
@@ -46,11 +77,5 @@ public class CameraFollow : MonoBehaviour
         }
 
         transform.position = pos;
-    }
-    #endregion
-
-    public void UpdateOffset()
-    {
-        _offset = transform.position - _target.position;
     }
 }
