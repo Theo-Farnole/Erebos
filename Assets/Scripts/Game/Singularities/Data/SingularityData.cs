@@ -13,7 +13,7 @@ public class SingularityData : ScriptableObject
 
     public float Range { get => _range; }
     public float MinRange { get => _minRange; }
-    public float ReactionForce { get => _reactionForce * 1e6f; }
+    public float ReactionForce { get => _reactionForce * 1e5f; }
     public int AnglePerSecond { get => _anglePerSecond; }
 
 #if UNITY_EDITOR
