@@ -8,12 +8,12 @@ public class SingularityData : ScriptableObject
     [SerializeField] private float _range = 8f;
     [SerializeField] private float _minRange = 3f;
     [Space]
-    [SerializeField] private float _reactionForce = 20000f;
-    [SerializeField] private int _anglePerSecond = 360;
+    [SerializeField] private float _reactionForce = 2f;
+    [SerializeField] private int _anglePerSecond = 360;    
 
     public float Range { get => _range; }
     public float MinRange { get => _minRange; }
-    public float ReactionForce { get => _reactionForce; }
+    public float ReactionForce { get => _reactionForce * 1e6f; }
     public int AnglePerSecond { get => _anglePerSecond; }
 
 #if UNITY_EDITOR
