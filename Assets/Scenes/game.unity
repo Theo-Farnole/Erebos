@@ -27899,6 +27899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraType: 0
+  _data: {fileID: 0}
   _followOnX: 1
   _followOnY: 1
   _isActive: 0
@@ -33753,6 +33754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraType: 1
+  _data: {fileID: 11400000, guid: cf39f1f264236ba46b0887df2bbffa72, type: 2}
   _followOnX: 1
   _followOnY: 1
   _isActive: 1
