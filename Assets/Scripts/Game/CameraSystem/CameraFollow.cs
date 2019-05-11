@@ -40,9 +40,10 @@ public class CameraFollow : MonoBehaviour
     #region MonoBehaviour Callbacks
     void Start()
     {
+        gameObject.SetActive(_isActive);
+
         _target = GameObject.FindGameObjectWithTag("Player").transform;
 
-        gameObject.SetActive(_isActive);
         _playerOffset = transform.position - _target.position;
     }
 
@@ -71,7 +72,7 @@ public class CameraFollow : MonoBehaviour
 
         if (_followOnX)
         {
-            pos.x = _target.position.x + _playerOffset.y;
+            pos.x = _target.position.x + _playerOffset.x;
         }
 
         if (_followOnY)
