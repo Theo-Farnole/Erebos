@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _range: 8
   _minRange: 3
-  _reactionForce: 1
+  _reactionForce: 2
   _anglePerSecond: 360
