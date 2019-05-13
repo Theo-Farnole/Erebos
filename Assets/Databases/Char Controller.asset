@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d0704248eb44b45885021a73811dc7, type: 3}
   m_Name: Char Controller
   m_EditorClassIdentifier: 
-  _speed: 9
-  _maxVelocityOnX: 8
+  _speed: 10
+  _maxVelocityOnX: 9
   _jumpHeight: 4
   _dashDistance: 8
   _dashTime: 0.3
