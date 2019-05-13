@@ -1,4 +1,5 @@
 ﻿using GamepadInput;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,6 +49,7 @@ public class CharController : MonoBehaviour
     // movements variables
     private PlayerCollision _collision = new PlayerCollision();
     private bool _isSticked = false;
+    private bool _isDashing = false;
     private int _jumpsAvailable = 0;
     private bool _isStickingEnable = true;
 
@@ -81,7 +83,7 @@ public class CharController : MonoBehaviour
         ManageSticking();
         ProcessJumpInput();
 
-        _rigidbody.useGravity = !_isSticked;
+        _rigidbody.useGravity = !(_isSticked || _isDashing);
     }
     #endregion
 
@@ -108,10 +110,11 @@ public class CharController : MonoBehaviour
         _collision.right = Physics.Raycast(transform.position, Vector3.right, _distToSide + 0.1f);
     }
 
+    #region Run Methods
     private void ProcessRunInput()
     {
         // If no collision on side, apply velocity
-        if (!_isSticked && (_horizontal < 0 && !_collision.left) || (_horizontal > 0 && !_collision.right))
+        if (!(_isSticked || _isDashing) && ((_horizontal < 0 && !_collision.left) || (_horizontal > 0 && !_collision.right)))
         {
             Vector3 vel = _rigidbody.velocity;
 
@@ -136,6 +139,7 @@ public class CharController : MonoBehaviour
             _model.localScale = scale;
         }
     }
+    #endregion
 
     #region Sticking Methods
     private void ManageSticking()
@@ -199,31 +203,54 @@ public class CharController : MonoBehaviour
             }
             else
             {
-                NormalJump();
+                ProcessGroundedJump();
             }
         }
     }
 
-    private void NormalJump()
+    private void ProcessGroundedJump()
     {
         if (_jumpsAvailable > 0)
         {
             if (_jumpsAvailable == 2)
             {
-                Vector3 vel = _rigidbody.velocity;
-                vel.y = Mathf.Sqrt(2 * _data.FirstJumpHeight * Mathf.Abs(Physics2D.gravity.y));
-                _rigidbody.velocity = vel;
+                Jump();
             }
             else if (_jumpsAvailable == 1)
             {
-                Vector3 vel = _rigidbody.velocity;
-                vel.y = Mathf.Sqrt(2 * _data.SecondJumpHeight * Mathf.Abs(Physics2D.gravity.y));
-                _rigidbody.velocity = vel;
+                Dash();
             }
 
             _jumpsAvailable--;
             CharFeedbacks.Instance.PlayJumpPS();
         }
+    }
+
+    private void Jump()
+    {
+        Vector3 vel = _rigidbody.velocity;
+        vel.y = Mathf.Sqrt(2 * _data.JumpHeight * Mathf.Abs(Physics2D.gravity.y));
+        _rigidbody.velocity = vel;
+    }
+
+    private void Dash()
+    {
+        // add force
+        Vector3 input = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.Any);
+        Vector3 force = (input * _data.DashDistance) / _data.DashTime;
+        _rigidbody.velocity = force;
+
+        // dash boolean
+        _isDashing = true;
+        StartCoroutine(ExecuteAfterTime(_data.DashTime, () =>
+        {
+            _isDashing = false;
+            _rigidbody.velocity = Vector3.zero;
+        }
+        ));
+
+        // debug
+        GizmosPersistence.DrawPersistentLine(transform.position, transform.position + force);
     }
 
     private void StickedJump()
@@ -240,6 +267,8 @@ public class CharController : MonoBehaviour
             angle = -_data.StickedJumpAngle;
         }
 
+        _jumpsAvailable = 1;
+
         Vector3 dir = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
         _rigidbody.AddForce(dir * _data.StickedJumpForce * _rigidbody.mass, ForceMode.Impulse);
     }
@@ -249,4 +278,11 @@ public class CharController : MonoBehaviour
         return Physics.Raycast(transform.position, -Vector3.up, _distToGround + 0.1f);
     }
     #endregion
+
+    IEnumerator ExecuteAfterTime(float time, Action task)
+    {
+        yield return new WaitForSeconds(time);
+
+        task();
+    }
 }
