@@ -6,7 +6,12 @@ using UnityEngine;
 // https://answers.unity.com/questions/1139985/gizmosdrawline-thickens.html
 public class GizmosLine : MonoBehaviour
 {
-    public static void DrawLine(Vector3 p1, Vector3 p2, float width)
+    public Vector3 p1;
+    public Vector3 p2;
+
+    public float width = 1f;
+
+    void OnDrawGizmos()
     {
         int count = Mathf.CeilToInt(width); // how many lines are needed.
         if (count == 1)
