@@ -165,6 +165,7 @@ public class CharController : MonoBehaviour
         {
             _isSticked = true;
             _rigidbody.velocity = Vector3.zero;
+            _jumpsAvailable = 1;
         }
     }
 
@@ -291,5 +292,8 @@ public class CharController : MonoBehaviour
         _isSticked = false;
         _isStickingEnable = true;
         _isDashing = false;
+
+        // put dash
+        _jumpsAvailable = 1;
     }
 }
