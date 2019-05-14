@@ -66,8 +66,9 @@ public class BlackSingularity : AbstractSingularity
         float speed = _data.Radius / _data.TimeToReachCenter;
 
         // apply velocity
-        Vector3 vel = speed * dir * Time.deltaTime;
-        _character.GetComponent<Rigidbody>().velocity = vel;
+        Vector3 vel = speed * dir;
+        _character.GetComponent<Rigidbody>().velocity = vel * Time.deltaTime;
+        //_character.GetComponent<Rigidbody>().velocity.Clamp(vel);
 
         // debug
         Debug.DrawRay(transform.position, dir * speed, Color.red);
