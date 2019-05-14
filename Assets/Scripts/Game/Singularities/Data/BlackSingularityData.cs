@@ -6,10 +6,10 @@ using UnityEngine;
 public class BlackSingularityData : ScriptableObject
 {
     [SerializeField] private float _timeToReachCenter = 3f;
-    [SerializeField] private float _range = 3f;
+    [SerializeField] private float _radius = 3f;
 
     public float TimeToReachCenter { get => _timeToReachCenter; }
-    public float Range { get => _range; }
+    public float Radius { get => _radius; }
 
 #if UNITY_EDITOR
     void OnValidate()

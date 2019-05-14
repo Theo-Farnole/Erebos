@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WhiteSingularity : MonoBehaviour
+public class WhiteSingularity : AbstractSingularity
 {
     #region Fields
     [SerializeField] private WhiteSingularityData _data;
-
-    private Transform _character;
     #endregion
 
-    #region MonoBehaviour Callbacks
-    void OnTriggerEnter(Collider other)
+    #region Overrided Methods
+    protected override void OnExit()
     {
-        if (other.CompareTag("Player"))
-        {
-            _character = other.transform;
+        //throw new System.NotImplementedException();
+    }
 
-            RepulsePlayer();
-        }
+    protected override void OnStay()
+    {
+        RepulsePlayer();
     }
     #endregion
 

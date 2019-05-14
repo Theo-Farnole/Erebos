@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackSingularity : MonoBehaviour
+public class BlackSingularity : AbstractSingularity
 {
     #region Fields
     [SerializeField] private BlackSingularityData _data;
@@ -14,23 +14,27 @@ public class BlackSingularity : MonoBehaviour
     #region MonoBehaviour Callbacks
     void Awake()
     {
-        GetComponent<SphereCollider>().radius = _data.Range;
+        GetComponent<SphereCollider>().radius = _data.Radius;
+        UpdateRangeFeedback();
+    }
+    #endregion
+
+    #region Overrided Methods
+    protected override void OnStay()
+    {
+        AttractPlayer();
     }
 
-    void OnTriggerStay(Collider other)
+    protected override void OnExit()
     {
-        if (other.CompareTag("Player"))
-        {
-            _player = other.transform;
-            AttractPlayer();
-        }
+        //throw new System.NotImplementedException();
     }
     #endregion
 
     private void AttractPlayer()
     {
         Vector3 dir = (transform.position - _player.position).normalized;
-        float speed = _data.Range / _data.TimeToReachCenter;
+        float speed = _data.Radius / _data.TimeToReachCenter;
 
         // apply velocity
         Vector3 vel = _player.GetComponent<Rigidbody>().velocity;
@@ -51,8 +55,8 @@ public class BlackSingularity : MonoBehaviour
             return;
         }
 
-        _rangeFeedback.xradius = _data.Range;
-        _rangeFeedback.yradius = _data.Range;
+        _rangeFeedback.xradius = _data.Radius;
+        _rangeFeedback.yradius = _data.Radius;
 
         _rangeFeedback.UpdateCircle();
     }
