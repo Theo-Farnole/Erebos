@@ -22,14 +22,12 @@ public class WhiteSingularity : AbstractSingularity
 
     private void RepulsePlayer()
     {
+        Debug.Log("repulse player()");
+
         Vector3 dir = (_character.position - transform.position).normalized;
 
         // apply velocity
-        Vector3 vel = _character.GetComponent<Rigidbody>().velocity;
-
-        vel.x = dir.x * _data.RepulsionDistance;
-        vel.y = dir.y * _data.RepulsionDistance;
-
+        Vector3 vel = dir * _data.RepulsionDistance;
         _character.GetComponent<Rigidbody>().velocity = vel;
 
         // debug

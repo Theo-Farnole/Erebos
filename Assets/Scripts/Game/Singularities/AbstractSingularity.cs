@@ -15,6 +15,7 @@ public abstract class AbstractSingularity : MonoBehaviour
         {
             _character = other.transform;
             _character.GetComponent<CharControllerManager>().Attracted = true;
+            OnStay();
         }
     }
 
@@ -23,6 +24,7 @@ public abstract class AbstractSingularity : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _character.GetComponent<CharControllerManager>().Attracted = false;
+            OnExit();
         }
     }
     #endregion

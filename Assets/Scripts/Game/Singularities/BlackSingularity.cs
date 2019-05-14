@@ -7,8 +7,6 @@ public class BlackSingularity : AbstractSingularity
     #region Fields
     [SerializeField] private BlackSingularityData _data;
     [SerializeField] private DrawCircle _rangeFeedback;
-
-    private Transform _player;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -33,15 +31,12 @@ public class BlackSingularity : AbstractSingularity
 
     private void AttractPlayer()
     {
-        Vector3 dir = (transform.position - _player.position).normalized;
+        Vector3 dir = (transform.position - _character.position).normalized;
         float speed = _data.Radius / _data.TimeToReachCenter;
 
         // apply velocity
-        Vector3 vel = _player.GetComponent<Rigidbody>().velocity;
-
-        vel = dir * Time.deltaTime * Mathf.Sqrt(2 * speed * Mathf.Abs(Physics2D.gravity.y)); ;
-
-        _player.GetComponent<Rigidbody>().velocity = vel;
+        Vector3 vel = dir * Time.deltaTime * Mathf.Sqrt(2 * speed * Mathf.Abs(Physics2D.gravity.y)); 
+        _character.GetComponent<Rigidbody>().velocity = vel;
 
         // debug
         Debug.DrawRay(transform.position, dir * speed, Color.red);
