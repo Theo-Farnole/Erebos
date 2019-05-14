@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
-public class CharController : MonoBehaviour
+public class CharController : Singleton<CharController>
 {
     public static readonly int MAX_JUMPS = 2;
 
@@ -297,7 +297,7 @@ public class CharController : MonoBehaviour
         task();
     }
 
-    public void AttractReset()
+    public void ResetMovements()
     {
         _isSticked = false;
         _isStickingEnable = true;

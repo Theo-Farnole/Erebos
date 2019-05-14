@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8258357459599110184}
   - component: {fileID: 1731791828621383590}
   - component: {fileID: 1553995149499568171}
+  - component: {fileID: 149452262}
   - component: {fileID: 149693694}
   - component: {fileID: 1731791828621383589}
   - component: {fileID: 1731791828621383591}
@@ -110,6 +111,19 @@ MonoBehaviour:
   _matNormal: {fileID: 2100000, guid: a7852ff83cf6e4f498a861410c22b811, type: 2}
   _matEthereal: {fileID: 2100000, guid: b76ff5bb3591c7145b21b4f0b10d3d98, type: 2}
   _matVoid: {fileID: 2100000, guid: 53d27e1ddc9b3a545b5de7e50d2a3be7, type: 2}
+--- !u!114 &149452262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731791828621383585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a1b077155dcc8547b0a15fd1acb4641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCheckpoint: {fileID: 0}
 --- !u!114 &149693694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +224,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b76ff5bb3591c7145b21b4f0b10d3d98, type: 2}
+  - {fileID: 2100000, guid: a7852ff83cf6e4f498a861410c22b811, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
