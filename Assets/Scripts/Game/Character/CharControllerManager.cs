@@ -15,10 +15,15 @@ public class CharControllerManager : MonoBehaviour
 
         set
         {
+            _attracted = value;
+
             GetComponent<CharController>().enabled = !_attracted;
             GetComponent<Rigidbody>().useGravity = !_attracted;
 
-            _attracted = value;
+            if (_attracted)
+            {
+                GetComponent<CharController>().AttractReset();
+            }
         }
     }
 }

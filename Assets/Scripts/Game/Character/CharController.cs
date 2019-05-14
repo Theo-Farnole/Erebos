@@ -285,4 +285,11 @@ public class CharController : MonoBehaviour
 
         task();
     }
+
+    public void AttractReset()
+    {
+        _isSticked = false;
+        _isStickingEnable = true;
+        _isDashing = false;
+    }
 }
