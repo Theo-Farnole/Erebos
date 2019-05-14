@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GamepadInput;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +21,14 @@ public class BlackSingularity : AbstractSingularity
     #region Overrided Methods
     protected override void OnStay()
     {
-        AttractPlayer();
+        if (Vector3.Distance(transform.position, _character.position) <= _data.CharacterRotateRadius)
+        {
+            RotateCharacter();
+        }
+        else
+        {
+            AttractPlayer();
+        }
     }
 
     protected override void OnExit()
@@ -28,6 +36,27 @@ public class BlackSingularity : AbstractSingularity
         //throw new System.NotImplementedException();
     }
     #endregion
+
+    // note: this function shouldn't be in this script, but in the CharControllerSingularity!
+    private void RotateCharacter()
+    {
+        _character.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        int anglePerSecond = 360;
+
+
+        // process input
+        float horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x * Time.deltaTime * anglePerSecond;
+
+        Vector3 dir = _character.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        angle += horizontal;
+
+        // apply new position
+        Vector3 offset = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+        _character.position = transform.position + offset * _data.CharacterRotateRadius;
+
+    }
 
     private void AttractPlayer()
     {
@@ -37,7 +66,7 @@ public class BlackSingularity : AbstractSingularity
         float speed = _data.Radius / _data.TimeToReachCenter;
 
         // apply velocity
-        Vector3 vel = speed * dir * Time.deltaTime; 
+        Vector3 vel = speed * dir * Time.deltaTime;
         _character.GetComponent<Rigidbody>().velocity = vel;
 
         // debug
