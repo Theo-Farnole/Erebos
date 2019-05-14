@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SingularityEntity : MonoBehaviour
 {
-    [SerializeField] private Singularity _blackSingularity;
-    [SerializeField] private Singularity _whiteSingularity;
+    [SerializeField] private BlackSingularity _blackSingularity;
+    [SerializeField] private WhiteSingularity _whiteSingularity;
 
     void Update()
     {

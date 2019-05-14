@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc59ddda86f7b348bc8bc6dd512a4f3, type: 3}
+  m_Script: {fileID: 11500000, guid: eb158ee23d5f34e4991ef706c1dbf242, type: 3}
   m_Name: Black Singularity
   m_EditorClassIdentifier: 
-  _range: 8
-  _minRange: 3
-  _reactionForce: 2
+  _repulseForce: 3
+  _range: 3
   _anglePerSecond: 360

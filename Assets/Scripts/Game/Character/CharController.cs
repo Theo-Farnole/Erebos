@@ -60,6 +60,10 @@ public class CharController : MonoBehaviour
     private float _distToSide;
     #endregion
 
+    #region Properties
+    public Rigidbody Rigidbody { get => _rigidbody; }
+    #endregion
+
     #region MonoBehaviour Callbacks
     void Start()
     {
@@ -156,6 +160,12 @@ public class CharController : MonoBehaviour
         else
         {
             Stick();
+        }
+
+        // override sticked
+        if (!_collision.left && _collision.right)
+        {
+            _isSticked = false;
         }
     }
 
