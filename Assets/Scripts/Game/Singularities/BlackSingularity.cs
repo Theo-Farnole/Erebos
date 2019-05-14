@@ -31,11 +31,13 @@ public class BlackSingularity : AbstractSingularity
 
     private void AttractPlayer()
     {
+        Debug.Log("AttractPlayer()");
+
         Vector3 dir = (transform.position - _character.position).normalized;
         float speed = _data.Radius / _data.TimeToReachCenter;
 
         // apply velocity
-        Vector3 vel = dir * Time.deltaTime * Mathf.Sqrt(2 * speed * Mathf.Abs(Physics2D.gravity.y)); 
+        Vector3 vel = speed * dir * Time.deltaTime; 
         _character.GetComponent<Rigidbody>().velocity = vel;
 
         // debug

@@ -22,8 +22,6 @@ public class WhiteSingularity : AbstractSingularity
 
     private void RepulsePlayer()
     {
-        Debug.Log("repulse player()");
-
         Vector3 dir = (_character.position - transform.position).normalized;
 
         // apply velocity
