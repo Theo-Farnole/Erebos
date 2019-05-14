@@ -39,6 +39,7 @@ public class BlackSingularity : MonoBehaviour
 
         _player.GetComponent<Rigidbody>().velocity = vel;
 
+        // debug
         Debug.DrawRay(transform.position, dir * speed, Color.red);
     }
 

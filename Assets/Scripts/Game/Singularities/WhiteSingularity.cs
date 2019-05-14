@@ -29,11 +29,12 @@ public class WhiteSingularity : MonoBehaviour
         // apply velocity
         Vector3 vel = _character.GetComponent<Rigidbody>().velocity;
 
-        vel.x = Mathf.Sign(dir.x) * Mathf.Sqrt(2 * _data.RepulsionDistance * Mathf.Abs(Physics.gravity.x));
-        vel.y = Mathf.Sign(dir.y) * Mathf.Sqrt(2 * _data.RepulsionDistance * Mathf.Abs(Physics.gravity.y));
+        vel.x = dir.x * _data.RepulsionDistance;
+        vel.y = dir.y * _data.RepulsionDistance;
 
         _character.GetComponent<Rigidbody>().velocity = vel;
 
+        // debug
         GizmosPersistence.DrawPersistentLine(transform.position, transform.position + vel);
     }
 }
