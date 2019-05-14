@@ -36,6 +36,11 @@ public class CharControllerSingularity : MonoBehaviour
         // void form
         if (GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f)
         {
+            if (form == Form.Ethereal)
+            {
+                CharControllerManager.Instance.Attracted = false;
+            }
+
             form = Form.Void;
             UpdateForm();
         }
@@ -43,6 +48,11 @@ public class CharControllerSingularity : MonoBehaviour
         // ethereal form
         if (GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f)
         {
+            if (form == Form.Void)
+            {
+                CharControllerManager.Instance.Attracted = false;
+            }
+
             form = Form.Ethereal;
             UpdateForm();
         }

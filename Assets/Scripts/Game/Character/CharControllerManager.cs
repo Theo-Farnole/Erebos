@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharControllerManager : MonoBehaviour
+public class CharControllerManager : Singleton<CharControllerManager>
 {
     private bool _attracted = false;
 
