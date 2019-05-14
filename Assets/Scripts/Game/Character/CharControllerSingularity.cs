@@ -16,6 +16,9 @@ public class CharControllerSingularity : MonoBehaviour
 
     public enum Form { Normal, Ethereal, Void };
     public static Form form = Form.Normal;
+
+    private bool _rightTriggerPressed = false;
+    private bool _leftTriggerPressed = false;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -34,28 +37,52 @@ public class CharControllerSingularity : MonoBehaviour
     void ManageInputs()
     {
         // void form
-        if (GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f)
+        if (!_rightTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f)
         {
-            if (form == Form.Ethereal)
+            switch (form)
             {
-                CharControllerManager.Instance.Attracted = false;
+                case Form.Normal:
+                    form = Form.Void;
+                    break;
+
+                case Form.Ethereal:
+                    form = Form.Void;
+                    CharControllerManager.Instance.Attracted = false;
+                    break;
+
+                case Form.Void:
+                    form = Form.Normal;
+                    break;
             }
 
-            form = Form.Void;
             UpdateForm();
         }
 
         // ethereal form
-        if (GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f)
+        if (!_leftTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f)
         {
-            if (form == Form.Void)
+            switch (form)
             {
-                CharControllerManager.Instance.Attracted = false;
+                case Form.Normal:
+                    form = Form.Ethereal;
+                    break;
+
+                case Form.Void:
+                    form = Form.Ethereal;
+                    CharControllerManager.Instance.Attracted = false;
+                    break;
+
+                case Form.Ethereal:
+                    form = Form.Normal;
+                    break;
+
             }
 
-            form = Form.Ethereal;
             UpdateForm();
         }
+
+        _rightTriggerPressed = GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f ? true : false;
+        _leftTriggerPressed = GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f ? true : false;
     }
 
     void UpdateForm()
