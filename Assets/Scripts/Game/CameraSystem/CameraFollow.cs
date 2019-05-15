@@ -2,23 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CameraFollow : MonoBehaviour
 {
     #region Fields
     public enum Type { Static, Dynamic }
-    public Type _cameraType = Type.Static; // set to public in order to hide variables
 
+    [Space]
     [SerializeField] private CameraFollowData _data;
     [Space]
-    [SerializeField] private bool _followOnX = false;
-    [SerializeField] private bool _followOnY = false;
-    [Space]
+    [SerializeField] private Type _cameraType = Type.Static;
     [Tooltip("Is this the first camera of the level?")]
-    [SerializeField] private bool _isActive = false;
+    [SerializeField] private bool _firstCameraOfTheLevel = false;
 
     private Transform _target = null;
-    private Vector3 _playerOffset = Vector3.zero;
+    private Rigidbody _targetRb = null;
+
+    private Vector2 _screenBounds;
+
+    private Vector3 _targetPosition = Vector3.zero;
     private Vector3 _cameraOffset = Vector3.zero;
     #endregion
 
@@ -27,12 +30,11 @@ public class CameraFollow : MonoBehaviour
     {
         get
         {
-            return _isActive;
+            return _firstCameraOfTheLevel;
         }
         set
         {
-            _playerOffset = transform.position - _target.position;
-            _isActive = value;
+            _firstCameraOfTheLevel = value;
         }
     }
     #endregion
@@ -40,55 +42,70 @@ public class CameraFollow : MonoBehaviour
     #region MonoBehaviour Callbacks
     void Start()
     {
-        gameObject.SetActive(_isActive);
-
         _target = GameObject.FindGameObjectWithTag("Player").transform;
+        _targetRb = _target.GetComponent<Rigidbody>();
 
-        _playerOffset = transform.position - _target.position;
+        _screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+
+        gameObject.SetActive(_firstCameraOfTheLevel);
     }
 
     void Update()
     {
-        if (!_isActive)
+        if (!_firstCameraOfTheLevel)
             return;
 
-        switch (_cameraType)
+        if (_cameraType == Type.Dynamic)
         {
-            case Type.Static:
-                break;
-
-            case Type.Dynamic:
-                FollowPlayer();
-                break;
+            SetTargetPosition();
         }
 
         ProcessInput();
+        Move();
     }
     #endregion
 
-    void FollowPlayer()
+
+    void SetTargetPosition()
     {
-        Vector3 pos = transform.position;
-
-        if (_followOnX)
+        if (_targetRb.velocity.x > 0)
         {
-            pos.x = _target.position.x + _playerOffset.x;
+            // go to right
+            _targetPosition = _target.position - 3f * Vector3.right; // (0.6f * _screenBounds.x) * Vector3.right;
         }
 
-        if (_followOnY)
+        else if (_targetRb.velocity.x < 0)
         {
-            pos.y = _target.position.y + _playerOffset.y;
+            // go to left
+            //_targetPosition = _target.position + (0.6f * _screenBounds.x) * Vector3.right;
         }
 
-        transform.position = pos;
+        else
+        {
+            // idle
+            _targetPosition = _target.position;
+        }
+
+        _targetPosition.z = transform.position.z;
     }
 
     void ProcessInput()
     {
-        Vector2 input = GamePad.GetAxis(GamePad.Axis.RightStick, GamePad.Index.Any);                
-        Vector3 target = (Vector3)input.normalized * _data.MaxOffset;
+        Vector2 input = GamePad.GetAxis(GamePad.Axis.RightStick, GamePad.Index.Any);
+        Vector3 target = input.normalized * _data.MaxOffset;
 
-        _cameraOffset = Vector3.Slerp(_cameraOffset, target, Time.deltaTime * _data.Speed);
-        transform.position += _cameraOffset;
+        _cameraOffset = (Vector2)Vector3.Slerp(_cameraOffset, target, Time.deltaTime * _data.Speed);
+    }
+
+    void Move()
+    {
+        Vector3 newPosition = Vector3.zero;
+
+        newPosition = Vector3.Slerp(transform.position, _targetPosition, Time.deltaTime * _data.Speed);
+        newPosition += _cameraOffset;
+
+        newPosition.z = transform.position.z; // lock Z axis
+
+        transform.position = newPosition;
     }
 }
