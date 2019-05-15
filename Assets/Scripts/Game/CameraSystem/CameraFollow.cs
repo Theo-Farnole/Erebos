@@ -70,14 +70,12 @@ public class CameraFollow : MonoBehaviour
     {
         if (_targetRb.velocity.x > 0)
         {
-            // go to right
             _targetPosition = _target.position - 3f * Vector3.right; // (0.6f * _screenBounds.x) * Vector3.right;
         }
 
         else if (_targetRb.velocity.x < 0)
         {
-            // go to left
-            //_targetPosition = _target.position + (0.6f * _screenBounds.x) * Vector3.right;
+            _targetPosition = _target.position + 3f * Vector3.right;
         }
 
         else
@@ -87,6 +85,7 @@ public class CameraFollow : MonoBehaviour
         }
 
         _targetPosition.z = transform.position.z;
+        _targetPosition.y += _screenBounds.y / 2;
     }
 
     void ProcessInput()
