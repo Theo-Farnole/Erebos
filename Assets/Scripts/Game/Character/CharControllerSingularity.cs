@@ -52,6 +52,7 @@ public class CharControllerSingularity : MonoBehaviour
 
                 case Form.Void:
                     form = Form.Normal;
+                    CharControllerManager.Instance.Attracted = false;
                     break;
             }
 
@@ -74,6 +75,7 @@ public class CharControllerSingularity : MonoBehaviour
 
                 case Form.Ethereal:
                     form = Form.Normal;
+                    CharControllerManager.Instance.Attracted = false;
                     break;
 
             }
