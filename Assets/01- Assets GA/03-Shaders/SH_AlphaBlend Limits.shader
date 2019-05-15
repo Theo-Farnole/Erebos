@@ -116,8 +116,8 @@ Shader "Erebos/SH_AlphaBlend Limits"
 }
 /*ASEBEGIN
 Version=16400
-930.4;148.8;1005;779;792.0759;106.2884;1;True;False
-Node;AmplifyShaderEditor.SamplerNode;1;-1151.724,-72.1779;Float;True;Property;_MainTexture;MainTexture;0;0;Create;True;0;0;False;0;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+7;134;1906;885;2230.613;392.9616;1.7195;True;False
+Node;AmplifyShaderEditor.SamplerNode;1;-1151.724,-72.1779;Float;True;Property;_MainTexture;MainTexture;0;0;Create;True;0;0;False;0;None;710501c02b57cb04b9560fda42e84dd2;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.VertexColorNode;2;-1108.648,245.5891;Float;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;4;-565.4825,-72.35283;Float;True;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.RangedFloatNode;6;-372.9518,150.4237;Float;False;Property;_Intensity;Intensity;1;0;Create;True;0;0;False;0;10;10;0;0;0;1;FLOAT;0
@@ -133,4 +133,4 @@ WireConnection;5;1;6;0
 WireConnection;0;2;5;0
 WireConnection;0;9;3;0
 ASEEND*/
-//CHKSM=D23505ECFA70F0625F5A18E66E1B1BAC128F846D
+//CHKSM=334D1BAA543B164D17544428925DF6DFC84C3E9D
