@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Black Singularity
   m_EditorClassIdentifier: 
   _timeToReachCenter: 0.01
-  _radius: 6
+  _radius: 8
   _characterRotateRadius: 1

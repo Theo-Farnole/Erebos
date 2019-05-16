@@ -163,7 +163,7 @@ public class CharController : Singleton<CharController>
         }
 
         // override sticked
-        if (!_collision.left && _collision.right)
+        if (!_collision.left && !_collision.right)
         {
             _isSticked = false;
         }
@@ -183,7 +183,6 @@ public class CharController : Singleton<CharController>
     {
         if (GamePad.GetButton(GamePad.Button.B, GamePad.Index.Any))
         {
-            Debug.Log("Unstick t'entends ?");
             _isSticked = false;
             _isStickingEnable = false;
         }

@@ -17,8 +17,8 @@ public class CameraFollowEditor : Editor
     {
         //ShowOnEnum("type", "Type1", "type1Var"); //type1Var is only visible when type == Type1
 
-        ShowOnEnum("_cameraType", "Dynamic", "_followOnX");
-        ShowOnEnum("_cameraType", "Dynamic", "_followOnY");
+        //ShowOnEnum("_cameraType", "Dynamic", "_followOnX");
+        //ShowOnEnum("_cameraType", "Dynamic", "_followOnY");
     }
 
     /////////////////////////////////////////////////////////
