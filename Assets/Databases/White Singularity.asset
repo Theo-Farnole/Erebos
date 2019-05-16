@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5a934e44b624244abe512fa1708d5f, type: 3}
   m_Name: White Singularity
   m_EditorClassIdentifier: 
-  _repulsionDistance: 15
+  _repulsionDistance: 18

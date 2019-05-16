@@ -1,0 +1,54 @@
+# ProBuilder 4.0.4
+# https://unity3d.com/unity/features/worldbuilding/probuilder
+# 16/05/2019 10:12:33
+
+mtllib ./Cube_(35).mtl
+o Cube (35)
+
+g Cube (35)
+v -200 57 2
+v -216 57 2
+v -200 58 2
+v -216 58 2
+v -216 57 -3
+v -216 58 -3
+v -200 57 -3
+v -200 58 -3
+
+vt -3 0
+vt -19 0
+vt -3 1
+vt -19 1
+vt 2 0
+vt 2 1
+vt 19 0
+vt 3 0
+vt 19 1
+vt 3 1
+vt -2 0
+vt -2 1
+vt 3 2
+vt 19 2
+vt 3 -3
+vt 19 -3
+vt -3 -3
+vt -19 -3
+vt -3 2
+vt -19 2
+
+vn 0 0 1
+vn -1 0 0
+vn 0 0 -1
+vn 1 0 0
+vn 0 1 0
+vn 0 -1 0
+
+g Cube (35)
+usemtl MetricsProbuilder
+f 3/3/1 4/4/1 2/2/1 1/1/1
+f 4/6/2 6/3/2 5/1/2 2/5/2
+f 6/9/3 8/10/3 7/8/3 5/7/3
+f 8/10/4 3/12/4 1/11/4 7/8/4
+f 8/15/5 6/16/5 4/14/5 3/13/5
+f 1/19/6 2/20/6 5/18/6 7/17/6
+
