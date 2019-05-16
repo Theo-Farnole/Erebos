@@ -102,11 +102,25 @@ public class CameraFollow : MonoBehaviour
     {
         Vector3 newPosition = Vector3.zero;
 
-        newPosition = Vector3.Slerp(transform.position, _targetPosition, Time.deltaTime * _data.Speed);
+        newPosition = Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime * _data.Speed);
         newPosition += _cameraOffset;
 
         newPosition.z = transform.position.z; // lock Z axis
 
         transform.position = newPosition;
+    }
+
+    private void OnDrawGizmos()
+    {
+        // draw bounds
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position - _screenBounds.x * Vector3.right, transform.position + _screenBounds.x * Vector3.right);     // up
+        Gizmos.DrawLine(transform.position - _screenBounds.x * Vector3.right - _screenBounds.y * Vector3.up, transform.position + _screenBounds.x * Vector3.right - _screenBounds.y * Vector3.up);    // down
+        Gizmos.DrawLine(transform.position + _screenBounds.x * Vector3.right, transform.position + _screenBounds.x * Vector3.right - _screenBounds.y * Vector3.up);    // right
+        Gizmos.DrawLine(transform.position - _screenBounds.x * Vector3.right, transform.position - _screenBounds.x * Vector3.right - _screenBounds.y * Vector3.up);    // left
+
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + _screenBounds.y * Vector3.down);    
     }
 }
