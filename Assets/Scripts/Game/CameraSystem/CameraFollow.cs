@@ -100,12 +100,10 @@ public class CameraFollow : MonoBehaviour
 
         if (downDelta > 0f)
         {
-            Debug.Log("_focusRect.min.y " + _focusRect.min.y);
             _targetPosition.y = transform.position.y + _focusRect.min.y;
         }
         else if (upDelta < 0f)
         {
-            Debug.Log("_focusRect.max.y " + _focusRect.max.y);
             _targetPosition.y = transform.position.y + _focusRect.max.y;
         }
 
@@ -125,7 +123,7 @@ public class CameraFollow : MonoBehaviour
     {
         Vector3 newPosition = Vector3.zero;
 
-        newPosition = Vector3.Slerp(transform.position, _targetPosition, Time.deltaTime * _data.Speed);
+        newPosition = Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime * _data.Speed);
         newPosition += _cameraOffset;
 
         newPosition.z = transform.position.z; // lock Z axis
