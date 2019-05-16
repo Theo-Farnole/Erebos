@@ -183,7 +183,6 @@ public class CharController : Singleton<CharController>
     {
         if (GamePad.GetButton(GamePad.Button.B, GamePad.Index.Any))
         {
-            Debug.Log("Unstick t'entends ?");
             _isSticked = false;
             _isStickingEnable = false;
         }

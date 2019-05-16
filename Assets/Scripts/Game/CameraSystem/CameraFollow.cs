@@ -20,6 +20,7 @@ public class CameraFollow : MonoBehaviour
     private Rigidbody _targetRb = null;
 
     private Vector2 _screenBounds;
+    private Rect _focusRect;
 
     private Vector3 _targetPosition = Vector3.zero;
     private Vector3 _cameraOffset = Vector3.zero;
@@ -45,10 +46,13 @@ public class CameraFollow : MonoBehaviour
         _target = GameObject.FindGameObjectWithTag("Player").transform;
         _targetRb = _target.GetComponent<Rigidbody>();
 
+        // calculate in game width & height
         float distance = Vector3.Distance(_target.position, transform.position);
         _screenBounds.y = 2.0f * distance * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad); ;
-        _screenBounds.x = _screenBounds.y * Camera.main.aspect; ;
-        Debug.Log("ScreenBounds: " + _screenBounds);
+        _screenBounds.x = _screenBounds.y * Camera.main.aspect;
+
+        // draw focus rect
+        _focusRect = new Rect(-_screenBounds * 0.3f * 0.5f, _screenBounds * 0.3f);
 
         gameObject.SetActive(_firstCameraOfTheLevel);
     }
@@ -63,7 +67,7 @@ public class CameraFollow : MonoBehaviour
             SetTargetPosition();
         }
 
-        ProcessInput();
+        //ProcessInput();
         Move();
     }
     #endregion
@@ -87,6 +91,7 @@ public class CameraFollow : MonoBehaviour
             _targetPosition = _target.position;
         }
 
+        _targetPosition = _target.position;
         _targetPosition.z = transform.position.z;
         _targetPosition.y += _screenBounds.y / 2;
     }
@@ -114,19 +119,23 @@ public class CameraFollow : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // draw bounds
+        // draw camera's bounds
         Gizmos.color = Color.yellow;
 
         Vector3 leftPoint = transform.position - _screenBounds.x * Vector3.right / 2;
         Vector3 rightPoint = transform.position + _screenBounds.x * Vector3.right / 2;
-        Gizmos.DrawLine(leftPoint, rightPoint);     // up
-        Gizmos.DrawLine(leftPoint - _screenBounds.y * Vector3.up, rightPoint - _screenBounds.y * Vector3.up);    // down
 
-        Gizmos.DrawLine(rightPoint, rightPoint - _screenBounds.y * Vector3.up);    // right
-        Gizmos.DrawLine(leftPoint, leftPoint - _screenBounds.y * Vector3.up);    // left
+        GizmosExtension.Draw2DLine(leftPoint, rightPoint);     // up
+        GizmosExtension.Draw2DLine(leftPoint - _screenBounds.y * Vector3.up, rightPoint - _screenBounds.y * Vector3.up);    // down
+        GizmosExtension.Draw2DLine(rightPoint, rightPoint - _screenBounds.y * Vector3.up);    // right
+        GizmosExtension.Draw2DLine(leftPoint, leftPoint - _screenBounds.y * Vector3.up);    // left
 
-
+        // draw center
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + _screenBounds.y * Vector3.down);    
+        GizmosExtension.Draw2DLine(transform.position, transform.position + _screenBounds.y * Vector3.down);
+
+        // draw focus rect
+        Gizmos.color = Color.green;
+        GizmosExtension.DrawRect((Vector2)transform.position + (_screenBounds.y / 2) * Vector2.down, _focusRect);
     }
 }
