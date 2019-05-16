@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FX_BlackHole_Material_Rim
-  m_Shader: {fileID: 4800000, guid: 94dbb206fc52aa84e8fdf80a2f0cb0f8, type: 3}
+  m_Shader: {fileID: 4800000, guid: a570fb3ecdb17da4b82c2a8d118d2273, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -33,6 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Emissivpowa: 10
+    - _Intensity: 10
     - _InvFade: 1
     - __dirty: 0
     m_Colors: []
