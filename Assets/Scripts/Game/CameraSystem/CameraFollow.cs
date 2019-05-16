@@ -20,6 +20,7 @@ public class CameraFollow : MonoBehaviour
     private Rigidbody _targetRb = null;
 
     private Vector2 _screenBounds;
+    private Vector2 _targetFocusPosition;
     private Rect _focusRect;
 
     private Vector3 _targetPosition = Vector3.zero;
@@ -52,7 +53,14 @@ public class CameraFollow : MonoBehaviour
         _screenBounds.x = _screenBounds.y * Camera.main.aspect;
 
         // draw focus rect
-        _focusRect = new Rect(-_screenBounds * 0.3f * 0.5f, _screenBounds * 0.3f);
+        _focusRect = new Rect(Vector2.zero, new Vector2(_screenBounds.x * _data.WidthPercent, _screenBounds.y * _data.HeightPercent));
+        _focusRect.position = -_focusRect.size * 0.5f;
+        _targetFocusPosition = _focusRect.position;
+
+        // set target position
+        _targetPosition = _target.position;
+        _targetPosition.z = transform.position.z;
+        _targetPosition.y += _screenBounds.y / 2;
 
         gameObject.SetActive(_firstCameraOfTheLevel);
     }
@@ -65,6 +73,7 @@ public class CameraFollow : MonoBehaviour
         if (_cameraType == Type.Dynamic)
         {
             SetTargetPosition();
+            SetFocusRect();
         }
 
         //ProcessInput();
@@ -75,25 +84,52 @@ public class CameraFollow : MonoBehaviour
 
     void SetTargetPosition()
     {
-        if (_targetRb.velocity.x > 0)
+        float leftDelta = transform.position.x + _focusRect.min.x - _target.position.x;
+        float rightDelta = transform.position.x + _focusRect.max.x - _target.position.x;
+
+
+        if (leftDelta > 0f)
         {
-            _targetPosition = _target.position - (0.6f * _screenBounds.x) * Vector3.right;
+            _targetPosition.x = transform.position.x + _focusRect.min.x;
+        }
+        else if (rightDelta < 0f)
+        {
+            _targetPosition.x = transform.position.x + _focusRect.max.x;
         }
 
-        else if (_targetRb.velocity.x < 0)
+        float downDelta = (transform.position.y - _screenBounds.y / 2) + _focusRect.min.y - _target.position.y;
+        float upDelta = (transform.position.y - _screenBounds.y / 2) + _focusRect.max.y - _target.position.y;
+
+        if (downDelta > 0f)
         {
-            _targetPosition = _target.position + (0.6f * _screenBounds.x) * Vector3.right;
+            _targetPosition.y = transform.position.y + _focusRect.min.y;
+        }
+        else if (upDelta < 0f)
+        {
+            _targetPosition.y = transform.position.y + _focusRect.max.y;
+        }
+
+        _targetPosition.z = transform.position.z;
+    }
+
+    void SetFocusRect()
+    {
+        if (_targetRb.velocity.x < 0f)
+        {
+            _targetFocusPosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.left - new Vector2(0, _focusRect.size.y * 0.5f);
+        }
+
+        else if (_targetRb.velocity.x > 0f)
+        {
+            _targetFocusPosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right - new Vector2(_focusRect.size.x, _focusRect.size.y * 0.5f);
         }
 
         else
         {
-            // idle
-            _targetPosition = _target.position;
+            _targetFocusPosition = -_focusRect.size * 0.5f;
         }
 
-        _targetPosition = _target.position;
-        _targetPosition.z = transform.position.z;
-        _targetPosition.y += _screenBounds.y / 2;
+        _focusRect.position = Vector2.Lerp(_focusRect.position, _targetFocusPosition, Time.deltaTime * _data.FocusRectSpeed);
     }
 
     void ProcessInput()

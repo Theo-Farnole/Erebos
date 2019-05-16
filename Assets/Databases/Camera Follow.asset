@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Camera Follow
   m_EditorClassIdentifier: 
   _maxOffset: 1
-  _speed: 2
+  _speed: 1
+  _focusRectSpeed: 1
+  _widthPercent: 10
+  _heightPercent: 30
