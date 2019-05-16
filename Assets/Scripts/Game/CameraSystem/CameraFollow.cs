@@ -46,11 +46,12 @@ public class CameraFollow : MonoBehaviour
         _targetRb = _target.GetComponent<Rigidbody>();
 
         _screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        Debug.Log("ScreenBounds: " + _screenBounds);
 
         gameObject.SetActive(_firstCameraOfTheLevel);
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (!_firstCameraOfTheLevel)
             return;
@@ -70,12 +71,12 @@ public class CameraFollow : MonoBehaviour
     {
         if (_targetRb.velocity.x > 0)
         {
-            _targetPosition = _target.position - 3f * Vector3.right; // (0.6f * _screenBounds.x) * Vector3.right;
+            _targetPosition = _target.position - (0.6f * _screenBounds.x) * Vector3.right;
         }
 
         else if (_targetRb.velocity.x < 0)
         {
-            _targetPosition = _target.position + 3f * Vector3.right;
+            _targetPosition = _target.position + (0.6f * _screenBounds.x) * Vector3.right;
         }
 
         else
@@ -94,6 +95,7 @@ public class CameraFollow : MonoBehaviour
         Vector3 target = input.normalized * _data.MaxOffset;
 
         _cameraOffset = (Vector2)Vector3.Slerp(_cameraOffset, target, Time.deltaTime * _data.Speed);
+        _cameraOffset.Clamp(_data.MaxOffset * Vector3.one);
     }
 
     void Move()
