@@ -45,7 +45,9 @@ public class CameraFollow : MonoBehaviour
         _target = GameObject.FindGameObjectWithTag("Player").transform;
         _targetRb = _target.GetComponent<Rigidbody>();
 
-        _screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        float distance = Vector3.Distance(_target.position, transform.position);
+        _screenBounds.y = 2.0f * distance * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad); ;
+        _screenBounds.x = _screenBounds.y * Camera.main.aspect; ;
         Debug.Log("ScreenBounds: " + _screenBounds);
 
         gameObject.SetActive(_firstCameraOfTheLevel);
@@ -114,10 +116,14 @@ public class CameraFollow : MonoBehaviour
     {
         // draw bounds
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position - _screenBounds.x * Vector3.right, transform.position + _screenBounds.x * Vector3.right);     // up
-        Gizmos.DrawLine(transform.position - _screenBounds.x * Vector3.right - _screenBounds.y * Vector3.up, transform.position + _screenBounds.x * Vector3.right - _screenBounds.y * Vector3.up);    // down
-        Gizmos.DrawLine(transform.position + _screenBounds.x * Vector3.right, transform.position + _screenBounds.x * Vector3.right - _screenBounds.y * Vector3.up);    // right
-        Gizmos.DrawLine(transform.position - _screenBounds.x * Vector3.right, transform.position - _screenBounds.x * Vector3.right - _screenBounds.y * Vector3.up);    // left
+
+        Vector3 leftPoint = transform.position - _screenBounds.x * Vector3.right / 2;
+        Vector3 rightPoint = transform.position + _screenBounds.x * Vector3.right / 2;
+        Gizmos.DrawLine(leftPoint, rightPoint);     // up
+        Gizmos.DrawLine(leftPoint - _screenBounds.y * Vector3.up, rightPoint - _screenBounds.y * Vector3.up);    // down
+
+        Gizmos.DrawLine(rightPoint, rightPoint - _screenBounds.y * Vector3.up);    // right
+        Gizmos.DrawLine(leftPoint, leftPoint - _screenBounds.y * Vector3.up);    // left
 
 
         Gizmos.color = Color.red;
