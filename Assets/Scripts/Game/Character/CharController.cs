@@ -163,7 +163,7 @@ public class CharController : Singleton<CharController>
         }
 
         // override sticked
-        if (!_collision.left && _collision.right)
+        if (!_collision.left && !_collision.right)
         {
             _isSticked = false;
         }
