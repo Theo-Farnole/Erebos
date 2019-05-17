@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void DeathHandle(object sender);
+
 public class CharDeath : MonoBehaviour
 {
     #region Fields
+    public static event DeathHandle EventDeath;
+
     [SerializeField] private Material _materialNotActive;
     [SerializeField] private Material _materialActive;
 
     [HideInInspector] public Transform currentCheckpoint;
-
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -34,11 +37,7 @@ public class CharDeath : MonoBehaviour
 
     private void Death()
     {
-        Debug.Log("Death");
-
-        CharControllerManager.Instance.Attracted = false;
-        CharController.Instance.ResetMovements();
-
+        EventDeath?.Invoke(this);
         transform.position = (Vector2)currentCheckpoint.position;
     }
 
@@ -54,7 +53,6 @@ public class CharDeath : MonoBehaviour
                 m.material = _materialNotActive;
             }
         }
-
 
         // change current checkpoint
         currentCheckpoint = other.transform;

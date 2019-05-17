@@ -43,7 +43,6 @@ public class BlackSingularity : AbstractSingularity
         _character.GetComponent<Rigidbody>().velocity = Vector3.zero;
         int anglePerSecond = 360;
 
-
         // process input
         float horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x * Time.deltaTime * anglePerSecond;
 
@@ -60,15 +59,12 @@ public class BlackSingularity : AbstractSingularity
 
     private void AttractPlayer()
     {
-        Debug.Log("AttractPlayer()");
-
         Vector3 dir = (transform.position - _character.position).normalized;
         float speed = _data.Radius / _data.TimeToReachCenter;
 
         // apply velocity
         Vector3 vel = speed * dir;
         _character.GetComponent<Rigidbody>().velocity = vel * Time.deltaTime;
-        //_character.GetComponent<Rigidbody>().velocity.Clamp(vel);
 
         // debug
         Debug.DrawRay(transform.position, dir * speed, Color.red);

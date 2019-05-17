@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
-public class CharController : Singleton<CharController>
+public class CharController : MonoBehaviour
 {
     public static readonly int MAX_JUMPS = 2;
 
@@ -72,6 +72,9 @@ public class CharController : Singleton<CharController>
 
         _distToGround = GetComponent<Collider>().bounds.extents.y;
         _distToSide = GetComponent<Collider>().bounds.extents.x;
+
+        DeathHandle d = new DeathHandle(ResetMovements);
+        CharDeath.EventDeath += d;
     }
 
     void Update()
@@ -246,8 +249,11 @@ public class CharController : Singleton<CharController>
     private void Dash()
     {
         // add force
-        Vector3 input = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.Any);
-        Vector3 force = (input * _data.DashDistance) / _data.DashTime;
+        Vector2 input = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.Any);
+        if (input == Vector2.zero) input = Vector2.up;// if no input, dash on up
+
+        Vector3 force = (input.normalized * _data.DashDistance) / _data.DashTime;
+
         _rigidbody.velocity = force;
 
         // dash boolean
@@ -296,7 +302,7 @@ public class CharController : Singleton<CharController>
         task();
     }
 
-    public void ResetMovements()
+    public void ResetMovements(object sender = null)
     {
         _isSticked = false;
         _isStickingEnable = true;

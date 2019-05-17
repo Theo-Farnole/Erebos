@@ -24,7 +24,9 @@ public class CameraFollow : MonoBehaviour
     private Rect _focusRect;
 
     private Vector3 _targetPosition = Vector3.zero;
-    private Vector3 _cameraOffset = Vector3.zero;
+    private Vector3 _cameraInputOffset = Vector3.zero;
+
+    private float _distanceToTarget = Mathf.Infinity;
     #endregion
 
     #region Properties
@@ -48,8 +50,8 @@ public class CameraFollow : MonoBehaviour
         _targetRb = _target.GetComponent<Rigidbody>();
 
         // calculate in game width & height
-        float distance = Vector3.Distance(_target.position, transform.position);
-        _screenBounds.y = 2.0f * distance * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad); ;
+        _distanceToTarget = Vector3.Distance(_target.position, transform.position);
+        _screenBounds.y = 2.0f * _distanceToTarget * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad); ;
         _screenBounds.x = _screenBounds.y * Camera.main.aspect;
 
         // draw focus rect
@@ -62,6 +64,10 @@ public class CameraFollow : MonoBehaviour
         _targetPosition.z = transform.position.z;
         _targetPosition.y += _screenBounds.y / 2;
 
+        // reset on death
+        DeathHandle d = new DeathHandle(CenterOnPlayer);
+        CharDeath.EventDeath += d;
+
         gameObject.SetActive(_firstCameraOfTheLevel);
     }
 
@@ -72,8 +78,8 @@ public class CameraFollow : MonoBehaviour
 
         if (_cameraType == Type.Dynamic)
         {
-            SetTargetPosition();
             SetFocusRect();
+            SetTargetPosition();
         }
 
         //ProcessInput();
@@ -81,12 +87,30 @@ public class CameraFollow : MonoBehaviour
     }
     #endregion
 
+    void SetFocusRect()
+    {
+        if (_targetRb.velocity.x < 0f)
+        {
+            _targetFocusPosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.left - new Vector2(0, _focusRect.size.y * 0.5f);
+        }
+
+        else if (_targetRb.velocity.x > 0f)
+        {
+            _targetFocusPosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right - new Vector2(_focusRect.size.x, _focusRect.size.y * 0.5f);
+        }
+
+        else
+        {
+            _targetFocusPosition = -_focusRect.size * 0.5f;
+        }
+
+        _focusRect.position = Vector2.Lerp(_focusRect.position, _targetFocusPosition, Time.deltaTime * _data.FocusRectSpeed);
+    }
 
     void SetTargetPosition()
     {
         float leftDelta = transform.position.x + _focusRect.min.x - _target.position.x;
         float rightDelta = transform.position.x + _focusRect.max.x - _target.position.x;
-
 
         if (leftDelta > 0f)
         {
@@ -112,33 +136,13 @@ public class CameraFollow : MonoBehaviour
         _targetPosition.z = transform.position.z;
     }
 
-    void SetFocusRect()
-    {
-        if (_targetRb.velocity.x < 0f)
-        {
-            _targetFocusPosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.left - new Vector2(0, _focusRect.size.y * 0.5f);
-        }
-
-        else if (_targetRb.velocity.x > 0f)
-        {
-            _targetFocusPosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right - new Vector2(_focusRect.size.x, _focusRect.size.y * 0.5f);
-        }
-
-        else
-        {
-            _targetFocusPosition = -_focusRect.size * 0.5f;
-        }
-
-        _focusRect.position = Vector2.Lerp(_focusRect.position, _targetFocusPosition, Time.deltaTime * _data.FocusRectSpeed);
-    }
-
     void ProcessInput()
     {
         Vector2 input = GamePad.GetAxis(GamePad.Axis.RightStick, GamePad.Index.Any);
         Vector3 target = input.normalized * _data.MaxOffset;
 
-        _cameraOffset = (Vector2)Vector3.Slerp(_cameraOffset, target, Time.deltaTime * _data.Speed);
-        _cameraOffset.Clamp(_data.MaxOffset * Vector3.one);
+        _cameraInputOffset = (Vector2)Vector3.Slerp(_cameraInputOffset, target, Time.deltaTime * _data.Speed);
+        _cameraInputOffset.Clamp(_data.MaxOffset * Vector3.one);
     }
 
     void Move()
@@ -146,11 +150,27 @@ public class CameraFollow : MonoBehaviour
         Vector3 newPosition = Vector3.zero;
 
         newPosition = Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime * _data.Speed);
-        newPosition += _cameraOffset;
+        newPosition += _cameraInputOffset;
 
         newPosition.z = transform.position.z; // lock Z axis
 
         transform.position = newPosition;
+    }
+
+    void CenterOnPlayer(object sender)
+    {
+        Debug.Log("CenterOnPlayer");
+
+        // change focus rect
+        _targetFocusPosition = -_focusRect.size * 0.5f;
+        _focusRect.position = _targetFocusPosition;
+
+        // change target position
+        _targetPosition = (Vector2)_target.position;
+        //_targetPosition += new Vector3(0, Mathf.Sin(-transform.eulerAngles.y), Mathf.Cos(-transform.eulerAngles.x)) * _distanceToTarget;
+        _targetPosition.z = transform.position.z;
+
+        transform.position = _targetPosition;
     }
 
     private void OnDrawGizmos()
