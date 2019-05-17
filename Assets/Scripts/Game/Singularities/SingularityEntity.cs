@@ -18,7 +18,7 @@ public class SingularityEntity : MonoBehaviour
 
     public void OnFormChange(object sender, Form form)
     {
-        switch (CharControllerSingularity.form)
+        switch (form)
         {
             case Form.Normal:
                 _blackSingularity.gameObject.SetActive(false);

@@ -18,22 +18,39 @@ public class CharControllerSingularity : MonoBehaviour
     [SerializeField] private Material _matEthereal;
     [SerializeField] private Material _matVoid;
 
-    public static Form form = Form.Normal;
-
     private bool _rightTriggerPressed = false;
     private bool _leftTriggerPressed = false;
+
+    private Form _form = Form.Normal;
+    #endregion
+
+    #region Properties
+    public Form Form
+    {
+        get
+        {
+            return _form;
+        }
+
+        set
+        {
+            _form = value;
+            UpdateForm();
+            EventForm?.Invoke(this, Form);
+        }
+    }
     #endregion
 
     #region MonoBehaviour Callbacks
     void Awake()
     {
-        form = Form.Normal;
+        Form = Form.Normal;
         UpdateForm();
 
         // on death, return to normal form
         DeathHandle d = new DeathHandle((object sender) =>
         {
-            form = Form.Normal;
+            Form = Form.Normal;
         });
         CharDeath.EventDeath += d;
     }
@@ -49,49 +66,43 @@ public class CharControllerSingularity : MonoBehaviour
         // void form
         if (!_rightTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f)
         {
-            switch (form)
+            switch (Form)
             {
                 case Form.Normal:
-                    form = Form.Void;
+                    Form = Form.Void;
                     break;
 
                 case Form.Ethereal:
-                    form = Form.Void;
+                    Form = Form.Void;
                     CharControllerManager.Instance.Attracted = false;
                     break;
 
                 case Form.Void:
-                    form = Form.Normal;
+                    Form = Form.Normal;
                     CharControllerManager.Instance.Attracted = false;
                     break;
             }
-
-            EventForm?.Invoke(this, form);
-            UpdateForm();
         }
 
         // ethereal form
         if (!_leftTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f)
         {
-            switch (form)
+            switch (Form)
             {
                 case Form.Normal:
-                    form = Form.Ethereal;
+                    Form = Form.Ethereal;
                     break;
 
                 case Form.Void:
-                    form = Form.Ethereal;
+                    Form = Form.Ethereal;
                     CharControllerManager.Instance.Attracted = false;
                     break;
 
                 case Form.Ethereal:
-                    form = Form.Normal;
+                    Form = Form.Normal;
                     CharControllerManager.Instance.Attracted = false;
                     break;
             }
-
-            EventForm?.Invoke(this, form);
-            UpdateForm();
         }
 
         _rightTriggerPressed = GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f ? true : false;
@@ -100,7 +111,7 @@ public class CharControllerSingularity : MonoBehaviour
 
     void UpdateForm()
     {
-        switch (form)
+        switch (Form)
         {
             case Form.Normal:
                 _meshRenderer.material = _matNormal;
