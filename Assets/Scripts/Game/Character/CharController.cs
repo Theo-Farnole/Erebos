@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
-public class CharController : Singleton<CharController>
+public class CharController : MonoBehaviour
 {
     public static readonly int MAX_JUMPS = 2;
 
@@ -72,6 +72,9 @@ public class CharController : Singleton<CharController>
 
         _distToGround = GetComponent<Collider>().bounds.extents.y;
         _distToSide = GetComponent<Collider>().bounds.extents.x;
+
+        DeathHandle d = new DeathHandle(ResetMovements);
+        CharDeath.EventDeath += d;
     }
 
     void Update()
@@ -299,7 +302,7 @@ public class CharController : Singleton<CharController>
         task();
     }
 
-    public void ResetMovements()
+    public void ResetMovements(object sender = null)
     {
         _isSticked = false;
         _isStickingEnable = true;
