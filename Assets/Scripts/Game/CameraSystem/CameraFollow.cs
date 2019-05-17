@@ -141,7 +141,7 @@ public class CameraFollow : MonoBehaviour
         Vector2 input = GamePad.GetAxis(GamePad.Axis.RightStick, GamePad.Index.Any);
         Vector3 target = input.normalized * _data.MaxOffset;
 
-        _cameraInputOffset = (Vector2)Vector3.Slerp(_cameraInputOffset, target, Time.deltaTime * _data.Speed);
+        _cameraInputOffset = (Vector2)Vector3.Lerp(_cameraInputOffset, target, Time.deltaTime * _data.Speed);
         _cameraInputOffset.Clamp(_data.MaxOffset * Vector3.one);
     }
 
