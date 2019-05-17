@@ -246,8 +246,11 @@ public class CharController : Singleton<CharController>
     private void Dash()
     {
         // add force
-        Vector3 input = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.Any);
-        Vector3 force = (input * _data.DashDistance) / _data.DashTime;
+        Vector2 input = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.Any);
+        if (input == Vector2.zero) input = Vector2.up;// if no input, dash on up
+
+        Vector3 force = (input.normalized * _data.DashDistance) / _data.DashTime;
+
         _rigidbody.velocity = force;
 
         // dash boolean
