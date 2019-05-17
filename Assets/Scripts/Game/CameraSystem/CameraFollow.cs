@@ -62,6 +62,10 @@ public class CameraFollow : MonoBehaviour
         _targetPosition.z = transform.position.z;
         _targetPosition.y += _screenBounds.y / 2;
 
+        // reset on death
+        DeathHandle d = new DeathHandle(CenterOnPlayer);
+        CharDeath.EventDeath += d;
+
         gameObject.SetActive(_firstCameraOfTheLevel);
     }
 
@@ -151,6 +155,18 @@ public class CameraFollow : MonoBehaviour
         newPosition.z = transform.position.z; // lock Z axis
 
         transform.position = newPosition;
+    }
+
+    void CenterOnPlayer(object sender)
+    {
+        Debug.Log("CenterOnPLayer");
+
+        _targetFocusPosition = _target.position;
+        _focusRect.position = _targetFocusPosition;
+
+        _targetPosition = (Vector2)_target.position + (_screenBounds.y / 2) * Vector2.up;
+        _targetPosition.z = transform.position.z;
+        transform.position = _targetPosition;
     }
 
     private void OnDrawGizmos()
