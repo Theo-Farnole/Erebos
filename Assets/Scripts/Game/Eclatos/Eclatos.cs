@@ -101,9 +101,7 @@ public class Eclatos : MonoBehaviour
                     t.position = destination[i];
                 }
             }
-
-            Debug.Log("isFullySplited " + isCompleted);
-
+            
             yield return new WaitForEndOfFrame();
 
         } while (isCompleted == false);
