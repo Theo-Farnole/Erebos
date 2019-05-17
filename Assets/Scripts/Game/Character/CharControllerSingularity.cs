@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharControllerSingularity : MonoBehaviour
+public enum Form { Normal, Ethereal, Void };
+public delegate void FormHandle(object sender, Form form);
+
+public class CharControllerSingularity : Singleton<CharControllerSingularity>
 {
     #region Fields
+    public event FormHandle EventForm;
 
     [Header("Models Settings")]
     [SerializeField] private MeshRenderer _meshRenderer;
@@ -14,7 +18,6 @@ public class CharControllerSingularity : MonoBehaviour
     [SerializeField] private Material _matEthereal;
     [SerializeField] private Material _matVoid;
 
-    public enum Form { Normal, Ethereal, Void };
     public static Form form = Form.Normal;
 
     private bool _rightTriggerPressed = false;
@@ -56,6 +59,7 @@ public class CharControllerSingularity : MonoBehaviour
                     break;
             }
 
+            EventForm(this, form);
             UpdateForm();
         }
 
@@ -77,9 +81,9 @@ public class CharControllerSingularity : MonoBehaviour
                     form = Form.Normal;
                     CharControllerManager.Instance.Attracted = false;
                     break;
-
             }
 
+            EventForm(this, form);
             UpdateForm();
         }
 

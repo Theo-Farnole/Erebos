@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [SelectionBase]
 public class SingularityEntity : MonoBehaviour
 {
@@ -9,23 +10,29 @@ public class SingularityEntity : MonoBehaviour
     [SerializeField] private WhiteSingularity _whiteSingularity;
     [SerializeField] private GameObject _normalSingularity;
 
-    void Update()
+    void Start()
+    {
+        FormHandle d = new FormHandle(OnFormChange);
+        CharControllerSingularity.Instance.EventForm += d;
+    }
+
+    public void OnFormChange(object sender, Form form)
     {
         switch (CharControllerSingularity.form)
         {
-            case CharControllerSingularity.Form.Normal:
+            case Form.Normal:
                 _blackSingularity.gameObject.SetActive(false);
                 _whiteSingularity.gameObject.SetActive(false);
                 _normalSingularity.SetActive(true);
                 break;
 
-            case CharControllerSingularity.Form.Ethereal:
+            case Form.Ethereal:
                 _blackSingularity.gameObject.SetActive(false);
                 _whiteSingularity.gameObject.SetActive(true);
                 _normalSingularity.SetActive(false);
                 break;
 
-            case CharControllerSingularity.Form.Void:
+            case Form.Void:
                 _blackSingularity.gameObject.SetActive(true);
                 _whiteSingularity.gameObject.SetActive(false);
                 _normalSingularity.SetActive(false);
