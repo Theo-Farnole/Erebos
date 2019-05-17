@@ -13,7 +13,6 @@ public class CharDeath : MonoBehaviour
     [SerializeField] private Material _materialActive;
 
     [HideInInspector] public Transform currentCheckpoint;
-
     #endregion
 
     #region MonoBehaviour Callbacks
