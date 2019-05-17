@@ -60,8 +60,6 @@ public class BlackSingularity : AbstractSingularity
 
     private void AttractPlayer()
     {
-        Debug.Log("AttractPlayer()");
-
         Vector3 dir = (transform.position - _character.position).normalized;
         float speed = _data.Radius / _data.TimeToReachCenter;
 
