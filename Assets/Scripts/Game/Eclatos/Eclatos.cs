@@ -6,6 +6,9 @@ using UnityEngine;
 public class Eclatos : MonoBehaviour
 {
     #region Fields
+    [SerializeField] private float _speedSplit = 8f;
+    [SerializeField] private Form _splitOnForm = Form.Void;
+    [Space]
     [SerializeField] private Transform _topLeftPoint;
     [SerializeField] private Transform _topRightPoint;
     [SerializeField] private Transform _bottomRightPoint;
@@ -13,15 +16,15 @@ public class Eclatos : MonoBehaviour
 
     private Transform[] _points = new Transform[4];
     private Vector3[] _posSplitted = new Vector3[4];
+    private Vector3[] _posGrounded = new Vector3[4];
 
-    private static readonly float SPLIT_SPEED = 3f;
-    private static readonly float SPLIT_MIN_DISTANCE = 0.5f;
+    private static readonly float SPLIT_MIN_DISTANCE = 0.1f;
 
     private static readonly Vector3[] GROUNDED_POSITION = new Vector3[4]
     {
         new Vector3(-0.5f, 0.5f),
         new Vector3(0.5f, 0.5f),
-        new Vector3(-0.5f, 0.5f),
+        new Vector3(0.5f, -0.5f),
         new Vector3(-0.5f, -0.5f)
     };
     #endregion
@@ -43,54 +46,66 @@ public class Eclatos : MonoBehaviour
         {
             _posSplitted[i] = _points[i].position;
         }
+
+        // process grounded position
+        for (int i = 0; i < _points.Length; i++)
+        {
+            _posGrounded[i] = transform.position + GROUNDED_POSITION[i];
+        }
+
+        if (_splitOnForm == Form.Normal)
+        {
+            Debug.LogError(transform.name + " Split On Form can't be \"normal\"! ");
+        }
     }
     #endregion
 
     public void OnFormChange(object sender, Form form)
     {
-        switch (form)
+        if (form == _splitOnForm)
         {
-            case Form.Normal:
-                break;
-
-            case Form.Ethereal:
-                StopAllCoroutines();
-                StartCoroutine(Split());
-                break;
-
-            case Form.Void:
-                StopAllCoroutines();
-                StartCoroutine(Group());
-                break;
+            StopAllCoroutines();
+            StartCoroutine(GotoPoints(_posSplitted));
+        }
+        else if (form != Form.Normal && form != _splitOnForm)
+        {
+            StopAllCoroutines();
+            StartCoroutine(GotoPoints(_posGrounded));
         }
     }
 
-    IEnumerator Split()
+    IEnumerator GotoPoints(Vector3[] destination)
     {
-        bool isFullySplited;
+        Debug.Log("GotoPoints()");
+
+        bool isCompleted;
 
         do
         {
-            isFullySplited = true;
+            isCompleted = true;
 
             for (int i = 0; i < _points.Length; i++)
             {
                 Transform t = _points[i];
 
-                if (Vector3.Distance(t.position, _posSplitted[i]) >= SPLIT_MIN_DISTANCE)
+                // if position is to far from destination...
+                if (Vector3.Distance(t.position, destination[i]) >= SPLIT_MIN_DISTANCE)
                 {
-                    t.position = Vector3.MoveTowards(t.position, _posSplitted[i], SPLIT_SPEED);
-                    isFullySplited = false;
+                    // ... go to destination.
+                    t.position = Vector3.MoveTowards(t.position, destination[i], Time.deltaTime * _speedSplit);
+
+                    isCompleted = false;
+                }
+                else
+                {
+                    t.position = destination[i];
                 }
             }
 
+            Debug.Log("isFullySplited " + isCompleted);
+
             yield return new WaitForEndOfFrame();
 
-        } while (isFullySplited == false);
-    }
-
-    IEnumerator Group()
-    {
-        yield return new WaitForEndOfFrame();
+        } while (isCompleted == false);
     }
 }
