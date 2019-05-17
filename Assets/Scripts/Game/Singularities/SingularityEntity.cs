@@ -13,7 +13,7 @@ public class SingularityEntity : MonoBehaviour
     void Start()
     {
         FormHandle d = new FormHandle(OnFormChange);
-        CharControllerSingularity.Instance.EventForm += d;
+        CharControllerSingularity.EventForm += d;
     }
 
     public void OnFormChange(object sender, Form form)

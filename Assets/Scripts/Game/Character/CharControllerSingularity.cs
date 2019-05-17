@@ -6,10 +6,10 @@ using UnityEngine;
 public enum Form { Normal, Ethereal, Void };
 public delegate void FormHandle(object sender, Form form);
 
-public class CharControllerSingularity : Singleton<CharControllerSingularity>
+public class CharControllerSingularity : MonoBehaviour
 {
     #region Fields
-    public event FormHandle EventForm;
+    public static event FormHandle EventForm;
 
     [Header("Models Settings")]
     [SerializeField] private MeshRenderer _meshRenderer;
@@ -59,7 +59,7 @@ public class CharControllerSingularity : Singleton<CharControllerSingularity>
                     break;
             }
 
-            EventForm(this, form);
+            EventForm?.Invoke(this, form);
             UpdateForm();
         }
 
@@ -83,7 +83,7 @@ public class CharControllerSingularity : Singleton<CharControllerSingularity>
                     break;
             }
 
-            EventForm(this, form);
+            EventForm?.Invoke(this, form);
             UpdateForm();
         }
 
