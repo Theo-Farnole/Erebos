@@ -29,6 +29,13 @@ public class CharControllerSingularity : MonoBehaviour
     {
         form = Form.Normal;
         UpdateForm();
+
+        // on death, return to normal form
+        DeathHandle d = new DeathHandle((object sender) =>
+        {
+            form = Form.Normal;
+        });
+        CharDeath.EventDeath += d;
     }
 
     void Update()

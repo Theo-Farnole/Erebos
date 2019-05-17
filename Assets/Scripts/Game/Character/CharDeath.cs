@@ -38,11 +38,8 @@ public class CharDeath : MonoBehaviour
 
     private void Death()
     {
-        CharControllerManager.Instance.Attracted = false;
-
-        transform.position = (Vector2)currentCheckpoint.position;
-
         EventDeath?.Invoke(this);
+        transform.position = (Vector2)currentCheckpoint.position;
     }
 
     private void SetNewCheckpoint(Collider other)
