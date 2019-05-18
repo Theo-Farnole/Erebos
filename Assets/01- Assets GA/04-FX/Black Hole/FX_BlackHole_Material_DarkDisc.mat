@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FX_BlackHole_Material_DarkDisc
-  m_Shader: {fileID: 4800000, guid: ad55926279f81a446be0ce6b809fea37, type: 3}
+  m_Shader: {fileID: 4800000, guid: a570fb3ecdb17da4b82c2a8d118d2273, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0

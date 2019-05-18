@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Erebos_SH_BraseroFire
+  m_Name: FX_BraseroFire_Material
   m_Shader: {fileID: 4800000, guid: 19e4558bb06ea284bb657133b3de24ec, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -27,6 +27,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: c05f3e149852a294dbfa6d10eb5dc929, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ONESTLA:
+        m_Texture: {fileID: 2800000, guid: 1d6c887482606e442accc98b3c4ecc51, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Sanstitre1:
         m_Texture: {fileID: 2800000, guid: f3d1bfbd7b46ed04d90727204bb56413, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -44,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample1:
-        m_Texture: {fileID: 2800000, guid: f16a5ad4e72c5194595a6d5c79262b49, type: 3}
+        m_Texture: {fileID: 2800000, guid: a61f9d2d1db90804d9398d4fa0fbde90, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample10:
@@ -52,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample14:
-        m_Texture: {fileID: 2800000, guid: a61f9d2d1db90804d9398d4fa0fbde90, type: 3}
+        m_Texture: {fileID: 2800000, guid: f537c76703017f64ab87562cdc638877, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample15:
@@ -72,7 +76,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample2:
-        m_Texture: {fileID: 2800000, guid: a61f9d2d1db90804d9398d4fa0fbde90, type: 3}
+        m_Texture: {fileID: 2800000, guid: f16a5ad4e72c5194595a6d5c79262b49, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample3:
@@ -80,11 +84,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample4:
-        m_Texture: {fileID: 2800000, guid: a61f9d2d1db90804d9398d4fa0fbde90, type: 3}
+        m_Texture: {fileID: 2800000, guid: db1fe8065d9aeed469449be79e8c3124, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample5:
-        m_Texture: {fileID: 2800000, guid: c05f3e149852a294dbfa6d10eb5dc929, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0bfb06a6482525b4baa8a7fd3be657c5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample6:
@@ -101,6 +105,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _TextureSample9:
         m_Texture: {fileID: 2800000, guid: f16a5ad4e72c5194595a6d5c79262b49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Worley:
+        m_Texture: {fileID: 2800000, guid: 6d52a67c7a915bb488fb4dc43649d06d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _azezeazazzazazaz:
@@ -127,6 +135,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: ab9c7cb28c62eef48900a64572f75123, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _oraoraoraoraoa:
+        m_Texture: {fileID: 2800000, guid: f537c76703017f64ab87562cdc638877, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _sdqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq:
         m_Texture: {fileID: 2800000, guid: f16a5ad4e72c5194595a6d5c79262b49, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -148,7 +160,7 @@ Material:
         m_Scale: {x: 0.1, y: 0.1}
         m_Offset: {x: 0, y: 0}
     - _yeeeeboisdsdsd:
-        m_Texture: {fileID: 2800000, guid: db1fe8065d9aeed469449be79e8c3124, type: 3}
+        m_Texture: {fileID: 2800000, guid: 48a21a8e0294df245918fd54aec53cad, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _zeazazezeazeaazeeazeazeaz:
@@ -157,5 +169,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 0.5
+    - _DistorsionIntensity: 1
     - __dirty: 0
     m_Colors: []
