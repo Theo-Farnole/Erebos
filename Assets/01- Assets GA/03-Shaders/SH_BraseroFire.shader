@@ -33,9 +33,9 @@ Shader "Erebos/SH_BraseroFire"
 		void surf( Input i , inout SurfaceOutputStandard o )
 		{
 			float2 uv_TexCoord251 = i.uv_texcoord * float2( 0.7,0.7 ) + float2( 1,1 );
-			float2 panner256 = ( 1.5 * _Time.y * float2( 0.1,-0.5 ) + uv_TexCoord251);
+			float2 panner256 = ( 1.5 * _Time.y * float2( 0.05,-0.5 ) + uv_TexCoord251);
 			float2 uv_TexCoord248 = i.uv_texcoord * float2( 0.5,0.5 );
-			float2 panner252 = ( 0.9 * _Time.y * float2( -0.05,-0.5 ) + uv_TexCoord248);
+			float2 panner252 = ( 0.9 * _Time.y * float2( 0.1,-0.5 ) + uv_TexCoord248);
 			float4 tex2DNode264 = tex2D( _TextureSample5, ( ( tex2D( _yeeeeboisdsdsd, panner256 ) + tex2D( _TextureSample2, panner252 ) + float4( i.uv_texcoord, 0.0 , 0.0 ) ) * float4( i.uv_texcoord, 0.0 , 0.0 ) ).rg );
 			float3 temp_cast_3 = (( 5.0 * tex2DNode264.r )).xxx;
 			o.Emission = temp_cast_3;
@@ -49,11 +49,11 @@ Shader "Erebos/SH_BraseroFire"
 }
 /*ASEBEGIN
 Version=16400
-1152.8;73.6;893;1000;795.0657;-989.2029;1;True;False
+1352;81.6;687;985;802.471;-1007.804;1.3;True;False
 Node;AmplifyShaderEditor.TextureCoordinatesNode;251;-671.5039,1250.213;Float;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;0.7,0.7;False;1;FLOAT2;1,1;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TextureCoordinatesNode;248;-601.4714,1476.646;Float;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;0.5,0.5;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.PannerNode;256;-421.5052,1250.213;Float;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0.1,-0.5;False;1;FLOAT;1.5;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.PannerNode;252;-355.9086,1476.792;Float;False;3;0;FLOAT2;0,0;False;2;FLOAT2;-0.05,-0.5;False;1;FLOAT;0.9;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.PannerNode;256;-421.5052,1250.213;Float;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0.05,-0.5;False;1;FLOAT;1.5;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.PannerNode;252;-355.9086,1476.792;Float;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0.1,-0.5;False;1;FLOAT;0.9;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SamplerNode;458;-149.8829,1224.788;Float;True;Property;_yeeeeboisdsdsd;yeeee boi sdsdsd;3;0;Create;True;0;0;False;0;None;48a21a8e0294df245918fd54aec53cad;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TextureCoordinatesNode;250;-103.693,1782.944;Float;True;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SamplerNode;255;-174.6918,1449.719;Float;True;Property;_TextureSample2;Texture Sample 2;2;0;Create;True;0;0;False;0;f16a5ad4e72c5194595a6d5c79262b49;f16a5ad4e72c5194595a6d5c79262b49;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
@@ -78,4 +78,4 @@ WireConnection;267;1;264;1
 WireConnection;0;2;267;0
 WireConnection;0;10;264;4
 ASEEND*/
-//CHKSM=155B1D573AF918B169CF11FF09941A7A9797AE09
+//CHKSM=D4288A01DE73C5C8DB092FFCE976E3AC44F6A097
