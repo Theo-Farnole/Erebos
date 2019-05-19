@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FX_BlackHole_Material_Rim
-  m_Shader: {fileID: 4800000, guid: b0b30eca6c57dd44683637683b489af7, type: 3}
+  m_Name: FX_Collectibles_Material_Coin
+  m_Shader: {fileID: 4800000, guid: 054a6e466d40fed4eb679286edc04ac5, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -19,16 +19,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 30c74f3b576201d4a9e4991769ac3923, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 30c74f3b576201d4a9e4991769ac3923, type: 3}
+        m_Texture: {fileID: 2800000, guid: 36f2dbd1f70787a4687eecdc38623fc4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Sparkles:
-        m_Texture: {fileID: 2800000, guid: 30c74f3b576201d4a9e4991769ac3923, type: 3}
+    - _Sanstitre2:
+        m_Texture: {fileID: 2800000, guid: 36f2dbd1f70787a4687eecdc38623fc4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -36,9 +32,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Emisivintensity: 5
-    - _Emissivpowa: 10
-    - _Intensity: 10
-    - _InvFade: 1
+    - _Cutoff: 5
     - __dirty: 0
     m_Colors: []
