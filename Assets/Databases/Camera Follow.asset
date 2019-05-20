@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5c8350eb4ae234588079a8ee5edca7, type: 3}
   m_Name: Camera Follow
   m_EditorClassIdentifier: 
-  _maxOffset: 1
   _speed: 1
+  _inputPercentOffset: 10
+  _inputSpeed: 8
   _focusRectSpeed: 1
   _maxRectPositionPercent: 31.1
   _widthPercent: 10
