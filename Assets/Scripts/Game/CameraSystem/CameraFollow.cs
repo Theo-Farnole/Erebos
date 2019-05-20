@@ -15,6 +15,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Type _cameraType = Type.Static;
     [Tooltip("Is this the first camera of the level?")]
     [SerializeField] private bool _firstCameraOfTheLevel = false;
+    [SerializeField] private bool _drawDebug = false;
 
     private Transform _character = null;
     private Rigidbody _targetRb = null;
@@ -181,6 +182,9 @@ public class CameraFollow : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!_drawDebug)
+            return;
+
         Vector3 midLeftPoint = transform.position + _screenBounds.x * Vector3.left / 2;
         Vector3 midRightPoint = transform.position + _screenBounds.x * Vector3.right / 2;
 
