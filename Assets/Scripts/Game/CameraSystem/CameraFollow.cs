@@ -119,6 +119,9 @@ public class CameraFollow : MonoBehaviour
         else if (rightDelta < 0f)
         {
             _wantedCameraPosition.x = _character.position.x - _relativeFocusRect.max.x;
+        } else
+        {
+            _wantedCameraPosition.x = _character.position.x;
         }
 
         float downDelta = transform.position.y + _relativeFocusRect.min.y - _character.position.y;
@@ -126,15 +129,15 @@ public class CameraFollow : MonoBehaviour
 
         if (downDelta > 0f)
         {
-            _wantedCameraPosition.y = _character.position.y + _relativeFocusRect.min.y;
+            _wantedCameraPosition.y = _character.position.y - _relativeFocusRect.min.y;
         }
         else if (upDelta < 0f)
         {
-            _wantedCameraPosition.y = _character.position.y + _relativeFocusRect.max.y;
+            _wantedCameraPosition.y = _character.position.y - _relativeFocusRect.max.y;
         }
         else
         {
-            _wantedCameraPosition.y = 0;
+            _wantedCameraPosition.y = _character.position.y;
         }
 
         _wantedCameraPosition.y += Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
@@ -170,7 +173,7 @@ public class CameraFollow : MonoBehaviour
 
         // change target position
         _wantedCameraPosition.x = _character.position.x;
-        _wantedCameraPosition.y = _character.position.y + Mathf.Sin(-transform.eulerAngles.x) * _distanceToTarget;
+        _wantedCameraPosition.y = _character.position.y + Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
         _wantedCameraPosition.z = _distanceToTarget;
 
         transform.position = _wantedCameraPosition;
