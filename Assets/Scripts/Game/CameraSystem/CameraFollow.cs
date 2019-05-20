@@ -126,13 +126,18 @@ public class CameraFollow : MonoBehaviour
 
         if (downDelta > 0f)
         {
-            _wantedCameraPosition.y = transform.position.y + _relativeFocusRect.min.y;
+            _wantedCameraPosition.y = _character.position.y + _relativeFocusRect.min.y;
         }
         else if (upDelta < 0f)
         {
-            _wantedCameraPosition.y = transform.position.y + _relativeFocusRect.max.y;
+            _wantedCameraPosition.y = _character.position.y + _relativeFocusRect.max.y;
+        }
+        else
+        {
+            _wantedCameraPosition.y = 0;
         }
 
+        _wantedCameraPosition.y += Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
         _wantedCameraPosition.z = transform.position.z;
     }
 
@@ -165,7 +170,7 @@ public class CameraFollow : MonoBehaviour
 
         // change target position
         _wantedCameraPosition.x = _character.position.x;
-        _wantedCameraPosition.y = _character.position.y;
+        _wantedCameraPosition.y = _character.position.y + Mathf.Sin(-transform.eulerAngles.x) * _distanceToTarget;
         _wantedCameraPosition.z = _distanceToTarget;
 
         transform.position = _wantedCameraPosition;
@@ -173,9 +178,6 @@ public class CameraFollow : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // draw camera's bounds
-        Gizmos.color = Color.yellow;
-
         Vector3 midLeftPoint = transform.position + _screenBounds.x * Vector3.left / 2;
         Vector3 midRightPoint = transform.position + _screenBounds.x * Vector3.right / 2;
 
@@ -188,15 +190,15 @@ public class CameraFollow : MonoBehaviour
         Vector3 topMidPoint = transform.position + _screenBounds.y * Vector3.up / 2;
         Vector3 bottomMidPoint = transform.position + _screenBounds.y * Vector3.down / 2;
 
-        GizmosExtension.Draw2DLine(topLeftPoint, topRightPoint);     // up
-        GizmosExtension.Draw2DLine(bottomLeftPoint, bottomRightPoint);    // down
+        // draw camera's bounds
+        Gizmos.color = Color.yellow;
+        GizmosExtension.Draw2DLine(topLeftPoint, topRightPoint);        // up
+        GizmosExtension.Draw2DLine(bottomLeftPoint, bottomRightPoint);  // down
         GizmosExtension.Draw2DLine(bottomRightPoint, topRightPoint);    // right
-        GizmosExtension.Draw2DLine(bottomLeftPoint, topLeftPoint);    // left
+        GizmosExtension.Draw2DLine(bottomLeftPoint, topLeftPoint);      // left
 
         // draw center
         Gizmos.color = Color.red;
-
-        Vector3 midPoint = transform.position;
         GizmosExtension.Draw2DLine(bottomMidPoint, topMidPoint); // vertical
         GizmosExtension.Draw2DLine(midLeftPoint, midRightPoint); // horizontal
 
