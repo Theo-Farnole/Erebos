@@ -218,6 +218,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1731791828621383585, guid: ceae8591dd66be14a97c4225176aa11c,
+        type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1731791828621383584, guid: ceae8591dd66be14a97c4225176aa11c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -272,11 +277,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1731791828621383585, guid: ceae8591dd66be14a97c4225176aa11c,
-        type: 3}
-      propertyPath: m_Name
-      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ceae8591dd66be14a97c4225176aa11c, type: 3}
@@ -502,12 +502,12 @@ PrefabInstance:
     - target: {fileID: 4468269841339216516, guid: bb54a67216121c8408df713e98e8e9b0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.5737205
+      value: -4.06
       objectReference: {fileID: 0}
     - target: {fileID: 4468269841339216516, guid: bb54a67216121c8408df713e98e8e9b0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8416898
+      value: -1.65
       objectReference: {fileID: 0}
     - target: {fileID: 4468269841339216516, guid: bb54a67216121c8408df713e98e8e9b0,
         type: 3}
@@ -553,6 +553,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242178860, guid: bb54a67216121c8408df713e98e8e9b0, type: 3}
+      propertyPath: _points.Array.data[0].point.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242178860, guid: bb54a67216121c8408df713e98e8e9b0, type: 3}
+      propertyPath: _points.Array.data[0].point.x
+      value: -16.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242178860, guid: bb54a67216121c8408df713e98e8e9b0, type: 3}
+      propertyPath: _points.Array.data[0].timeToReachPoint
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242178860, guid: bb54a67216121c8408df713e98e8e9b0, type: 3}
+      propertyPath: _points.Array.data[1].timeToReachPoint
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb54a67216121c8408df713e98e8e9b0, type: 3}

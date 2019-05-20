@@ -23,6 +23,7 @@ public class BlackSingularity : AbstractSingularity
     {
         if (Vector3.Distance(transform.position, _character.position) <= _data.CharacterRotateRadius)
         {
+            _character.SetParent(transform);
             RotateCharacter();
         }
         else
