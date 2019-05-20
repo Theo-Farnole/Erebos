@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2162744607443460683}
   - component: {fileID: 2162744607443460682}
   m_Layer: 0
-  m_Name: FX_Collectibles 1
+  m_Name: FX_Collectibles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5558,7 +5558,7 @@ ParticleSystem:
           m_RotationOrder: 4
     arc:
       value: 360
-      mode: 1
+      mode: 0
       spread: 0
       speed:
         serializedVersion: 2
