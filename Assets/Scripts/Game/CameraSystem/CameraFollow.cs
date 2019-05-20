@@ -15,15 +15,16 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Type _cameraType = Type.Static;
     [Tooltip("Is this the first camera of the level?")]
     [SerializeField] private bool _firstCameraOfTheLevel = false;
+    [SerializeField] private bool _drawDebug = false;
 
-    private Transform _target = null;
+    private Transform _character = null;
     private Rigidbody _targetRb = null;
 
     private Vector2 _screenBounds;
-    private Vector2 _targetFocusPosition;
-    private Rect _focusRect;
+    private Vector2 _wantedFocusRelativePosition;
+    private Rect _relativeFocusRect;
 
-    private Vector3 _targetPosition = Vector3.zero;
+    private Vector3 _wantedCameraPosition = Vector3.zero;
     private Vector3 _cameraInputOffset = Vector3.zero;
 
     private float _distanceToTarget = Mathf.Infinity;
@@ -46,27 +47,25 @@ public class CameraFollow : MonoBehaviour
     #region MonoBehaviour Callbacks
     void Start()
     {
-        _target = GameObject.FindGameObjectWithTag("Player").transform;
-        _targetRb = _target.GetComponent<Rigidbody>();
+        _character = GameObject.FindGameObjectWithTag("Player").transform;
+        _targetRb = _character.GetComponent<Rigidbody>();
 
-        // calculate in game width & height
-        _distanceToTarget = Vector3.Distance(_target.position, transform.position);
-        _screenBounds.y = 2.0f * _distanceToTarget * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad); ;
+        // calculate in game width & height        
+        _distanceToTarget = transform.position.z - _character.position.z;
+        _screenBounds.y = 2.0f * Mathf.Abs(_distanceToTarget) * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad);
         _screenBounds.x = _screenBounds.y * Camera.main.aspect;
 
-        // draw focus rect
-        _focusRect = new Rect(Vector2.zero, new Vector2(_screenBounds.x * _data.WidthPercent, _screenBounds.y * _data.HeightPercent));
-        _focusRect.position = -_focusRect.size * 0.5f;
-        _targetFocusPosition = _focusRect.position;
+        Debug.Log("_screenBounds = " + _screenBounds);
 
-        // set target position
-        _targetPosition = _target.position;
-        _targetPosition.z = transform.position.z;
-        _targetPosition.y += _screenBounds.y / 2;
+        // draw focus rect
+        _relativeFocusRect = new Rect(Vector2.zero, new Vector2(_screenBounds.x * _data.WidthPercent, _screenBounds.y * _data.HeightPercent));
 
         // reset on death
         DeathHandle d = new DeathHandle(CenterOnPlayer);
         CharDeath.EventDeath += d;
+
+        // on start, center camera on players
+        CenterOnPlayer(this);
 
         gameObject.SetActive(_firstCameraOfTheLevel);
     }
@@ -82,74 +81,86 @@ public class CameraFollow : MonoBehaviour
             SetTargetPosition();
         }
 
-        //ProcessInput();
+        ProcessInput();
         Move();
     }
     #endregion
+
 
     void SetFocusRect()
     {
         if (_targetRb.velocity.x < 0f)
         {
-            _targetFocusPosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.left - new Vector2(0, _focusRect.size.y * 0.5f);
+            _wantedFocusRelativePosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right;
         }
 
         else if (_targetRb.velocity.x > 0f)
         {
-            _targetFocusPosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right - new Vector2(_focusRect.size.x, _focusRect.size.y * 0.5f);
+            _wantedFocusRelativePosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.left;
         }
 
         else
         {
-            _targetFocusPosition = -_focusRect.size * 0.5f;
+            _wantedFocusRelativePosition = Vector2.zero;
         }
 
-        _focusRect.position = Vector2.Lerp(_focusRect.position, _targetFocusPosition, Time.deltaTime * _data.FocusRectSpeed);
+        _wantedFocusRelativePosition -= _relativeFocusRect.size * 0.5f; // center rect
+        _relativeFocusRect.position = Vector2.Lerp(_relativeFocusRect.position, _wantedFocusRelativePosition, Time.deltaTime * _data.FocusRectSpeed);
     }
 
     void SetTargetPosition()
     {
-        float leftDelta = transform.position.x + _focusRect.min.x - _target.position.x;
-        float rightDelta = transform.position.x + _focusRect.max.x - _target.position.x;
+        float leftDelta = transform.position.x + _relativeFocusRect.min.x - _character.position.x;
+        float rightDelta = transform.position.x + _relativeFocusRect.max.x - _character.position.x;
 
         if (leftDelta > 0f)
         {
-            _targetPosition.x = transform.position.x + _focusRect.min.x;
+            _wantedCameraPosition.x = _character.position.x - _relativeFocusRect.min.x;
         }
         else if (rightDelta < 0f)
         {
-            _targetPosition.x = transform.position.x + _focusRect.max.x;
+            _wantedCameraPosition.x = _character.position.x - _relativeFocusRect.max.x;
+        } else
+        {
+            _wantedCameraPosition.x = _character.position.x;
         }
 
-        float downDelta = (transform.position.y - _screenBounds.y / 2) + _focusRect.min.y - _target.position.y;
-        float upDelta = (transform.position.y - _screenBounds.y / 2) + _focusRect.max.y - _target.position.y;
+        float downDelta = transform.position.y + _relativeFocusRect.min.y - _character.position.y;
+        float upDelta = transform.position.y + _relativeFocusRect.max.y - _character.position.y;
 
         if (downDelta > 0f)
         {
-            _targetPosition.y = transform.position.y + _focusRect.min.y;
+            _wantedCameraPosition.y = _character.position.y - _relativeFocusRect.min.y;
         }
         else if (upDelta < 0f)
         {
-            _targetPosition.y = transform.position.y + _focusRect.max.y;
+            _wantedCameraPosition.y = _character.position.y - _relativeFocusRect.max.y;
+        }
+        else
+        {
+            _wantedCameraPosition.y = _character.position.y;
         }
 
-        _targetPosition.z = transform.position.z;
+        _wantedCameraPosition.y += Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
+        _wantedCameraPosition.z = transform.position.z;
     }
 
     void ProcessInput()
     {
-        Vector2 input = GamePad.GetAxis(GamePad.Axis.RightStick, GamePad.Index.Any);
-        Vector3 target = input.normalized * _data.MaxOffset;
+        float maxOffset = _screenBounds.x * _data.InputPercentOffset;
 
-        _cameraInputOffset = (Vector2)Vector3.Lerp(_cameraInputOffset, target, Time.deltaTime * _data.Speed);
-        _cameraInputOffset.Clamp(_data.MaxOffset * Vector3.one);
+        Vector2 input = GamePad.GetAxis(GamePad.Axis.RightStick, GamePad.Index.Any);
+        Vector3 target = input.normalized * maxOffset;
+
+        _cameraInputOffset = (Vector2)Vector3.Lerp(_cameraInputOffset, target, Time.deltaTime * _data.InputSpeed);
+        _cameraInputOffset.Clamp(maxOffset * Vector3.one);
     }
 
     void Move()
     {
         Vector3 newPosition = Vector3.zero;
 
-        newPosition = Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime * _data.Speed);
+        newPosition = Vector3.Lerp(transform.position - _cameraInputOffset, _wantedCameraPosition, Time.deltaTime * _data.Speed);
         newPosition += _cameraInputOffset;
 
         newPosition.z = transform.position.z; // lock Z axis
@@ -159,39 +170,56 @@ public class CameraFollow : MonoBehaviour
 
     void CenterOnPlayer(object sender)
     {
-        Debug.Log("CenterOnPlayer");
-
         // change focus rect
-        _targetFocusPosition = -_focusRect.size * 0.5f;
-        _focusRect.position = _targetFocusPosition;
+        _wantedFocusRelativePosition = -_relativeFocusRect.size * 0.5f;
+        _relativeFocusRect.position = _wantedFocusRelativePosition;
 
         // change target position
-        _targetPosition = (Vector2)_target.position;
-        //_targetPosition += new Vector3(0, Mathf.Sin(-transform.eulerAngles.y), Mathf.Cos(-transform.eulerAngles.x)) * _distanceToTarget;
-        _targetPosition.z = transform.position.z;
+        _wantedCameraPosition.x = _character.position.x;
+        _wantedCameraPosition.y = _character.position.y + Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
+        _wantedCameraPosition.z = _distanceToTarget;
 
-        transform.position = _targetPosition;
+        transform.position = _wantedCameraPosition;
     }
 
     private void OnDrawGizmos()
     {
+        if (!_drawDebug)
+            return;
+
+        Vector3 midLeftPoint = transform.position + _screenBounds.x * Vector3.left / 2;
+        Vector3 midRightPoint = transform.position + _screenBounds.x * Vector3.right / 2;
+
+        Vector3 topLeftPoint = transform.position + _screenBounds.y * Vector3.up / 2 + _screenBounds.x * Vector3.left / 2;
+        Vector3 topRightPoint = transform.position + _screenBounds.y * Vector3.up / 2 + _screenBounds.x * Vector3.right / 2;
+
+        Vector3 bottomLeftPoint = transform.position + _screenBounds.y * Vector3.down / 2 + _screenBounds.x * Vector3.left / 2;
+        Vector3 bottomRightPoint = transform.position + _screenBounds.y * Vector3.down / 2 + _screenBounds.x * Vector3.right / 2;
+
+        Vector3 topMidPoint = transform.position + _screenBounds.y * Vector3.up / 2;
+        Vector3 bottomMidPoint = transform.position + _screenBounds.y * Vector3.down / 2;
+
         // draw camera's bounds
         Gizmos.color = Color.yellow;
-
-        Vector3 leftPoint = transform.position - _screenBounds.x * Vector3.right / 2;
-        Vector3 rightPoint = transform.position + _screenBounds.x * Vector3.right / 2;
-
-        GizmosExtension.Draw2DLine(leftPoint, rightPoint);     // up
-        GizmosExtension.Draw2DLine(leftPoint - _screenBounds.y * Vector3.up, rightPoint - _screenBounds.y * Vector3.up);    // down
-        GizmosExtension.Draw2DLine(rightPoint, rightPoint - _screenBounds.y * Vector3.up);    // right
-        GizmosExtension.Draw2DLine(leftPoint, leftPoint - _screenBounds.y * Vector3.up);    // left
+        GizmosExtension.Draw2DLine(topLeftPoint, topRightPoint);        // up
+        GizmosExtension.Draw2DLine(bottomLeftPoint, bottomRightPoint);  // down
+        GizmosExtension.Draw2DLine(bottomRightPoint, topRightPoint);    // right
+        GizmosExtension.Draw2DLine(bottomLeftPoint, topLeftPoint);      // left
 
         // draw center
         Gizmos.color = Color.red;
-        GizmosExtension.Draw2DLine(transform.position, transform.position + _screenBounds.y * Vector3.down);
+        GizmosExtension.Draw2DLine(bottomMidPoint, topMidPoint); // vertical
+        GizmosExtension.Draw2DLine(midLeftPoint, midRightPoint); // horizontal
 
         // draw focus rect
         Gizmos.color = Color.green;
-        GizmosExtension.DrawRect((Vector2)transform.position + (_screenBounds.y / 2) * Vector2.down, _focusRect);
+        GizmosExtension.DrawRect(transform.position, _relativeFocusRect);
+
+        // draw wanted position
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawSphere((Vector2)_wantedCameraPosition, 0.5f);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere((Vector2)transform.position + _wantedFocusRelativePosition, 0.5f);
     }
 }

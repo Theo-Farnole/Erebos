@@ -36,6 +36,13 @@ public class CharControllerManager : Singleton<CharControllerManager>
             Attracted = false;
         });
         CharDeath.EventDeath += d;
+
+        // on form change, set parent to null
+        FormHandle dd = new FormHandle((object sender, Form form) =>
+        {
+            transform.parent = null;
+        });
+        CharControllerSingularity.EventForm += dd;
     }
     #endregion
 }

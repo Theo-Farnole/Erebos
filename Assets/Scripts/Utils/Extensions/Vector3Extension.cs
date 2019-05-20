@@ -11,7 +11,6 @@ public static class Vector3Extension
         v.z = Mathf.Clamp(v.z, min, max);
     }
 
-    // note: this method can be OPTIMIZED if need
     public static void Clamp(this Vector3 v1, Vector3 v2)
     {
         v1.x = Mathf.Clamp(v1.x, -Mathf.Abs(v2.x), Mathf.Abs(v2.x));
