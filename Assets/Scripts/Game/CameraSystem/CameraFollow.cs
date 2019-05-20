@@ -15,6 +15,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Type _cameraType = Type.Static;
     [Tooltip("Is this the first camera of the level?")]
     [SerializeField] private bool _firstCameraOfTheLevel = false;
+    [SerializeField] private bool _drawDebug = false;
 
     private Transform _character = null;
     private Rigidbody _targetRb = null;
@@ -80,7 +81,7 @@ public class CameraFollow : MonoBehaviour
             SetTargetPosition();
         }
 
-        //ProcessInput();
+        ProcessInput();
         Move();
     }
     #endregion
@@ -146,18 +147,20 @@ public class CameraFollow : MonoBehaviour
 
     void ProcessInput()
     {
-        Vector2 input = GamePad.GetAxis(GamePad.Axis.RightStick, GamePad.Index.Any);
-        Vector3 target = input.normalized * _data.MaxOffset;
+        float maxOffset = _screenBounds.x * _data.InputPercentOffset;
 
-        _cameraInputOffset = (Vector2)Vector3.Lerp(_cameraInputOffset, target, Time.deltaTime * _data.Speed);
-        _cameraInputOffset.Clamp(_data.MaxOffset * Vector3.one);
+        Vector2 input = GamePad.GetAxis(GamePad.Axis.RightStick, GamePad.Index.Any);
+        Vector3 target = input.normalized * maxOffset;
+
+        _cameraInputOffset = (Vector2)Vector3.Lerp(_cameraInputOffset, target, Time.deltaTime * _data.InputSpeed);
+        _cameraInputOffset.Clamp(maxOffset * Vector3.one);
     }
 
     void Move()
     {
         Vector3 newPosition = Vector3.zero;
 
-        newPosition = Vector3.Lerp(transform.position, _wantedCameraPosition, Time.deltaTime * _data.Speed);
+        newPosition = Vector3.Lerp(transform.position - _cameraInputOffset, _wantedCameraPosition, Time.deltaTime * _data.Speed);
         newPosition += _cameraInputOffset;
 
         newPosition.z = transform.position.z; // lock Z axis
@@ -181,6 +184,9 @@ public class CameraFollow : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!_drawDebug)
+            return;
+
         Vector3 midLeftPoint = transform.position + _screenBounds.x * Vector3.left / 2;
         Vector3 midRightPoint = transform.position + _screenBounds.x * Vector3.right / 2;
 
