@@ -37,8 +37,9 @@ public class CharDeath : MonoBehaviour
 
     private void Death()
     {
-        EventDeath?.Invoke(this);
         transform.position = (Vector2)currentCheckpoint.position;
+
+        EventDeath?.Invoke(this);
     }
 
     private void SetNewCheckpoint(Collider other)
