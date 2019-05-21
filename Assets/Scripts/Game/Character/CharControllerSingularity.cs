@@ -9,19 +9,28 @@ public delegate void FormHandle(object sender, Form form);
 public class CharControllerSingularity : MonoBehaviour
 {
     #region Fields
+    #region Publics Fields
     public static event FormHandle EventForm;
 
+    [HideInInspector] public bool canGotoVoid = true;
+    [HideInInspector] public bool canGotoEtheral = true;
+    #endregion
+
+    #region Serialize Fields
     [Header("Models Settings")]
     [SerializeField] private MeshRenderer _meshRenderer;
     [Space]
     [SerializeField] private Material _matNormal;
     [SerializeField] private Material _matEthereal;
     [SerializeField] private Material _matVoid;
+    #endregion
 
+    #region Private Fields
     private bool _rightTriggerPressed = false;
     private bool _leftTriggerPressed = false;
 
     private Form _form = Form.Normal;
+    #endregion
     #endregion
 
     #region Properties
@@ -44,8 +53,13 @@ public class CharControllerSingularity : MonoBehaviour
     #region MonoBehaviour Callbacks
     void Awake()
     {
+        bool isInTutorial = FindObjectsOfType<AbstractSingularity>().Length == 0 && FindObjectsOfType<Eclatos>().Length == 0;
+        bool isInFirstZone = FindObjectsOfType<TutorialFeather>().Length > 0;
+
+        canGotoVoid = !(isInTutorial || isInFirstZone);
+        canGotoEtheral = !(isInTutorial || isInFirstZone);
+
         Form = Form.Normal;
-        UpdateForm();
 
         // on death, return to normal form
         DeathHandle d = new DeathHandle((object sender) =>
@@ -64,7 +78,7 @@ public class CharControllerSingularity : MonoBehaviour
     void ManageInputs()
     {
         // void form
-        if (!_rightTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f)
+        if (canGotoVoid && !_rightTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f)
         {
             switch (Form)
             {
@@ -85,7 +99,7 @@ public class CharControllerSingularity : MonoBehaviour
         }
 
         // ethereal form
-        if (!_leftTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f)
+        if (canGotoEtheral && !_leftTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f)
         {
             switch (Form)
             {
