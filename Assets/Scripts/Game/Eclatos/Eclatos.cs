@@ -21,7 +21,7 @@ public class Eclatos : MonoBehaviour
     private Vector3[] _eulerAngleEthereal = new Vector3[4];
 
     private Transform[] _points = new Transform[4];
-    private static readonly float SPLIT_MIN_DISTANCE = 0.1f;
+    private static readonly float MIN_DISTANCE = 0.1f;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -102,7 +102,7 @@ public class Eclatos : MonoBehaviour
                 Transform t = _points[i];
 
                 // if position is to far from destination...
-                if (Vector3.Distance(t.position, position[i]) >= SPLIT_MIN_DISTANCE)
+                if (Vector3.Distance(t.position, position[i]) >= MIN_DISTANCE)
                 {
                     // ... go to destination.
                     t.position = Vector3.MoveTowards(t.position, position[i], Time.deltaTime * _speedSplit);
