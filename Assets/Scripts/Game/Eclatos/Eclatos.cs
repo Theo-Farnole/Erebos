@@ -110,14 +110,14 @@ public class Eclatos : MonoBehaviour
 
                     isCompleted = false;
 
-                    t.GetComponent<Collider>().isTrigger = true;
+                    t.GetComponentInChildren<Collider>().isTrigger = true;
                 }
                 else
                 {
                     t.position = position[i];
                     t.eulerAngles = rotation[i];
 
-                    t.GetComponent<Collider>().isTrigger = false;
+                    t.GetComponentInChildren<Collider>().isTrigger = false;
                 }
             }
 
