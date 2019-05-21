@@ -128,7 +128,24 @@ public class Eclatos : MonoBehaviour
         {
             if (_pointsVoid[i] != null && _pointsEtheral[i] != null)
             {
-                Gizmos.color = Color.green;
+                switch (i)
+                {
+                    case 0:
+                        Gizmos.color = Color.green;
+                        break;
+
+                    case 1:
+                        Gizmos.color = Color.red;
+                        break;
+
+                    case 2:
+                        Gizmos.color = Color.yellow;
+                        break;
+
+                    case 3:
+                        Gizmos.color = Color.blue;
+                        break;
+                }
                 Gizmos.DrawLine(_pointsVoid[i].position, _pointsEtheral[i].position);
             }
         }
