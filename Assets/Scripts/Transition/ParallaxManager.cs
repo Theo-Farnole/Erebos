@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class ParallaxManager : Singleton<ParallaxManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private AnimationCurve _speedOnX;
+    [SerializeField] private AnimationCurve _speedOnY;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        float horizontal = _speedOnX.Evaluate(Time.timeSinceLevelLoad);
+        float vertical = _speedOnY.Evaluate(Time.timeSinceLevelLoad);
+
+        transform.position += new Vector3(horizontal, vertical, 0);
     }
 }
