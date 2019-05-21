@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GamepadInput;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -41,9 +42,9 @@ public class TransitionManager : MonoBehaviour
         {
             _textPressAnyKey.gameObject.SetActive(true);
 
-            if (Input.anyKeyDown)
+            if (GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
             {
-                //ao.allowSceneActivation = true;
+                ao.allowSceneActivation = true;
             }
         }
     }
