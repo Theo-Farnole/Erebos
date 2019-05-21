@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e64cdbf6bb76f04dab01790febecbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeToScaleDown: 1.5
-  _prefabDestroyPS: {fileID: 6740827490227148799, guid: 7af69c2e4618d384e8cb910c5a94a1a1,
+  _timeToScaleDown: 0.1
+  _prefabDestroyPS: {fileID: 5445730514264888277, guid: 4419bafdcdf90884f81584c0c1074d75,
     type: 3}
 --- !u!65 &5288219580137048899
 BoxCollider:
