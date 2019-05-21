@@ -109,11 +109,15 @@ public class Eclatos : MonoBehaviour
                     t.eulerAngles = Vector3.MoveTowards(t.eulerAngles, rotation[i], Time.deltaTime * _rotationSpeed);
 
                     isCompleted = false;
+
+                    t.GetComponent<Collider>().isTrigger = true;
                 }
                 else
                 {
                     t.position = position[i];
                     t.eulerAngles = rotation[i];
+
+                    t.GetComponent<Collider>().isTrigger = false;
                 }
             }
 
