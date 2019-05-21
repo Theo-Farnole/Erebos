@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -7,26 +8,20 @@ public class Eclatos : MonoBehaviour
 {
     #region Fields
     [SerializeField] private float _speedSplit = 8f;
-    [SerializeField] private Form _splitOnForm = Form.Void;
+    [SerializeField] private float _rotationSpeed = 90f;
     [Space]
-    [SerializeField] private Transform _topLeftPoint;
-    [SerializeField] private Transform _topRightPoint;
-    [SerializeField] private Transform _bottomRightPoint;
-    [SerializeField] private Transform _bottomLeftPoint;
+    [SerializeField] private Form _startOnForm = Form.Void;
+    [Space]
+    [SerializeField] private Transform[] _pointsVoid = new Transform[4];
+    [SerializeField] private Transform[] _pointsEtheral = new Transform[4];
+
+    private Vector3[] _positionVoid = new Vector3[4];
+    private Vector3[] _eulerAngleVoid = new Vector3[4];
+    private Vector3[] _positionEthereal = new Vector3[4];
+    private Vector3[] _eulerAngleEthereal = new Vector3[4];
 
     private Transform[] _points = new Transform[4];
-    private Vector3[] _posSplitted = new Vector3[4];
-    private Vector3[] _posGrounded = new Vector3[4];
-
     private static readonly float SPLIT_MIN_DISTANCE = 0.1f;
-
-    private static readonly Vector3[] GROUNDED_POSITION = new Vector3[4]
-    {
-        new Vector3(-0.5f, 0.5f),
-        new Vector3(0.5f, 0.5f),
-        new Vector3(0.5f, -0.5f),
-        new Vector3(-0.5f, -0.5f)
-    };
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -35,46 +30,64 @@ public class Eclatos : MonoBehaviour
         FormHandle d = new FormHandle(OnFormChange);
         CharControllerSingularity.EventForm += d;
 
-        // SerializeField points to array of Transform
-        _points[0] = _topLeftPoint;
-        _points[1] = _topRightPoint;
-        _points[2] = _bottomRightPoint;
-        _points[3] = _bottomLeftPoint;
-
-        // save splitted position
-        for (int i = 0; i < _points.Length; i++)
+        // register transform to points
+        for (int i = 0; i < _pointsVoid.Length; i++)
         {
-            _posSplitted[i] = _points[i].position;
+            _positionVoid[i] = _pointsVoid[i].position;
+            _eulerAngleVoid[i] = _pointsVoid[i].eulerAngles;
         }
 
-        // process grounded position
-        for (int i = 0; i < _points.Length; i++)
+        for (int i = 0; i < _pointsEtheral.Length; i++)
         {
-            _posGrounded[i] = transform.position + GROUNDED_POSITION[i];
+            _positionEthereal[i] = _pointsEtheral[i].position;
+            _eulerAngleEthereal[i] = _pointsEtheral[i].eulerAngles;
         }
 
-        if (_splitOnForm == Form.Normal)
+
+        // Hide useless transform
+        switch (_startOnForm)
         {
-            Debug.LogError(transform.name + " Split On Form can't be \"normal\"! ");
+            case Form.Normal:
+                Debug.LogError(transform.name + " Split On Form can't be \"normal\"! ");
+                break;
+
+            case Form.Void:
+                _points = _pointsVoid;
+
+                foreach (var t in _pointsEtheral)
+                {
+                    t.gameObject.SetActive(false);
+                }
+                break;
+
+            case Form.Ethereal:
+                _points = _pointsEtheral;
+
+                foreach (var t in _pointsVoid)
+                {
+                    t.gameObject.SetActive(false);
+                }
+                break;
         }
+
     }
     #endregion
 
     public void OnFormChange(object sender, Form form)
     {
-        if (form == _splitOnForm)
+        if (form == Form.Void)
         {
             StopAllCoroutines();
-            StartCoroutine(GotoPoints(_posSplitted));
+            StartCoroutine(GotoPoints(_positionVoid, _eulerAngleVoid));
         }
-        else if (form != Form.Normal && form != _splitOnForm)
+        else if (form == Form.Ethereal)
         {
             StopAllCoroutines();
-            StartCoroutine(GotoPoints(_posGrounded));
+            StartCoroutine(GotoPoints(_positionEthereal, _eulerAngleEthereal));
         }
     }
 
-    IEnumerator GotoPoints(Vector3[] destination)
+    IEnumerator GotoPoints(Vector3[] position, Vector3[] rotation)
     {
         Debug.Log("GotoPoints()");
 
@@ -89,21 +102,62 @@ public class Eclatos : MonoBehaviour
                 Transform t = _points[i];
 
                 // if position is to far from destination...
-                if (Vector3.Distance(t.position, destination[i]) >= SPLIT_MIN_DISTANCE)
+                if (Vector3.Distance(t.position, position[i]) >= SPLIT_MIN_DISTANCE)
                 {
                     // ... go to destination.
-                    t.position = Vector3.MoveTowards(t.position, destination[i], Time.deltaTime * _speedSplit);
+                    t.position = Vector3.MoveTowards(t.position, position[i], Time.deltaTime * _speedSplit);
+                    t.eulerAngles = Vector3.MoveTowards(t.eulerAngles, rotation[i], Time.deltaTime * _rotationSpeed);
 
                     isCompleted = false;
+
+                    if (t.GetComponentInChildren<Collider>() != null)
+                    {
+                        t.GetComponentInChildren<Collider>().isTrigger = true;
+                    }
                 }
                 else
                 {
-                    t.position = destination[i];
+                    t.position = position[i];
+                    t.eulerAngles = rotation[i];
+
+                    if (t.GetComponentInChildren<Collider>())
+                    {
+                        t.GetComponentInChildren<Collider>().isTrigger = false;
+                    }
                 }
             }
-            
+
             yield return new WaitForEndOfFrame();
 
         } while (isCompleted == false);
+    }
+
+    void OnDrawGizmos()
+    {
+        for (int i = 0; i < _positionVoid.Length; i++)
+        {
+            if (_pointsVoid[i] != null && _pointsEtheral[i] != null)
+            {
+                switch (i)
+                {
+                    case 0:
+                        Gizmos.color = Color.green;
+                        break;
+
+                    case 1:
+                        Gizmos.color = Color.red;
+                        break;
+
+                    case 2:
+                        Gizmos.color = Color.yellow;
+                        break;
+
+                    case 3:
+                        Gizmos.color = Color.blue;
+                        break;
+                }
+                Gizmos.DrawLine(_pointsVoid[i].position, _pointsEtheral[i].position);
+            }
+        }
     }
 }
