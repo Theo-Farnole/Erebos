@@ -33,6 +33,11 @@ public class CharDeath : MonoBehaviour
             SetNewCheckpoint(other);
         }
     }
+
+    void OnDisable()
+    {
+        EventDeath = null;
+    }
     #endregion
 
     private void Death()

@@ -15,7 +15,6 @@ public class TransitionManager : MonoBehaviour
     #region MonoBehaviour Callbacks
     void Start()
     {
-
         Debug.Log("TransionManager Start()");
         _textPressAnyKey.gameObject.SetActive(false);
 

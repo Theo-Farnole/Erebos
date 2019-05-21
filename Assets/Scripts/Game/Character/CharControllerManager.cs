@@ -28,7 +28,7 @@ public class CharControllerManager : Singleton<CharControllerManager>
     }
 
     #region MonoBehaviour Callbacks
-    private void Awake()
+    private void Start()
     {
         // on death, set attracted to false
         DeathHandle d = new DeathHandle((object sender) =>

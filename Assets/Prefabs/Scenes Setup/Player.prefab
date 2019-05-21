@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac14c2e7f53f11439fdc0a5385f9b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canGotoVoid: 1
+  canGotoEtheral: 1
   _meshRenderer: {fileID: 1731791828711320992}
   _matNormal: {fileID: 2100000, guid: a7852ff83cf6e4f498a861410c22b811, type: 2}
   _matEthereal: {fileID: 2100000, guid: b76ff5bb3591c7145b21b4f0b10d3d98, type: 2}
@@ -138,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee200b691f3a0e3429d2046462f5f0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabJumpPS: {fileID: 832532527732859052, guid: a1c5b65a251be464381f9b3c29df0ad6,
+  _prefabJumpPS: {fileID: 1741529584871504724, guid: 2ee648ea8514a2c4eb91d1293b51a9fe,
     type: 3}
 --- !u!54 &1731791828621383589
 Rigidbody:

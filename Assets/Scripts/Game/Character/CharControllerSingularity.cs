@@ -73,6 +73,11 @@ public class CharControllerSingularity : MonoBehaviour
     {
         ManageInputs();
     }
+
+    void OnDisable()
+    {
+        EventForm = null;
+    }
     #endregion
 
     void ManageInputs()

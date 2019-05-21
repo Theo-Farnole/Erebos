@@ -19,6 +19,8 @@ public class TriggerToTransition : MonoBehaviour
         {
             _hasBeenTriggered = true;
 
+            SingletonExtension.ResetSingleton();
+
             GameState.state++;
             SceneManager.LoadScene("transition");
         }

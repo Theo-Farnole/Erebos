@@ -9,6 +9,7 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     public void PlayJumpPS()
     {
         GameObject obj = Instantiate(_prefabJumpPS, transform.position, Quaternion.Euler(new Vector3(36.68f, transform.eulerAngles.y))).gameObject;
+        obj.transform.parent = transform;
         Destroy(obj, 3f);
     }
 }
