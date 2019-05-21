@@ -17,7 +17,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
 				if (instances.Length > 1)
 				{
-					Debug.LogError("There is more than one instance of Singleton.");
+					Debug.LogError(typeof(T) + "There is more than one instance of Singleton. ");
 				}
 				if (instances != null && instances.Length > 0)
 				{
