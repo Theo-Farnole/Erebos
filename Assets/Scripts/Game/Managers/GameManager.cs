@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GamepadInput;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,15 @@ public class GameManager : Singleton<GameManager>
         SaveSystem.Load();
 
         ApplySavedSettings();
+    }
+
+    void Update()
+    {
+        if (GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
+        {
+            Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+            UIManager.Instance.UpdatePanelPause();
+        }
     }
     #endregion
 

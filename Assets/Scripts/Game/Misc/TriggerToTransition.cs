@@ -23,6 +23,8 @@ public class TriggerToTransition : MonoBehaviour
 
             GameState.state++;
             SceneManager.LoadScene("transition");
+
+            GameState.SaveSpeedRunTime();
         }
     }
     #endregion
