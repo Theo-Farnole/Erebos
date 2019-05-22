@@ -7,8 +7,7 @@ using UnityEngine;
 public class Eclatos : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private float _speedSplit = 8f;
-    [SerializeField] private float _rotationSpeed = 90f;
+    [SerializeField] private float _timeToEnd = 1f;
     [Space]
     [SerializeField] private Form _startOnForm = Form.Void;
     [Space]
@@ -22,6 +21,7 @@ public class Eclatos : MonoBehaviour
 
     private Transform[] _points = new Transform[4];
     private static readonly float MIN_DISTANCE = 0.1f;
+    private static readonly float MIN_ANGLE = 3f;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -69,7 +69,6 @@ public class Eclatos : MonoBehaviour
                 }
                 break;
         }
-
     }
     #endregion
 
@@ -78,18 +77,20 @@ public class Eclatos : MonoBehaviour
         if (form == Form.Void)
         {
             StopAllCoroutines();
-            StartCoroutine(GotoPoints(_positionVoid, _eulerAngleVoid));
+            StartCoroutine(GotoPoints(_positionVoid, _positionEthereal, _eulerAngleVoid, _eulerAngleEthereal));
         }
         else if (form == Form.Ethereal)
         {
             StopAllCoroutines();
-            StartCoroutine(GotoPoints(_positionEthereal, _eulerAngleEthereal));
+            StartCoroutine(GotoPoints(_positionEthereal, _positionVoid, _eulerAngleEthereal, _eulerAngleVoid));
         }
     }
 
-    IEnumerator GotoPoints(Vector3[] position, Vector3[] rotation)
+    IEnumerator GotoPoints(Vector3[] position, Vector3[] oldPosition, Vector3[] eulerAngles, Vector3[] oldEulerAngles)
     {
         Debug.Log("GotoPoints()");
+
+        float startTime = Time.time;
 
         bool isCompleted;
 
@@ -101,12 +102,21 @@ public class Eclatos : MonoBehaviour
             {
                 Transform t = _points[i];
 
+                float distancePosition = Vector3.Distance(t.position, position[i]);
+                float distanceAngle = Vector3.Distance(t.eulerAngles, eulerAngles[i]);
+
                 // if position is to far from destination...
-                if (Vector3.Distance(t.position, position[i]) >= MIN_DISTANCE)
+                if (distancePosition >= MIN_DISTANCE || distanceAngle >= MIN_ANGLE)
                 {
                     // ... go to destination.
-                    t.position = Vector3.MoveTowards(t.position, position[i], Time.deltaTime * _speedSplit);
-                    t.eulerAngles = Vector3.MoveTowards(t.eulerAngles, rotation[i], Time.deltaTime * _rotationSpeed);
+                    if (distancePosition >= MIN_DISTANCE)
+                    {
+                        t.position = Vector3.Lerp(oldPosition[i], position[i], (Time.time - startTime) / _timeToEnd);
+                    }
+                    if (distanceAngle >= MIN_ANGLE)
+                    {
+                        t.eulerAngles = Vector3.Lerp(oldEulerAngles[i], eulerAngles[i], (Time.time - startTime) / _timeToEnd);
+                    }
 
                     isCompleted = false;
 
@@ -118,7 +128,7 @@ public class Eclatos : MonoBehaviour
                 else
                 {
                     t.position = position[i];
-                    t.eulerAngles = rotation[i];
+                    t.eulerAngles = eulerAngles[i];
 
                     if (t.GetComponentInChildren<Collider>())
                     {
