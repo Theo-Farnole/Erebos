@@ -35,6 +35,7 @@ public class BlackSingularity : AbstractSingularity
 
     protected override void OnExit()
     {
+        transform.eulerAngles = Vector3.zero;
         //throw new System.NotImplementedException();
     }
     #endregion

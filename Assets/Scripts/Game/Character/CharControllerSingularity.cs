@@ -17,6 +17,7 @@ public class CharControllerSingularity : MonoBehaviour
     #endregion
 
     #region Serialize Fields
+    [SerializeField] private float _anglesPerSecond = 90;
     [Header("Models Settings")]
     [SerializeField] private MeshRenderer _meshRenderer;
     [Space]
@@ -154,14 +155,13 @@ public class CharControllerSingularity : MonoBehaviour
         if (input == Vector2.zero)
             return;
 
-        Vector3 dir = transform.position - singularity.position;
         float wantedAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
 
         Quaternion targetRot = Quaternion.Euler(Vector3.forward * wantedAngle);
-        singularity.rotation = Quaternion.RotateTowards(singularity.rotation, targetRot, 80 * Time.deltaTime);
+        singularity.rotation = Quaternion.RotateTowards(singularity.rotation, targetRot, _anglesPerSecond * Time.deltaTime);
 
         // DEBUGS
-        Debug.DrawRay(singularity.position, dir);
+        Debug.DrawRay(singularity.position, transform.position - singularity.position);
         Debug.DrawRay(singularity.position, input);
     }
 }
