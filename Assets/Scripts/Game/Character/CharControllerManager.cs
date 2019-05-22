@@ -28,7 +28,7 @@ public class CharControllerManager : Singleton<CharControllerManager>
     }
 
     #region MonoBehaviour Callbacks
-    private void Start()
+    void Start()
     {
         // on death, set attracted to false
         DeathHandle d = new DeathHandle((object sender) =>
@@ -44,6 +44,11 @@ public class CharControllerManager : Singleton<CharControllerManager>
             Attracted = false;
         });
         CharControllerSingularity.EventForm += dd;
+    }
+
+    void Update()
+    {
+        transform.eulerAngles = Vector3.zero;
     }
     #endregion
 }

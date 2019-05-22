@@ -89,7 +89,7 @@ public class CharController : MonoBehaviour
         ProcessRunInput();
         ManageSticking();
         ProcessJumpInput();
-
+        
         _rigidbody.useGravity = !(_isSticked || _isDashing);
     }
     #endregion

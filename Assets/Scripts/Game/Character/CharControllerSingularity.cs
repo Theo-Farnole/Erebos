@@ -144,4 +144,24 @@ public class CharControllerSingularity : MonoBehaviour
                 break;
         }
     }
+
+    public void RotateAroundSingularity(Transform singularity)
+    {
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+        Vector2 input = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One);
+
+        if (input == Vector2.zero)
+            return;
+
+        Vector3 dir = transform.position - singularity.position;
+        float wantedAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
+
+        Quaternion targetRot = Quaternion.Euler(Vector3.forward * wantedAngle);
+        singularity.rotation = Quaternion.RotateTowards(singularity.rotation, targetRot, 80 * Time.deltaTime);
+
+        // DEBUGS
+        Debug.DrawRay(singularity.position, dir);
+        Debug.DrawRay(singularity.position, input);
+    }
 }
