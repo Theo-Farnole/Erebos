@@ -170,5 +170,5 @@ Material:
     m_Floats:
     - _Cutoff: 0.9
     - _DistorsionIntensity: 1
-    - __dirty: 0
+    - __dirty: 1
     m_Colors: []
