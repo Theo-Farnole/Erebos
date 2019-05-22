@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeToReachCenter: 0.01
   _radius: 8
-  _characterRotateRadius: 2.33
+  _characterRotateRadius: 1.3

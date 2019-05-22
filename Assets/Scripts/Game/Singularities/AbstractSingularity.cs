@@ -9,27 +9,30 @@ public abstract class AbstractSingularity : MonoBehaviour
     #endregion
 
     #region MonoBehaviour Callbacks
-    void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             _character = other.transform;
+            OnEnter();
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
             _character.GetComponent<CharControllerManager>().Attracted = true;
             OnStay();
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            _character.GetComponent<CharControllerManager>().Attracted = false;
-            OnExit();
-        }
+        _character.GetComponent<CharControllerManager>().Attracted = false;
     }
     #endregion
 
+    protected abstract void OnEnter();
     protected abstract void OnStay();
-    protected abstract void OnExit();
-
 }

@@ -109,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canGotoVoid: 1
   canGotoEtheral: 1
+  _anglesPerSecond: 180
   _meshRenderer: {fileID: 1731791828711320992}
   _matNormal: {fileID: 2100000, guid: a7852ff83cf6e4f498a861410c22b811, type: 2}
   _matEthereal: {fileID: 2100000, guid: b76ff5bb3591c7145b21b4f0b10d3d98, type: 2}

@@ -10,7 +10,7 @@ public class WhiteSingularity : AbstractSingularity
     #endregion
 
     #region Overrided Methods
-    protected override void OnExit()
+    protected override void OnEnter()
     {
         //throw new System.NotImplementedException();
     }

@@ -9,6 +9,8 @@ public class BlackSingularity : AbstractSingularity
     #region Fields
     [SerializeField] private BlackSingularityData _data;
     [SerializeField] private DrawCircle _rangeFeedback;
+
+    private float _currentAngleDelta;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -17,26 +19,31 @@ public class BlackSingularity : AbstractSingularity
         GetComponent<SphereCollider>().radius = _data.Radius;
         UpdateRangeFeedback();
     }
+
+    private void OnEnable()
+    {
+        transform.eulerAngles = Vector3.zero;
+    }
     #endregion
 
     #region Overrided Methods
+    protected override void OnEnter()
+    {
+        Vector3 dir = _character.position - transform.position;
+        _currentAngleDelta = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+    }
+
     protected override void OnStay()
     {
         if (Vector3.Distance(transform.position, _character.position) <= _data.CharacterRotateRadius)
         {
             _character.SetParent(transform);
-            _character.GetComponent<CharControllerSingularity>().RotateAroundSingularity(transform);
+            _character.GetComponent<CharControllerSingularity>().RotateAroundSingularity(transform, _currentAngleDelta);
         }
         else
         {
             AttractPlayer();
         }
-    }
-
-    protected override void OnExit()
-    {
-        transform.eulerAngles = Vector3.zero;
-        //throw new System.NotImplementedException();
     }
     #endregion
 
@@ -63,4 +70,6 @@ public class BlackSingularity : AbstractSingularity
 
         _rangeFeedback.UpdateCircle();
     }
+
+    
 }

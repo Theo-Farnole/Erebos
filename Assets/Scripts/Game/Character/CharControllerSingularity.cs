@@ -48,8 +48,6 @@ public class CharControllerSingularity : MonoBehaviour
 
             UpdateForm();
             EventForm?.Invoke(this, _form);
-
-            Debug.Log("EventForm invoke");
         }
     }
     #endregion
@@ -146,7 +144,7 @@ public class CharControllerSingularity : MonoBehaviour
         }
     }
 
-    public void RotateAroundSingularity(Transform singularity)
+    public void RotateAroundSingularity(Transform singularity, float currentAngleDelta)
     {
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
@@ -157,11 +155,13 @@ public class CharControllerSingularity : MonoBehaviour
 
         float wantedAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
 
-        Quaternion targetRot = Quaternion.Euler(Vector3.forward * wantedAngle);
+        Quaternion targetRot = Quaternion.Euler(Vector3.forward * (wantedAngle - currentAngleDelta));
         singularity.rotation = Quaternion.RotateTowards(singularity.rotation, targetRot, _anglesPerSecond * Time.deltaTime);
 
         // DEBUGS
-        Debug.DrawRay(singularity.position, transform.position - singularity.position);
+        Vector3 dir = transform.position - singularity.position;
+        Debug.Log("WantedAngle " + wantedAngle + "\ncurrentAngleDelta: " + currentAngleDelta);
+        Debug.DrawRay(singularity.position, dir);
         Debug.DrawRay(singularity.position, input);
     }
 }
