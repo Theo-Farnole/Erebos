@@ -34,7 +34,7 @@ public class CharDeath : MonoBehaviour
         }
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         EventDeath = null;
     }

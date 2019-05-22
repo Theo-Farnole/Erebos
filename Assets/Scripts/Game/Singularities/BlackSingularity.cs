@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class BlackSingularity : AbstractSingularity
 {
     #region Fields
@@ -42,20 +43,35 @@ public class BlackSingularity : AbstractSingularity
     private void RotateCharacter()
     {
         _character.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        int anglePerSecond = 360;
 
-        // process input
-        float horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x * Time.deltaTime * anglePerSecond;
+        Vector2 input = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One);
 
-        Vector3 dir = _character.position - transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        if (input != Vector2.zero)
+        {
+            float radiansSpeed = 180 * Mathf.Deg2Rad; // in rads
 
-        angle += horizontal;
+            // calculate current angle
+            Vector3 characterDirection = (_character.position - transform.position).normalized;
+            float currentAngle = Mathf.Atan2(characterDirection.y, characterDirection.x); // in radians
+            if (currentAngle < 0f) currentAngle += 360f;
 
-        // apply new position
-        Vector3 offset = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
-        _character.position = transform.position + offset * _data.CharacterRotateRadius;
+            // calcule input angle
+            float angleInput = Mathf.Atan2(input.y, input.x); // in radians
+            if (angleInput < 0f) angleInput += 360f;
 
+            // calculate angle delta
+            float angleDelta = angleInput - currentAngle; // in radians
+
+            float finalAngle = currentAngle + Mathf.Clamp(angleDelta, -1, 1) * Time.deltaTime * radiansSpeed;
+            Vector3 newPosition = new Vector3(Mathf.Cos(finalAngle), Mathf.Sin(finalAngle));
+
+            _character.position = transform.position + newPosition;
+
+            // debugs
+            //Debug.Log("AngleInput: " + angleInput + "\ncurrentAngle " + currentAngle);
+            Debug.DrawRay(transform.position, characterDirection);
+            Debug.DrawRay(transform.position, input);
+        }
     }
 
     private void AttractPlayer()
@@ -66,9 +82,6 @@ public class BlackSingularity : AbstractSingularity
         // apply velocity
         Vector3 vel = speed * dir;
         _character.GetComponent<Rigidbody>().velocity = vel * Time.deltaTime;
-
-        // debug
-        Debug.DrawRay(transform.position, dir * speed, Color.red);
     }
 
     public void UpdateRangeFeedback()

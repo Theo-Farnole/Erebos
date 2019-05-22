@@ -44,8 +44,11 @@ public class CharControllerSingularity : MonoBehaviour
         set
         {
             _form = value;
+
             UpdateForm();
-            EventForm?.Invoke(this, Form);
+            EventForm?.Invoke(this, _form);
+
+            Debug.Log("EventForm invoke");
         }
     }
     #endregion
@@ -74,7 +77,7 @@ public class CharControllerSingularity : MonoBehaviour
         ManageInputs();
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         EventForm = null;
     }
@@ -93,12 +96,10 @@ public class CharControllerSingularity : MonoBehaviour
 
                 case Form.Ethereal:
                     Form = Form.Void;
-                    CharControllerManager.Instance.Attracted = false;
                     break;
 
                 case Form.Void:
                     Form = Form.Normal;
-                    CharControllerManager.Instance.Attracted = false;
                     break;
             }
         }
@@ -114,12 +115,10 @@ public class CharControllerSingularity : MonoBehaviour
 
                 case Form.Void:
                     Form = Form.Ethereal;
-                    CharControllerManager.Instance.Attracted = false;
                     break;
 
                 case Form.Ethereal:
                     Form = Form.Normal;
-                    CharControllerManager.Instance.Attracted = false;
                     break;
             }
         }
