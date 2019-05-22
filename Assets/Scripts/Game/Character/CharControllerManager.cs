@@ -41,17 +41,7 @@ public class CharControllerManager : Singleton<CharControllerManager>
         FormHandle dd = new FormHandle((object sender, Form form) =>
         {
             transform.parent = null;
-
-            switch (form)
-            {
-                case Form.Normal:
-                    break;
-
-                case Form.Ethereal:
-                case Form.Void:
-                    Attracted = false;
-                    break;
-            }
+            Attracted = false;
         });
         CharControllerSingularity.EventForm += dd;
     }

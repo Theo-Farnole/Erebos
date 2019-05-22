@@ -30,7 +30,8 @@ public class CharDeath : MonoBehaviour
 
         if (other.CompareTag("Checkpoint"))
         {
-            SetNewCheckpoint(other);
+            currentCheckpoint = other.transform;
+            other.GetComponent<Checkpoint>().ActiveBrasero();
         }
     }
 
@@ -45,30 +46,5 @@ public class CharDeath : MonoBehaviour
         transform.position = (Vector2)currentCheckpoint.position;
 
         EventDeath?.Invoke(this);
-    }
-
-    private void SetNewCheckpoint(Collider other)
-    {
-        // set not active material to the old checkpoint 
-        if (currentCheckpoint != transform)
-        {
-            var oldMat = currentCheckpoint.GetChild(0).GetComponentsInChildren<MeshRenderer>();
-
-            foreach (var m in oldMat)
-            {
-                m.material = _materialNotActive;
-            }
-        }
-
-        // change current checkpoint
-        currentCheckpoint = other.transform;
-
-        // then apply new material
-        MeshRenderer[] newMat = currentCheckpoint.GetChild(0).GetComponentsInChildren<MeshRenderer>();
-
-        foreach (var m in newMat)
-        {
-            m.material = _materialActive;
-        }
     }
 }

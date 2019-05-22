@@ -140,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee200b691f3a0e3429d2046462f5f0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prefabTrail: {fileID: 8148474396878549479, guid: cbd1c8add0e963d4097365d46217f4fd,
+    type: 3}
   _prefabJumpPS: {fileID: 1741529584871504724, guid: 2ee648ea8514a2c4eb91d1293b51a9fe,
     type: 3}
 --- !u!54 &1731791828621383589

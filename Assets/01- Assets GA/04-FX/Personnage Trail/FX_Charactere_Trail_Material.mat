@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Amplify Shader
+  m_Name: FX_Charactere_Trail_Material
   m_Shader: {fileID: 4800000, guid: d7de337da8a050e428496c7655949013, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
