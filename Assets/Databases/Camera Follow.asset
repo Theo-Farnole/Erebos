@@ -18,4 +18,4 @@ MonoBehaviour:
   _focusRectSpeed: 1
   _maxRectPositionPercent: 30
   _widthPercent: 10
-  _heightPercent: 10
+  _heightPercent: 20

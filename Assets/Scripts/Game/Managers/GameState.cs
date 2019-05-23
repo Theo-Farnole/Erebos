@@ -31,9 +31,15 @@ public static class GameState
 {
     public static SceneState state = SceneState.Tutorial;
     public static float[] speedrunTime = new float[3] { 0, 0, 0 };
+    public static float[] deathCount = new float[3] { 0, 0, 0 };
 
     public static void SaveSpeedRunTime()
     {
         speedrunTime[(int)state] = Time.timeSinceLevelLoad;
+    }
+
+    public static void OneMoreDeath()
+    {
+        deathCount[(int)state]++;
     }
 }

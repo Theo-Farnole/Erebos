@@ -304,6 +304,8 @@ public class CharController : MonoBehaviour
 
     public void ResetMovements(object sender = null)
     {
+        _rigidbody.velocity = Vector3.zero;
+
         _isSticked = false;
         _isStickingEnable = true;
         _isDashing = false;
