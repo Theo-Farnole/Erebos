@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1
   _inputPercentOffset: 5
-  _inputSpeed: 8
+  _inputSpeed: 32
   _focusRectSpeed: 1
-  _maxRectPositionPercent: 31.1
+  _maxRectPositionPercent: 30
   _widthPercent: 10
-  _heightPercent: 30
+  _heightPercent: 10
