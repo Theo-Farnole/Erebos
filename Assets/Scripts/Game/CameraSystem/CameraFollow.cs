@@ -120,7 +120,8 @@ public class CameraFollow : MonoBehaviour
         else if (rightDelta < 0f)
         {
             _wantedCameraPosition.x = _character.position.x - _relativeFocusRect.max.x;
-        } else
+        }
+        else
         {
             _wantedCameraPosition.x = _character.position.x;
         }
@@ -130,11 +131,11 @@ public class CameraFollow : MonoBehaviour
 
         if (downDelta > 0f)
         {
-            _wantedCameraPosition.y = _character.position.y - _relativeFocusRect.min.y;
+            _wantedCameraPosition.y = _character.position.y - _relativeFocusRect.max.y / 2;
         }
         else if (upDelta < 0f)
         {
-            _wantedCameraPosition.y = _character.position.y - _relativeFocusRect.max.y;
+            _wantedCameraPosition.y = _character.position.y - _relativeFocusRect.min.y / 2;
         }
         else
         {
@@ -199,6 +200,16 @@ public class CameraFollow : MonoBehaviour
         Vector3 topMidPoint = transform.position + _screenBounds.y * Vector3.up / 2;
         Vector3 bottomMidPoint = transform.position + _screenBounds.y * Vector3.down / 2;
 
+        Vector3 deltaAngle = -Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget * Vector3.up;
+        midLeftPoint += deltaAngle;
+        midRightPoint += deltaAngle;
+        topLeftPoint += deltaAngle;
+        topRightPoint += deltaAngle;
+        bottomLeftPoint += deltaAngle;
+        bottomRightPoint += deltaAngle;
+        topMidPoint += deltaAngle;
+        bottomMidPoint += deltaAngle;
+
         // draw camera's bounds
         Gizmos.color = Color.yellow;
         GizmosExtension.Draw2DLine(topLeftPoint, topRightPoint);        // up
@@ -213,13 +224,13 @@ public class CameraFollow : MonoBehaviour
 
         // draw focus rect
         Gizmos.color = Color.green;
-        GizmosExtension.DrawRect(transform.position, _relativeFocusRect);
+        GizmosExtension.DrawRect(transform.position + deltaAngle, _relativeFocusRect);
 
         // draw wanted position
         Gizmos.color = Color.magenta;
-        Gizmos.DrawSphere((Vector2)_wantedCameraPosition, 0.5f);
+        Gizmos.DrawSphere((Vector2)_wantedCameraPosition + (Vector2)deltaAngle, 0.5f);
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere((Vector2)transform.position + _wantedFocusRelativePosition, 0.5f);
+        Gizmos.DrawSphere((Vector2)transform.position + _wantedFocusRelativePosition + (Vector2)deltaAngle, 0.5f);
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Camera Follow
   m_EditorClassIdentifier: 
   _speed: 1
-  _inputPercentOffset: 10
+  _inputPercentOffset: 5
   _inputSpeed: 8
   _focusRectSpeed: 1
   _maxRectPositionPercent: 31.1
