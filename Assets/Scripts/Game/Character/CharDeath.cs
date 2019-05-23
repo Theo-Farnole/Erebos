@@ -12,13 +12,13 @@ public class CharDeath : MonoBehaviour
     [SerializeField] private Material _materialNotActive;
     [SerializeField] private Material _materialActive;
 
-    [HideInInspector] public Transform currentCheckpoint;
+    [HideInInspector] public Vector3 currentCheckpoint;
     #endregion
 
     #region MonoBehaviour Callbacks
     private void Awake()
     {
-        currentCheckpoint = transform;
+        currentCheckpoint = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,7 +30,7 @@ public class CharDeath : MonoBehaviour
 
         if (other.CompareTag("Checkpoint"))
         {
-            currentCheckpoint = other.transform;
+            currentCheckpoint = other.transform.position;
             other.GetComponent<Checkpoint>().ActiveBrasero();
         }
     }
@@ -43,7 +43,7 @@ public class CharDeath : MonoBehaviour
 
     private void Death()
     {
-        transform.position = (Vector2)currentCheckpoint.position;
+        transform.position = (Vector2)currentCheckpoint;
 
         EventDeath?.Invoke(this);
     }
