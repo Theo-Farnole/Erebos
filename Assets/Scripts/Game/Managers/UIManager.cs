@@ -12,6 +12,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject _panelPause;
     [Space]
     [SerializeField] private TextMeshProUGUI[] _textSpeedRunsTimes  = new TextMeshProUGUI[3];
+    [SerializeField] private TextMeshProUGUI[] _textDeathCount = new TextMeshProUGUI[3];
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -37,7 +38,17 @@ public class UIManager : Singleton<UIManager>
             for (int i = 0; i < GameState.speedrunTime.Length; i++)
             {
                 float t = GameState.speedrunTime[i];
-                _textSpeedRunsTimes[i].text = string.Format("{0:0.0} s", t); ;
+
+                float minutes = (t / 60);
+                float seconds = (t % 60);
+
+                _textSpeedRunsTimes[i].text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            }
+
+            for (int i = 0; i < GameState.speedrunTime.Length; i++)
+            {
+                float d = GameState.deathCount[i];
+                _textDeathCount[i].text = d.ToString();
             }
         }
  
