@@ -78,7 +78,7 @@ public class CameraFollow : MonoBehaviour
         if (_cameraType == Type.Dynamic)
         {
             SetFocusRect();
-            SetTargetPosition();
+            SetWantedPosition();
         }
 
         ProcessInput();
@@ -89,61 +89,34 @@ public class CameraFollow : MonoBehaviour
 
     void SetFocusRect()
     {
-        if (_targetRb.velocity.x < 0f)
-        {
-            _wantedFocusRelativePosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right;
-        }
-
-        else if (_targetRb.velocity.x > 0f)
-        {
-            _wantedFocusRelativePosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.left;
-        }
-
-        else
-        {
-            _wantedFocusRelativePosition = Vector2.zero;
-        }
+        _wantedFocusRelativePosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right;
+        _wantedFocusRelativePosition *= -_targetRb.velocity.normalized.x;
 
         _wantedFocusRelativePosition -= _relativeFocusRect.size * 0.5f; // center rect
         _relativeFocusRect.position = Vector2.Lerp(_relativeFocusRect.position, _wantedFocusRelativePosition, Time.deltaTime * _data.FocusRectSpeed);
     }
 
-    void SetTargetPosition()
+    void SetWantedPosition()
     {
         float leftDelta = transform.position.x + _relativeFocusRect.min.x - _character.position.x;
         float rightDelta = transform.position.x + _relativeFocusRect.max.x - _character.position.x;
-
-        if (leftDelta > 0f)
-        {
-            _wantedCameraPosition.x = _character.position.x - _relativeFocusRect.min.x;
-        }
-        else if (rightDelta < 0f)
-        {
-            _wantedCameraPosition.x = _character.position.x - _relativeFocusRect.max.x;
-        }
-        else
-        {
-            _wantedCameraPosition.x = _character.position.x;
-        }
-
         float downDelta = transform.position.y + _relativeFocusRect.min.y - _character.position.y;
         float upDelta = transform.position.y + _relativeFocusRect.max.y - _character.position.y;
 
-        if (downDelta > 0f)
-        {
-            _wantedCameraPosition.y = _character.position.y - _relativeFocusRect.max.y / 2;
-        }
-        else if (upDelta < 0f)
-        {
-            _wantedCameraPosition.y = _character.position.y - _relativeFocusRect.min.y / 2;
-        }
-        else
-        {
-            _wantedCameraPosition.y = _character.position.y;
-        }
+        _wantedCameraPosition.x = _character.position.x;
+        _wantedCameraPosition.y = _character.position.y + Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
 
-        _wantedCameraPosition.y += Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
+        if (leftDelta > 0f) _wantedCameraPosition.x -= _relativeFocusRect.min.x;
+        else if (rightDelta < 0f) _wantedCameraPosition.x -= _relativeFocusRect.max.x;
+
+        if (downDelta > 0f) _wantedCameraPosition.y -= _relativeFocusRect.max.y / 2;
+        else if (upDelta < 0f) _wantedCameraPosition.y -= _relativeFocusRect.min.y / 2;
+
         _wantedCameraPosition.z = transform.position.z;
+
+
+        if (leftDelta > 0f) Debug.DrawRay(transform.position, Vector3.right);
+        else if (rightDelta < 0f) Debug.DrawRay(transform.position, Vector3.left);
     }
 
     void ProcessInput()
