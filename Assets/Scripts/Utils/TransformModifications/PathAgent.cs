@@ -26,9 +26,11 @@ public class PathAgent : MonoBehaviour
         {
             _points[i].point += transform.position;
         }
-
-        //transform.position = _points[0].point;
+        
         ChangeDirection();
+
+        DeathHandle d = new DeathHandle(ResetPosition);
+        CharDeath.EventDeath += d;
     }
 
     void Update()
@@ -45,6 +47,14 @@ public class PathAgent : MonoBehaviour
         }
     }
     #endregion
+
+    void ResetPosition(object sender)
+    {
+        _currentPointIndex = 0;
+
+        transform.position = _points[0].point;
+        ChangeDirection();
+    }
 
     private void ChangeDirection()
     {
