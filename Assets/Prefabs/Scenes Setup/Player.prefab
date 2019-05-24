@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _materialNotActive: {fileID: 2100000, guid: b76ff5bb3591c7145b21b4f0b10d3d98, type: 2}
   _materialActive: {fileID: 2100000, guid: 2defbc08d5636cc4f85c40627e0381f1, type: 2}
-  currentCheckpoint: {fileID: 0}
+  currentCheckpoint: {x: 0, y: 0, z: 0}
 --- !u!114 &149693694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +144,8 @@ MonoBehaviour:
   _prefabTrail: {fileID: 8148474396878549479, guid: cbd1c8add0e963d4097365d46217f4fd,
     type: 3}
   _prefabJumpPS: {fileID: 1741529584871504724, guid: 2ee648ea8514a2c4eb91d1293b51a9fe,
+    type: 3}
+  _prefabDeathPS: {fileID: 5114115037409213442, guid: 6d1bc7891c8b50d488ad462610eb561f,
     type: 3}
 --- !u!54 &1731791828621383589
 Rigidbody:
