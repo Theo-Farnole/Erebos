@@ -17,8 +17,9 @@ public class GameManager : Singleton<GameManager>
     void Awake()
     {
         SaveSystem.Load();
-
         ApplySavedSettings();
+
+        GameState.CurrentMaxCollectibles = FindObjectsOfType<Collectible>().Length;
     }
 
     void Update()
@@ -68,7 +69,7 @@ public class GameManager : Singleton<GameManager>
         style.fontSize = h * 2 / 80;
         style.normal.textColor = Color.red;
 
-        GUI.Label(rect, "collectible(s) x " + CurrentCollectibles, style);
+        GUI.Label(rect, CurrentCollectibles + " / " + GameState.CurrentMaxCollectibles, style);
     }
 #endif
 }

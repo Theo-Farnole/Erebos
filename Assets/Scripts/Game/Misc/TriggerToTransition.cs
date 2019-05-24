@@ -24,7 +24,7 @@ public class TriggerToTransition : MonoBehaviour
             GameState.state++;
             AsyncOperation ao = SceneManager.LoadSceneAsync("transition");
 
-            GameState.SaveSpeedRunTime();
+            GameState.CurrentSpeedrunTime = Time.timeSinceLevelLoad;
         }
     }
     #endregion

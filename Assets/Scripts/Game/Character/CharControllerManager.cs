@@ -34,7 +34,7 @@ public class CharControllerManager : Singleton<CharControllerManager>
         DeathHandle d = new DeathHandle((object sender) =>
         {
             Attracted = false;
-            GameState.OneMoreDeath();
+            GameState.CurrentDeathCount++;
         });
         CharDeath.EventDeath += d;
 

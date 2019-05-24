@@ -26,17 +26,19 @@ public class UIManager : Singleton<UIManager>
 
         _button.onClick.AddListener(() => GameManager.Instance.RestartCheckpoint());
         _button.onClick.AddListener(() => UpdatePanelPause());
+
+        UpdateTextCollectible();
     }
     #endregion
 
     public void UpdateTextCollectible()
     {
-        _textCollectible.text = GameManager.Instance.CurrentCollectibles.ToString();
+        _textCollectible.text = GameManager.Instance.CurrentCollectibles + " / " + GameState.CurrentMaxCollectibles;
     }
 
     public void UpdatePanelPause()
     {
-        GameState.SaveSpeedRunTime();
+        GameState.CurrentSpeedrunTime = Time.timeSinceLevelLoad;
 
         bool isInPause = (Time.timeScale == 0);
 
