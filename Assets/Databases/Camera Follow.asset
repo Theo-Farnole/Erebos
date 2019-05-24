@@ -16,6 +16,6 @@ MonoBehaviour:
   _inputPercentOffset: 5
   _inputSpeed: 32
   _focusRectSpeed: 1
-  _maxRectPositionPercent: 30
+  _maxRectPositionPercent: 4.2
   _widthPercent: 10
   _heightPercent: 20
