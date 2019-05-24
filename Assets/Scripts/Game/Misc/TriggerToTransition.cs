@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,7 +23,7 @@ public class TriggerToTransition : MonoBehaviour
             SingletonExtension.ResetSingleton();
 
             GameState.state++;
-            AsyncOperation ao = SceneManager.LoadSceneAsync("transition");
+            Initiate.Fade("transition", Color.black, 1f);
 
             GameState.CurrentSpeedrunTime = Time.timeSinceLevelLoad;
         }
