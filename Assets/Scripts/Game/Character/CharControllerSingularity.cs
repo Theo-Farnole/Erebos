@@ -90,15 +90,12 @@ public class CharControllerSingularity : MonoBehaviour
             switch (Form)
             {
                 case Form.Normal:
-                    Form = Form.Void;
-                    break;
-
                 case Form.Ethereal:
                     Form = Form.Void;
                     break;
 
                 case Form.Void:
-                    Form = Form.Normal;
+                    Form = Form.Ethereal;
                     break;
             }
         }
@@ -109,15 +106,12 @@ public class CharControllerSingularity : MonoBehaviour
             switch (Form)
             {
                 case Form.Normal:
-                    Form = Form.Ethereal;
-                    break;
-
                 case Form.Void:
                     Form = Form.Ethereal;
                     break;
 
                 case Form.Ethereal:
-                    Form = Form.Normal;
+                    Form = Form.Void;
                     break;
             }
         }
