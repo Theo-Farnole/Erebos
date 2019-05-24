@@ -10,11 +10,6 @@ public class WhiteSingularity : AbstractSingularity
     #endregion
 
     #region Overrided Methods
-    protected override void OnEnter()
-    {
-        //throw new System.NotImplementedException();
-    }
-
     protected override void OnStay()
     {
         RepulsePlayer();

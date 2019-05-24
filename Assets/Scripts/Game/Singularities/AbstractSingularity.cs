@@ -9,15 +9,6 @@ public abstract class AbstractSingularity : MonoBehaviour
     #endregion
 
     #region MonoBehaviour Callbacks
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            _character = other.transform;
-            OnEnter();
-        }
-    }
-
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -33,6 +24,5 @@ public abstract class AbstractSingularity : MonoBehaviour
     }
     #endregion
 
-    protected abstract void OnEnter();
     protected abstract void OnStay();
 }
