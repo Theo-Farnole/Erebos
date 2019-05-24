@@ -2,23 +2,29 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
     #region Fields
-    [Header("InGame UI")]
+    [Header("---- InGame UI ----")]
     [SerializeField] private TextMeshProUGUI _textCollectible;
-    [Header ("Pause UI")]
+    [Header("---- Pause UI ----")]
     [SerializeField] private GameObject _panelPause;
     [Space]
-    [SerializeField] private TextMeshProUGUI[] _textSpeedRunsTimes  = new TextMeshProUGUI[3];
+    [Header("Timers")]
+    [SerializeField] private TextMeshProUGUI[] _textSpeedRunsTimes = new TextMeshProUGUI[3];
     [SerializeField] private TextMeshProUGUI[] _textDeathCount = new TextMeshProUGUI[3];
+    [Header("Buttons")]
+    [SerializeField] private Button _button;
     #endregion
 
     #region MonoBehaviour Callbacks
     void Start()
     {
         _panelPause.SetActive(false);
+
+        _button.onClick.AddListener(() => RestartCheckpoint());
     }
     #endregion
 
@@ -51,7 +57,15 @@ public class UIManager : Singleton<UIManager>
                 _textDeathCount[i].text = d.ToString();
             }
         }
- 
+
         _panelPause.SetActive(isInPause);
+    }
+
+    private void RestartCheckpoint()
+    {
+        CharControllerManager.Instance.GetComponent<CharDeath>().Death();
+
+        Time.timeScale = 1;
+        UpdatePanelPause();
     }
 }

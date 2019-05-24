@@ -98,7 +98,7 @@ public class CharController : MonoBehaviour
     {
         _horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x;
 
-        if (GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
+        if (Time.timeScale != 0 && GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
         {
             _jumpInput = true;
         }

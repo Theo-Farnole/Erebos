@@ -41,7 +41,7 @@ public class CharDeath : MonoBehaviour
     }
     #endregion
 
-    private void Death()
+    public void Death()
     {
         transform.position = (Vector2)currentCheckpoint;
 
