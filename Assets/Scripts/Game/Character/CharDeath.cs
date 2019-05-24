@@ -43,9 +43,9 @@ public class CharDeath : MonoBehaviour
 
     public void Death()
     {
-        transform.position = (Vector2)currentCheckpoint;
         CharFeedbacks.Instance.PlayDeathPS();
+        transform.position = (Vector2)currentCheckpoint;
 
-        CustomDelay.ExecuteAfterTime(3f, () => EventDeath?.Invoke(this));
+        EventDeath?.Invoke(this);
     }
 }
