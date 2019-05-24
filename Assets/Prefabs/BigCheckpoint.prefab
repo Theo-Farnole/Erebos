@@ -792,6 +792,7 @@ GameObject:
   - component: {fileID: 3160397812581179932}
   - component: {fileID: 143856190736053949}
   - component: {fileID: 9063745276891081336}
+  - component: {fileID: 6365957852032890550}
   m_Layer: 0
   m_Name: BigCheckpoint
   m_TagString: Checkpoint
@@ -841,6 +842,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _braseroFX: {fileID: 5610280624002294546}
   _auraLight: {fileID: 7018115137058901333}
+--- !u!114 &6365957852032890550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3160397812581179939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc1fc6320670c64e89b0b266a3eeb59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasBeenTriggered: 0
 --- !u!1 &3737686815335548456
 GameObject:
   m_ObjectHideFlags: 0
