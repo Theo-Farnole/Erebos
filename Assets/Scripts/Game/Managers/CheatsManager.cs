@@ -17,10 +17,16 @@ public class CheatsManager : MonoBehaviour
         {
             _isActive = !_isActive;
 
-            if (_checkpoints == null)
+            if (_isActive)
             {
-                _checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
-                Debug.Log("Finded " + _checkpoints.Length + " cps");
+                if (_checkpoints == null)
+                {
+                    _checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+                }
+
+                CharControllerSingularity charControllerSingularity = CharControllerManager.Instance.GetComponent<CharControllerSingularity>();
+                charControllerSingularity.canGotoEtheral = true;
+                charControllerSingularity.canGotoVoid = true;
             }
         }
 

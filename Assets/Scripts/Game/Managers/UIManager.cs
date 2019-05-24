@@ -24,7 +24,8 @@ public class UIManager : Singleton<UIManager>
     {
         _panelPause.SetActive(false);
 
-        _button.onClick.AddListener(() => RestartCheckpoint());
+        _button.onClick.AddListener(() => GameManager.Instance.RestartCheckpoint());
+        _button.onClick.AddListener(() => UpdatePanelPause());
     }
     #endregion
 
@@ -59,13 +60,5 @@ public class UIManager : Singleton<UIManager>
         }
 
         _panelPause.SetActive(isInPause);
-    }
-
-    private void RestartCheckpoint()
-    {
-        CharControllerManager.Instance.GetComponent<CharDeath>().Death();
-
-        Time.timeScale = 1;
-        UpdatePanelPause();
     }
 }

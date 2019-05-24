@@ -47,6 +47,12 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void RestartCheckpoint()
+    {
+        CharControllerManager.Instance.GetComponent<CharDeath>().Death();
+        Time.timeScale = 1;
+    }
+
 #if UNITY_EDITOR
     void OnGUI()
     {
