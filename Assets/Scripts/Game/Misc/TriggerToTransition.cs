@@ -22,7 +22,7 @@ public class TriggerToTransition : MonoBehaviour
             SingletonExtension.ResetSingleton();
 
             GameState.state++;
-            SceneManager.LoadScene("transition");
+            AsyncOperation ao = SceneManager.LoadSceneAsync("transition");
 
             GameState.SaveSpeedRunTime();
         }
