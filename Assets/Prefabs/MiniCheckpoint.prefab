@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 889363296}
   - component: {fileID: 8950886941908600741}
   m_Layer: 0
-  m_Name: Checkpoint
+  m_Name: MiniCheckpoint
   m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,7 +546,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6904142201578169395}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7799988, y: 4.527832, z: -1.04}
+  m_LocalPosition: {x: 0, y: 3.78, z: 0}
   m_LocalScale: {x: 1.3847, y: 1.3847, z: 1.3847}
   m_Children:
   - {fileID: 1798289868123054256}
@@ -565,6 +565,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1010745928526555253}
     m_Modifications:
+    - target: {fileID: 5231430673919604484, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_BraseroFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 5231430673919604484, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 6829522091886495897, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -630,17 +640,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.2000003
       objectReference: {fileID: 0}
-    - target: {fileID: 6829522091886495897, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
+    - target: {fileID: 3697344675559461773, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
         type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
-    - target: {fileID: 5231430673919604484, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
-        type: 3}
-      propertyPath: m_Name
-      value: FX_BraseroFire
-      objectReference: {fileID: 0}
-    - target: {fileID: 5231430673919604484, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
+    - target: {fileID: 7746811287736715194, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -650,20 +655,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7746811287736715194, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 3697344675559461760, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
         type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697344675559461760, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
-        type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.1
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.7812537
       objectReference: {fileID: 0}
     - target: {fileID: 3697344675559461760, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
         type: 3}
@@ -672,8 +667,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3697344675559461760, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
         type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0.7812537
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3697344675559461760, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3697344675559461760, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
         type: 3}
@@ -694,11 +694,6 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697344675559461773, guid: eb3cd2b9b97fdce4aa15e5c883aef54a,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb3cd2b9b97fdce4aa15e5c883aef54a, type: 3}
