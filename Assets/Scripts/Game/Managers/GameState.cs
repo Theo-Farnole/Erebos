@@ -46,7 +46,7 @@ public static class GameState
 
         set
         {
-            speedrunTime[(int)state] = value;
+            speedrunTime[(int)state] = Time.timeSinceLevelLoad;
         }
     }
 
