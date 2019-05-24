@@ -44,12 +44,9 @@ public class CheatsManager : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Keypad8)) targetCP = 7;
             else if (Input.GetKeyDown(KeyCode.Keypad9)) targetCP = 8;
 
-            Debug.Log("targetCp: " + targetCP);
-
             if (targetCP != -1 && targetCP < _checkpoints.Length)
             {
                 CharControllerManager.Instance.transform.position = _checkpoints[targetCP].transform.position;
-                Debug.Log("TP to : " + _checkpoints[targetCP].transform + " > " + _checkpoints[targetCP].transform.position);
             }
         }
     }
