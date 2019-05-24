@@ -154,7 +154,6 @@ public class CharControllerSingularity : MonoBehaviour
 
         // DEBUGS
         Vector3 dir = transform.position - singularity.position;
-        Debug.Log("WantedAngle " + wantedAngle + "\ncurrentAngleDelta: " + currentAngleDelta);
         Debug.DrawRay(singularity.position, dir);
         Debug.DrawRay(singularity.position, input);
     }
