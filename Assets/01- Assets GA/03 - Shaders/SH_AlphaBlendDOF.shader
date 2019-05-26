@@ -126,8 +126,8 @@ Shader "Erebos/SH_AlphaBlendDOF"
 }
 /*ASEBEGIN
 Version=16400
-1016;73.6;1030;1000;1377.531;619.5996;1.916388;True;False
-Node;AmplifyShaderEditor.SamplerNode;1;-941.1996,-30.62711;Float;True;Property;_MainTexture;MainTexture;0;0;Create;True;0;0;False;0;None;2b55eb7d05742694cbbb13d3832a9bae;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+1172;73.6;874;1000;603.4207;271.6841;1.13717;True;False
+Node;AmplifyShaderEditor.SamplerNode;1;-941.1996,-30.62711;Float;True;Property;_MainTexture;MainTexture;0;0;Create;True;0;0;False;0;None;3b317f93a495db944abda686e3360802;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.VertexColorNode;2;-909.2044,231.7388;Float;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;3;-352.8123,237.6905;Float;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.DepthFade;5;-511.2707,514.7817;Float;False;True;True;False;2;1;FLOAT3;0,0,0;False;0;FLOAT;2;False;1;FLOAT;0
@@ -143,4 +143,4 @@ WireConnection;7;1;5;0
 WireConnection;0;2;4;0
 WireConnection;0;9;7;0
 ASEEND*/
-//CHKSM=F486F984A5B6DF7870389AA0F9B156DD0257B3D4
+//CHKSM=CDD8A2F6F692C1E2B9CDFE371E84D61419F8CBA1

@@ -52,11 +52,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _mask:
-        m_Texture: {fileID: 2800000, guid: f40c8ee257d0813448ce5f179b5cb9bc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8165e94064e99b942bd3e4c842c2f7b5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _noise_map:
-        m_Texture: {fileID: 2800000, guid: 2693b281ec19f554fb1333a4122c02fa, type: 3}
+        m_Texture: {fileID: 2800000, guid: e28dc97a9541e3642a48c0e3886688c5, type: 3}
         m_Scale: {x: 1, y: 21}
         m_Offset: {x: 0, y: 0}
     - _seamlessnoisetexture_178756:
