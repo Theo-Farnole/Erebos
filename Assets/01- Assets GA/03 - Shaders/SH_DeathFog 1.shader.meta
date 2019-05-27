@@ -5,7 +5,6 @@ ShaderImporter:
   defaultTextures:
   - _1678bump: {fileID: 2800000, guid: e2d5365aa0a61c84e84baa80ecea377a, type: 3}
   - _noise_map: {fileID: 2800000, guid: 2693b281ec19f554fb1333a4122c02fa, type: 3}
-  - _mask: {fileID: 2800000, guid: f40c8ee257d0813448ce5f179b5cb9bc, type: 3}
   - _FX_DeathFog_Texture_Mask4: {fileID: 2800000, guid: 745b6133175d7a942abeb9b5bd2a9e07,
       type: 3}
   nonModifiableTextures: []

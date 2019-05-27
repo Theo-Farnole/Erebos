@@ -10,7 +10,7 @@ Material:
   m_Name: FX_DeathFogGlobal_Material
   m_Shader: {fileID: 4800000, guid: 3d88b10f2157b07469028b25bd856608, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -24,11 +24,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FX_DeathFog_Texture_Mask4:
-        m_Texture: {fileID: 2800000, guid: 745b6133175d7a942abeb9b5bd2a9e07, type: 3}
+        m_Texture: {fileID: 2800000, guid: e1f80f955b5f4ae44a73f5d530f76093, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _mask:
-        m_Texture: {fileID: 2800000, guid: 3b317f93a495db944abda686e3360802, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _noise_map:
@@ -40,7 +40,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Float0: 15.47
-    - _Float1: 14.5
+    - _Float0: 17.6
+    - _Float1: 6
+    - _Float4: 14.13
+    - _U_TillingMask: 14.13
     - __dirty: 0
     m_Colors: []
