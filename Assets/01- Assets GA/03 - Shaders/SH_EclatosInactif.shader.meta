@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: c85b6ce378591724e9f8bac2da9f2dea
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _SM_Eclatos_lambert2_BaseColor: {fileID: 2800000, guid: cbe3486ede21ea7428f60aad62a188ca,
+      type: 3}
+  - _FX_BraseroFire_Texture_Noise01: {fileID: 2800000, guid: f16a5ad4e72c5194595a6d5c79262b49,
+      type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
