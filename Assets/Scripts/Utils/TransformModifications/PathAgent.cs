@@ -26,7 +26,7 @@ public class PathAgent : MonoBehaviour
         {
             _points[i].point += transform.position;
         }
-        
+
         ChangeDirection();
 
         DeathHandle d = new DeathHandle(ResetPosition);
@@ -75,9 +75,14 @@ public class PathAgent : MonoBehaviour
         _timeStart = Time.time;
     }
 
+#if UNITY_EDITOR
+    public void ReversePath()
+    {
+        _points.Reverse();
+    }
+
     private void OnDrawGizmos()
     {
-#if UNITY_EDITOR
         foreach (var p in _points)
         {
             if (Application.isPlaying)
@@ -89,6 +94,6 @@ public class PathAgent : MonoBehaviour
                 Gizmos.DrawWireSphere(transform.position + p.point, 0.5f);
             }
         }
-#endif
     }
+#endif
 }
