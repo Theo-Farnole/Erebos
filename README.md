@@ -5,4 +5,4 @@ With a wide range of actions, the character is able to find his way into the lev
   
 The context is about Greek mythology, where Athena is banned in the Erebos.  
   
-![Game Screenshot](cover.png)  
+![Game Screenshot](Docs/cover.png)  
