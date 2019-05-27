@@ -8,7 +8,7 @@ The context is about Greek mythology, where Athena is banned in the Erebos.
   
   
 ## Team & Constraints
-- one month to make
+- one month 
 - 3 game designers
 - 4 game artists
 
