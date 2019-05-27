@@ -5746,7 +5746,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh46684
+  m_Name: pb_Mesh43196
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5757,8 +5757,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 24
     localAABB:
-      m_Center: {x: -39, y: 35, z: -0.5}
-      m_Extent: {x: 2, y: 8, z: 2.5}
+      m_Center: {x: -39, y: 36, z: -0.5}
+      m_Extent: {x: 2, y: 7, z: 2.5}
   m_Shapes:
     vertices: []
     shapes: []
@@ -5837,7 +5837,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 1152
-    _typelessdata: 000024c20000f0410000004000000000000000000000803f000080bf0000000000000000000080bf000024420000f041000014c20000d8410000004000000000000000000000803f000080bf0000000000000000000080bf000014420000d841000024c200002c420000004000000000000000000000803f000080bf0000000000000000000080bf0000244200002c42000014c200002c420000004000000000000000000000803f000080bf0000000000000000000080bf0000144200002c42000014c20000d841000000400000803f000000000000000000000000000000000000803f000080bf000000400000d841000014c20000d841000040c00000803f000000000000000000000000000000000000803f000080bf000040c00000d841000014c200002c42000000400000803f000000000000000000000000000000000000803f000080bf0000004000002c42000014c200002c42000040c00000803f000000000000000000000000000000000000803f000080bf000040c000002c42000014c20000d841000040c00000000000000000000080bf0000803f0000000000000000000080bf000014c20000d841000024c20000f041000040c00000000000000000000080bf0000803f0000000000000000000080bf000024c20000f041000014c200002c42000040c00000000000000000000080bf0000803f0000000000000000000080bf000014c200002c42000024c200002c42000040c00000000000000000000080bf0000803f0000000000000000000080bf000024c200002c42000024c20000f041000040c0000080bf00000000000000000000000000000000000080bf000080bf000040400000f041000024c20000f04100000040000080bf00000000000000000000000000000000000080bf000080bf000000c00000f041000024c200002c42000040c0000080bf00000000000000000000000000000000000080bf000080bf0000404000002c42000024c200002c4200000040000080bf00000000000000000000000000000000000080bf000080bf000000c000002c42000024c200002c4200000040000000000000803f000000000000803f0000000000000000000080bf000024c200000040000014c200002c4200000040000000000000803f000000000000803f0000000000000000000080bf000014c200000040000024c200002c42000040c0000000000000803f000000000000803f0000000000000000000080bf000024c2000040c0000014c200002c42000040c0000000000000803f000000000000803f0000000000000000000080bf000014c2000040c0000024c20000f041000040c09a9919bfcdcc4cbf00000000cccc4cbf9a99193f00000000000080bf34334b42000040c0000014c20000d841000040c09a9919bfcdcc4cbf00000000cccc4cbf9a99193f00000000000080bf33333742000040c0000024c20000f041000000409a9919bfcdcc4cbf00000000cccc4cbf9a99193f00000000000080bf34334b4200000040000014c20000d841000000409a9919bfcdcc4cbf00000000cccc4cbf9a99193f00000000000080bf3333374200000040
+    _typelessdata: 000024c20000f0410000004000000000000000000000803f000080bf0000000000000000000080bf000024420000f041000014c20000e8410000004000000000000000000000803f000080bf0000000000000000000080bf000014420000e841000024c200002c420000004000000000000000000000803f000080bf0000000000000000000080bf0000244200002c42000014c200002c420000004000000000000000000000803f000080bf0000000000000000000080bf0000144200002c42000014c20000e841000000400000803f000000000000000000000000000000000000803f000080bf000000400000e841000014c20000e841000040c00000803f000000000000000000000000000000000000803f000080bf000040c00000e841000014c200002c42000000400000803f000000000000000000000000000000000000803f000080bf0000004000002c42000014c200002c42000040c00000803f000000000000000000000000000000000000803f000080bf000040c000002c42000014c20000e841000040c00000000000000000000080bf0000803f0000000000000000000080bf000014c20000e841000024c20000f041000040c00000000000000000000080bf0000803f0000000000000000000080bf000024c20000f041000014c200002c42000040c00000000000000000000080bf0000803f0000000000000000000080bf000014c200002c42000024c200002c42000040c00000000000000000000080bf0000803f0000000000000000000080bf000024c200002c42000024c20000f041000040c0000080bf00000000000000000000000000000000000080bf000080bf000040400000f041000024c20000f04100000040000080bf00000000000000000000000000000000000080bf000080bf000000c00000f041000024c200002c42000040c0000080bf00000000000000000000000000000000000080bf000080bf0000404000002c42000024c200002c4200000040000080bf00000000000000000000000000000000000080bf000080bf000000c000002c42000024c200002c4200000040000000000000803f000000000000803f0000000000000000000080bf000024c200000040000014c200002c4200000040000000000000803f000000000000803f0000000000000000000080bf000014c200000040000024c200002c42000040c0000000000000803f000000000000803f0000000000000000000080bf000024c2000040c0000014c200002c42000040c0000000000000803f000000000000803f0000000000000000000080bf000014c2000040c0000024c20000f041000040c0425b78be425b78bf00000000425b78bf425b783e00000000000080bf28353c42000040c0000014c20000e841000040c0425b78be425b78bf00000000425b78bf425b783e00000000000080bf19b72b42000040c0000024c20000f04100000040425b78be425b78bf00000000425b78bf425b783e00000000000080bf28353c4200000040000014c20000e84100000040425b78be425b78bf00000000425b78bf425b783e00000000000080bf19b72b4200000040
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -5891,8 +5891,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: -39, y: 35, z: -0.5}
-    m_Extent: {x: 2, y: 8, z: 2.5}
+    m_Center: {x: -39, y: 36, z: -0.5}
+    m_Extent: {x: 2, y: 7, z: 2.5}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
@@ -31997,6 +31997,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734046602}
   m_Mesh: {fileID: 2033992627}
+--- !u!84 &734101347
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Aura Point Light : Shadow Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!43 &737314756
 Mesh:
   m_ObjectHideFlags: 0
@@ -32166,7 +32200,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh46572
+  m_Name: pb_Mesh43084
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -32257,7 +32291,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 1152
-    _typelessdata: 000024c2000000410000004000000000000000000000803f000080bf0000000000000000000080bf0000244200000041000014c2000000410000004000000000000000000000803f000080bf0000000000000000000080bf0000144200000041000024c2000000420000004000000000000000000000803f000080bf0000000000000000000080bf0000244200000042000014c20000e8410000004000000000000000000000803f000080bf0000000000000000000080bf000014420000e841000014c200000041000000400000803f000000000000000000000000000000000000803f000080bf0000004000000041000014c200000041000040c00000803f000000000000000000000000000000000000803f000080bf000040c000000041000014c20000e841000000400000803f000000000000000000000000000000000000803f000080bf000000400000e841000014c20000e841000040c00000803f000000000000000000000000000000000000803f000080bf000040c00000e841000014c200000041000040c00000000000000000000080bf0000803f0000000000000000000080bf000014c200000041000024c200000041000040c00000000000000000000080bf0000803f0000000000000000000080bf000024c200000041000014c20000e841000040c00000000000000000000080bf0000803f0000000000000000000080bf000014c20000e841000024c200000042000040c00000000000000000000080bf0000803f0000000000000000000080bf000024c200000042000024c200000041000040c0000080bf00000000000000000000000000000000000080bf000080bf0000404000000041000024c20000004100000040000080bf00000000000000000000000000000000000080bf000080bf000000c000000041000024c200000042000040c0000080bf00000000000000000000000000000000000080bf000080bf0000404000000042000024c20000004200000040000080bf00000000000000000000000000000000000080bf000080bf000000c000000042000024c200000042000000409a99193fcdcc4c3f00000000cdcc4c3f9a9919bf00000000000080bf000050c200000040000014c20000e841000000409a99193fcdcc4c3f00000000cdcc4c3f9a9919bf00000000000080bf00003cc200000040000024c200000042000040c09a99193fcdcc4c3f00000000cdcc4c3f9a9919bf00000000000080bf000050c2000040c0000014c20000e841000040c09a99193fcdcc4c3f00000000cdcc4c3f9a9919bf00000000000080bf00003cc2000040c0000024c200000041000040c000000000000080bf00000000000080bf0000000000000000000080bf00002442000040c0000014c200000041000040c000000000000080bf00000000000080bf0000000000000000000080bf00001442000040c0000024c2000000410000004000000000000080bf00000000000080bf0000000000000000000080bf0000244200000040000014c2000000410000004000000000000080bf00000000000080bf0000000000000000000080bf0000144200000040
+    _typelessdata: 000024c2000000410000004000000000000000000000803f000080bf0000000000000000000080bf0000244200000041000014c2000000410000004000000000000000000000803f000080bf0000000000000000000080bf0000144200000041000024c2000000420000004000000000000000000000803f000080bf0000000000000000000080bf0000244200000042000014c20000f8410000004000000000000000000000803f000080bf0000000000000000000080bf000014420000f841000014c200000041000000400000803f000000000000000000000000000000000000803f000080bf0000004000000041000014c200000041000040c00000803f000000000000000000000000000000000000803f000080bf000040c000000041000014c20000f841000000400000803f000000000000000000000000000000000000803f000080bf000000400000f841000014c20000f841000040c00000803f000000000000000000000000000000000000803f000080bf000040c00000f841000014c200000041000040c00000000000000000000080bf0000803f0000000000000000000080bf000014c200000041000024c200000041000040c00000000000000000000080bf0000803f0000000000000000000080bf000024c200000041000014c20000f841000040c00000000000000000000080bf0000803f0000000000000000000080bf000014c20000f841000024c200000042000040c00000000000000000000080bf0000803f0000000000000000000080bf000024c200000042000024c200000041000040c0000080bf00000000000000000000000000000000000080bf000080bf0000404000000041000024c20000004100000040000080bf00000000000000000000000000000000000080bf000080bf000000c000000041000024c200000042000040c0000080bf00000000000000000000000000000000000080bf000080bf0000404000000042000024c20000004200000040000080bf00000000000000000000000000000000000080bf000080bf000000c000000042000024c20000004200000040425b783e425b783f00000000435b783f435b78be00000000000080bfdf253ec200000040000014c20000f84100000040425b783e425b783f00000000435b783f435b78be00000000000080bfcfa72dc200000040000024c200000042000040c0425b783e425b783f00000000435b783f435b78be00000000000080bfdf253ec2000040c0000014c20000f841000040c0425b783e425b783f00000000435b783f435b78be00000000000080bfcfa72dc2000040c0000024c200000041000040c000000000000080bf00000000000080bf0000000000000000000080bf00002442000040c0000014c200000041000040c000000000000080bf00000000000080bf0000000000000000000080bf00001442000040c0000024c2000000410000004000000000000080bf00000000000080bf0000000000000000000080bf0000244200000040000014c2000000410000004000000000000080bf00000000000080bf0000000000000000000080bf0000144200000040
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -48516,6 +48550,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3559317886180085762, guid: 4b86045ac9316584c9bd0d8927669ca4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3559317885758620512, guid: 4b86045ac9316584c9bd0d8927669ca4,
         type: 3}
       propertyPath: m_Positions.Array.data[0].x
@@ -49544,11 +49583,6 @@ PrefabInstance:
     - target: {fileID: 3628415332353872844, guid: 4b86045ac9316584c9bd0d8927669ca4,
         type: 3}
       propertyPath: m_UseWorldSpace
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3559317886180085762, guid: 4b86045ac9316584c9bd0d8927669ca4,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -55579,6 +55613,40 @@ Transform:
   m_Father: {fileID: 34701503}
   m_RootOrder: 52
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1232746118
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Aura Point Light : Shadow Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1236175053
 GameObject:
   m_ObjectHideFlags: 0
@@ -55902,6 +55970,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1731791828621383585, guid: ceae8591dd66be14a97c4225176aa11c,
+        type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1731791828621383584, guid: ceae8591dd66be14a97c4225176aa11c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -55956,11 +56029,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1731791828621383585, guid: ceae8591dd66be14a97c4225176aa11c,
-        type: 3}
-      propertyPath: m_Name
-      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1731791828711320994, guid: ceae8591dd66be14a97c4225176aa11c,
         type: 3}
@@ -56283,6 +56351,40 @@ Transform:
   m_Father: {fileID: 34701503}
   m_RootOrder: 70
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1246383710
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Aura Point Light : Shadow Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!43 &1254653882
 Mesh:
   m_ObjectHideFlags: 0
@@ -59835,23 +59937,23 @@ MonoBehaviour:
   - {x: -41, y: 8, z: 2}
   - {x: -37, y: 8, z: 2}
   - {x: -41, y: 32, z: 2}
-  - {x: -37, y: 29, z: 2}
+  - {x: -37, y: 31, z: 2}
   - {x: -37, y: 8, z: 2}
   - {x: -37, y: 8, z: -3}
-  - {x: -37, y: 29, z: 2}
-  - {x: -37, y: 29, z: -3}
+  - {x: -37, y: 31, z: 2}
+  - {x: -37, y: 31, z: -3}
   - {x: -37, y: 8, z: -3}
   - {x: -41, y: 8, z: -3}
-  - {x: -37, y: 29, z: -3}
+  - {x: -37, y: 31, z: -3}
   - {x: -41, y: 32, z: -3}
   - {x: -41, y: 8, z: -3}
   - {x: -41, y: 8, z: 2}
   - {x: -41, y: 32, z: -3}
   - {x: -41, y: 32, z: 2}
   - {x: -41, y: 32, z: 2}
-  - {x: -37, y: 29, z: 2}
+  - {x: -37, y: 31, z: 2}
   - {x: -41, y: 32, z: -3}
-  - {x: -37, y: 29, z: -3}
+  - {x: -37, y: 31, z: -3}
   - {x: -41, y: 8, z: -3}
   - {x: -37, y: 8, z: -3}
   - {x: -41, y: 8, z: 2}
@@ -59860,23 +59962,23 @@ MonoBehaviour:
   - {x: 41, y: 8}
   - {x: 37, y: 8}
   - {x: 41, y: 32}
-  - {x: 37, y: 29}
+  - {x: 37, y: 31}
   - {x: 2, y: 8}
   - {x: -3, y: 8}
-  - {x: 2, y: 29}
-  - {x: -3, y: 29}
+  - {x: 2, y: 31}
+  - {x: -3, y: 31}
   - {x: -37, y: 8}
   - {x: -41, y: 8}
-  - {x: -37, y: 29}
+  - {x: -37, y: 31}
   - {x: -41, y: 32}
   - {x: 3, y: 8}
   - {x: -2, y: 8}
   - {x: 3, y: 32}
   - {x: -2, y: 32}
-  - {x: -52, y: 2}
-  - {x: -47, y: 2}
-  - {x: -52, y: -3}
-  - {x: -47, y: -3}
+  - {x: -47.536983, y: 2}
+  - {x: -43.413876, y: 2}
+  - {x: -47.536983, y: -3}
+  - {x: -43.413876, y: -3}
   - {x: 41, y: -3}
   - {x: 37, y: -3}
   - {x: 41, y: 2}
@@ -59900,10 +60002,10 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -1, w: -1}
   - {x: 0, y: 0, z: -1, w: -1}
   - {x: 0, y: 0, z: -1, w: -1}
-  - {x: 0.8, y: -0.6, z: 0, w: -1}
-  - {x: 0.8, y: -0.6, z: 0, w: -1}
-  - {x: 0.8, y: -0.6, z: 0, w: -1}
-  - {x: 0.8, y: -0.6, z: 0, w: -1}
+  - {x: 0.97014254, y: -0.24253564, z: 0, w: -1}
+  - {x: 0.97014254, y: -0.24253564, z: 0, w: -1}
+  - {x: 0.97014254, y: -0.24253564, z: 0, w: -1}
+  - {x: 0.97014254, y: -0.24253564, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
@@ -59918,10 +60020,8 @@ MonoBehaviour:
   assetGuid: 
   m_IsSelectable: 1
   m_SelectedFaces: 
-  m_SelectedEdges:
-  - a: 7
-    b: 6
-  m_SelectedVertices: 0700000006000000
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!23 &1339768403
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63219,14 +63319,14 @@ MonoBehaviour:
   m_SharedTextures: []
   m_Positions:
   - {x: -41, y: 30, z: 2}
-  - {x: -37, y: 27, z: 2}
+  - {x: -37, y: 29, z: 2}
   - {x: -41, y: 43, z: 2}
   - {x: -37, y: 43, z: 2}
-  - {x: -37, y: 27, z: 2}
-  - {x: -37, y: 27, z: -3}
+  - {x: -37, y: 29, z: 2}
+  - {x: -37, y: 29, z: -3}
   - {x: -37, y: 43, z: 2}
   - {x: -37, y: 43, z: -3}
-  - {x: -37, y: 27, z: -3}
+  - {x: -37, y: 29, z: -3}
   - {x: -41, y: 30, z: -3}
   - {x: -37, y: 43, z: -3}
   - {x: -41, y: 43, z: -3}
@@ -63239,19 +63339,19 @@ MonoBehaviour:
   - {x: -41, y: 43, z: -3}
   - {x: -37, y: 43, z: -3}
   - {x: -41, y: 30, z: -3}
-  - {x: -37, y: 27, z: -3}
+  - {x: -37, y: 29, z: -3}
   - {x: -41, y: 30, z: 2}
-  - {x: -37, y: 27, z: 2}
+  - {x: -37, y: 29, z: 2}
   m_Textures0:
   - {x: 41, y: 30}
-  - {x: 37, y: 27}
+  - {x: 37, y: 29}
   - {x: 41, y: 43}
   - {x: 37, y: 43}
-  - {x: 2, y: 27}
-  - {x: -3, y: 27}
+  - {x: 2, y: 29}
+  - {x: -3, y: 29}
   - {x: 2, y: 43}
   - {x: -3, y: 43}
-  - {x: -37, y: 27}
+  - {x: -37, y: 29}
   - {x: -41, y: 30}
   - {x: -37, y: 43}
   - {x: -41, y: 43}
@@ -63263,10 +63363,10 @@ MonoBehaviour:
   - {x: -37, y: 2}
   - {x: -41, y: -3}
   - {x: -37, y: -3}
-  - {x: 50.800003, y: -3}
-  - {x: 45.8, y: -3}
-  - {x: 50.800003, y: 2}
-  - {x: 45.8, y: 2}
+  - {x: 47.05191, y: -3}
+  - {x: 42.928806, y: -3}
+  - {x: 47.05191, y: 2}
+  - {x: 42.928806, y: 2}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -63290,10 +63390,10 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
-  - {x: -0.79999995, y: 0.6, z: 0, w: -1}
-  - {x: -0.79999995, y: 0.6, z: 0, w: -1}
-  - {x: -0.79999995, y: 0.6, z: 0, w: -1}
-  - {x: -0.79999995, y: 0.6, z: 0, w: -1}
+  - {x: -0.9701425, y: 0.24253562, z: 0, w: -1}
+  - {x: -0.9701425, y: 0.24253562, z: 0, w: -1}
+  - {x: -0.9701425, y: 0.24253562, z: 0, w: -1}
+  - {x: -0.9701425, y: 0.24253562, z: 0, w: -1}
   m_Colors: []
   m_UnwrapParameters:
     m_HardAngle: 88
@@ -66461,6 +66561,40 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!84 &1590996207
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Aura Point Light : Shadow Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1593004651
 GameObject:
   m_ObjectHideFlags: 0
@@ -67409,6 +67543,40 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!84 &1610286594
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Aura Point Light : Shadow Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1618247241
 GameObject:
   m_ObjectHideFlags: 0
@@ -73043,6 +73211,40 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!84 &1669681959
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Aura Point Light : Shadow Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1697210772
 GameObject:
   m_ObjectHideFlags: 0
@@ -79012,6 +79214,40 @@ Transform:
   m_Father: {fileID: 34701503}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1882890431
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Aura Point Light : Shadow Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!43 &1885514629
 Mesh:
   m_ObjectHideFlags: 0
@@ -101130,6 +101366,40 @@ Transform:
   m_Father: {fileID: 34701503}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &2136627365
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Aura Point Light : Shadow Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &2136758707
 GameObject:
   m_ObjectHideFlags: 0
