@@ -92,8 +92,8 @@ public class CameraFollow : MonoBehaviour
         _wantedFocusRelativePosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right;
         _wantedFocusRelativePosition *= -_targetRb.velocity.normalized.x;
 
-        _wantedFocusRelativePosition -= _relativeFocusRect.size * 0.5f; // center rect
-        _relativeFocusRect.position = Vector2.Lerp(_relativeFocusRect.position, _wantedFocusRelativePosition, Time.deltaTime * _data.FocusRectSpeed);
+        //_wantedFocusRelativePosition -= _relativeFocusRect.size * 0.5f; // center rect
+        _relativeFocusRect.center = Vector2.Lerp(_relativeFocusRect.center, _wantedFocusRelativePosition, Time.deltaTime * _data.FocusRectSpeed);
     }
 
     void SetWantedPosition()
