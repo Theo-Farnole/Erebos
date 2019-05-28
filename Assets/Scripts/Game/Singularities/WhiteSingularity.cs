@@ -46,4 +46,9 @@ public class WhiteSingularity : AbstractSingularity
         // debug
         GizmosPersistence.DrawPersistentLine(transform.position, transform.position + vel);
     }
+
+    void OnEnable()
+    {
+        _canRepulse = true;
+    }
 }
