@@ -35,6 +35,8 @@ public class BlackSingularity : AbstractSingularity
 
     protected override void OnStay()
     {
+        _character.GetComponent<CharControllerManager>().Attracted = true;
+
         if (Vector3.Distance(transform.position, _character.position) <= _data.CharacterRotateRadius)
         {
             _character.SetParent(transform);

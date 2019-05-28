@@ -22,7 +22,6 @@ public abstract class AbstractSingularity : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _character.GetComponent<CharControllerManager>().Attracted = true;
             OnStay();
         }
     }

@@ -5,8 +5,12 @@ using UnityEngine;
 [SelectionBase]
 public class WhiteSingularity : AbstractSingularity
 {
+    public static readonly float REPULSE_DELAY = 0.2f;
+
     #region Fields
     [SerializeField] private WhiteSingularityData _data;
+
+    private bool _canRepulse = true;
     #endregion
 
     #region Overrided Methods
@@ -23,6 +27,16 @@ public class WhiteSingularity : AbstractSingularity
 
     private void RepulsePlayer()
     {
+        if (!_canRepulse)
+            return;
+
+        _canRepulse = false;
+        StartCoroutine(CustomDelay.ExecuteAfterTime(REPULSE_DELAY, () =>
+        {
+            _canRepulse = true;
+            Debug.Log("CanRepulse now to true! " + _canRepulse);
+        }));
+
         Vector3 dir = (_character.position - transform.position).normalized;
 
         // apply velocity
