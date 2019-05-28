@@ -1,0 +1,54 @@
+# ProBuilder 4.0.4
+# https://unity3d.com/unity/features/worldbuilding/probuilder
+# 28/05/2019 15:38:24
+
+mtllib ./Cube_(92).mtl
+o Cube (92)
+
+g Cube (92)
+v -602 291 2
+v -604 291 2
+v -602 304 2
+v -604 304 2
+v -604 291 -3
+v -604 304 -3
+v -602 291 -3
+v -602 304 -3
+
+vt -2 6
+vt -4 6
+vt -2 19
+vt -4 19
+vt 2 6
+vt -3 6
+vt 2 19
+vt -3 19
+vt 4 6
+vt 4 19
+vt 3 6
+vt 3 19
+vt 2 2
+vt 4 2
+vt 2 -3
+vt 4 -3
+vt -2 -3
+vt -4 -3
+vt -2 2
+vt -4 2
+
+vn 0 0 1
+vn -1 0 0
+vn 0 0 -1
+vn 1 0 0
+vn 0 1 0
+vn 0 -1 0
+
+g Cube (92)
+usemtl TrapBlockOutMaterial
+f 3/3/1 4/4/1 2/2/1 1/1/1
+f 4/7/2 6/8/2 5/6/2 2/5/2
+f 6/10/3 8/7/3 7/5/3 5/9/3
+f 8/12/4 3/3/4 1/1/4 7/11/4
+f 8/15/5 6/16/5 4/14/5 3/13/5
+f 1/19/6 2/20/6 5/18/6 7/17/6
+
