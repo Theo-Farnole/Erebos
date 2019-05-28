@@ -84,7 +84,7 @@ public class CharController : MonoBehaviour
 
     void FixedUpdate()
     {
-        UpdatePlayerCollisionVar();
+        UpdateCollisionsVariable();
 
         ProcessRunInput();
         ManageSticking();
@@ -109,7 +109,7 @@ public class CharController : MonoBehaviour
         }
     }
 
-    private void UpdatePlayerCollisionVar()
+    private void UpdateCollisionsVariable()
     {
         _collision.up = Physics.Raycast(transform.position, Vector3.up, _distToGround + 0.1f);
         _collision.down = Physics.Raycast(transform.position, Vector3.down, _distToGround + 0.1f);
