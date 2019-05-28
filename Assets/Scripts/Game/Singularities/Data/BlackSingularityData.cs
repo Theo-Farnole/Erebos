@@ -12,16 +12,4 @@ public class BlackSingularityData : ScriptableObject
     public float TimeToReachCenter { get => _timeToReachCenter; }
     public float Radius { get => _radius; }
     public float CharacterRotateRadius { get => _characterRotateRadius;}
-
-#if UNITY_EDITOR
-    void OnValidate()
-    {
-        var singularities = GameObject.FindObjectsOfType<BlackSingularity>();
-
-        foreach (var s in singularities)
-        {
-            s.UpdateRangeFeedback();
-        }
-    }
-#endif
 }

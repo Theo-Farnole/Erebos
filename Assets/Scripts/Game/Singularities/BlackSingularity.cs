@@ -8,30 +8,29 @@ public class BlackSingularity : AbstractSingularity
 {
     #region Fields
     [SerializeField] private BlackSingularityData _data;
-    [SerializeField] private DrawCircle _rangeFeedback;
 
-    private float _currentAngleDelta;
+    private float _currentAngleDelta = Mathf.Infinity;
     #endregion
 
     #region MonoBehaviour Callbacks
     void Awake()
     {
         GetComponent<SphereCollider>().radius = _data.Radius;
-        UpdateRangeFeedback();
     }
 
     private void OnEnable()
     {
         transform.eulerAngles = Vector3.zero;
     }
+
+    private void OnDisable()
+    {
+        _currentAngleDelta = Mathf.Infinity; // reset variable
+    }
     #endregion
 
     #region Overrided Methods
-    protected override void OnEnter()
-    {
-        Vector3 dir = _character.position - transform.position;
-        _currentAngleDelta = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-    }
+    protected override void OnEnter() { }
 
     protected override void OnStay()
     {
@@ -39,6 +38,8 @@ public class BlackSingularity : AbstractSingularity
 
         if (Vector3.Distance(transform.position, _character.position) <= _data.CharacterRotateRadius)
         {
+            CalculateCurrentAngleDelta();
+
             _character.SetParent(transform);
             _character.GetComponent<CharControllerSingularity>().RotateAroundSingularity(transform, _currentAngleDelta);
         }
@@ -59,19 +60,13 @@ public class BlackSingularity : AbstractSingularity
         _character.GetComponent<Rigidbody>().velocity = vel * Time.deltaTime;
     }
 
-    public void UpdateRangeFeedback()
+    private void CalculateCurrentAngleDelta()
     {
-        if (_rangeFeedback == null)
-        {
-            Debug.LogError(transform.name + " has no range feedback dragged!");
+        // calculate only if current angle delta isn't calculated
+        if (_currentAngleDelta != Mathf.Infinity)
             return;
-        }
 
-        _rangeFeedback.xradius = _data.Radius;
-        _rangeFeedback.yradius = _data.Radius;
-
-        _rangeFeedback.UpdateCircle();
+        Vector3 dir = _character.position - transform.position;
+        _currentAngleDelta = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
     }
-
-    
 }
