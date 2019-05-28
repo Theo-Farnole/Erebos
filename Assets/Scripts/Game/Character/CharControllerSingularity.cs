@@ -46,7 +46,7 @@ public class CharControllerSingularity : MonoBehaviour
         {
             _form = value;
 
-            UpdateForm();
+            UpdateFormMesh();
             EventForm?.Invoke(this, _form);
         }
     }
@@ -85,33 +85,28 @@ public class CharControllerSingularity : MonoBehaviour
     void ManageInputs()
     {
         // void form
-        if (canGotoVoid && !_rightTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f)
+        if (!_rightTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f ||
+         !_leftTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f)
         {
             switch (Form)
             {
                 case Form.Normal:
                 case Form.Ethereal:
-                    Form = Form.Void;
+                    if (canGotoVoid)
+                    {
+                        Form = Form.Void;
+                    }
                     break;
 
                 case Form.Void:
-                    Form = Form.Ethereal;
-                    break;
-            }
-        }
-
-        // ethereal form
-        if (canGotoEtheral && !_leftTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f)
-        {
-            switch (Form)
-            {
-                case Form.Normal:
-                case Form.Void:
-                    Form = Form.Ethereal;
-                    break;
-
-                case Form.Ethereal:
-                    Form = Form.Void;
+                    if (canGotoEtheral)
+                    {
+                        Form = Form.Ethereal;
+                    }
+                    else
+                    {
+                        Form = Form.Normal;
+                    }
                     break;
             }
         }
@@ -120,7 +115,7 @@ public class CharControllerSingularity : MonoBehaviour
         _leftTriggerPressed = GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f ? true : false;
     }
 
-    void UpdateForm()
+    void UpdateFormMesh()
     {
         switch (Form)
         {
