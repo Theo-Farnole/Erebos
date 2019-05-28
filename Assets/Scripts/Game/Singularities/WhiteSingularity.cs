@@ -16,13 +16,10 @@ public class WhiteSingularity : AbstractSingularity
     #region Overrided Methods
     protected override void OnEnter()
     {
-        //throw new System.NotImplementedException();
-    }
-
-    protected override void OnStay()
-    {
         RepulsePlayer();
     }
+
+    protected override void OnStay() {}
     #endregion
 
     private void RepulsePlayer()
@@ -34,7 +31,6 @@ public class WhiteSingularity : AbstractSingularity
         StartCoroutine(CustomDelay.ExecuteAfterTime(REPULSE_DELAY, () =>
         {
             _canRepulse = true;
-            Debug.Log("CanRepulse now to true! " + _canRepulse);
         }));
 
         Vector3 dir = (_character.position - transform.position).normalized;
