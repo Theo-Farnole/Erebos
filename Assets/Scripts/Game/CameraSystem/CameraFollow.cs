@@ -90,9 +90,8 @@ public class CameraFollow : MonoBehaviour
     void SetFocusRect()
     {
         _wantedFocusRelativePosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right;
-        _wantedFocusRelativePosition *= -_targetRb.velocity.normalized.x;
+        _wantedFocusRelativePosition *= Mathf.Sign(_targetRb.velocity.x);
 
-        //_wantedFocusRelativePosition -= _relativeFocusRect.size * 0.5f; // center rect
         _relativeFocusRect.center = Vector2.Lerp(_relativeFocusRect.center, _wantedFocusRelativePosition, Time.deltaTime * _data.FocusRectSpeed);
     }
 
