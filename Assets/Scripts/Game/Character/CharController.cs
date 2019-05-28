@@ -258,7 +258,7 @@ public class CharController : MonoBehaviour
 
         // dash boolean
         _isDashing = true;
-        StartCoroutine(ExecuteAfterTime(_data.DashTime, () =>
+        StartCoroutine(CustomDelay.ExecuteAfterTime(_data.DashTime, () =>
         {
             _isDashing = false;
             _rigidbody.velocity = Vector3.zero;
@@ -294,13 +294,6 @@ public class CharController : MonoBehaviour
         return Physics.Raycast(transform.position, -Vector3.up, _distToGround + 0.1f);
     }
     #endregion
-
-    IEnumerator ExecuteAfterTime(float time, Action task)
-    {
-        yield return new WaitForSeconds(time);
-
-        task();
-    }
 
     public void ResetMovements(object sender = null)
     {
