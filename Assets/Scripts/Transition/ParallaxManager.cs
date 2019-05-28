@@ -6,10 +6,11 @@ using UnityEngine;
 public class ParallaxManager : Singleton<ParallaxManager>
 {
     #region Fields
+    [SerializeField] private float _animationSeconds = 1f;
+    [Space]
     [SerializeField] private AnimationCurve _speedOnX;
     [SerializeField] private AnimationCurve _speedOnY;
-    [Space]
-    [SerializeField] private float _animationSeconds = 1f;
+    [Header("Player inputs settings")]
     [SerializeField] private float _inputOffset = 10f;
     [SerializeField] private float _inputSpeed = 10f;
 
