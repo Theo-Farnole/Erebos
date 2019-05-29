@@ -42,10 +42,8 @@ public class GameManager : Singleton<GameManager>
     {
         _currentCollectibles++;
 
-        if (UIManager.Instance != null)
-        {
-            UIManager.Instance.UpdateTextCollectible();
-        }
+        UIManager.Instance.UpdateTextCollectible();
+        AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Collectible);
     }
 
     public void RestartCheckpoint()

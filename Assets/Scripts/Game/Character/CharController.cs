@@ -89,7 +89,7 @@ public class CharController : MonoBehaviour
         ProcessRunInput();
         ManageSticking();
         ProcessJumpInput();
-        
+
         _rigidbody.useGravity = !(_isSticked || _isDashing);
     }
 
@@ -189,6 +189,8 @@ public class CharController : MonoBehaviour
             _isSticked = true;
             _rigidbody.velocity = Vector3.zero;
             _jumpsAvailable = 1;
+
+            AudioManager.Instance.PlaySoundGeneral(SoundGeneral.WallGrab);
         }
     }
 
@@ -238,10 +240,12 @@ public class CharController : MonoBehaviour
             if (_jumpsAvailable == 2)
             {
                 Jump();
+                AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Jump);
             }
             else if (_jumpsAvailable == 1)
             {
                 Dash();
+                AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Dash);
             }
 
             _jumpsAvailable--;
@@ -297,6 +301,8 @@ public class CharController : MonoBehaviour
 
         Vector3 dir = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
         _rigidbody.AddForce(dir * _data.StickedJumpForce * _rigidbody.mass, ForceMode.Impulse);
+
+        AudioManager.Instance.PlaySoundGeneral(SoundGeneral.WallJump);
     }
 
     private bool IsGrounded()

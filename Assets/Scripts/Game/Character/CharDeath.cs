@@ -56,6 +56,7 @@ public class CharDeath : MonoBehaviour
         CharFeedbacks.Instance.PlayDeathPS();
         transform.position = (Vector2)currentCheckpoint;
 
+        AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Death);
         EventDeath?.Invoke(this);
     }
 }
