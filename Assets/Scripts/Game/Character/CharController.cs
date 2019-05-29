@@ -97,14 +97,8 @@ public class CharController : MonoBehaviour
     {
         Vector3 angles = transform.eulerAngles;
 
-        if (_rigidbody.velocity.x < 0f)
-        {
-            angles.y = 180;
-        }
-        else if (_rigidbody.velocity.x > 0f)
-        {
-            angles.y = 0;
-        }
+        if (_rigidbody.velocity.x < 0f) angles.y = 180;
+        else if (_rigidbody.velocity.x > 0f) angles.y = 0;
 
         transform.eulerAngles = angles;
     }
