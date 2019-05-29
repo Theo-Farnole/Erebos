@@ -39,6 +39,8 @@ public class UIMenuManager : MonoBehaviour
 
     void Awake()
     {
+        DisplayPanel(PanelType.MainMenu);
+
         // main menu
         _buttonPlay.onClick.AddListener(() => SceneManager.LoadScene(GameState.state.ToScene()));  // load transition scene
         _buttonOptions.onClick.AddListener(() => DisplayPanel(PanelType.OptionsGeneral));
