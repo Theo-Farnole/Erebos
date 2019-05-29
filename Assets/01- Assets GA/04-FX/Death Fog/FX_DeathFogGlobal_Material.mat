@@ -44,5 +44,5 @@ Material:
     - _Float1: 6
     - _Float4: 14.13
     - _U_TillingMask: 14.13
-    - __dirty: 0
+    - __dirty: 1
     m_Colors: []
