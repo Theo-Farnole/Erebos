@@ -92,6 +92,22 @@ public class CharController : MonoBehaviour
         
         _rigidbody.useGravity = !(_isSticked || _isDashing);
     }
+
+    void LateUpdate()
+    {
+        Vector3 angles = transform.eulerAngles;
+
+        if (_rigidbody.velocity.x < 0f)
+        {
+            angles.y = 180;
+        }
+        else if (_rigidbody.velocity.x > 0f)
+        {
+            angles.y = 0;
+        }
+
+        transform.eulerAngles = angles;
+    }
     #endregion
 
     private void ManageInputs()

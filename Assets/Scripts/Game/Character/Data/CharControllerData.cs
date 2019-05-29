@@ -8,6 +8,8 @@ public class CharControllerData : ScriptableObject
     [Header("Run settings")]
     [SerializeField] private float _speed = 3f;
     [SerializeField] private float _maxVelocityOnX = 10f;
+    [Space]
+    [SerializeField] private float _turnSpeed = 60f;
     [Header("Jumps settings")]
     [SerializeField] private float _jumpHeight = 4;
     [SerializeField] private float _dashDistance = 8;
@@ -31,4 +33,5 @@ public class CharControllerData : ScriptableObject
     public float DashDistance { get => _dashDistance; }
     public float StickedJumpAngle { get => _stickedJumpAngle; }
     public float DashTime { get => _dashTime;  }
+    public float TurnSpeed { get => _turnSpeed; }
 }
