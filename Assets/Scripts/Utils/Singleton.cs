@@ -20,7 +20,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
                 if (instances.Length > 1)
                 {
-                    Debug.LogError(typeof(T) + "There is more than one instance of Singleton. ");
+                    Debug.LogError(instances[0].transform.parent.name + "/" + instances[0].name + " There is more than one instance of " + typeof(T) + " Singleton. ");
                 }
                 if (instances != null && instances.Length > 0)
                 {
