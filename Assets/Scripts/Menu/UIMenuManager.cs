@@ -32,6 +32,9 @@ public class UIMenuManager : MonoBehaviour
     [Header("Quality Panel")]
     [SerializeField] private Button _buttonQuality;
     [SerializeField] private Button _buttonSound;
+    [Space]
+    [SerializeField] private Toggle _toggleVSync;
+    [SerializeField] private TMP_Dropdown _dropdownFullscreen;
     [Header("Returns buttons")]
     [SerializeField] private List<Button> _buttonsReturn = new List<Button>();
 
@@ -39,6 +42,7 @@ public class UIMenuManager : MonoBehaviour
 
     void Awake()
     {
+        LoadVideoSettings();
         DisplayPanel(PanelType.MainMenu);
 
         // main menu
@@ -104,7 +108,27 @@ public class UIMenuManager : MonoBehaviour
             case PanelType.OptionsSound:
             case PanelType.OptionsQuality:
                 DisplayPanel(PanelType.OptionsGeneral);
+                SaveVideoSettings();
                 break;
         }
     }
+
+    #region Load/Save Settings Methods
+    void LoadVideoSettings()
+    {
+        if (SaveSystem.optionsData == null)
+            SaveSystem.Load();
+
+        _toggleVSync.isOn = SaveSystem.optionsData.enableVSync;
+        _dropdownFullscreen.SetValueWithoutNotify(SaveSystem.optionsData.FullScreenValue);
+    }
+
+    void SaveVideoSettings()
+    {
+        SaveSystem.optionsData.enableVSync = _toggleVSync.isOn;
+        SaveSystem.optionsData.FullScreenValue = _dropdownFullscreen.value;
+
+        SaveSystem.Save();
+    }
+    #endregion
 }

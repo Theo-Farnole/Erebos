@@ -16,6 +16,8 @@ public static class SaveSystem
         bf.Serialize(file, optionsData);
 
         file.Close();
+
+        optionsData.ApplySettings();
     }
 
     public static void Load()
@@ -33,5 +35,7 @@ public static class SaveSystem
         {
             optionsData = new OptionsData();
         }
+
+        optionsData.ApplySettings();
     }
 }

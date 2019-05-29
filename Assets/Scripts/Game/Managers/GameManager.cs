@@ -17,8 +17,6 @@ public class GameManager : Singleton<GameManager>
     void Awake()
     {
         SaveSystem.Load();
-        ApplySavedSettings();
-
         GameState.CurrentMaxCollectibles = FindObjectsOfType<Collectible>().Length;
     }
 
@@ -31,12 +29,6 @@ public class GameManager : Singleton<GameManager>
         }
     }
     #endregion
-
-    public void ApplySavedSettings()
-    {
-        int vSyncCount = SaveSystem.optionsData.enableVSync ? 2 : 0;
-        QualitySettings.vSyncCount = vSyncCount;
-    }
 
     public void AddCollectible()
     {
