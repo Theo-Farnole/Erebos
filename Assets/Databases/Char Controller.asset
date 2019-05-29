@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _maxVelocityOnX: 9
+  _turnSpeed: 180
   _jumpHeight: 4
   _dashDistance: 8
   _dashTime: 0.3
