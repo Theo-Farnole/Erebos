@@ -23,9 +23,12 @@ public class TriggerToTransition : MonoBehaviour
             SingletonExtension.ResetSingleton();
 
             GameState.state++;
-            Initiate.Fade("transition", Color.black, 1f);
-
             GameState.CurrentSpeedrunTime = Time.timeSinceLevelLoad;
+
+            StartCoroutine(CustomDelay.ExecuteAfterTime(1f, () =>
+            {
+                Initiate.Fade("transition", Color.black, 1f);
+            }));
         }
     }
     #endregion
