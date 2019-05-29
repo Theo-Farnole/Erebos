@@ -6,6 +6,8 @@ public delegate void DeathHandle(object sender);
 
 public class CharDeath : MonoBehaviour
 {
+    public static readonly int DEATH_Y = -10;
+
     #region Fields
     public static event DeathHandle EventDeath;
 
@@ -16,12 +18,20 @@ public class CharDeath : MonoBehaviour
     #endregion
 
     #region MonoBehaviour Callbacks
-    private void Awake()
+    void Awake()
     {
         currentCheckpoint = transform.position;
     }
 
-    private void OnTriggerEnter(Collider other)
+    void Update()
+    {
+        if (transform.position.y <= DEATH_Y)
+        {
+            Death();
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("KillingObstacle"))
         {
