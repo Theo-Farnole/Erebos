@@ -7,7 +7,7 @@ public class ParallaxItem : MonoBehaviour
     #region Fields
     [SerializeField] private float _speedFactor = 1;
 
-    private Transform _target;
+    private Transform _parallaxManager;
     private Vector3 _originalPosition;
     #endregion
 
@@ -15,12 +15,12 @@ public class ParallaxItem : MonoBehaviour
     private void Start()
     {
         _originalPosition = transform.position;
-        _target = ParallaxManager.Instance.transform;
+        _parallaxManager = ParallaxManager.Instance.transform;
     }
 
     void Update()
     {
-        transform.position = _originalPosition + _target.position * _speedFactor;
+        transform.position = _originalPosition + _parallaxManager.position * _speedFactor;
     }
     #endregion
 }

@@ -17,6 +17,10 @@ public class ParallaxManager : Singleton<ParallaxManager>
     private Vector3 _screenCenter = Vector3.zero;
     private Vector3 _originalPosition = Vector3.zero;
     private Vector3 _wantedInputDelta = Vector3.zero;
+
+
+    private float _xScreenFactor = 1;
+    private float _yScreenFactor = 1;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -24,12 +28,17 @@ public class ParallaxManager : Singleton<ParallaxManager>
     {
         _screenCenter = new Vector2(Screen.width, Screen.height) / 2;
         _originalPosition = transform.position;
+
+        _xScreenFactor = Screen.width / 1920f;
+        _yScreenFactor = Screen.height / 1080f;
+
+        Debug.Log("Factor x/y: " + _xScreenFactor + " & " + _yScreenFactor);
     }
 
     void Update()
     {
-        float horizontal = _speedOnX.Evaluate(Time.timeSinceLevelLoad / _animationSeconds);
-        float vertical = _speedOnY.Evaluate(Time.timeSinceLevelLoad / _animationSeconds);
+        float horizontal = _speedOnX.Evaluate(Time.timeSinceLevelLoad / _animationSeconds) * _xScreenFactor;
+        float vertical = _speedOnY.Evaluate(Time.timeSinceLevelLoad / _animationSeconds) *  _yScreenFactor;
 
         Vector3 delta = new Vector3(horizontal, vertical, 0);
 
