@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 357eafe7aafca9743ab049bd352de11b
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _AM_Athena_Texture_Black: {fileID: 2800000, guid: aa8dac7a70d0c8c40a3ca4b1a02dabda,
+      type: 3}
+  - _Mask: {fileID: 2800000, guid: 7abb782795c0cee44aba21df634d80c5, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
