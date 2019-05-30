@@ -91,7 +91,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Intensity: 10
+    - _Intensity: 5
     - _InvFade: 1
     - _LightingEnabled: 1
     - _Metallic: 0
