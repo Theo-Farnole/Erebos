@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FX_Charactere_Material_Repop
+  m_Name: FX_Athena_Material_Repop
   m_Shader: {fileID: 4800000, guid: d4034d780ea8ff144a135303eeff7beb, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
