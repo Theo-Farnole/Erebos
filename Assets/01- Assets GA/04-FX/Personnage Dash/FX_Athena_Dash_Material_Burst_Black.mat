@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FX_Athena_Dash_Material_Burst
+  m_Name: FX_Athena_Dash_Material_Burst_Black
   m_Shader: {fileID: 4800000, guid: 4711e6105c4e3aa4a949b852324b0d24, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _FX_Athena_Dash_Texture_Burst:
-        m_Texture: {fileID: 2800000, guid: 06154260111a5164f9b2d09545347c36, type: 3}
+        m_Texture: {fileID: 2800000, guid: f5ef44739408706499217687d28fb21c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -28,6 +28,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Float0: 5
+    - _Float0: 0
     - __dirty: 0
     m_Colors: []

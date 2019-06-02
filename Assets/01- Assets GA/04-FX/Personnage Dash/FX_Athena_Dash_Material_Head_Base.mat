@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FX_Athena_Dash_Material_Head
-  m_Shader: {fileID: 4800000, guid: 2378930d4ba74f84db6f88de17707fae, type: 3}
+  m_Name: FX_Athena_Dash_Material_Head_Base
+  m_Shader: {fileID: 4800000, guid: d4034d780ea8ff144a135303eeff7beb, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -21,6 +21,10 @@ Material:
     m_TexEnvs:
     - _FX_Athena_Dash_Texture_Burst:
         m_Texture: {fileID: 2800000, guid: d817e8b4614d3774a869832adb3bd722, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: aa28261616d43c048a743d33672fb1e0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
