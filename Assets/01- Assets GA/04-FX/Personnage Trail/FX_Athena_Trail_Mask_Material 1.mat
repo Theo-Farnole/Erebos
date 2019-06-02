@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FX_Athena_Trail_Material
+  m_Name: FX_Athena_Trail_Mask_Material 1
   m_Shader: {fileID: 4800000, guid: d7de337da8a050e428496c7655949013, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -36,6 +36,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _IntensityEmissiv: 1
+    - _IntensityEmissiv: -100
     - __dirty: 0
     m_Colors: []
