@@ -29,5 +29,5 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Float0: 0
-    - __dirty: 0
+    - __dirty: 1
     m_Colors: []
