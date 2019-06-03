@@ -13,7 +13,7 @@ public class CheatsManager : MonoBehaviour
 
     void Update()
     {
-        if (GamePad.GetButtonDown(GamePad.Button.Back, GamePad.Index.One))
+        if (GamePad.GetButtonDown(GamePad.Button.Back, GamePad.Index.One) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             _isActive = !_isActive;
 
@@ -34,7 +34,8 @@ public class CheatsManager : MonoBehaviour
         {
             int targetCP = -1;
 
-            if (Input.GetKeyDown(KeyCode.Keypad1)) targetCP = 0;
+            if (Input.GetKeyDown(KeyCode.Keypad0)) EndLevel();
+            else if (Input.GetKeyDown(KeyCode.Keypad1)) targetCP = 0;
             else if (Input.GetKeyDown(KeyCode.Keypad2)) targetCP = 1;
             else if (Input.GetKeyDown(KeyCode.Keypad3)) targetCP = 2;
             else if (Input.GetKeyDown(KeyCode.Keypad4)) targetCP = 3;
@@ -49,6 +50,13 @@ public class CheatsManager : MonoBehaviour
                 CharControllerManager.Instance.transform.position = _checkpoints[targetCP].transform.position;
             }
         }
+    }
+
+    void EndLevel()
+    {
+        Transform bigCheckpoint = FindObjectOfType<TriggerToTransition>().transform;
+
+        CharControllerManager.Instance.transform.position = bigCheckpoint.position;
     }
 
     void OnGUI()
