@@ -13,6 +13,8 @@ public class Transition : MonoBehaviour
 
     private int _currentDialogue = -1;
     private string _dialogueKey;
+
+    private bool _isPanelWasActiveLastFrame = false;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -25,10 +27,12 @@ public class Transition : MonoBehaviour
 
     void Update()
     {
-        if (_panel.activeSelf && Input.GetKeyDown(KeyCode.A))
+        if (_panel.activeSelf && _panel.activeSelf == _isPanelWasActiveLastFrame && Input.GetKeyDown(KeyCode.A))
         {
             ChangeDialogue();
         }
+
+        _isPanelWasActiveLastFrame = _panel.activeSelf;
     }
     #endregion
 
@@ -38,10 +42,9 @@ public class Transition : MonoBehaviour
         ChangeDialogue();
     }
 
-    void UnloadVignette()
+    public void UnloadVignette()
     {
         _panel.SetActive(false);
-        TransitionManager.Instance.ChangeTransition();
     }
 
     void ChangeDialogue()
@@ -56,7 +59,7 @@ public class Transition : MonoBehaviour
         // if dialogue is ended
         if (text == key)
         {
-            UnloadVignette();
+        TransitionManager.Instance.ChangeTransition();
         }
         else
         {

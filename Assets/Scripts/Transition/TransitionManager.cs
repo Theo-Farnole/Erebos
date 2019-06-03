@@ -49,10 +49,13 @@ public class TransitionManager : Singleton<TransitionManager>
     void Start()
     {
         // load scene
-        string sceneToLoad = GameState.currentScene.ToScene();
+        if (GameState.currentScene != SceneState.End)
+        {
+            string sceneToLoad = GameState.currentScene.ToScene();
 
-        ao = SceneManager.LoadSceneAsync(sceneToLoad);
-        ao.allowSceneActivation = false;
+            ao = SceneManager.LoadSceneAsync(sceneToLoad);
+            ao.allowSceneActivation = false;
+        }
 
         ChangeTransition();
     }
@@ -71,11 +74,19 @@ public class TransitionManager : Singleton<TransitionManager>
             else
             {
                 _transitions[CurrentScene][_currentTransition].LoadVignette();
+
+                if (_currentTransition - 1 >= 0)
+                {
+                    _transitions[CurrentScene][_currentTransition - 1].UnloadVignette();
+                }
             }
         }
         else
         {
-            ao.allowSceneActivation = true;
+            if (ao != null)
+            {
+                ao.allowSceneActivation = true;
+            }
         }
     }
 }
