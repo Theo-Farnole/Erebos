@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// NOTE:
+// add async load of tutorial
 public class UIMenuManager : MonoBehaviour
 {
     #region Enums
@@ -46,7 +48,7 @@ public class UIMenuManager : MonoBehaviour
         DisplayPanel(PanelType.MainMenu);
 
         // main menu
-        _buttonPlay.onClick.AddListener(() => SceneManager.LoadScene(GameState.state.ToScene()));  // load transition scene
+        _buttonPlay.onClick.AddListener(() => SceneManager.LoadScene(SceneState.Tutorial.ToScene()));  // load tutorial
         _buttonOptions.onClick.AddListener(() => DisplayPanel(PanelType.OptionsGeneral));
         _buttonCredits.onClick.AddListener(() => DisplayPanel(PanelType.Credits));
         _buttonQuit.onClick.AddListener(() => Application.Quit());
