@@ -30,7 +30,7 @@ public static class SceneStateExtension
 public static class GameState
 {
     #region Fields
-    public static SceneState state = SceneState.Tutorial;
+    public static SceneState currentScene = SceneState.Tutorial;
     public static float[] speedrunTime = new float[3] { 0, 0, 0 };
     public static float[] deathCount = new float[3] { 0, 0, 0 };
     private static int[] _maxCollectibles = new int[3] { 0, 0, 0 };
@@ -41,12 +41,12 @@ public static class GameState
     {
         get
         {
-            return speedrunTime[(int)state];
+            return speedrunTime[(int)currentScene];
         }
 
         set
         {
-            speedrunTime[(int)state] = Time.timeSinceLevelLoad;
+            speedrunTime[(int)currentScene] = Time.timeSinceLevelLoad;
         }
     }
 
@@ -54,12 +54,12 @@ public static class GameState
     {
         get
         {
-            return _maxCollectibles[(int)state];
+            return _maxCollectibles[(int)currentScene];
         }
 
         set
         {
-            _maxCollectibles[(int)state] = value;
+            _maxCollectibles[(int)currentScene] = value;
         }
     }
 
@@ -68,12 +68,12 @@ public static class GameState
     {
         get
         {
-            return deathCount[(int)state];
+            return deathCount[(int)currentScene];
         }
 
         set
         {
-            deathCount[(int)state] = value;
+            deathCount[(int)currentScene] = value;
         }
     }
     #endregion
