@@ -11,7 +11,7 @@ public static class SceneStateExtension
         switch (s)
         {
             case SceneState.Tutorial:
-                return "SC_Zoneopyi";
+                return "SC_Zone0_Final";
 
             case SceneState.ZoneOne:
                 return "Zone1";
