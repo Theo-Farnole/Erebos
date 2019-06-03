@@ -4,20 +4,32 @@ using UnityEngine;
 
 public static class SaveSystem
 {
-    public static OptionsData optionsData;
+    private static OptionsData _optionsData;
     readonly static string pathOptions = "options_data.gd";
 
+    public static OptionsData OptionsData
+    {
+        get
+        {
+            if (_optionsData == null)
+            {
+                Load();
+            }
+
+            return _optionsData;
+        }
+    }
 
     public static void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();
 
         FileStream file = File.Create(Application.persistentDataPath + "/" + pathOptions);
-        bf.Serialize(file, optionsData);
+        bf.Serialize(file, _optionsData);
 
         file.Close();
 
-        optionsData.ApplySettings();
+        _optionsData.ApplySettings();
     }
 
     public static void Load()
@@ -27,15 +39,15 @@ public static class SaveSystem
             BinaryFormatter bf = new BinaryFormatter();
 
             FileStream file = File.Open(Application.persistentDataPath + "/" + pathOptions, FileMode.Open);
-            optionsData = (OptionsData)bf.Deserialize(file);
+            _optionsData = (OptionsData)bf.Deserialize(file);
 
             file.Close();
         }
         else
         {
-            optionsData = new OptionsData();
+            _optionsData = new OptionsData();
         }
 
-        optionsData.ApplySettings();
+        _optionsData.ApplySettings();
     }
 }

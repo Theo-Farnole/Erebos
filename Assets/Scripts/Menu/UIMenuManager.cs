@@ -118,17 +118,17 @@ public class UIMenuManager : MonoBehaviour
     #region Load/Save Settings Methods
     void LoadVideoSettings()
     {
-        if (SaveSystem.optionsData == null)
+        if (SaveSystem.OptionsData == null)
             SaveSystem.Load();
 
-        _toggleVSync.isOn = SaveSystem.optionsData.enableVSync;
-        _dropdownFullscreen.SetValueWithoutNotify(SaveSystem.optionsData.FullScreenValue);
+        _toggleVSync.isOn = SaveSystem.OptionsData.enableVSync;
+        _dropdownFullscreen.SetValueWithoutNotify(SaveSystem.OptionsData.FullScreenValue);
     }
 
     void SaveVideoSettings()
     {
-        SaveSystem.optionsData.enableVSync = _toggleVSync.isOn;
-        SaveSystem.optionsData.FullScreenValue = _dropdownFullscreen.value;
+        SaveSystem.OptionsData.enableVSync = _toggleVSync.isOn;
+        SaveSystem.OptionsData.FullScreenValue = _dropdownFullscreen.value;
 
         SaveSystem.Save();
     }

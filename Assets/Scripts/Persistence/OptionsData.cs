@@ -58,7 +58,7 @@ public class OptionsData
 
     public void ApplySettings()
     {
-        int vSyncCount = SaveSystem.optionsData.enableVSync ? 2 : 0;
+        int vSyncCount = SaveSystem.OptionsData.enableVSync ? 2 : 0;
         QualitySettings.vSyncCount = vSyncCount;
 
         Screen.fullScreen = isFullscreen;

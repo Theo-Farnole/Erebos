@@ -83,13 +83,13 @@ public class UISettingsManager : MonoBehaviour
     #region Load/Save Settings Methods
     void LoadVideoSettings()
     {
-        _toggleVSync.isOn = SaveSystem.optionsData.enableVSync;
+        _toggleVSync.isOn = SaveSystem.OptionsData.enableVSync;
         //_toggleDisplayFPS.isOn = SaveSystem.optionsData.fullscreenMode;
     }
 
     void SaveVideoSettings()
     {
-        SaveSystem.optionsData.enableVSync = _toggleVSync.isOn;
+        SaveSystem.OptionsData.enableVSync = _toggleVSync.isOn;
         //SaveSystem.optionsData.fullscreenMode = _toggleDisplayFPS.isOn;
 
         SaveSystem.Save();

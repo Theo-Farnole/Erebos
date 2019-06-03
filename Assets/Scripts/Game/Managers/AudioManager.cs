@@ -75,7 +75,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySoundGeneral(SoundGeneral sound)
     {
-        float volume = SaveSystem.optionsData.soundGeneral;
+        float volume = SaveSystem.OptionsData.soundGeneral;
 
         if (_generalSounds.Sounds[sound] != null)
         {
@@ -89,7 +89,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySoundMusic(SoundMusic sound)
     {
-        float volume = SaveSystem.optionsData.soundMusique;
+        float volume = SaveSystem.OptionsData.soundMusique;
 
         switch (sound)
         {
@@ -100,7 +100,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySoundAmbiance(SoundAmbiance sound)
     {
-        float volume = SaveSystem.optionsData.soundAmbiance;
+        float volume = SaveSystem.OptionsData.soundAmbiance;
 
         switch (sound)
         {
