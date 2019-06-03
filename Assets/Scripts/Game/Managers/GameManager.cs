@@ -16,7 +16,6 @@ public class GameManager : Singleton<GameManager>
     #region MonoBehaviour Callbacks
     void Awake()
     {
-        SaveSystem.Load();
         GameState.CurrentMaxCollectibles = FindObjectsOfType<Collectible>().Length;
     }
 
