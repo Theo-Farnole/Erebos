@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/transition.unity
     guid: 5bab2887bb5410c4bb545518d8162049
   - enabled: 1
-    path: Assets/Scenes/Scenes Final/SC_Zoneopyi.unity
+    path: Assets/Scenes/Scenes Final/SC_Zone0_Final.unity
     guid: b32c7e22ca5d8844eaef100ab7491e4d
   - enabled: 1
     path: Assets/Scenes/Zone1.unity
