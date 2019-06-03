@@ -22,27 +22,31 @@ public class TutorialFeather : MonoBehaviour
             _hasBeenTriggered = true;
 
             CharControllerSingularity charControllerSingularity = other.GetComponent<CharControllerSingularity>();
-
-            switch (_unlockForm)
-            {
-                case Form.Normal:
-                    Debug.LogWarning(transform.name + " Tutorial Feather can't unlock normal form.");
-                    break;
-
-                case Form.Ethereal:
-                    Debug.Log("Ethereal form unlocked!");
-                    charControllerSingularity.canGotoEtheral = true;
-                    break;
-
-                case Form.Void:
-                    Debug.Log("Void form unlocked!");
-                    charControllerSingularity.canGotoVoid = true;
-                    break;
-            }
+            UnlockForm(charControllerSingularity);
 
             Instantiate(_prefabDestroyPS, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
     #endregion
+
+    void UnlockForm(CharControllerSingularity charController)
+    {
+        switch (_unlockForm)
+        {
+            case Form.Normal:
+                Debug.LogWarning(transform.name + " Tutorial Feather can't unlock normal form.");
+                break;
+
+            case Form.Ethereal:
+                Debug.Log("Ethereal form unlocked!");
+                charController.canGotoEtheral = true;
+                break;
+
+            case Form.Void:
+                Debug.Log("Void form unlocked!");
+                charController.canGotoVoid = true;
+                break;
+        }
+    }
 }
