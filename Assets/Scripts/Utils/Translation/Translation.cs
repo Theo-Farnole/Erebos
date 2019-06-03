@@ -8,7 +8,7 @@ public sealed class Translation : MonoBehaviour
     private static Dictionary<string, string> Translations = null;
 
 #if UNITY_EDITOR
-    private static bool d_OverrideLanguage = false;
+    private static bool d_OverrideLanguage = true;
     private static SystemLanguage d_Language = SystemLanguage.English;
 #endif
 
