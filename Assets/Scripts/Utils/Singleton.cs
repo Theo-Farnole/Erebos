@@ -38,6 +38,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     }
 }
 
+// NOTE: avoid this
 public static class SingletonExtension
 {
     public static void ResetSingleton()
@@ -46,7 +47,6 @@ public static class SingletonExtension
         CharFeedbacks.Instance = null;
         GameManager.Instance = null;
         UIManager.Instance = null;
-        ParallaxManager.Instance = null;
         DynamicsObjects.Instance = null;
     }
 }
