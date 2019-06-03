@@ -4827,7 +4827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9082845363236591663
 Transform:
   m_ObjectHideFlags: 0
@@ -9632,7 +9632,7 @@ GameObject:
   - component: {fileID: 9082845363240214365}
   - component: {fileID: 9082845363240214366}
   m_Layer: 0
-  m_Name: FX_Charactere_Rebirth
+  m_Name: FX_Athena_Rebirth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14548,7 +14548,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -14770,7 +14770,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15
+      scalar: 40.85
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -18258,12 +18258,12 @@ ParticleSystem:
     light: {fileID: 2643762849518015882, guid: 3709adb7b33271b49a19ae5fc84ab896, type: 3}
     randomDistribution: 0
     color: 0
-    range: 1
+    range: 0
     intensity: 0
     rangeCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
