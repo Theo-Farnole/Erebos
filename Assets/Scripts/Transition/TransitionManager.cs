@@ -5,46 +5,77 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TransitionManager : MonoBehaviour
+public class TransitionManager : Singleton<TransitionManager>
 {
     #region Fields
-    [SerializeField] private TextMeshProUGUI _textPressAnyKey;
+    [SerializeField] private bool _override;
+    [SerializeField] private SceneState _overrideState;
+    [Space]
+    [SerializeField] private List<Transition> _transitionsZoneOne = new List<Transition>();
+    [SerializeField] private List<Transition> _transitionsZoneTwo = new List<Transition>();
+    [SerializeField] private List<Transition> _transitionsEnd = new List<Transition>();
+
+    private Dictionary<SceneState, List<Transition>> _transitions = new Dictionary<SceneState, List<Transition>>();
     private AsyncOperation ao;
+
+    private int _currentTransition = -1;
+    #endregion
+
+    #region Properties
+    private SceneState CurrentScene
+    {
+        get
+        {
+#if UNITY_EDITOR
+            if (_override)
+            {
+                return _overrideState;
+            }
+#endif
+
+            return GameState.currentScene;
+        }
+    }
     #endregion
 
     #region MonoBehaviour Callbacks
+    void Awake()
+    {
+        _transitions.Add(SceneState.ZoneOne, _transitionsZoneOne);
+        _transitions.Add(SceneState.ZoneTwo, _transitionsZoneTwo);
+        _transitions.Add(SceneState.End, _transitionsEnd);
+    }
+
     void Start()
     {
-        Debug.Log("TransionManager Start()");
-        _textPressAnyKey.gameObject.SetActive(false);
-
-        LoadScene();
-    }
-
-    void Update()
-    {
-        ProcessInput();
-    }
-    #endregion
-
-    void LoadScene()
-    {
-        string sceneToLoad = GameState.state.ToScene();
+        // load scene
+        string sceneToLoad = GameState.currentScene.ToScene();
 
         ao = SceneManager.LoadSceneAsync(sceneToLoad);
         ao.allowSceneActivation = false;
+
+        ChangeTransition();
     }
+    #endregion
 
-    void ProcessInput()
+    public void ChangeTransition()
     {
-        if (ao.progress >= 0.9f)
-        {
-            _textPressAnyKey.gameObject.SetActive(true);
+        _currentTransition++;
 
-            if (GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
+        if (_currentTransition < _transitions[CurrentScene].Count)
+        {
+            if (CurrentScene == SceneState.Tutorial)
             {
-                ao.allowSceneActivation = true;
+                Debug.LogError("Can't load transition for tutorial!");
             }
+            else
+            {
+                _transitions[CurrentScene][_currentTransition].LoadVignette();
+            }
+        }
+        else
+        {
+            ao.allowSceneActivation = true;
         }
     }
 }
