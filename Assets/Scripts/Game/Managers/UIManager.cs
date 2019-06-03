@@ -7,16 +7,20 @@ using UnityEngine.UI;
 public class UIManager : Singleton<UIManager>
 {
     #region Fields
-    [Header("---- InGame UI ----")]
+    [Header("-- InGame UI ")]
     [SerializeField] private TextMeshProUGUI _textCollectible;
-    [Header("---- Pause UI ----")]
+    [Header("-- Pause UI ")]
     [SerializeField] private GameObject _panelPause;
     [Space]
-    [Header("Timers")]
+    [Header("-- Pause UI - Timers")]
     [SerializeField] private TextMeshProUGUI[] _textSpeedRunsTimes = new TextMeshProUGUI[3];
     [SerializeField] private TextMeshProUGUI[] _textDeathCount = new TextMeshProUGUI[3];
-    [Header("Buttons")]
-    [SerializeField] private Button _button;
+    [Header("-- Pause UI - Buttons")]
+    [SerializeField] private Button _buttonRestart;
+    [SerializeField] private Button _buttonQuitPause;
+    [Header("-- Feathers")]
+    [SerializeField] private GameObject _panelWhiteFeather;
+    [SerializeField] private GameObject _panelBlackFeather;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -24,8 +28,8 @@ public class UIManager : Singleton<UIManager>
     {
         _panelPause.SetActive(false);
 
-        _button.onClick.AddListener(() => GameManager.Instance.RestartCheckpoint());
-        _button.onClick.AddListener(() => UpdatePanelPause());
+        _buttonRestart.onClick.AddListener(() => GameManager.Instance.RestartCheckpoint());
+        _buttonQuitPause.onClick.AddListener(() => UpdatePanelPause());
 
         UpdateTextCollectible();
     }
