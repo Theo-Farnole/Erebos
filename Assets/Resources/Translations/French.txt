@@ -1,3 +1,3 @@
-pause.restart = Redémarrer le niveau
+﻿pause.restart = Redémarrer le niveau
 pause.video = Paramètres Video
 pause.audio = Paramètres Audio
