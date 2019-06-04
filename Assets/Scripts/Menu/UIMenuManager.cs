@@ -6,9 +6,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// NOTE:
-// add async load of tutorial
-
 public delegate void LanguageHandle();
 
 public class UIMenuManager : MonoBehaviour
@@ -56,6 +53,7 @@ public class UIMenuManager : MonoBehaviour
 
     #region Privates Fields
     private PanelType _currentPanel = PanelType.MainMenu;
+    private AsyncOperation _ao;
     #endregion
     #endregion
 
@@ -65,7 +63,7 @@ public class UIMenuManager : MonoBehaviour
         DisplayPanel(PanelType.MainMenu);
 
         // main menu
-        _buttonPlay.onClick.AddListener(() => SceneManager.LoadScene(SceneState.Tutorial.ToScene()));  // load tutorial
+        _buttonPlay.onClick.AddListener(LoadTutorial);  // load tutorial
         _buttonOptions.onClick.AddListener(() => DisplayPanel(PanelType.OptionsGeneral));
         _buttonCredits.onClick.AddListener(() => DisplayPanel(PanelType.Credits));
         _buttonQuit.onClick.AddListener(Application.Quit);
@@ -80,6 +78,21 @@ public class UIMenuManager : MonoBehaviour
         foreach (Button b in _buttonsReturn)
         {
             b.onClick.AddListener(() => ReturnButtonPressed());
+        }
+    }
+
+    void Start()
+    {
+        // doesn't work in Awake()
+        _ao = SceneManager.LoadSceneAsync(SceneState.Tutorial.ToScene());
+        _ao.allowSceneActivation = false;
+    }
+
+    void LoadTutorial()
+    {
+        if (_ao != null)
+        {
+            _ao.allowSceneActivation = true;
         }
     }
 
