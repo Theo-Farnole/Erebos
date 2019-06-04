@@ -7,9 +7,9 @@ public sealed class Translation : MonoBehaviour
     public static readonly SystemLanguage[] Languages = { SystemLanguage.English, SystemLanguage.French };
     private static Dictionary<string, string> Translations = null;
 
-#if UNITY_EDITOR
     private static bool d_OverrideLanguage = true;
     private static SystemLanguage d_Language = SystemLanguage.English;
+#if UNITY_EDITOR
 #endif
 
     private static void CheckInstance()
@@ -22,10 +22,10 @@ public sealed class Translation : MonoBehaviour
 
         var lang = Application.systemLanguage;
 
-#if UNITY_EDITOR
         // Override the current language for testing purpose.
         if (d_OverrideLanguage)
             lang = d_Language;
+#if UNITY_EDITOR
 #endif
         // Check if the current language is supported.
         // Otherwise use the first language as default.
