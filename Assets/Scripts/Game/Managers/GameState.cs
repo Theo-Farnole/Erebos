@@ -41,12 +41,8 @@ public static class GameState
     {
         get
         {
-            return speedrunTime[(int)currentScene];
-        }
-
-        set
-        {
             speedrunTime[(int)currentScene] = Time.timeSinceLevelLoad;
+            return speedrunTime[(int)currentScene];
         }
     }
 
@@ -77,4 +73,9 @@ public static class GameState
         }
     }
     #endregion
+
+    public static void UpdateCurrentSpeedrunTime()
+    {
+        speedrunTime[(int)currentScene] = Time.timeSinceLevelLoad;
+    }
 }

@@ -42,8 +42,7 @@ public class UIManager : Singleton<UIManager>
 
     public void UpdatePanelPause()
     {
-        GameState.CurrentSpeedrunTime = Time.timeSinceLevelLoad;
-
+        GameState.UpdateCurrentSpeedrunTime();
         bool isInPause = (Time.timeScale == 0);
 
         if (isInPause)

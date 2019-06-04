@@ -22,7 +22,7 @@ public class TriggerToTransition : MonoBehaviour
 
             SingletonExtension.ResetSingleton();
 
-            GameState.CurrentSpeedrunTime = Time.timeSinceLevelLoad;
+            GameState.UpdateCurrentSpeedrunTime();
             GameState.currentScene++;
 
             StartCoroutine(CustomDelay.ExecuteAfterTime(1f, () =>
