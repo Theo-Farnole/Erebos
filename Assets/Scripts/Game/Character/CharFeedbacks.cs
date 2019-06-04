@@ -21,6 +21,10 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     [SerializeField] private GameObject _prefabWhiteForm;
 
     private Coroutine _coroutineDashSequence = null;
+    private CharControllerSingularity _charControllerSingularity = null;
+
+    private bool _isDashing = false;
+    private bool _isDead = false;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -37,6 +41,17 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
 
         FormHandle d3 = new FormHandle(PlayFormChange);
         CharControllerSingularity.EventForm += d3;
+
+        _charControllerSingularity = GetComponent<CharControllerSingularity>();
+    }
+
+    void Update()
+    {
+        bool isInBlackSingularity = CharControllerManager.Instance.Attracted && _charControllerSingularity.Form == Form.Void;
+
+        bool shouldBeActive = !(_isDashing || _isDead || isInBlackSingularity);
+
+        _model.SetActive(shouldBeActive);    
     }
     #endregion
 
@@ -62,18 +77,13 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     #region Death & Respawn
     void PlayDeath(object sender)
     {
-        _model.SetActive(false);
+        _isDead = true;
         Instantiate(_prefabDeathPS, transform.position, Quaternion.identity);
-
-        if (_coroutineDashSequence != null)
-        {
-            StopCoroutine(_coroutineDashSequence);
-        }
     }
 
     void PlayRespawn(object sender)
     {
-        _model.SetActive(true);
+        _isDead = false;
         Instantiate(_prefabRespawnPS, transform.position, Quaternion.identity);
     }
     #endregion
@@ -86,17 +96,17 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
         Vector3 rotation = Quaternion.identity.eulerAngles + new Vector3(0, 0, angle);
         Instantiate(_prefabBurstDash, transform.position, Quaternion.Euler(rotation));
 
-        _model.SetActive(false);
-
         GameObject obj = Instantiate(_prefabHeadDash, transform.position, Quaternion.Euler(rotation));
         obj.transform.parent = transform;
+
+        _isDashing = true;
     }
 
     public void StopDashSequence()
     {
         Instantiate(_prefabEndDash, transform.position + Vector3.back * 3f, Quaternion.identity);
 
-        _coroutineDashSequence = StartCoroutine(CustomDelay.ExecuteAfterTime(0.2f, () => _model.SetActive(true)));
+        _isDashing = false;
     }
     #endregion
 }
