@@ -141,8 +141,6 @@ public class UIMenuManager : MonoBehaviour
 
     void DropdownLanguageChanged(int i)
     {
-        Debug.Log("event called");
-
         SaveSettings();
         Translation.ResetTranslations();
 
