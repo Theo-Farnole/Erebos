@@ -8,7 +8,6 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     [SerializeField] private GameObject _model;
     [SerializeField] private GameObject _blackMask;
     [Space]
-    [SerializeField] private GameObject _prefabTrail;
     [SerializeField] private GameObject _prefabJumpPS;
     [Header("Death")]
     [SerializeField] private GameObject _prefabDeathPS;
@@ -34,9 +33,6 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     #region MonoBehaviour Callbacks
     void Awake()
     {
-        var trail = Instantiate(_prefabTrail, transform.position, Quaternion.identity);
-        trail.GetComponent<FollowTransform>().transformToFollow = transform;
-
         DeathHandle d1 = new DeathHandle(PlayDeath);
         CharDeath.EventDeath += d1;
 
@@ -70,11 +66,13 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
         switch (form)
         {
             case Form.Ethereal:
-                Instantiate(_prefabWhiteForm, transform.position, Quaternion.identity);
+                var obj = Instantiate(_prefabWhiteForm, transform.position, Quaternion.identity);
+                obj.transform.parent = transform;
                 break;
 
             case Form.Void:
-                Instantiate(_prefabBlackForm, transform.position, Quaternion.identity);
+                obj = Instantiate(_prefabBlackForm, transform.position, Quaternion.identity);
+                obj.transform.parent = transform;
                 break;
         }
     }
