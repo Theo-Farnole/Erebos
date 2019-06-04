@@ -277,6 +277,8 @@ public class CharController : MonoBehaviour
         {
             _isDashing = false;
             _rigidbody.velocity = Vector3.zero;
+
+            CharFeedbacks.Instance.StopDashSequence();
         }
         ));
 

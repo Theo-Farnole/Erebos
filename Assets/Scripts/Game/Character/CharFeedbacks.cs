@@ -26,15 +26,12 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
 
     public void PlayJumpPS()
     {
-        GameObject obj = Instantiate(_prefabJumpPS, transform.position, Quaternion.Euler(new Vector3(36.68f, transform.eulerAngles.y)));
-        obj.transform.parent = transform;
-        Destroy(obj, 3f);
+        Instantiate(_prefabJumpPS, transform.position, Quaternion.Euler(new Vector3(36.68f, transform.eulerAngles.y)));
     }
 
     public void PlayDeathPS()
     {
-        GameObject obj = Instantiate(_prefabDeathPS, transform.position, Quaternion.Euler(new Vector3(36.68f, transform.eulerAngles.y)));
-        Destroy(obj, 3f);
+        Instantiate(_prefabDeathPS, transform.position, Quaternion.Euler(new Vector3(36.68f, transform.eulerAngles.y)));
     }
 
     public void PlayDashSequence(float angle)
@@ -43,5 +40,17 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
 
         Vector3 rotation = Quaternion.identity.eulerAngles + new Vector3(0, 0, angle);
         Instantiate(_prefabBurstDash, transform.position, Quaternion.Euler(rotation));
+
+        _model.SetActive(false);
+
+        GameObject obj = Instantiate(_prefabHeadDash, transform.position, Quaternion.Euler(rotation));
+        obj.transform.parent = transform;
+    }
+
+    public void StopDashSequence()
+    {
+        Instantiate(_prefabEndDash, transform.position + Vector3.back * 3f, Quaternion.identity);
+
+        StartCoroutine(CustomDelay.ExecuteAfterTime(0.2f, () => _model.SetActive(true)));
     }
 }
