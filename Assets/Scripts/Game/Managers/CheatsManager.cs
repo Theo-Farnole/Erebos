@@ -68,11 +68,19 @@ public class CheatsManager : MonoBehaviour
 
         GUIStyle style = new GUIStyle();
 
-        Rect rect = new Rect(w - 60, 0, w, h * 2 / 100);
+        Rect topRight = new Rect(w - 60, 0, w, h * 2 / 100);
         style.alignment = TextAnchor.UpperLeft;
         style.fontSize = h * 2 / 100;
         style.normal.textColor = Color.red;
-        string text = string.Format("cheats enabled");
-        GUI.Label(rect, text, style);
+        GUI.Label(topRight, "cheats enabled", style);
+
+        float t = GameState.CurrentSpeedrunTime;
+
+        int min = Mathf.FloorToInt(t / 60);
+        int sec = Mathf.FloorToInt(t % 60);
+        string txt = string.Format(min.ToString("00") + ":" + sec.ToString("00"));
+
+        Rect topLeft = new Rect(0, 0, w, h * 2 / 100);
+        GUI.Label(topLeft, txt, style);
     }
 }

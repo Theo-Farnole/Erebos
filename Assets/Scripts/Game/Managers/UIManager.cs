@@ -51,10 +51,12 @@ public class UIManager : Singleton<UIManager>
             {
                 float t = GameState.speedrunTime[i];
 
-                float minutes = (t / 60);
-                float seconds = (t % 60);
+                int min = Mathf.FloorToInt(t / 60);
+                int sec = Mathf.FloorToInt(t % 60);
 
-                _textSpeedRunsTimes[i].text = string.Format("{0:00}:{1:00}", minutes, seconds);
+                string txt = string.Format(min.ToString("00") + ":" + sec.ToString("00"));
+
+                _textSpeedRunsTimes[i].text = txt;
             }
 
             for (int i = 0; i < GameState.speedrunTime.Length; i++)
