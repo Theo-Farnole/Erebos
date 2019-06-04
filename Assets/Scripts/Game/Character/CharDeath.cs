@@ -60,6 +60,9 @@ public class CharDeath : MonoBehaviour
 
     public void Death()
     {
+        if (isDead)
+            return;
+
         isDead = true;
         AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Death);
 
