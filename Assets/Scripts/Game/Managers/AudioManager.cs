@@ -83,7 +83,7 @@ public class AudioManager : Singleton<AudioManager>
         }
         else
         {
-            Debug.Log(sound.ToString() + " isn't set in AudioManager!");
+            Debug.LogWarning(sound.ToString() + " isn't set in AudioManager!");
         }
     }
 
