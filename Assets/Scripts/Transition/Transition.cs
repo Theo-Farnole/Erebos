@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GamepadInput;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -27,7 +28,7 @@ public class Transition : MonoBehaviour
 
     void Update()
     {
-        if (_panel.activeSelf && _panel.activeSelf == _isPanelWasActiveLastFrame && Input.GetKeyDown(KeyCode.A))
+        if (_panel.activeSelf && _panel.activeSelf == _isPanelWasActiveLastFrame && GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
         {
             ChangeDialogue();
         }
