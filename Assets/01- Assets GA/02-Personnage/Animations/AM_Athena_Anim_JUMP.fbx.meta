@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 08c442480abc1d94e82602bc4cf1574a
+guid: 8c50650ad4c9cbb4bb3cda940d3bdc76
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Take 001
+    second: Jump
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: Jump
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 37
-      lastFrame: 50
+      firstFrame: 0
+      lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

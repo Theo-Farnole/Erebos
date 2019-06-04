@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 8a2cb02678e60eb488a6dee6bdfdd5ba
+guid: 2d3f362f430cebe40bc617d853313586
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Take 001
+    second: Landing
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -35,19 +35,19 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: Landing
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 25
-      lastFrame: 39
+      firstFrame: 39
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
