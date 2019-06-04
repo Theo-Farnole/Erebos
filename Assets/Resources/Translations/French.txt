@@ -15,7 +15,7 @@ mainmenu.options.video.vsync = VSync
 mainmenu.options.video.fullscreen = Plein écran
 
 ; main menu - options audio
-mainmenu.options.audio.general = général
+mainmenu.options.audio.general = Général
 mainmenu.options.audio.ambiance = Ambience
 mainmenu.options.audio.music = Musique
 
