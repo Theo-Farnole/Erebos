@@ -47,6 +47,8 @@ public class CharController : MonoBehaviour
     private float _horizontal = 0;
 
     // movements variables
+    private bool _isInputsEnable = true;
+
     private PlayerCollision _collision = new PlayerCollision();
     private bool _isSticked = false;
     private bool _isDashing = false;
@@ -73,8 +75,14 @@ public class CharController : MonoBehaviour
         _distToGround = GetComponent<Collider>().bounds.extents.y;
         _distToSide = GetComponent<Collider>().bounds.extents.x;
 
-        DeathHandle d = new DeathHandle(ResetMovements);
-        CharDeath.EventDeath += d;
+        DeathHandle d1 = new DeathHandle(ResetMovements);
+        CharDeath.EventDeath += d1;
+
+        DeathHandle d2 = new DeathHandle((object sender) => _isInputsEnable = false);
+        CharDeath.EventDeath += d2;
+
+        RespawnHandle d3 = new RespawnHandle((object sender) => _isInputsEnable = true);
+        CharDeath.EventRespawn += d3;
     }
 
     void Update()
@@ -106,6 +114,9 @@ public class CharController : MonoBehaviour
 
     private void ManageInputs()
     {
+        if (!_isInputsEnable)
+            return;        
+        
         _horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x;
 
         if (Time.timeScale != 0 && GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
