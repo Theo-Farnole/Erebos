@@ -119,6 +119,10 @@ MonoBehaviour:
     type: 3}
   _prefabEndDash: {fileID: 212035726029398445, guid: e05cf9d0a91531b4e97b01dddafba95b,
     type: 3}
+  _prefabBlackForm: {fileID: 4295180897977169039, guid: 68785749c11940f469b529b236f83685,
+    type: 3}
+  _prefabWhiteForm: {fileID: 4574036301494883949, guid: 2a6c8aadfc7c79c46aaca9a6da35bf4f,
+    type: 3}
 --- !u!54 &1731791828621383589
 Rigidbody:
   m_ObjectHideFlags: 0

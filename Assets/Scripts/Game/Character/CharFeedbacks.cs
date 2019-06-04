@@ -16,6 +16,9 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     [SerializeField] private GameObject _prefabBurstDash;
     [SerializeField] private GameObject _prefabHeadDash;
     [SerializeField] private GameObject _prefabEndDash;
+    [Header("Form")]
+    [SerializeField] private GameObject _prefabBlackForm;
+    [SerializeField] private GameObject _prefabWhiteForm;
 
     private Coroutine _coroutineDashSequence = null;
     #endregion
@@ -31,6 +34,9 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
 
         RespawnHandle d2 = new RespawnHandle(PlayRespawn);
         CharDeath.EventRespawn += d2;
+
+        FormHandle d3 = new FormHandle(PlayFormChange);
+        CharControllerSingularity.EventForm += d3;
     }
     #endregion
 
@@ -39,6 +45,21 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
         Instantiate(_prefabJumpPS, transform.position, Quaternion.identity);
     }
 
+    void PlayFormChange(object sender, Form form)
+    {
+        switch (form)
+        {
+            case Form.Ethereal:
+                Instantiate(_prefabWhiteForm, transform.position, Quaternion.identity);
+                break;
+
+            case Form.Void:
+                Instantiate(_prefabBlackForm, transform.position, Quaternion.identity);
+                break;
+        }
+    }
+
+    #region Death & Respawn
     void PlayDeath(object sender)
     {
         _model.SetActive(false);
@@ -55,7 +76,9 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
         _model.SetActive(true);
         Instantiate(_prefabRespawnPS, transform.position, Quaternion.identity);
     }
+    #endregion
 
+    #region Dash Sequence
     public void PlayDashSequence(float angle)
     {
         Debug.Log("Dash Sequence!");
@@ -75,4 +98,5 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
 
         _coroutineDashSequence = StartCoroutine(CustomDelay.ExecuteAfterTime(0.2f, () => _model.SetActive(true)));
     }
+    #endregion
 }
