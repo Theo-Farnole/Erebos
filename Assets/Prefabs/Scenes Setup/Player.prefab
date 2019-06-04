@@ -142,12 +142,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee200b691f3a0e3429d2046462f5f0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _model: {fileID: 0}
+  _model: {fileID: 8296172668999330784}
   _prefabTrail: {fileID: 8148474396878549479, guid: cbd1c8add0e963d4097365d46217f4fd,
     type: 3}
   _prefabJumpPS: {fileID: 1741529584871504731, guid: 2ee648ea8514a2c4eb91d1293b51a9fe,
     type: 3}
   _prefabDeathPS: {fileID: 5114115037409213453, guid: 6d1bc7891c8b50d488ad462610eb561f,
+    type: 3}
+  _prefabRespawnPS: {fileID: 9082845363240214367, guid: 940cbdecfd07ef7458246474eecd439c,
     type: 3}
   _prefabBurstDash: {fileID: 7399400166872164486, guid: f4d3895bec9f1a94bab5306b9f891a73,
     type: 3}
@@ -371,6 +373,12 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 11b8f72ac7eb7bb49bf267e7a7efa189, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d829d20d5ec11d408c7e461276df070, type: 3}
+--- !u!1 &8296172668999330784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 1d829d20d5ec11d408c7e461276df070,
+    type: 3}
+  m_PrefabInstance: {fileID: 218968809}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5006512734990539251 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 1d829d20d5ec11d408c7e461276df070,

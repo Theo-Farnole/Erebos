@@ -28,10 +28,6 @@ public class CharDeath : MonoBehaviour
         // call respawn event with delay
         DeathHandle d1 = new DeathHandle(InvokeRespawn);
         EventDeath += d1;
-
-        // tp to checkpoint on respawn
-        RespawnHandle d2 = new RespawnHandle(TeleportToCheckpoint);
-        EventRespawn += d2;
     }
 
     void Update()
@@ -74,12 +70,9 @@ public class CharDeath : MonoBehaviour
     {
         StartCoroutine(CustomDelay.ExecuteAfterTime(RESPAWN_TIME, () =>
         {
+            transform.position = (Vector2)currentCheckpoint;
+
             EventRespawn?.Invoke(this);
         }));
-    }
-
-    private void TeleportToCheckpoint(object sender)
-    {
-        transform.position = (Vector2)currentCheckpoint;
     }
 }
