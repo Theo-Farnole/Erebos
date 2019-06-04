@@ -6,13 +6,16 @@ using UnityEngine.Serialization;
 
 public class CameraFollow : MonoBehaviour
 {
-    #region Fields
+    #region Enums
     public enum Type { Static, Dynamic }
+    #endregion
 
-    [Space]
+    #region Fields
     [SerializeField] private CameraFollowData _data;
-    [Space]
     [SerializeField] private bool _drawDebug = false;
+    [Space]
+    [SerializeField] private Vector3 _worldMinimumPosition;
+    [SerializeField] private Vector3 _worldMaximumPosition;
 
     private Transform _character = null;
     private Rigidbody _targetRb = null;
@@ -132,6 +135,10 @@ public class CameraFollow : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawSphere(_worldMaximumPosition, 1);
+        Gizmos.DrawSphere(_worldMinimumPosition, 1);
+
         if (!_drawDebug)
             return;
 
