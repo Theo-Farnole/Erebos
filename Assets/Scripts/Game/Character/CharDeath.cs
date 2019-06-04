@@ -14,6 +14,8 @@ public class CharDeath : MonoBehaviour
     public static event DeathHandle EventDeath;
     public static event RespawnHandle EventRespawn;
 
+    public static bool isDead = false;
+
     [HideInInspector] public Vector3 currentCheckpoint;
     #endregion
 
@@ -58,6 +60,7 @@ public class CharDeath : MonoBehaviour
 
     public void Death()
     {
+        isDead = true;
         AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Death);
 
         EventDeath?.Invoke(this);
@@ -69,6 +72,7 @@ public class CharDeath : MonoBehaviour
         {
             transform.position = (Vector2)currentCheckpoint;
 
+            isDead = false;
             EventRespawn?.Invoke(this);
         }));
     }

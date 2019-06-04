@@ -84,7 +84,13 @@ public class CharController : MonoBehaviour
         DeathHandle d1 = new DeathHandle(ResetMovements);
         CharDeath.EventDeath += d1;
 
-        DeathHandle d2 = new DeathHandle((object sender) => _isInputsEnable = false);
+        DeathHandle d2 = new DeathHandle((object sender) =>
+        {
+            _isInputsEnable = false;
+            ResetMovements();
+            _rigidbody.useGravity = false;
+            _horizontal = 0;
+        });
         CharDeath.EventDeath += d2;
 
         RespawnHandle d3 = new RespawnHandle((object sender) => _isInputsEnable = true);
