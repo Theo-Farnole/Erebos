@@ -350,6 +350,10 @@ public class CharController : MonoBehaviour
     #region Animation Methods
     void LookAtDirection()
     {
+        // if in pause, don't look at direction
+        if (Time.timeScale == 0) 
+            return;
+
         Vector3 angles = transform.eulerAngles;
 
         if (_horizontal < 0f) angles.y = 180;
@@ -360,6 +364,10 @@ public class CharController : MonoBehaviour
 
     void SetAnimatorValue()
     {
+        // if in pause, don't update animation
+        if (Time.timeScale == 0)
+            return;
+
         bool isFalling = _rigidbody.velocity.y < 0;
         bool isGrounded = _collision.down;
 
