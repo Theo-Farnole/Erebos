@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -20,6 +21,7 @@ public class UIMenuManager : MonoBehaviour
     };
     #endregion
 
+    [SerializeField] private EventSystem _eventSystem;
     [Header("Panels")]
     [SerializeField] private GameObject _panelMainMenu;
     [SerializeField] private GameObject _panelOptionsGeneral;
@@ -78,22 +80,27 @@ public class UIMenuManager : MonoBehaviour
         {
             case PanelType.MainMenu:
                 _panelMainMenu.SetActive(true);
+                _eventSystem.SetSelectedGameObject(_buttonPlay.gameObject);
                 break;
 
             case PanelType.OptionsGeneral:
                 _panelOptionsGeneral.SetActive(true);
+                _eventSystem.SetSelectedGameObject(_buttonQuality.gameObject);
                 break;
 
             case PanelType.OptionsSound:
                 _panelOptionsSound.SetActive(true);
+                //_eventSystem.firstSelectedGameObject = _buttonQuality.gameObject;    
                 break;
 
             case PanelType.OptionsQuality:
                 _panelOptionsQuality.SetActive(true);
+                _eventSystem.SetSelectedGameObject(_toggleVSync.gameObject);
                 break;
 
             case PanelType.Credits:
                 _panelCredits.SetActive(true);
+                _eventSystem.SetSelectedGameObject(_buttonsReturn[3].gameObject);
                 break;
         }
     }
