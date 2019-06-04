@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TransitionManager : Singleton<TransitionManager>
 {
     #region Fields
-    [SerializeField] private bool _override;
-    [SerializeField] private SceneState _overrideState;
-    [Space]
+    [Header("Panel linkage")]
+    [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private Image _image;
+    [Header("Transitions data")]
     [SerializeField] private List<Transition> _transitionsZoneOne = new List<Transition>();
     [SerializeField] private List<Transition> _transitionsZoneTwo = new List<Transition>();
     [SerializeField] private List<Transition> _transitionsEnd = new List<Transition>();
@@ -18,24 +20,8 @@ public class TransitionManager : Singleton<TransitionManager>
     private Dictionary<SceneState, List<Transition>> _transitions = new Dictionary<SceneState, List<Transition>>();
     private AsyncOperation ao;
 
-    private int _currentTransition = -1;
-    #endregion
-
-    #region Properties
-    private SceneState CurrentScene
-    {
-        get
-        {
-#if UNITY_EDITOR
-            if (_override)
-            {
-                return _overrideState;
-            }
-#endif
-
-            return GameState.currentScene;
-        }
-    }
+    private int _currentTransitionIndex= -1;
+    private Transition _currentTransition;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -48,7 +34,7 @@ public class TransitionManager : Singleton<TransitionManager>
 
     void Start()
     {
-        // load scene
+        // load scene except if it's the end of the game
         if (GameState.currentScene != SceneState.End)
         {
             string sceneToLoad = GameState.currentScene.ToScene();
@@ -59,26 +45,35 @@ public class TransitionManager : Singleton<TransitionManager>
 
         ChangeTransition();
     }
+
+    void Update()
+    {
+        if (GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One) || Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Wola!");
+
+            if (_currentTransition != null)
+            {
+                _currentTransition.ChangeDialogue();
+            }
+        }
+    }
     #endregion
 
     public void ChangeTransition()
     {
-        _currentTransition++;
+        _currentTransitionIndex++;
 
-        if (_currentTransition < _transitions[CurrentScene].Count)
+        if (_currentTransitionIndex < _transitions[GameState.currentScene].Count)
         {
-            if (CurrentScene == SceneState.Tutorial)
+            if (GameState.currentScene == SceneState.Tutorial)
             {
                 Debug.LogError("Can't load transition for tutorial!");
             }
             else
             {
-                _transitions[CurrentScene][_currentTransition].LoadVignette();
-
-                if (_currentTransition - 1 >= 0)
-                {
-                    _transitions[CurrentScene][_currentTransition - 1].UnloadVignette();
-                }
+                _currentTransition = _transitions[GameState.currentScene][_currentTransitionIndex];
+                _currentTransition.LoadVignette(ref _image, ref _text);
             }
         }
         else
@@ -89,4 +84,5 @@ public class TransitionManager : Singleton<TransitionManager>
             }
         }
     }
+
 }

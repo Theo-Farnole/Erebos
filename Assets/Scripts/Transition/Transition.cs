@@ -3,55 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Transition : MonoBehaviour
+[System.Serializable]
+public class Transition
 {
     #region Fields
-    [SerializeField] private GameObject _panel;
-    [SerializeField] private TextMeshProUGUI _text;
-    [Space]
+    [Header("General Settings")]
     [SerializeField] private int _cinematicIndex = 0;
+    [SerializeField] private Sprite _sprite = null;
 
     private int _currentDialogue = -1;
     private string _dialogueKey;
-
-    private bool _isPanelWasActiveLastFrame = false;
+    private TextMeshProUGUI _text;
     #endregion
 
-    #region MonoBehaviour Callbacks
-    void Awake()
+    public void LoadVignette(ref Image image, ref TextMeshProUGUI text)
     {
-        _panel.SetActive(false);
-
         _dialogueKey = "cinematics." + _cinematicIndex + ".";
-    }
 
-    void Update()
-    {
-        if (_panel.activeSelf && _panel.activeSelf == _isPanelWasActiveLastFrame && GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
-        {
-            ChangeDialogue();
-        }
+        _text = text;
 
-        _isPanelWasActiveLastFrame = _panel.activeSelf;
-    }
-    #endregion
-
-    public void LoadVignette()
-    {
-        _panel.SetActive(true);
+        image.sprite = _sprite;
         ChangeDialogue();
     }
 
-    public void UnloadVignette()
+    public void ChangeDialogue()
     {
-        _panel.SetActive(false);
-    }
-
-    void ChangeDialogue()
-    {
-        Debug.Log("ChangeDialogue! " + transform.name);
-
         _currentDialogue++;
 
         string key = _dialogueKey + _currentDialogue;
@@ -60,7 +38,7 @@ public class Transition : MonoBehaviour
         // if dialogue is ended
         if (text == key)
         {
-        TransitionManager.Instance.ChangeTransition();
+            TransitionManager.Instance.ChangeTransition();
         }
         else
         {
