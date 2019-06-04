@@ -29,8 +29,8 @@ public class PathAgent : MonoBehaviour
 
         ChangeDirection();
 
-        DeathHandle d = new DeathHandle(ResetPosition);
-        CharDeath.EventDeath += d;
+        RespawnHandle d = new RespawnHandle(ResetPosition);
+        CharDeath.EventRespawn += d;
     }
 
     void Update()
