@@ -40,6 +40,7 @@ public class CharController : MonoBehaviour
     [SerializeField] private CharControllerData _data = null;
     [Header("Model settings")]
     [SerializeField] private Transform _model = null;
+    [SerializeField] private Animator _animator = null;
 
 
     // inputs variables
@@ -60,6 +61,11 @@ public class CharController : MonoBehaviour
     private Collider _collider;
     private float _distToGround;
     private float _distToSide;
+
+    private readonly int _hashWalkBlend = Animator.StringToHash("WalkBlend");
+    private readonly int _hashJump = Animator.StringToHash("Jump");
+    private readonly int _hashFall = Animator.StringToHash("Fall");
+    private readonly int _hashGrounded = Animator.StringToHash("Grounded");
     #endregion
 
     #region Properties
@@ -104,7 +110,7 @@ public class CharController : MonoBehaviour
     void LateUpdate()
     {
         LookAtDirection();
-        SetBlendTreeValue();
+        SetAnimatorValue();
     }
     #endregion
 
@@ -253,6 +259,9 @@ public class CharController : MonoBehaviour
 
     private void Jump()
     {
+        Debug.Log("Jump tamer");
+        _animator.SetTrigger(_hashJump);
+
         Vector3 vel = _rigidbody.velocity;
         vel.y = Mathf.Sqrt(2 * _data.JumpHeight * Mathf.Abs(Physics2D.gravity.y));
         _rigidbody.velocity = vel;
@@ -340,31 +349,14 @@ public class CharController : MonoBehaviour
         transform.eulerAngles = angles;
     }
 
-    void SetBlendTreeValue()
+    void SetAnimatorValue()
     {
-        float currentValue = 0f;
-        float targetValue = 0f;
+        bool isFalling = _rigidbody.velocity.y < 0;
+        bool isGrounded = _collision.down;
 
-        if (_collision.down)
-        {
-            targetValue = 1f; // land
-        }
-        else
-        {
-            if (_rigidbody.velocity.y < 0)
-            {
-                targetValue = 0.72f; // fall
-            }
-            else if (_rigidbody.velocity.y > 0)
-            {
-                targetValue = 0.4f; // jump
-            }
-            else
-            {
-                targetValue = 0.2f; // run
-            }
-        }
-
+        _animator.SetBool(_hashFall, isFalling);
+        _animator.SetBool(_hashGrounded, isGrounded);
+        _animator.SetFloat(_hashWalkBlend, Mathf.Abs(_horizontal));
     }
     #endregion
 }
