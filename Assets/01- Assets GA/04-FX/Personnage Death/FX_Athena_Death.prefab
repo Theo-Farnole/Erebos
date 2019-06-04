@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5114115037409213442}
   - component: {fileID: 5114115037409213443}
   m_Layer: 0
-  m_Name: FX_Charactere_Death (1)
+  m_Name: FX_Athena_Death
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 5
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
