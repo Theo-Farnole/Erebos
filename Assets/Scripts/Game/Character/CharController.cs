@@ -310,9 +310,6 @@ public class CharController : MonoBehaviour
         // feedback
         float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
         CharFeedbacks.Instance.PlayDashSequence(angle);
-
-        // debug
-        GizmosPersistence.DrawPersistentLine(transform.position, transform.position + force);
     }
 
     private void StickedJump()
