@@ -6,7 +6,7 @@ Shader "Erebos/SH_Character_DashCD_Black"
 	{
 		_AM_Athena_Texture_Black("AM_Athena_Texture_Black", 2D) = "white" {}
 		_Mask("Mask", 2D) = "white" {}
-		_CDDashBlack("CD Dash Black", Range( 0 , 1)) = 0
+		_CDDash("CD Dash", Range( 0 , 1)) = 0
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 		[HideInInspector] __dirty( "", Int ) = 1
 	}
@@ -27,13 +27,13 @@ Shader "Erebos/SH_Character_DashCD_Black"
 		uniform float4 _AM_Athena_Texture_Black_ST;
 		uniform sampler2D _Mask;
 		uniform float4 _Mask_ST;
-		uniform float _CDDashBlack;
+		uniform float _CDDash;
 
 		void surf( Input i , inout SurfaceOutputStandard o )
 		{
 			float2 uv_AM_Athena_Texture_Black = i.uv_texcoord * _AM_Athena_Texture_Black_ST.xy + _AM_Athena_Texture_Black_ST.zw;
 			float2 uv_Mask = i.uv_texcoord * _Mask_ST.xy + _Mask_ST.zw;
-			float4 lerpResult4 = lerp( tex2D( _AM_Athena_Texture_Black, uv_AM_Athena_Texture_Black ) , tex2D( _Mask, uv_Mask ) , _CDDashBlack);
+			float4 lerpResult4 = lerp( tex2D( _AM_Athena_Texture_Black, uv_AM_Athena_Texture_Black ) , tex2D( _Mask, uv_Mask ) , _CDDash);
 			o.Emission = ( lerpResult4 * 2.0 ).rgb;
 			o.Alpha = 1;
 		}
@@ -45,10 +45,10 @@ Shader "Erebos/SH_Character_DashCD_Black"
 }
 /*ASEBEGIN
 Version=16400
-6.4;13.6;2036;1078;2266.042;556.3693;1.308983;True;False
+7;1;1906;1011;2180.958;512.5184;1.308983;True;True
 Node;AmplifyShaderEditor.SamplerNode;1;-1093.712,35.76058;Float;True;Property;_AM_Athena_Texture_Black;AM_Athena_Texture_Black;0;0;Create;True;0;0;False;0;aa8dac7a70d0c8c40a3ca4b1a02dabda;aa8dac7a70d0c8c40a3ca4b1a02dabda;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SamplerNode;5;-1083.896,245.569;Float;True;Property;_Mask;Mask;1;0;Create;True;0;0;False;0;7abb782795c0cee44aba21df634d80c5;7abb782795c0cee44aba21df634d80c5;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;6;-1075.925,458.1515;Float;False;Property;_CDDashBlack;CD Dash Black;2;0;Create;True;0;0;False;0;0;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;6;-1075.925,458.1515;Float;False;Property;_CDDash;CD Dash;2;0;Create;True;0;0;False;0;0;0;0;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.LerpOp;4;-567.0554,42.28725;Float;True;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.RangedFloatNode;3;-313.9352,134.9512;Float;False;Constant;_Float0;Float 0;1;0;Create;True;0;0;False;0;2;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;2;-165.9352,40.95117;Float;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
@@ -60,4 +60,4 @@ WireConnection;2;0;4;0
 WireConnection;2;1;3;0
 WireConnection;0;2;2;0
 ASEEND*/
-//CHKSM=64A05D834321DF88193FC6F4E5C4FF538BB5319C
+//CHKSM=A840796E579D5C891A1D158EEC391D36C8B25614
