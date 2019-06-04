@@ -8,7 +8,7 @@ public delegate void RespawnHandle(object sender);
 public class CharDeath : MonoBehaviour
 {
     public static readonly int DEATH_Y = -10;
-    public static readonly float RESPAWN_TIME = 2f;
+    public static readonly float RESPAWN_TIME = 0.8f;
 
     #region Fields
     public static event DeathHandle EventDeath;
