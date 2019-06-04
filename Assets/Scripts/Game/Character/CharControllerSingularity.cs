@@ -136,8 +136,21 @@ public class CharControllerSingularity : MonoBehaviour
 
         float wantedAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
 
+        Vector3 oldSingularityEulerAngles = singularity.eulerAngles;
         Quaternion targetRot = Quaternion.Euler(Vector3.forward * (wantedAngle - currentAngleDelta));
         singularity.rotation = Quaternion.RotateTowards(singularity.rotation, targetRot, _anglesPerSecond * Time.deltaTime);
+
+        // mask
+        Transform blackMask = CharFeedbacks.Instance.BlackMask.transform;
+
+        // mask rotation
+        //var eulerAngles = blackMask.eulerAngles;
+
+        //if (oldSingularityEulerAngles.z > singularity.eulerAngles.z) eulerAngles.y = 90;
+        //if (oldSingularityEulerAngles.z < singularity.eulerAngles.z) eulerAngles.y = 270;
+
+        //blackMask.eulerAngles = eulerAngles;
+        //blackMask.LookAt(singularity);
 
         // DEBUGS
         Vector3 dir = transform.position - singularity.position;
