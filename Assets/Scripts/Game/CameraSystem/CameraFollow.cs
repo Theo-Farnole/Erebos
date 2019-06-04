@@ -14,8 +14,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private CameraFollowData _data;
     [SerializeField] private bool _drawDebug = false;
     [Space]
-    [SerializeField] private Vector3 _worldMinimumPosition;
-    [SerializeField] private Vector3 _worldMaximumPosition;
+    [SerializeField] private float _worldMinimumX;
+    [SerializeField] private float _worldMaximumX;
 
     private Transform _character = null;
     private Rigidbody _targetRb = null;
@@ -114,6 +114,7 @@ public class CameraFollow : MonoBehaviour
         newPosition = Vector3.Lerp(transform.position - _cameraInputOffset, _wantedCameraPosition, Time.deltaTime * _data.Speed);
         newPosition += _cameraInputOffset;
 
+        newPosition.x = Mathf.Clamp(newPosition.x, _worldMinimumX, _worldMaximumX);
         newPosition.z = transform.position.z; // lock Z axis
 
         transform.position = newPosition;
@@ -136,8 +137,8 @@ public class CameraFollow : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawSphere(_worldMaximumPosition, 1);
-        Gizmos.DrawSphere(_worldMinimumPosition, 1);
+        Gizmos.DrawSphere(Vector3.right * _worldMaximumX + Vector3.up * transform.position.y, 1);
+        Gizmos.DrawSphere(Vector3.right * _worldMinimumX + Vector3.up * transform.position.y, 1);
 
         if (!_drawDebug)
             return;
