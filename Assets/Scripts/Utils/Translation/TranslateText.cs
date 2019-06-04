@@ -28,7 +28,6 @@ public sealed class TranslateText : MonoBehaviour
 
     void UpdateText()
     {
-        Debug.Log("event receved");
         _text.text = Translation.Get(_key);
     }
 }

@@ -68,9 +68,9 @@ public class UIMenuManager : MonoBehaviour
         _buttonPlay.onClick.AddListener(() => SceneManager.LoadScene(SceneState.Tutorial.ToScene()));  // load tutorial
         _buttonOptions.onClick.AddListener(() => DisplayPanel(PanelType.OptionsGeneral));
         _buttonCredits.onClick.AddListener(() => DisplayPanel(PanelType.Credits));
-        _buttonQuit.onClick.AddListener(() => Application.Quit());
+        _buttonQuit.onClick.AddListener(Application.Quit);
 
-        _dropdownLanguage.onValueChanged.AddListener((int i) => SaveSettings());
+        _dropdownLanguage.onValueChanged.AddListener(DropdownLanguageChanged);
 
         // quality panel
         _buttonQuality.onClick.AddListener(() => DisplayPanel(PanelType.OptionsQuality));
@@ -143,9 +143,10 @@ public class UIMenuManager : MonoBehaviour
     {
         Debug.Log("event called");
 
-        Translation.ResetTranslations();
-        EventLanguageChangement?.Invoke();
         SaveSettings();
+        Translation.ResetTranslations();
+
+        EventLanguageChangement?.Invoke();
     }
 
     #region Load/Save Settings Methods
