@@ -23,6 +23,8 @@ public enum SoundAmbiance
 {
 };
 
+// NOTE:
+// Project convention: Never call PlaySound from event!
 public class AudioManager : Singleton<AudioManager>
 {
     #region Class
