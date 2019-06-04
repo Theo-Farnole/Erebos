@@ -248,8 +248,7 @@ public class CharController : MonoBehaviour
                 AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Dash);
             }
 
-            _jumpsAvailable--;
-            CharFeedbacks.Instance.PlayJumpPS();
+            _jumpsAvailable--;            
         }
     }
 
@@ -258,6 +257,8 @@ public class CharController : MonoBehaviour
         Vector3 vel = _rigidbody.velocity;
         vel.y = Mathf.Sqrt(2 * _data.JumpHeight * Mathf.Abs(Physics2D.gravity.y));
         _rigidbody.velocity = vel;
+
+        CharFeedbacks.Instance.PlayJumpPS();
     }
 
     private void Dash()
@@ -276,8 +277,14 @@ public class CharController : MonoBehaviour
         {
             _isDashing = false;
             _rigidbody.velocity = Vector3.zero;
+
+            CharFeedbacks.Instance.StopDashSequence();
         }
         ));
+
+        // feedback
+        float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
+        CharFeedbacks.Instance.PlayDashSequence(angle);
 
         // debug
         GizmosPersistence.DrawPersistentLine(transform.position, transform.position + force);
