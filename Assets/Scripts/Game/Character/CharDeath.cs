@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public delegate void DeathHandle(object sender);
+public delegate void RespawnHandle(object sender);
 
 public class CharDeath : MonoBehaviour
 {
     public static readonly int DEATH_Y = -10;
+    public static readonly float RESPAWN_TIME = 2f;
 
     #region Fields
     public static event DeathHandle EventDeath;
+    public static event RespawnHandle EventRespawn;
 
     [SerializeField] private Material _materialNotActive;
     [SerializeField] private Material _materialActive;
@@ -21,6 +24,14 @@ public class CharDeath : MonoBehaviour
     void Awake()
     {
         currentCheckpoint = transform.position;
+
+        // call respawn event with delay
+        DeathHandle d1 = new DeathHandle(InvokeRespawn);
+        EventDeath += d1;
+
+        // tp to checkpoint on respawn
+        RespawnHandle d2 = new RespawnHandle(TeleportToCheckpoint);
+        EventRespawn += d2;
     }
 
     void Update()
@@ -48,15 +59,27 @@ public class CharDeath : MonoBehaviour
     void OnDestroy()
     {
         EventDeath = null;
+        EventRespawn = null;
     }
     #endregion
 
     public void Death()
     {
-        CharFeedbacks.Instance.PlayDeathPS();
-        transform.position = (Vector2)currentCheckpoint;
-
         AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Death);
+
         EventDeath?.Invoke(this);
+    }
+
+    private void InvokeRespawn(object sender)
+    {
+        StartCoroutine(CustomDelay.ExecuteAfterTime(RESPAWN_TIME, () =>
+        {
+            EventRespawn?.Invoke(this);
+        }));
+    }
+
+    private void TeleportToCheckpoint(object sender)
+    {
+        transform.position = (Vector2)currentCheckpoint;
     }
 }

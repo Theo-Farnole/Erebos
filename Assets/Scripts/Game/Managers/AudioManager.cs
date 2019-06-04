@@ -23,6 +23,8 @@ public enum SoundAmbiance
 {
 };
 
+// NOTE:
+// Project convention: Never call PlaySound from event!
 public class AudioManager : Singleton<AudioManager>
 {
     #region Class
@@ -83,7 +85,7 @@ public class AudioManager : Singleton<AudioManager>
         }
         else
         {
-            Debug.Log(sound.ToString() + " isn't set in AudioManager!");
+            Debug.LogWarning(sound.ToString() + " isn't set in AudioManager!");
         }
     }
 

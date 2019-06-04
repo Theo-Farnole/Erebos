@@ -61,8 +61,8 @@ public class CameraFollow : MonoBehaviour
         _relativeFocusRect = new Rect(Vector2.zero, new Vector2(_screenBounds.x * _data.WidthPercent, _screenBounds.y * _data.HeightPercent));
 
         // reset on death
-        DeathHandle d = new DeathHandle(CenterOnPlayer);
-        CharDeath.EventDeath += d;
+        RespawnHandle d = new RespawnHandle(CenterOnPlayer);
+        CharDeath.EventRespawn += d;
 
         // on start, center camera on players
         CenterOnPlayer(this);
