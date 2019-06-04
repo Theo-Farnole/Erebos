@@ -22,7 +22,6 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     [SerializeField] private GameObject _prefabWhiteForm;
 
     private bool _isDashing = false;
-    private bool _isDead = false;
 
     // cached variables
     private CharControllerSingularity _charControllerSingularity = null;
@@ -54,7 +53,7 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     {
         bool isInBlackSingularity = CharControllerManager.Instance.Attracted && _charControllerSingularity.Form == Form.Void;
 
-        bool shouldBeActive = !(_isDashing || _isDead || isInBlackSingularity);
+        bool shouldBeActive = !(_isDashing || CharDeath.isDead || isInBlackSingularity);
 
         _model.SetActive(shouldBeActive);
         _blackMask.SetActive(isInBlackSingularity);
@@ -83,13 +82,11 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     #region Death & Respawn
     void PlayDeath(object sender)
     {
-        _isDead = true;
         Instantiate(_prefabDeathPS, transform.position, Quaternion.identity);
     }
 
     void PlayRespawn(object sender)
     {
-        _isDead = false;
         Instantiate(_prefabRespawnPS, transform.position, Quaternion.identity);
     }
     #endregion

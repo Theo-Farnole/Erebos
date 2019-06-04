@@ -79,7 +79,9 @@ public class CharControllerSingularity : MonoBehaviour
 
     void ManageInputs()
     {
-        // void form
+        if (CharDeath.isDead)
+            return;
+
         if (!_rightTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f ||
          !_leftTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f)
         {
