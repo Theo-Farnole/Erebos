@@ -12,9 +12,6 @@ public class CameraFollow : MonoBehaviour
     [Space]
     [SerializeField] private CameraFollowData _data;
     [Space]
-    [SerializeField] private Type _cameraType = Type.Static;
-    [Tooltip("Is this the first camera of the level?")]
-    [SerializeField] private bool _firstCameraOfTheLevel = false;
     [SerializeField] private bool _drawDebug = false;
 
     private Transform _character = null;
@@ -28,20 +25,6 @@ public class CameraFollow : MonoBehaviour
     private Vector3 _cameraInputOffset = Vector3.zero;
 
     private float _distanceToTarget = Mathf.Infinity;
-    #endregion
-
-    #region Properties
-    public bool IsActive
-    {
-        get
-        {
-            return _firstCameraOfTheLevel;
-        }
-        set
-        {
-            _firstCameraOfTheLevel = value;
-        }
-    }
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -66,20 +49,12 @@ public class CameraFollow : MonoBehaviour
 
         // on start, center camera on players
         CenterOnPlayer(this);
-
-        gameObject.SetActive(_firstCameraOfTheLevel);
     }
 
     void LateUpdate()
     {
-        if (!_firstCameraOfTheLevel)
-            return;
-
-        if (_cameraType == Type.Dynamic)
-        {
-            SetFocusRect();
-            SetWantedPosition();
-        }
+        SetFocusRect();
+        SetWantedPosition();
 
         ProcessInput();
         Move();
