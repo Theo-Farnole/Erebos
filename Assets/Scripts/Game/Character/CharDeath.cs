@@ -14,9 +14,6 @@ public class CharDeath : MonoBehaviour
     public static event DeathHandle EventDeath;
     public static event RespawnHandle EventRespawn;
 
-    [SerializeField] private Material _materialNotActive;
-    [SerializeField] private Material _materialActive;
-
     [HideInInspector] public Vector3 currentCheckpoint;
     #endregion
 

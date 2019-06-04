@@ -18,12 +18,6 @@ public class CharControllerSingularity : MonoBehaviour
 
     #region Serialize Fields
     [SerializeField] private float _anglesPerSecond = 90;
-    [Header("Models Settings")]
-    [SerializeField] private MeshRenderer _meshRenderer;
-    [Space]
-    [SerializeField] private Material _matNormal;
-    [SerializeField] private Material _matEthereal;
-    [SerializeField] private Material _matVoid;
     #endregion
 
     #region Private Fields
@@ -121,15 +115,12 @@ public class CharControllerSingularity : MonoBehaviour
         switch (Form)
         {
             case Form.Normal:
-                _meshRenderer.material = _matNormal;
                 break;
 
             case Form.Ethereal:
-                _meshRenderer.material = _matEthereal;
                 break;
 
             case Form.Void:
-                _meshRenderer.material = _matVoid;
                 break;
         }
     }
