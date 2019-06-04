@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public sealed class TranslateText : MonoBehaviour
 {
-    private string _key = null;
+    private string _key = string.Empty;
 
     void Start()
     {
