@@ -6,6 +6,8 @@ using UnityEngine;
 [System.Serializable]
 public class OptionsData
 {
+    public SystemLanguage language = Application.systemLanguage;
+
     public bool enableVSync = false;
     public bool isFullscreen = true;
     public FullScreenMode fullscreenMode = FullScreenMode.FullScreenWindow;
@@ -52,6 +54,21 @@ public class OptionsData
                     fullscreenMode = FullScreenMode.FullScreenWindow;
                     break;
             }
+        }
+    }
+
+    public int Language
+    {
+        get
+        {
+            if (language == SystemLanguage.French) return 1;
+            else return 0; // return English
+        }
+
+        set
+        {
+            if (value == 1) language = SystemLanguage.French;
+            else language = SystemLanguage.English;
         }
     }
     #endregion
