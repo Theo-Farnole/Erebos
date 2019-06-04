@@ -1,4 +1,25 @@
-﻿; cinematics
+﻿; main menu
+mainmenu.play = Play
+mainmenu.options = Options
+mainmenu.credits = Credits
+mainmenu.quit = Quit
+mainmenu.subtitle = Athena's journey
+mainmenu.back = Back
+
+; main menu - options
+mainmenu.options.video = Video Settings
+mainmenu.options.audio = Audio Settings
+
+; main menu - options video
+mainmenu.options.video.vsync = VSync
+mainmenu.options.video.fullscreen = Fullscreen
+
+; main menu - options audio
+mainmenu.options.audio.general = General
+mainmenu.options.audio.ambiance = Ambiance
+mainmenu.options.audio.music = Music
+
+; cinematics
 cinematics.1.0 = This land...
 cinematics.1.1 = I... I forgot it's name...
 cinematics.1.2 = ...
@@ -26,8 +47,3 @@ cinematics.7.0 = Of jalousie he attacked and banished me into the Erebos, hoping
 
 cinematics.8.0 = Unfortunately for him, I survived hell itself and I on my way toward the realm of the livings stronger than ever. 
 cinematics.8.1 = Beware Poseidon, for Athena is coming back for you
-
-; pause
-pause.restart = Restart level
-pause.video = Video Settings
-pause.audio = Audio Settings
