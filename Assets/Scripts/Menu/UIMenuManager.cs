@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 // NOTE:
 // add async load of tutorial
+
+public delegate void LanguageHandle();
+
 public class UIMenuManager : MonoBehaviour
 {
     #region Enums
@@ -21,6 +24,8 @@ public class UIMenuManager : MonoBehaviour
     };
     #endregion
 
+    #region Fields
+    #region SerializeFields
     [SerializeField] private EventSystem _eventSystem;
     [Header("Panels")]
     [SerializeField] private GameObject _panelMainMenu;
@@ -33,6 +38,8 @@ public class UIMenuManager : MonoBehaviour
     [SerializeField] private Button _buttonOptions;
     [SerializeField] private Button _buttonCredits;
     [SerializeField] private Button _buttonQuit;
+    [Space]
+    [SerializeField] private TMP_Dropdown _dropdownLanguage;
     [Header("Quality Panel")]
     [SerializeField] private Button _buttonQuality;
     [SerializeField] private Button _buttonSound;
@@ -41,12 +48,20 @@ public class UIMenuManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown _dropdownFullscreen;
     [Header("Returns buttons")]
     [SerializeField] private List<Button> _buttonsReturn = new List<Button>();
+    #endregion
 
+    #region Public static fields
+    public static LanguageHandle EventLanguageChangement;
+    #endregion
+
+    #region Privates Fields
     private PanelType _currentPanel = PanelType.MainMenu;
+    #endregion
+    #endregion
 
     void Awake()
     {
-        LoadVideoSettings();
+        LoadSettings();
         DisplayPanel(PanelType.MainMenu);
 
         // main menu
@@ -54,6 +69,8 @@ public class UIMenuManager : MonoBehaviour
         _buttonOptions.onClick.AddListener(() => DisplayPanel(PanelType.OptionsGeneral));
         _buttonCredits.onClick.AddListener(() => DisplayPanel(PanelType.Credits));
         _buttonQuit.onClick.AddListener(() => Application.Quit());
+
+        _dropdownLanguage.onValueChanged.AddListener((int i) => SaveSettings());
 
         // quality panel
         _buttonQuality.onClick.AddListener(() => DisplayPanel(PanelType.OptionsQuality));
@@ -117,24 +134,38 @@ public class UIMenuManager : MonoBehaviour
             case PanelType.OptionsSound:
             case PanelType.OptionsQuality:
                 DisplayPanel(PanelType.OptionsGeneral);
-                SaveVideoSettings();
+                SaveSettings();
                 break;
         }
     }
 
+    void DropdownLanguageChanged(int i)
+    {
+        Debug.Log("event called");
+
+        Translation.ResetTranslations();
+        EventLanguageChangement?.Invoke();
+        SaveSettings();
+    }
+
     #region Load/Save Settings Methods
-    void LoadVideoSettings()
+    void LoadSettings()
     {
         _toggleVSync.isOn = SaveSystem.OptionsData.enableVSync;
         _dropdownFullscreen.SetValueWithoutNotify(SaveSystem.OptionsData.FullScreenValue);
+
+        _dropdownLanguage.value = SaveSystem.OptionsData.Language;
     }
 
-    void SaveVideoSettings()
+    void SaveSettings()
     {
         SaveSystem.OptionsData.enableVSync = _toggleVSync.isOn;
         SaveSystem.OptionsData.FullScreenValue = _dropdownFullscreen.value;
 
+        SaveSystem.OptionsData.Language = _dropdownLanguage.value;
+
         SaveSystem.Save();
+        Debug.Log("SaveSettings: " + SaveSystem.OptionsData.language);
     }
     #endregion
 }
