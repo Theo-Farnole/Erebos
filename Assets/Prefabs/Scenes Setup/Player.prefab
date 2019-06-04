@@ -108,9 +108,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _model: {fileID: 8296172668999330784}
   _blackMask: {fileID: 2633328502643533728}
-  _prefabTrail: {fileID: 8148474396878549479, guid: cbd1c8add0e963d4097365d46217f4fd,
-    type: 3}
   _prefabJumpPS: {fileID: 1741529584871504731, guid: 2ee648ea8514a2c4eb91d1293b51a9fe,
+    type: 3}
+  _meshRenderer: {fileID: 8992801175099414649}
+  _materialBlackForm: {fileID: 2100000, guid: 8b6e27ead278bad4596aa1ae8f2e4dbd, type: 2}
+  _materialWhiteForm: {fileID: 2100000, guid: d70d4eefd89323d43b79a46a806a7230, type: 2}
+  _prefabBlackFormPS: {fileID: 4295180897977169039, guid: 68785749c11940f469b529b236f83685,
+    type: 3}
+  _prefabWhiteFormPS: {fileID: 4574036301494883949, guid: 2a6c8aadfc7c79c46aaca9a6da35bf4f,
     type: 3}
   _prefabDeathPS: {fileID: 5114115037409213453, guid: 6d1bc7891c8b50d488ad462610eb561f,
     type: 3}
@@ -121,10 +126,6 @@ MonoBehaviour:
   _prefabHeadDash: {fileID: 8080836219120754306, guid: 2ec59b46bb4fcc84f8fb625ab5d0fdbc,
     type: 3}
   _prefabEndDash: {fileID: 212035726029398445, guid: e05cf9d0a91531b4e97b01dddafba95b,
-    type: 3}
-  _prefabBlackForm: {fileID: 4295180897977169039, guid: 68785749c11940f469b529b236f83685,
-    type: 3}
-  _prefabWhiteForm: {fileID: 4574036301494883949, guid: 2a6c8aadfc7c79c46aaca9a6da35bf4f,
     type: 3}
 --- !u!54 &1731791828621383589
 Rigidbody:
@@ -168,6 +169,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Athena_ailes_arriere (4)
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 1d829d20d5ec11d408c7e461276df070,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 892fae0825a35a44a954672c9bbb78b0, type: 2}
     - target: {fileID: -4216859302048453862, guid: 1d829d20d5ec11d408c7e461276df070,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -258,11 +264,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bdcc36f31fc01324da12d52701f49b50, type: 2}
-    - target: {fileID: -6057140222963153312, guid: 1d829d20d5ec11d408c7e461276df070,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 892fae0825a35a44a954672c9bbb78b0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d829d20d5ec11d408c7e461276df070, type: 3}
 --- !u!1 &8296172668999330784 stripped
@@ -280,6 +281,12 @@ Transform:
 --- !u!95 &3166231813672678537 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 1d829d20d5ec11d408c7e461276df070,
+    type: 3}
+  m_PrefabInstance: {fileID: 218968809}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8992801175099414649 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8992801175015860880, guid: 1d829d20d5ec11d408c7e461276df070,
     type: 3}
   m_PrefabInstance: {fileID: 218968809}
   m_PrefabAsset: {fileID: 0}

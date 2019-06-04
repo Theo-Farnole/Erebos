@@ -8,8 +8,15 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     [SerializeField] private GameObject _model;
     [SerializeField] private GameObject _blackMask;
     [Space]
-    [SerializeField] private GameObject _prefabTrail;
     [SerializeField] private GameObject _prefabJumpPS;
+    [Header("Form")]
+    [SerializeField] private SkinnedMeshRenderer _meshRenderer;
+    [Space]
+    [SerializeField] private Material _materialBlackForm;
+    [SerializeField] private Material _materialWhiteForm;
+    [Space]
+    [SerializeField] private GameObject _prefabBlackFormPS;
+    [SerializeField] private GameObject _prefabWhiteFormPS;
     [Header("Death")]
     [SerializeField] private GameObject _prefabDeathPS;
     [SerializeField] private GameObject _prefabRespawnPS;
@@ -17,14 +24,12 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     [SerializeField] private GameObject _prefabBurstDash;
     [SerializeField] private GameObject _prefabHeadDash;
     [SerializeField] private GameObject _prefabEndDash;
-    [Header("Form")]
-    [SerializeField] private GameObject _prefabBlackForm;
-    [SerializeField] private GameObject _prefabWhiteForm;
 
     private bool _isDashing = false;
 
     // cached variables
     private CharControllerSingularity _charControllerSingularity = null;
+    private int _hashCDDash = -1;
     #endregion
 
     #region Properties
@@ -34,9 +39,6 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     #region MonoBehaviour Callbacks
     void Awake()
     {
-        var trail = Instantiate(_prefabTrail, transform.position, Quaternion.identity);
-        trail.GetComponent<FollowTransform>().transformToFollow = transform;
-
         DeathHandle d1 = new DeathHandle(PlayDeath);
         CharDeath.EventDeath += d1;
 
@@ -65,16 +67,29 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
         Instantiate(_prefabJumpPS, transform.position, Quaternion.identity);
     }
 
+    public void UpdateFormMaterial(bool hasDash)
+    {
+        int propertyValue = hasDash ? 0 : 1;
+
+        _meshRenderer.material.SetFloat("_CDDash", propertyValue);
+    }
+
     void PlayFormChange(object sender, Form form)
     {
         switch (form)
         {
             case Form.Ethereal:
-                Instantiate(_prefabWhiteForm, transform.position, Quaternion.identity);
+                var obj = Instantiate(_prefabWhiteFormPS, transform.position, Quaternion.identity);
+                obj.transform.parent = transform;
+
+                _meshRenderer.material = _materialWhiteForm;
                 break;
 
             case Form.Void:
-                Instantiate(_prefabBlackForm, transform.position, Quaternion.identity);
+                obj = Instantiate(_prefabBlackFormPS, transform.position, Quaternion.identity);
+                obj.transform.parent = transform;
+
+                _meshRenderer.material = _materialBlackForm;
                 break;
         }
     }
