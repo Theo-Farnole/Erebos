@@ -29,6 +29,7 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
 
     // cached variables
     private CharControllerSingularity _charControllerSingularity = null;
+    private int _hashCDDash = -1;
     #endregion
 
     #region Properties
@@ -64,6 +65,13 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     public void PlayJumpPS()
     {
         Instantiate(_prefabJumpPS, transform.position, Quaternion.identity);
+    }
+
+    public void UpdateFormMaterial(bool hasDash)
+    {
+        int propertyValue = hasDash ? 0 : 1;
+
+        _meshRenderer.material.SetFloat("_CDDash", propertyValue);
     }
 
     void PlayFormChange(object sender, Form form)

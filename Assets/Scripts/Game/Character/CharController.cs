@@ -68,17 +68,34 @@ public class CharController : MonoBehaviour
 
     #region Properties
     public Rigidbody Rigidbody { get => _rigidbody; }
+    public int JumpsAvailable
+    {
+        get
+        {
+            return _jumpsAvailable;
+        }
+
+        set
+        {
+            _jumpsAvailable = value;
+
+            CharFeedbacks.Instance.UpdateFormMaterial(_jumpsAvailable >= 1);
+        }
+    }
     #endregion
 
     #region MonoBehaviour Callbacks
-    void Start()
+    void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
 
         _distToGround = GetComponent<Collider>().bounds.extents.y;
         _distToSide = GetComponent<Collider>().bounds.extents.x;
+    }
 
+    void Start()
+    {
         DeathHandle d1 = new DeathHandle((object sender) =>
         {
             ResetMovements();
@@ -154,9 +171,10 @@ public class CharController : MonoBehaviour
             _rigidbody.velocity = vel;
         }
 
-        // reset inertia
+        // if sticked or not runnings
         if (_isSticked || (_collision.down && _horizontal == 0))
         {
+            // reset inertia
             _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y);
         }
     }
@@ -192,7 +210,7 @@ public class CharController : MonoBehaviour
         {
             _isSticked = true;
             _rigidbody.velocity = Vector3.zero;
-            _jumpsAvailable = 1;
+            JumpsAvailable = 1;
 
             AudioManager.Instance.PlaySoundGeneral(SoundGeneral.WallGrab);
         }
@@ -212,9 +230,9 @@ public class CharController : MonoBehaviour
     private void ProcessJumpInput()
     {
         // check if we should reset jumps count.
-        if (IsGrounded())
+        if (_collision.down)
         {
-            _jumpsAvailable = MAX_JUMPS;
+            JumpsAvailable = MAX_JUMPS;
         }
 
         if (_rigidbody.velocity.y < 0)
@@ -239,20 +257,20 @@ public class CharController : MonoBehaviour
 
     private void ProcessGroundedJump()
     {
-        if (_jumpsAvailable > 0)
+        if (JumpsAvailable > 0)
         {
-            if (_jumpsAvailable == 2)
+            if (JumpsAvailable == 2)
             {
                 Jump();
                 AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Jump);
             }
-            else if (_jumpsAvailable == 1)
+            else if (JumpsAvailable == 1)
             {
                 Dash();
                 AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Dash);
             }
 
-            _jumpsAvailable--;
+            JumpsAvailable--;
         }
     }
 
@@ -311,17 +329,12 @@ public class CharController : MonoBehaviour
             angle = -_data.StickedJumpAngle;
         }
 
-        _jumpsAvailable = 1;
+        JumpsAvailable = 1;
 
         Vector3 dir = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
         _rigidbody.AddForce(dir * _data.StickedJumpForce * _rigidbody.mass, ForceMode.Impulse);
 
         AudioManager.Instance.PlaySoundGeneral(SoundGeneral.WallJump);
-    }
-
-    private bool IsGrounded()
-    {
-        return Physics.Raycast(transform.position, -Vector3.up, _distToGround + 0.1f);
     }
     #endregion
 
@@ -334,7 +347,7 @@ public class CharController : MonoBehaviour
         _isDashing = false;
 
         // put dash
-        _jumpsAvailable = 1;
+        JumpsAvailable = 1;
     }
 
     #region Animation Methods
