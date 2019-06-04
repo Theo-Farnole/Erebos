@@ -60,6 +60,7 @@ public class CharDeath : MonoBehaviour
 
     public void Death()
     {
+        // avoid 2 death straight
         if (isDead)
             return;
 
