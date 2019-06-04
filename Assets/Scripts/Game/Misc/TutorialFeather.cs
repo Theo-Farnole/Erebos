@@ -24,7 +24,7 @@ public class TutorialFeather : MonoBehaviour
             CharControllerSingularity charControllerSingularity = other.GetComponent<CharControllerSingularity>();
             UnlockForm(charControllerSingularity);
 
-            Instantiate(_prefabDestroyPS, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+            Instantiate(_prefabDestroyPS, transform.position + Vector3.up * 2.5f, Quaternion.identity);
             Destroy(gameObject);
         }
     }
