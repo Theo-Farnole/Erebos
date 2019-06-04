@@ -105,8 +105,8 @@ public class CharController : MonoBehaviour
     {
         Vector3 angles = transform.eulerAngles;
 
-        if (_rigidbody.velocity.x < 0f) angles.y = 180;
-        else if (_rigidbody.velocity.x > 0f) angles.y = 0;
+        if (_horizontal < 0f) angles.y = 180;
+        else if (_horizontal > 0f) angles.y = 0;
 
         transform.eulerAngles = angles;
     }
@@ -157,14 +157,6 @@ public class CharController : MonoBehaviour
         if (_isSticked || (_collision.down && _horizontal == 0))
         {
             _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y);
-        }
-
-        // turn the character where he runs
-        if (_horizontal != 0f)
-        {
-            Vector3 scale = _model.localScale;
-            scale.x = Mathf.Sign(_horizontal);
-            _model.localScale = scale;
         }
     }
     #endregion
