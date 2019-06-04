@@ -6,6 +6,7 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
 {
     #region Fields
     [SerializeField] private GameObject _model;
+    [SerializeField] private GameObject _blackMask;
     [Space]
     [SerializeField] private GameObject _prefabTrail;
     [SerializeField] private GameObject _prefabJumpPS;
@@ -20,11 +21,15 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     [SerializeField] private GameObject _prefabBlackForm;
     [SerializeField] private GameObject _prefabWhiteForm;
 
-    private Coroutine _coroutineDashSequence = null;
-    private CharControllerSingularity _charControllerSingularity = null;
-
     private bool _isDashing = false;
     private bool _isDead = false;
+
+    // cached variables
+    private CharControllerSingularity _charControllerSingularity = null;
+    #endregion
+
+    #region Properties
+    public GameObject BlackMask { get => _blackMask; }
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -51,7 +56,8 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
 
         bool shouldBeActive = !(_isDashing || _isDead || isInBlackSingularity);
 
-        _model.SetActive(shouldBeActive);    
+        _model.SetActive(shouldBeActive);
+        _blackMask.SetActive(isInBlackSingularity);
     }
     #endregion
 
