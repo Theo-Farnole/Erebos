@@ -11,10 +11,16 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     [SerializeField] private GameObject _prefabJumpPS;
     [Header("Death")]
     [SerializeField] private GameObject _prefabDeathPS;
+    [SerializeField] private GameObject _prefabRespawnPS;
     [Header("Dash")]
     [SerializeField] private GameObject _prefabBurstDash;
     [SerializeField] private GameObject _prefabHeadDash;
     [SerializeField] private GameObject _prefabEndDash;
+    [Header("Form")]
+    [SerializeField] private GameObject _prefabBlackForm;
+    [SerializeField] private GameObject _prefabWhiteForm;
+
+    private Coroutine _coroutineDashSequence = null;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -23,27 +29,56 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
         var trail = Instantiate(_prefabTrail, transform.position, Quaternion.identity);
         trail.GetComponent<FollowTransform>().transformToFollow = transform;
 
-        DeathHandle d1 = new DeathHandle(PlayDeathPS);
+        DeathHandle d1 = new DeathHandle(PlayDeath);
         CharDeath.EventDeath += d1;
 
-        DeathHandle d2 = new DeathHandle((object sender) => _model.SetActive(false));
-        CharDeath.EventDeath += d2;
+        RespawnHandle d2 = new RespawnHandle(PlayRespawn);
+        CharDeath.EventRespawn += d2;
 
-        RespawnHandle d3 = new RespawnHandle((object sender) => _model.SetActive(true));
-        CharDeath.EventRespawn += d3;
+        FormHandle d3 = new FormHandle(PlayFormChange);
+        CharControllerSingularity.EventForm += d3;
     }
     #endregion
 
     public void PlayJumpPS()
     {
-        Instantiate(_prefabJumpPS, transform.position, Quaternion.Euler(new Vector3(36.68f, transform.eulerAngles.y)));
+        Instantiate(_prefabJumpPS, transform.position, Quaternion.identity);
     }
 
-    public void PlayDeathPS(object sender = null)
+    void PlayFormChange(object sender, Form form)
     {
-        Instantiate(_prefabDeathPS, transform.position, Quaternion.Euler(new Vector3(36.68f, transform.eulerAngles.y)));
+        switch (form)
+        {
+            case Form.Ethereal:
+                Instantiate(_prefabWhiteForm, transform.position, Quaternion.identity);
+                break;
+
+            case Form.Void:
+                Instantiate(_prefabBlackForm, transform.position, Quaternion.identity);
+                break;
+        }
     }
 
+    #region Death & Respawn
+    void PlayDeath(object sender)
+    {
+        _model.SetActive(false);
+        Instantiate(_prefabDeathPS, transform.position, Quaternion.identity);
+
+        if (_coroutineDashSequence != null)
+        {
+            StopCoroutine(_coroutineDashSequence);
+        }
+    }
+
+    void PlayRespawn(object sender)
+    {
+        _model.SetActive(true);
+        Instantiate(_prefabRespawnPS, transform.position, Quaternion.identity);
+    }
+    #endregion
+
+    #region Dash Sequence
     public void PlayDashSequence(float angle)
     {
         Debug.Log("Dash Sequence!");
@@ -61,6 +96,7 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     {
         Instantiate(_prefabEndDash, transform.position + Vector3.back * 3f, Quaternion.identity);
 
-        StartCoroutine(CustomDelay.ExecuteAfterTime(0.2f, () => _model.SetActive(true)));
+        _coroutineDashSequence = StartCoroutine(CustomDelay.ExecuteAfterTime(0.2f, () => _model.SetActive(true)));
     }
+    #endregion
 }

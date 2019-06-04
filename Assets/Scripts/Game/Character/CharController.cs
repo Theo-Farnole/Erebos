@@ -103,20 +103,16 @@ public class CharController : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 angles = transform.eulerAngles;
-
-        if (_rigidbody.velocity.x < 0f) angles.y = 180;
-        else if (_rigidbody.velocity.x > 0f) angles.y = 0;
-
-        transform.eulerAngles = angles;
+        LookAtDirection();
+        SetBlendTreeValue();
     }
     #endregion
 
     private void ManageInputs()
     {
         if (!_isInputsEnable)
-            return;        
-        
+            return;
+
         _horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x;
 
         if (Time.timeScale != 0 && GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
@@ -157,14 +153,6 @@ public class CharController : MonoBehaviour
         if (_isSticked || (_collision.down && _horizontal == 0))
         {
             _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y);
-        }
-
-        // turn the character where he runs
-        if (_horizontal != 0f)
-        {
-            Vector3 scale = _model.localScale;
-            scale.x = Mathf.Sign(_horizontal);
-            _model.localScale = scale;
         }
     }
     #endregion
@@ -259,7 +247,7 @@ public class CharController : MonoBehaviour
                 AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Dash);
             }
 
-            _jumpsAvailable--;            
+            _jumpsAvailable--;
         }
     }
 
@@ -340,4 +328,43 @@ public class CharController : MonoBehaviour
         // put dash
         _jumpsAvailable = 1;
     }
+
+    #region Animation Methods
+    void LookAtDirection()
+    {
+        Vector3 angles = transform.eulerAngles;
+
+        if (_horizontal < 0f) angles.y = 180;
+        else if (_horizontal > 0f) angles.y = 0;
+
+        transform.eulerAngles = angles;
+    }
+
+    void SetBlendTreeValue()
+    {
+        float currentValue = 0f;
+        float targetValue = 0f;
+
+        if (_collision.down)
+        {
+            targetValue = 1f; // land
+        }
+        else
+        {
+            if (_rigidbody.velocity.y < 0)
+            {
+                targetValue = 0.72f; // fall
+            }
+            else if (_rigidbody.velocity.y > 0)
+            {
+                targetValue = 0.4f; // jump
+            }
+            else
+            {
+                targetValue = 0.2f; // run
+            }
+        }
+
+    }
+    #endregion
 }
