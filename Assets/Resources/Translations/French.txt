@@ -1,23 +1,23 @@
 ﻿; main menu
-mainmenu.play = Play
+mainmenu.play = Jouer
 mainmenu.options = Options
 mainmenu.credits = Credits
-mainmenu.quit = Quit
-mainmenu.subtitle = Athena's journey
-mainmenu.back = Back
+mainmenu.quit = Quitter
+mainmenu.subtitle = Le voyage d'Athena
+mainmenu.back = Retour
 
 ; main menu - options
-mainmenu.options.video = Video Settings
-mainmenu.options.audio = Audio Settings
+mainmenu.options.video = Paramètres Video
+mainmenu.options.audio = Paramètres Audio
 
 ; main menu - options video
 mainmenu.options.video.vsync = VSync
-mainmenu.options.video.fullscreen = Fullscreen
+mainmenu.options.video.fullscreen = Plein écran
 
 ; main menu - options audio
-mainmenu.options.audio.general = General
-mainmenu.options.audio.ambiance = Ambiance
-mainmenu.options.audio.music = Music
+mainmenu.options.audio.general = général
+mainmenu.options.audio.ambiance = Ambience
+mainmenu.options.audio.music = Musique
 
 ; cinematics
 cinematics.1.0 = This land...
