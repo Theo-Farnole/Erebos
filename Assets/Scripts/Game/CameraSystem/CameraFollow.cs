@@ -75,14 +75,20 @@ public class CameraFollow : Singleton<CameraFollow>
         }
 
         // setting Y axis
-        if (_character.position.y < transform.position.y + _data.PanicLineMinY)
-        {
-            CenterOnPlayer();
-        }
+        float deltaAngle = -Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
 
-        if (_character.position.y > transform.position.y + _data.PanicLineMaxY)
+        bool isPanicLineTop = _character.position.y > transform.position.y + (_data.PanicLineMaxY * _screenBounds.y) + deltaAngle;
+        bool isPanicLineBot = _character.position.y < transform.position.y - (_data.PanicLineMinY * _screenBounds.y) + deltaAngle;
+
+        if (isPanicLineBot || isPanicLineTop)
         {
-            CenterOnPlayer();
+            Debug.Log("CenterONPLayer() panic lines! \nb:" + isPanicLineBot + " t:" + isPanicLineTop);
+            
+            //_wantedCameraPositionXY.y = _character.position.y + deltaAngle;
+
+            //var pos = transform.position;
+            //pos.y = _character.position.y + deltaAngle;
+            //transform.position = pos;
         }
 
         // settings Z axis
@@ -165,6 +171,21 @@ public class CameraFollow : Singleton<CameraFollow>
         GizmosExtension.Draw2DLine(bottomLeftPoint, bottomRightPoint);  // down
         GizmosExtension.Draw2DLine(bottomRightPoint, topRightPoint);    // right
         GizmosExtension.Draw2DLine(bottomLeftPoint, topLeftPoint);      // left
+
+        // draw panic line
+        var topLeftLine = topLeftPoint;
+        var topRightLine = topRightPoint;
+        topLeftLine.y = transform.position.y + (_data.PanicLineMaxY * _screenBounds.y) + deltaAngle.y;
+        topRightLine.y = transform.position.y + (_data.PanicLineMaxY * _screenBounds.y) + deltaAngle.y;
+
+        var botLeftLine = bottomLeftPoint;
+        var botRightLine = bottomRightPoint;
+        botLeftLine.y = transform.position.y - (_data.PanicLineMinY * _screenBounds.y) + deltaAngle.y;
+        botRightLine.y = transform.position.y - (_data.PanicLineMinY * _screenBounds.y) + deltaAngle.y;
+
+        Gizmos.color = Color.red;
+        GizmosExtension.Draw2DLine(topLeftLine, topRightLine);
+        GizmosExtension.Draw2DLine(botLeftLine, botRightLine);
 
         // draw center
         Gizmos.color = Color.red;

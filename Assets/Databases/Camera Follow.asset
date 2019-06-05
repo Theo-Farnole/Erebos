@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5c8350eb4ae234588079a8ee5edca7, type: 3}
   m_Name: Camera Follow
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: {x: 5, y: 3, z: 5}
   _inputPercentOffset: 20
   _inputSpeed: 32
-  _widthPercent: 10
-  _heightPercent: 20
+  _deltaFromCenterWidthPercent: 10
+  _panicLineMaxY: 70
+  _panicLineMinY: 30

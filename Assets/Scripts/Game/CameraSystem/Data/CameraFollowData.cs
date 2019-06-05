@@ -12,8 +12,8 @@ public class CameraFollowData : ScriptableObject
     [Header("Camera Position")]
     [SerializeField, Range(0, 100)] private float _deltaFromCenterWidthPercent = 30f;
     [Space]
-    [SerializeField, Range(0, 100)] private float _panicLineMaxY;
-    [SerializeField, Range(0, 100)] private float _panicLineMinY;
+    [SerializeField, Range(0, 100)] private float _panicLineMaxY = 70;
+    [SerializeField, Range(0, 100)] private float _panicLineMinY = 30;
 
     public Vector3 Speed { get => _speed; }
 
