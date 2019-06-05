@@ -278,32 +278,32 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -3136429081600959462}
-    m_Position: {x: 240, y: 510, z: 0}
+    m_Position: {x: 370, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5562258803850311764}
-    m_Position: {x: -190, y: 550, z: 0}
+    m_Position: {x: -210, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5254245646425515496}
-    m_Position: {x: 780, y: 550, z: 0}
+    m_Position: {x: 920, y: 490, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2342670223751824097}
-    m_Position: {x: 400, y: 1530, z: 0}
+    m_Position: {x: 390, y: 1310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3542057930932860177}
-    m_Position: {x: -360, y: 1150, z: 0}
+    m_Position: {x: -230, y: 910, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6477946010882942525}
-    m_Position: {x: 310, y: 1090, z: 0}
+    m_Position: {x: 520, y: 880, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 450162771969464330}
-    m_Position: {x: 1170, y: 940, z: 0}
+    m_Position: {x: 940, y: 820, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 870, y: 280, z: 0}
-  m_EntryPosition: {x: 260, y: 390, z: 0}
+  m_EntryPosition: {x: 400, y: 160, z: 0}
   m_ExitPosition: {x: 700, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -3136429081600959462}
@@ -535,7 +535,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WallGrab
-  m_Speed: 15
+  m_Speed: 25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7034803177059371289}
@@ -575,7 +575,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0.000000006247402
   m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -614,7 +614,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Fall
-  m_Speed: 0.5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7326764746583513280}
