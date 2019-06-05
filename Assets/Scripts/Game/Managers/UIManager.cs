@@ -9,6 +9,9 @@ public class UIManager : Singleton<UIManager>
     #region Fields
     [Header("-- InGame UI ")]
     [SerializeField] private TextMeshProUGUI _textCollectible;
+    [SerializeField] private Image _imageCollectible;
+    [Space]
+    [SerializeField] private float _fadeoutTime = 2.3f;
     [Header("-- Pause UI ")]
     [SerializeField] private GameObject _panelPause;
     [Space]
@@ -31,13 +34,70 @@ public class UIManager : Singleton<UIManager>
         _buttonRestart.onClick.AddListener(() => GameManager.Instance.RestartCheckpoint());
         _buttonQuitPause.onClick.AddListener(() => UpdatePanelPause());
 
-        UpdateTextCollectible();
+        _textCollectible.gameObject.SetActive(false);
+        _imageCollectible.gameObject.SetActive(false);
     }
     #endregion
 
-    public void UpdateTextCollectible()
+    public void StartDisplayCollectiblesText()
     {
+        Debug.Log("FadeOut");
+
+        // update text
         _textCollectible.text = GameManager.Instance.CurrentCollectibles + " / " + GameState.CurrentMaxCollectibles;
+
+        StartCoroutine(FadeOut(new Graphic[] { _textCollectible, _imageCollectible }, _fadeoutTime));
+    }
+
+
+    IEnumerator FadeOut(Graphic[] _graphics, float timeToFadout)
+    {
+        // active graphics & set their alpha to 1
+        foreach (Graphic g in _graphics)
+        {
+            g.gameObject.SetActive(true);
+
+            var color = g.color;
+            color.a = 1;
+            g.color = color;
+        }
+
+        bool everythingFadeOut;
+        float startingTime = Time.unscaledTime;
+
+
+        do
+        {
+            everythingFadeOut = true;
+            float deltaTime = Time.unscaledTime - startingTime;
+            float newAlpha = Mathf.Lerp(1, 0, deltaTime / timeToFadout);
+
+            if (newAlpha > 0f)
+            {
+                everythingFadeOut = false;
+            }
+
+            foreach (Graphic g in _graphics)
+            {
+                // change color
+                Color color = g.color;
+                color.a = newAlpha;
+                g.color = color;
+
+                Debug.Log(g.name + " has an alpha of " + color.a);
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+        while (!everythingFadeOut);
+
+        // deactive for 
+        foreach (Graphic g in _graphics)
+        {
+            g.gameObject.SetActive(false);
+        }
+
+        Debug.Log("FadeOut ended");
     }
 
     public void UpdatePanelPause()

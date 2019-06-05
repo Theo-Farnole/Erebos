@@ -33,7 +33,7 @@ public class GameManager : Singleton<GameManager>
     {
         _currentCollectibles++;
 
-        UIManager.Instance.UpdateTextCollectible();
+        UIManager.Instance.StartDisplayCollectiblesText();
         AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Collectible);
     }
 
