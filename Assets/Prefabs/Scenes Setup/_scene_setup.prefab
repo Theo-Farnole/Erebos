@@ -2978,8 +2978,8 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: L_XAxis_0
-  m_VerticalAxis: L_YAxis_0
+  m_HorizontalAxis: L_XAxis_0_Inverse
+  m_VerticalAxis: L_YAxis_0_Inverse
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
@@ -3225,7 +3225,8 @@ MonoBehaviour:
   - {fileID: 349876808188744221}
   - {fileID: 6024849799044220805}
   - {fileID: 116614649240919293}
-  _button: {fileID: 6590123162027389631}
+  _buttonRestart: {fileID: 0}
+  _buttonQuitPause: {fileID: 0}
   _panelWhiteFeather: {fileID: 0}
   _panelBlackFeather: {fileID: 0}
 --- !u!1 &7671021392821172747
