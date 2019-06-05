@@ -17,11 +17,20 @@ public sealed class TranslateText : MonoBehaviour
         UIMenuManager.EventLanguageChangement += d;
 
         _text = GetComponent<TextMeshProUGUI>();
-        _key = _key != string.Empty ? _key : _text.text;
+        _key = _text.text;
 
         UpdateText();
     }
     #endregion
+
+    /// <summary>
+    /// Update key with text then, update text.
+    /// </summary>
+    public void DynamicTextUpdate()
+    {
+        _key = _text.text;
+        UpdateText();
+    }
 
     void UpdateText()
     {
