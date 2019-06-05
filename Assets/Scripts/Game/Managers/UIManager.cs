@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GamepadInput;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -36,9 +37,33 @@ public class UIManager : Singleton<UIManager>
 
         _textCollectible.gameObject.SetActive(false);
         _imageCollectible.gameObject.SetActive(false);
+
+        _panelWhiteFeather.SetActive(false);
+        _panelBlackFeather.SetActive(false);
+    }
+
+    void Update()
+    {
+        // deactivate if on tutorial feather
+        if (GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One) ||
+        GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
+        {
+            if (_panelWhiteFeather.activeSelf)
+            {
+                _panelWhiteFeather.SetActive(false);
+                Time.timeScale = 1;
+            }
+
+            if (_panelBlackFeather.activeSelf)
+            {
+                _panelBlackFeather.SetActive(false);
+                Time.timeScale = 1;
+            }
+        }
     }
     #endregion
 
+    #region Collectibles
     public void StartDisplayCollectiblesText()
     {
         Debug.Log("FadeOut");
@@ -98,6 +123,23 @@ public class UIManager : Singleton<UIManager>
         }
 
         Debug.Log("FadeOut ended");
+    }
+    #endregion
+
+    public void DisplayUnlockFormPanel(Form unlockedForm)
+    {
+        switch (unlockedForm)
+        {
+            case Form.Ethereal:
+                _panelWhiteFeather.SetActive(true);
+                Time.timeScale = 0;
+                break;
+
+            case Form.Void:
+                _panelBlackFeather.SetActive(true);
+                Time.timeScale = 0;
+                break;
+        }
     }
 
     public void UpdatePanelPause()

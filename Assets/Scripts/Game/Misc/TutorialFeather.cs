@@ -22,6 +22,7 @@ public class TutorialFeather : MonoBehaviour
             _hasBeenTriggered = true;
 
             CharControllerSingularity charControllerSingularity = other.GetComponent<CharControllerSingularity>();
+            UIManager.Instance.DisplayUnlockFormPanel(_unlockForm);
             UnlockForm(charControllerSingularity);
 
             Instantiate(_prefabDestroyPS, transform.position + Vector3.up * 2.5f, Quaternion.identity);
