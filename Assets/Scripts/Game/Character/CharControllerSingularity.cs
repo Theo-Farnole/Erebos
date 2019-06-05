@@ -145,15 +145,6 @@ public class CharControllerSingularity : MonoBehaviour
         // mask
         Transform blackMask = CharFeedbacks.Instance.BlackMask.transform;
 
-        // mask rotation
-        //var eulerAngles = blackMask.eulerAngles;
-
-        //if (oldSingularityEulerAngles.z > singularity.eulerAngles.z) eulerAngles.y = 90;
-        //if (oldSingularityEulerAngles.z < singularity.eulerAngles.z) eulerAngles.y = 270;
-
-        //blackMask.eulerAngles = eulerAngles;
-        //blackMask.LookAt(singularity);
-
         // DEBUGS
         Vector3 dir = transform.position - singularity.position;
         Debug.DrawRay(singularity.position, dir);
