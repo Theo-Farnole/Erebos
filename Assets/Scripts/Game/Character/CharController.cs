@@ -365,18 +365,23 @@ public class CharController : MonoBehaviour
             return;
 
         Vector3 angles = transform.eulerAngles;
+        Vector3 localScale = transform.localScale;
 
         if (_isSticked)
         {
-
+            if (_collision.left) localScale.x = Mathf.Abs(localScale.x) * -1;
+            if (_collision.right) localScale.x = Mathf.Abs(localScale.x) * 1;
         }
         else
         {
+            localScale.x = Mathf.Abs(localScale.x);
+
             if (_rigidbody.velocity.x < 0f) angles.y = 180;
-            else if (_rigidbody.velocity.x > 0f) angles.y = 0;
+            if (_rigidbody.velocity.x > 0f) angles.y = 0;
         }
 
         transform.eulerAngles = angles;
+        transform.localScale = localScale;
     }
 
     void SetAnimatorValue()
