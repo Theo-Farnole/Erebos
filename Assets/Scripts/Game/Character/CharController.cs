@@ -64,6 +64,7 @@ public class CharController : MonoBehaviour
     private readonly int _hashJump = Animator.StringToHash("Jump");
     private readonly int _hashFall = Animator.StringToHash("Fall");
     private readonly int _hashGrounded = Animator.StringToHash("Grounded");
+    private readonly int _hashIsInAir = Animator.StringToHash("IsInAir");
     #endregion
 
     #region Properties
@@ -374,6 +375,7 @@ public class CharController : MonoBehaviour
         _animator.SetBool(_hashFall, isFalling);
         _animator.SetBool(_hashGrounded, isGrounded);
         _animator.SetFloat(_hashWalkBlend, Mathf.Abs(_horizontal));
+        _animator.SetBool(_hashIsInAir, _rigidbody.velocity.x != 0);
     }
     #endregion
 }
