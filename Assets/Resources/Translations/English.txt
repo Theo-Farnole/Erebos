@@ -50,3 +50,4 @@ cinematics.8.1 = Beware Poseidon, for Athena is coming back for you
 
 ; tutorials
 game.tutorial.black = Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac eros vulputate mauris vestibulum dignissim sed at massa. Vestibulum et ultricies sem, id vehicula erat. Fusce ac rutrum eros. 
+game.tutorial.white = Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac eros vulputate mauris vestibulum dignissim sed at massa. Vestibulum et ultricies sem, id vehicula erat. Fusce ac rutrum eros. 
