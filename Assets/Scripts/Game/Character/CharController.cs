@@ -66,6 +66,8 @@ public class CharController : MonoBehaviour
     private readonly int _hashGrounded = Animator.StringToHash("Grounded");
     private readonly int _hashIsInAir = Animator.StringToHash("IsInAir");
     private readonly int _hashWallGrab = Animator.StringToHash("WallGrab");
+    private readonly int _hashUnstick = Animator.StringToHash("Unstick");
+    private readonly int _hashWallJump = Animator.StringToHash("Walljump");
     #endregion
 
     #region Properties
@@ -222,6 +224,8 @@ public class CharController : MonoBehaviour
     {
         if (GamePad.GetButton(GamePad.Button.B, GamePad.Index.Any))
         {
+            _animator.SetTrigger(_hashUnstick);
+
             _isSticked = false;
             _isStickingEnable = false;
         }
@@ -316,6 +320,7 @@ public class CharController : MonoBehaviour
 
     private void StickedJump()
     {
+        _animator.SetTrigger(_hashWallJump);
         _isSticked = false;
         float angle = 0f;
 
