@@ -13,6 +13,8 @@ mainmenu.options.audio = Audio Settings
 ; main menu - options video
 mainmenu.options.video.vsync = VSync
 mainmenu.options.video.fullscreen = Fullscreen
+mainmenu.options.video.windowed = Windowed
+mainmenu.options.video.borderless = Borderless
 
 ; main menu - options audio
 mainmenu.options.audio.general = General
