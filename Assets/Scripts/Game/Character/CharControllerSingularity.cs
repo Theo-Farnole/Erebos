@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Form { Normal, Ethereal, Void };
-public delegate void FormHandle(object sender, Form form);
+public delegate void FormHandle(Form form);
 
 public class CharControllerSingularity : MonoBehaviour
 {
@@ -42,7 +42,7 @@ public class CharControllerSingularity : MonoBehaviour
 
             AudioManager.Instance.PlaySoundGeneral(SoundGeneral.FormChange);
             UpdateFormMesh();
-            EventForm?.Invoke(this, _form);
+            EventForm?.Invoke(_form);
         }
     }
     #endregion
@@ -59,7 +59,7 @@ public class CharControllerSingularity : MonoBehaviour
         Form = Form.Normal;
 
         // on death, return to normal form
-        DeathHandle d = new DeathHandle((object sender) =>
+        DeathHandle d = new DeathHandle(() =>
         {
             Form = Form.Normal;
         });

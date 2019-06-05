@@ -48,7 +48,7 @@ public class PathAgent : MonoBehaviour
     }
     #endregion
 
-    void ResetPosition(object sender)
+    void ResetPosition()
     {
         _currentPointIndex = 0;
 

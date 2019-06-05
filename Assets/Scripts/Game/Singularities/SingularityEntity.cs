@@ -15,10 +15,10 @@ public class SingularityEntity : MonoBehaviour
         FormHandle d = new FormHandle(OnFormChange);
         CharControllerSingularity.EventForm += d;
 
-        OnFormChange(this, Form.Normal);
+        OnFormChange(Form.Normal);
     }
 
-    public void OnFormChange(object sender, Form form)
+    public void OnFormChange(Form form)
     {
         switch (form)
         {

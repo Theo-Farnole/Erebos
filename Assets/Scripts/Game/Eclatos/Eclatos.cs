@@ -72,7 +72,7 @@ public class Eclatos : MonoBehaviour
     }
     #endregion
 
-    public void OnFormChange(object sender, Form form)
+    public void OnFormChange(Form form)
     {
         if (form == Form.Void)
         {

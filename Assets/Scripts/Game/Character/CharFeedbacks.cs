@@ -83,7 +83,7 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
         _meshRenderer.material.SetFloat("_CDDash", propertyValue);
     }
 
-    void PlayFormChange(object sender, Form form)
+    void PlayFormChange(Form form)
     {
         switch (form)
         {
@@ -104,12 +104,12 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     }
 
     #region Death & Respawn
-    void PlayDeath(object sender)
+    void PlayDeath()
     {
         Instantiate(_prefabDeathPS, transform.position, Quaternion.identity);
     }
 
-    void PlayRespawn(object sender)
+    void PlayRespawn()
     {
         Instantiate(_prefabRespawnPS, transform.position, Quaternion.identity);
     }

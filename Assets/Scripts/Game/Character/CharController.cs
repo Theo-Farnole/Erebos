@@ -42,7 +42,6 @@ public class CharController : MonoBehaviour
     [SerializeField] private Transform _model = null;
     [SerializeField] private Animator _animator = null;
 
-
     // inputs variables
     private bool _jumpInput = false;
     private float _horizontal = 0;
@@ -103,7 +102,7 @@ public class CharController : MonoBehaviour
 
     void Start()
     {
-        DeathHandle d1 = new DeathHandle((object sender) =>
+        DeathHandle d1 = new DeathHandle(() =>
         {
             ResetMovements();
             _rigidbody.useGravity = false;
@@ -116,6 +115,11 @@ public class CharController : MonoBehaviour
     {
         if (CharDeath.isDead)
             return;
+
+        if (_collision.down || _isSticked)
+        {
+            CameraFollow.Instance.SmoothCenterOnCharacter();
+        }
 
         ManageInputs();
     }

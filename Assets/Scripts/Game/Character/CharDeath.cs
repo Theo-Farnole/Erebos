@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void DeathHandle(object sender);
-public delegate void RespawnHandle(object sender);
+public delegate void DeathHandle();
+public delegate void RespawnHandle();
 
 public class CharDeath : MonoBehaviour
 {
@@ -67,17 +67,17 @@ public class CharDeath : MonoBehaviour
         isDead = true;
         AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Death);
 
-        EventDeath?.Invoke(this);
+        EventDeath?.Invoke();
     }
 
-    private void InvokeRespawn(object sender)
+    private void InvokeRespawn()
     {
         StartCoroutine(CustomDelay.ExecuteAfterTime(RESPAWN_TIME, () =>
         {
             transform.position = (Vector2)currentCheckpoint;
 
             isDead = false;
-            EventRespawn?.Invoke(this);
+            EventRespawn?.Invoke();
             AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Respawn);
         }));
     }

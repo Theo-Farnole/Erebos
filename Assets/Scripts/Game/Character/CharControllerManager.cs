@@ -31,7 +31,7 @@ public class CharControllerManager : Singleton<CharControllerManager>
     void Start()
     {
         // on death, set attracted to false
-        DeathHandle d = new DeathHandle((object sender) =>
+        DeathHandle d = new DeathHandle(() =>
         {
             Attracted = false;
             GameState.CurrentDeathCount++;
@@ -39,7 +39,7 @@ public class CharControllerManager : Singleton<CharControllerManager>
         CharDeath.EventDeath += d;
 
         // on form change, set parent to null
-        FormHandle dd = new FormHandle((object sender, Form form) =>
+        FormHandle dd = new FormHandle((Form form) =>
         {
             transform.parent = null;
             Attracted = false;
