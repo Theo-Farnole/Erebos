@@ -27,7 +27,7 @@ public class TriggerToTransition : MonoBehaviour
 
             StartCoroutine(CustomDelay.ExecuteAfterTime(1f, () =>
             {
-                Initiate.Fade("transition", Color.black, 1f);
+                Initiate.Fade("SC_Transition", Color.black, 1f);
             }));
         }
     }

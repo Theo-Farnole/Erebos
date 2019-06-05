@@ -14,8 +14,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private CameraFollowData _data;
     [SerializeField] private bool _drawDebug = false;
     [Space]
-    [SerializeField] private float _worldMinimumX;
-    [SerializeField] private float _worldMaximumX;
+    [SerializeField] private float _worldMinimumX = Mathf.NegativeInfinity;
+    [SerializeField] private float _worldMaximumX = Mathf.Infinity;
 
     private Transform _character = null;
     private Rigidbody _targetRb = null;
