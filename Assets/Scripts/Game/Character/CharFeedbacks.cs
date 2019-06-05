@@ -42,7 +42,6 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     void Awake()
     {
         _charControllerSingularity = GetComponent<CharControllerSingularity>();
-
     }
 
     void Start()

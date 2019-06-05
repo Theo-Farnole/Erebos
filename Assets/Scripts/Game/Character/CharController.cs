@@ -68,6 +68,7 @@ public class CharController : MonoBehaviour
     private readonly int _hashWallGrab = Animator.StringToHash("WallGrab");
     private readonly int _hashUnstick = Animator.StringToHash("Unstick");
     private readonly int _hashWallJump = Animator.StringToHash("Walljump");
+    private readonly int _hashDeath = Animator.StringToHash("Death");
     #endregion
 
     #region Properties
@@ -104,6 +105,7 @@ public class CharController : MonoBehaviour
         {
             ResetMovements();
             _rigidbody.useGravity = false;
+            _animator.SetTrigger(_hashDeath);
         });
         CharDeath.EventDeath += d1;
     }

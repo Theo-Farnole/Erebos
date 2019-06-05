@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour
     private Rigidbody _targetRb = null;
 
     private Vector2 _screenBounds;
-    private Vector2 _wantedFocusRelativePosition;
+    private Vector2 _wantedRelativeFocusPosition;
     private Rect _relativeFocusRect;
 
     private Vector3 _wantedCameraPosition = Vector3.zero;
@@ -67,10 +67,10 @@ public class CameraFollow : MonoBehaviour
 
     void SetFocusRect()
     {
-        _wantedFocusRelativePosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right;
-        _wantedFocusRelativePosition *= Mathf.Sign(_targetRb.velocity.x);
+        _wantedRelativeFocusPosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right;
+        _wantedRelativeFocusPosition *= Mathf.Sign(_targetRb.velocity.x);
 
-        _relativeFocusRect.center = Vector2.Lerp(_relativeFocusRect.center, _wantedFocusRelativePosition, Time.deltaTime * _data.FocusRectSpeed);
+        _relativeFocusRect.center = Vector2.Lerp(_relativeFocusRect.center, _wantedRelativeFocusPosition, Time.deltaTime * _data.FocusRectSpeed);
     }
 
     void SetWantedPosition()
@@ -123,8 +123,8 @@ public class CameraFollow : MonoBehaviour
     void CenterOnPlayer(object sender)
     {
         // change focus rect
-        _wantedFocusRelativePosition = -_relativeFocusRect.size * 0.5f;
-        _relativeFocusRect.position = _wantedFocusRelativePosition;
+        _wantedRelativeFocusPosition = -_relativeFocusRect.size * 0.5f;
+        _relativeFocusRect.position = _wantedRelativeFocusPosition;
 
         // change target position
         _wantedCameraPosition.x = _character.position.x;
@@ -186,6 +186,6 @@ public class CameraFollow : MonoBehaviour
         Gizmos.DrawSphere((Vector2)_wantedCameraPosition + (Vector2)deltaAngle, 0.5f);
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere((Vector2)transform.position + _wantedFocusRelativePosition + (Vector2)deltaAngle, 0.5f);
+        Gizmos.DrawSphere((Vector2)transform.position + _wantedRelativeFocusPosition + (Vector2)deltaAngle, 0.5f);
     }
 }
