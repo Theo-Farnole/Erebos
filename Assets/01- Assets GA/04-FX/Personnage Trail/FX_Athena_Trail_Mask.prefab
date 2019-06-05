@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1247529550154948862}
   - component: {fileID: 1247529550154948863}
   - component: {fileID: 1247529550154948860}
+  - component: {fileID: 927275714229744519}
   m_Layer: 0
   m_Name: FX_Athena_Trail_Mask
   m_TagString: Untagged
@@ -4754,6 +4755,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &927275714229744519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247529550154948861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b0dcad160546a34fa4cccfeb6b39515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformToFollow: {fileID: 0}
 --- !u!1 &1247529550168181890
 GameObject:
   m_ObjectHideFlags: 0
