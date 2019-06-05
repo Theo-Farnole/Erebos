@@ -70,6 +70,7 @@ public class CharController : MonoBehaviour
     private readonly int _hashWallJump = Animator.StringToHash("Walljump");
     private readonly int _hashDeath = Animator.StringToHash("Death");
     private readonly int _hashVelocity = Animator.StringToHash("Velocity");
+    private readonly int _hashLeftCollision = Animator.StringToHash("LeftCollision");
     #endregion
 
     #region Properties
@@ -363,6 +364,8 @@ public class CharController : MonoBehaviour
         if (Time.timeScale == 0)
             return;
 
+        return;
+
         Vector3 angles = transform.eulerAngles;
 
         if (_isSticked)
@@ -397,6 +400,7 @@ public class CharController : MonoBehaviour
         _animator.SetBool(_hashIsInAir, _rigidbody.velocity.x != 0);
         _animator.SetBool(_hashWallGrab, _isSticked);
         _animator.SetFloat(_hashVelocity, velocity);
+        _animator.SetBool(_hashLeftCollision, _collision.left);
     }
     #endregion
 }
