@@ -78,6 +78,7 @@ public class CharDeath : MonoBehaviour
 
             isDead = false;
             EventRespawn?.Invoke(this);
+            AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Respawn);
         }));
     }
 }

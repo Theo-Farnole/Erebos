@@ -69,6 +69,8 @@ public class CharController : MonoBehaviour
     private readonly int _hashUnstick = Animator.StringToHash("Unstick");
     private readonly int _hashWallJump = Animator.StringToHash("Walljump");
     private readonly int _hashDeath = Animator.StringToHash("Death");
+    private readonly int _hashVelocity = Animator.StringToHash("Velocity");
+    private readonly int _hashLeftCollision = Animator.StringToHash("LeftCollision");
     #endregion
 
     #region Properties
@@ -359,13 +361,22 @@ public class CharController : MonoBehaviour
     void LookAtDirection()
     {
         // if in pause, don't look at direction
-        if (Time.timeScale == 0) 
+        if (Time.timeScale == 0)
             return;
+
+        return;
 
         Vector3 angles = transform.eulerAngles;
 
-        if (_rigidbody.velocity.x < 0f) angles.y = 180;
-        else if (_rigidbody.velocity.x > 0f) angles.y = 0;
+        if (_isSticked)
+        {
+
+        }
+        else
+        {
+            if (_rigidbody.velocity.x < 0f) angles.y = 180;
+            else if (_rigidbody.velocity.x > 0f) angles.y = 0;
+        }
 
         transform.eulerAngles = angles;
     }
@@ -378,12 +389,18 @@ public class CharController : MonoBehaviour
 
         bool isFalling = _rigidbody.velocity.y < 0;
         bool isGrounded = _collision.down;
+        float velocity = 0;
+
+        if (_rigidbody.velocity.x > 0) velocity = 1;
+        if (_rigidbody.velocity.x < 0) velocity = -1;
 
         _animator.SetBool(_hashFall, isFalling);
         _animator.SetBool(_hashGrounded, isGrounded);
         _animator.SetFloat(_hashWalkBlend, Mathf.Abs(_horizontal));
         _animator.SetBool(_hashIsInAir, _rigidbody.velocity.x != 0);
         _animator.SetBool(_hashWallGrab, _isSticked);
+        _animator.SetFloat(_hashVelocity, velocity);
+        _animator.SetBool(_hashLeftCollision, _collision.left);
     }
     #endregion
 }
