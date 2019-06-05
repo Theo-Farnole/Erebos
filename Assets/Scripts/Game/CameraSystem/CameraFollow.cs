@@ -4,12 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class CameraFollow : MonoBehaviour
+public class CameraFollow : Singleton<CameraFollow>
 {
-    #region Enums
-    public enum Type { Static, Dynamic }
-    #endregion
-
     #region Fields
     [SerializeField] private CameraFollowData _data;
     [SerializeField] private bool _drawDebug = false;
@@ -18,23 +14,24 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float _worldMaximumX = Mathf.Infinity;
 
     private Transform _character = null;
-    private Rigidbody _targetRb = null;
+    private Rigidbody _charRigidbody = null;
 
     private Vector2 _screenBounds;
-    private Vector2 _wantedRelativeFocusPosition;
-    private Rect _relativeFocusRect;
+    private Rect _focusRect;
 
-    private Vector3 _wantedCameraPosition = Vector3.zero;
+    private Vector3 _wantedCameraPositionXY = Vector3.zero;
     private Vector3 _cameraInputOffset = Vector3.zero;
 
     private float _distanceToTarget = Mathf.Infinity;
     #endregion
 
     #region MonoBehaviour Callbacks
-    void Start()
+    void Awake()
     {
         _character = GameObject.FindGameObjectWithTag("Player").transform;
-        _targetRb = _character.GetComponent<Rigidbody>();
+        _charRigidbody = _character.GetComponent<Rigidbody>();
+
+        //_focusRect = ;
 
         // calculate in game width & height        
         _distanceToTarget = transform.position.z - _character.position.z;
@@ -42,58 +39,54 @@ public class CameraFollow : MonoBehaviour
         _screenBounds.x = _screenBounds.y * Camera.main.aspect;
 
         Debug.Log("_screenBounds = " + _screenBounds);
+    }
 
-        // draw focus rect
-        _relativeFocusRect = new Rect(Vector2.zero, new Vector2(_screenBounds.x * _data.WidthPercent, _screenBounds.y * _data.HeightPercent));
-
+    void Start()
+    {
         // reset on death
         RespawnHandle d = new RespawnHandle(CenterOnPlayer);
         CharDeath.EventRespawn += d;
 
         // on start, center camera on players
-        CenterOnPlayer(this);
+        CenterOnPlayer();
     }
 
-    void LateUpdate()
+    void Update()
     {
-        SetFocusRect();
         SetWantedPosition();
 
-        ProcessInput();
+        //ProcessInput();
         Move();
     }
     #endregion
 
-
-    void SetFocusRect()
-    {
-        _wantedRelativeFocusPosition = (_screenBounds.x * _data.MaxRectPositionPercent) * Vector2.right;
-        _wantedRelativeFocusPosition *= Mathf.Sign(_targetRb.velocity.x);
-
-        _relativeFocusRect.center = Vector2.Lerp(_relativeFocusRect.center, _wantedRelativeFocusPosition, Time.deltaTime * _data.FocusRectSpeed);
-    }
-
     void SetWantedPosition()
     {
-        float leftDelta = transform.position.x + _relativeFocusRect.min.x - _character.position.x;
-        float rightDelta = transform.position.x + _relativeFocusRect.max.x - _character.position.x;
-        float downDelta = transform.position.y + _relativeFocusRect.min.y - _character.position.y;
-        float upDelta = transform.position.y + _relativeFocusRect.max.y - _character.position.y;
+        // setting X axis
+        _wantedCameraPositionXY.x = _character.position.x;
 
-        _wantedCameraPosition.x = _character.position.x;
-        _wantedCameraPosition.y = _character.position.y + Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
+        if (_charRigidbody.velocity.x > 0)
+        {
+            _wantedCameraPositionXY.x += _screenBounds.x * _data.DeltaFromCenterWidthPercent;
+        }
+        else if (_charRigidbody.velocity.x < 0)
+        {
+            _wantedCameraPositionXY.x -= _screenBounds.x * _data.DeltaFromCenterWidthPercent;
+        }
 
-        if (leftDelta > 0f) _wantedCameraPosition.x -= _relativeFocusRect.min.x;
-        else if (rightDelta < 0f) _wantedCameraPosition.x -= _relativeFocusRect.max.x;
+        // setting Y axis
+        if (_character.position.y < transform.position.y + _data.PanicLineMinY)
+        {
+            CenterOnPlayer();
+        }
 
-        if (downDelta > 0f) _wantedCameraPosition.y -= _relativeFocusRect.max.y / 2;
-        else if (upDelta < 0f) _wantedCameraPosition.y -= _relativeFocusRect.min.y / 2;
+        if (_character.position.y > transform.position.y + _data.PanicLineMaxY)
+        {
+            CenterOnPlayer();
+        }
 
-        _wantedCameraPosition.z = transform.position.z;
-
-
-        if (leftDelta > 0f) Debug.DrawRay(transform.position, Vector3.right);
-        else if (rightDelta < 0f) Debug.DrawRay(transform.position, Vector3.left);
+        // settings Z axis
+        _wantedCameraPositionXY.z = transform.position.z;
     }
 
     void ProcessInput()
@@ -111,27 +104,28 @@ public class CameraFollow : MonoBehaviour
     {
         Vector3 newPosition = Vector3.zero;
 
-        newPosition = Vector3.Lerp(transform.position - _cameraInputOffset, _wantedCameraPosition, Time.deltaTime * _data.Speed);
-        newPosition += _cameraInputOffset;
-
+        float distance = _character.position.x - transform.position.x;
+        newPosition.x = transform.position.x + distance / 32f;
         newPosition.x = Mathf.Clamp(newPosition.x, _worldMinimumX, _worldMaximumX);
-        newPosition.z = transform.position.z; // lock Z axis
+
+        newPosition.y = Mathf.Lerp(transform.position.y, _wantedCameraPositionXY.y, _data.Speed.y * Time.deltaTime);
+        newPosition.z = transform.position.z;
 
         transform.position = newPosition;
     }
 
-    void CenterOnPlayer(object sender)
+    public void SmoothCenterOnCharacter()
     {
-        // change focus rect
-        _wantedRelativeFocusPosition = -_relativeFocusRect.size * 0.5f;
-        _relativeFocusRect.position = _wantedRelativeFocusPosition;
-
         // change target position
-        _wantedCameraPosition.x = _character.position.x;
-        _wantedCameraPosition.y = _character.position.y + Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
-        _wantedCameraPosition.z = _distanceToTarget;
+        _wantedCameraPositionXY.x = _character.position.x;
+        _wantedCameraPositionXY.y = _character.position.y + Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
+        _wantedCameraPositionXY.z = _distanceToTarget;
+    }
 
-        transform.position = _wantedCameraPosition;
+    void CenterOnPlayer()
+    {
+        SmoothCenterOnCharacter();
+        transform.position = _wantedCameraPositionXY;
     }
 
     private void OnDrawGizmos()
@@ -177,15 +171,8 @@ public class CameraFollow : MonoBehaviour
         GizmosExtension.Draw2DLine(bottomMidPoint, topMidPoint); // vertical
         GizmosExtension.Draw2DLine(midLeftPoint, midRightPoint); // horizontal
 
-        // draw focus rect
-        Gizmos.color = Color.green;
-        GizmosExtension.DrawRect(transform.position + deltaAngle, _relativeFocusRect);
-
         // draw wanted position
         Gizmos.color = Color.magenta;
-        Gizmos.DrawSphere((Vector2)_wantedCameraPosition + (Vector2)deltaAngle, 0.5f);
-
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere((Vector2)transform.position + _wantedRelativeFocusPosition + (Vector2)deltaAngle, 0.5f);
+        Gizmos.DrawSphere((Vector2)_wantedCameraPositionXY + (Vector2)deltaAngle, 0.5f);
     }
 }
