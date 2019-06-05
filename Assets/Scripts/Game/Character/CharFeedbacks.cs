@@ -9,6 +9,7 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     [SerializeField] private GameObject _blackMask;
     [Space]
     [SerializeField] private GameObject _prefabJumpPS;
+    [SerializeField] private GameObject _prefabBlackMaskTrail;
     [Header("Form")]
     [SerializeField] private SkinnedMeshRenderer _meshRenderer;
     [Space]
@@ -26,6 +27,7 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     [SerializeField] private GameObject _prefabEndDash;
 
     private bool _isDashing = false;
+    private GameObject _blackMaskTrail = null;
 
     // cached variables
     private CharControllerSingularity _charControllerSingularity = null;
@@ -39,6 +41,12 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     #region MonoBehaviour Callbacks
     void Awake()
     {
+        _charControllerSingularity = GetComponent<CharControllerSingularity>();
+
+    }
+
+    void Start()
+    {
         DeathHandle d1 = new DeathHandle(PlayDeath);
         CharDeath.EventDeath += d1;
 
@@ -48,7 +56,8 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
         FormHandle d3 = new FormHandle(PlayFormChange);
         CharControllerSingularity.EventForm += d3;
 
-        _charControllerSingularity = GetComponent<CharControllerSingularity>();
+        _blackMaskTrail = Instantiate(_prefabBlackMaskTrail, transform.position, Quaternion.identity);
+        _blackMaskTrail.GetComponent<FollowTransform>().transformToFollow = transform;
     }
 
     void Update()
@@ -59,6 +68,7 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
 
         _model.SetActive(shouldBeActive);
         _blackMask.SetActive(isInBlackSingularity);
+        _blackMaskTrail.SetActive(isInBlackSingularity);
     }
     #endregion
 

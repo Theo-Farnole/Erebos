@@ -117,6 +117,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6386264090491224663}
     m_Modifications:
+    - target: {fileID: 1247529550154948861, guid: 2b544501d6b721b4db8e8eb3517c9245,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_Athena_Trail_Mask
+      objectReference: {fileID: 0}
     - target: {fileID: 1247529550154948862, guid: 2b544501d6b721b4db8e8eb3517c9245,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -187,11 +192,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1247529550154948861, guid: 2b544501d6b721b4db8e8eb3517c9245,
-        type: 3}
-      propertyPath: m_Name
-      value: FX_Athena_Trail_Mask
-      objectReference: {fileID: 0}
     - target: {fileID: 1247529550168181901, guid: 2b544501d6b721b4db8e8eb3517c9245,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -221,6 +221,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1247529550637907508, guid: 2b544501d6b721b4db8e8eb3517c9245,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1247529550637907505, guid: 2b544501d6b721b4db8e8eb3517c9245,
         type: 3}
