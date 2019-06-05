@@ -8,6 +8,9 @@ public class FollowTransform : MonoBehaviour
 
     void Update()
     {
+        if (transformToFollow == null)
+            return;
+
         transform.position = transformToFollow.position;
         transform.rotation = transformToFollow.rotation;
     }

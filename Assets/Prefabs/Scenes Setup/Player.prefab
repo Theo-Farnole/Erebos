@@ -110,6 +110,8 @@ MonoBehaviour:
   _blackMask: {fileID: 6493152785062857174}
   _prefabJumpPS: {fileID: 1741529584871504731, guid: 2ee648ea8514a2c4eb91d1293b51a9fe,
     type: 3}
+  _prefabBlackMaskTrail: {fileID: 1247529550154948861, guid: 2b544501d6b721b4db8e8eb3517c9245,
+    type: 3}
   _meshRenderer: {fileID: 8992801175099414649}
   _materialBlackForm: {fileID: 2100000, guid: 8b6e27ead278bad4596aa1ae8f2e4dbd, type: 2}
   _materialWhiteForm: {fileID: 2100000, guid: d70d4eefd89323d43b79a46a806a7230, type: 2}
