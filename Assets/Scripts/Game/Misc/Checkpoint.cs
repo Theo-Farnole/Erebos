@@ -23,6 +23,8 @@ public class Checkpoint : MonoBehaviour
         if (_hasBeenTriggered)
             return;
 
+        _hasBeenTriggered = true;
+
         _braseroFX.SetActive(true);
         _auraLight.SetActive(true);
 
