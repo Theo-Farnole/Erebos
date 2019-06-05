@@ -1959,7 +1959,7 @@ GameObject:
   - component: {fileID: 2681100832907757520}
   - component: {fileID: 89212960609083110}
   m_Layer: 5
-  m_Name: Image
+  m_Name: collectibles sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3102,7 +3102,7 @@ GameObject:
   - component: {fileID: 7671021392078970212}
   - component: {fileID: 7671021392078970235}
   m_Layer: 5
-  m_Name: Collectibles_label
+  m_Name: label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3292,6 +3292,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textCollectible: {fileID: 7671021392078970235}
+  _imageCollectible: {fileID: 89212960609083110}
+  _fadeoutTime: 2.3
   _panelPause: {fileID: 853999913758740437}
   _textSpeedRunsTimes:
   - {fileID: 5325885498643979027}
@@ -3301,8 +3303,8 @@ MonoBehaviour:
   - {fileID: 349876808188744221}
   - {fileID: 6024849799044220805}
   - {fileID: 116614649240919293}
-  _buttonRestart: {fileID: 0}
-  _buttonQuitPause: {fileID: 0}
+  _buttonRestart: {fileID: 6590123162027389631}
+  _buttonQuitPause: {fileID: 1412957963791004280}
   _panelWhiteFeather: {fileID: 0}
   _panelBlackFeather: {fileID: 0}
 --- !u!1 &7671021392821172747
