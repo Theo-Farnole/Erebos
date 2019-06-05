@@ -16,7 +16,7 @@ mainmenu.options.video.fullscreen = Plein écran
 
 ; main menu - options audio
 mainmenu.options.audio.general = Général
-mainmenu.options.audio.ambiance = Ambience
+mainmenu.options.audio.ambiance = Ambiance
 mainmenu.options.audio.music = Musique
 
 ; cinematics
