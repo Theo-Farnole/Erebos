@@ -144,10 +144,9 @@ public class CharControllerSingularity : MonoBehaviour
 
         // mask
         Transform blackMask = CharFeedbacks.Instance.BlackMask.transform;
+        Vector3 dir = (singularity.position - blackMask.position).normalized;
 
-        // DEBUGS
-        Vector3 dir = transform.position - singularity.position;
-        Debug.DrawRay(singularity.position, dir);
-        Debug.DrawRay(singularity.position, input);
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        blackMask.localEulerAngles = angle * Vector3.forward;
     }
 }
