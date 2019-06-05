@@ -364,8 +364,6 @@ public class CharController : MonoBehaviour
         if (Time.timeScale == 0)
             return;
 
-        return;
-
         Vector3 angles = transform.eulerAngles;
 
         if (_isSticked)
