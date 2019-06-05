@@ -119,8 +119,6 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     #region Dash Sequence
     public void PlayDashSequence(float angle)
     {
-        Debug.Log("Dash Sequence!");
-
         Vector3 rotation = Quaternion.identity.eulerAngles + new Vector3(0, 0, angle);
         Instantiate(_prefabBurstDash, transform.position, Quaternion.Euler(rotation));
 

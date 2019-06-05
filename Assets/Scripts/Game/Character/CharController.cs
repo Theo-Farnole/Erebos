@@ -282,7 +282,6 @@ public class CharController : MonoBehaviour
 
     private void Jump()
     {
-        Debug.Log("Jump tamer");
         _animator.SetTrigger(_hashJump);
 
         Vector3 vel = _rigidbody.velocity;
