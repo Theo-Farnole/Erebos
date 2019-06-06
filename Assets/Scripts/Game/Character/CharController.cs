@@ -369,7 +369,7 @@ public class CharController : MonoBehaviour
             return;
 
         Vector3 angles = transform.eulerAngles;
-        Vector3 localScale = transform.localScale;
+        Vector3 localScale = _model.localScale;
 
         if (_isSticked)
         {
@@ -385,7 +385,7 @@ public class CharController : MonoBehaviour
         }
 
         transform.eulerAngles = angles;
-        transform.localScale = localScale;
+        _model.localScale = localScale;
     }
 
     void SetAnimatorValue()
