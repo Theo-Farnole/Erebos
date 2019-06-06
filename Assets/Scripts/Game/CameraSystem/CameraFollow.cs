@@ -31,8 +31,6 @@ public class CameraFollow : Singleton<CameraFollow>
         _character = GameObject.FindGameObjectWithTag("Player").transform;
         _charRigidbody = _character.GetComponent<Rigidbody>();
 
-        //_focusRect = ;
-
         // calculate in game width & height        
         _distanceToTarget = transform.position.z - _character.position.z;
         _screenBounds.y = 2.0f * Mathf.Abs(_distanceToTarget) * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad);
