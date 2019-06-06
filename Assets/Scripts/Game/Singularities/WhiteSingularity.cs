@@ -38,6 +38,7 @@ public class WhiteSingularity : AbstractSingularity
         // apply velocity
         Vector3 vel = dir * _data.RepulsionDistance;
         _character.GetComponent<Rigidbody>().velocity = vel;
+        _character.GetComponent<CharController>().TriggerJump();
 
         // debug
         GizmosPersistence.DrawPersistentLine(transform.position, transform.position + vel);
