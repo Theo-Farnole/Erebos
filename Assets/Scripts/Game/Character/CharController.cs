@@ -409,5 +409,10 @@ public class CharController : MonoBehaviour
         _animator.SetFloat(_hashVelocity, velocity);
         _animator.SetBool(_hashLeftCollision, _collision.left);
     }
+
+    public void TriggerJump()
+    {
+        _animator.SetTrigger(_hashJump);
+    }
     #endregion
 }
