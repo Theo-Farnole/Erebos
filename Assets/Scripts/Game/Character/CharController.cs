@@ -207,7 +207,7 @@ public class CharController : MonoBehaviour
             }
             else
             {
-                vel.x += _horizontal * _data.AirControlSpeed * Time.fixedDeltaTime *_rigidbody.mass;
+                vel.x += _horizontal * _data.AirControlSpeed * Time.fixedDeltaTime * _rigidbody.mass;
             }
 
             vel.x = Mathf.Clamp(vel.x, -_data.MaxVelocityOnX, _data.MaxVelocityOnX);
@@ -402,23 +402,33 @@ public class CharController : MonoBehaviour
         if (Time.timeScale == 0)
             return;
 
-        Vector3 angles = transform.eulerAngles;
+        Vector3 angles = _model.eulerAngles;
         Vector3 localScale = _model.localScale;
 
         if (_isSticked)
         {
-            if (_collision.left) localScale.x = Mathf.Abs(localScale.x) * -1;
-            if (_collision.right) localScale.x = Mathf.Abs(localScale.x) * 1;
+            //angles.y = 180;
+
+            if (_collision.left)
+            {
+                angles.y = -90;
+                localScale.x = Mathf.Abs(localScale.x) * -1;
+            }
+            if (_collision.right)
+            {
+                angles.y = 90;
+                localScale.x = Mathf.Abs(localScale.x) * 1;
+            }
         }
         else
         {
             localScale.x = Mathf.Abs(localScale.x);
 
-            if (_rigidbody.velocity.x < 0f) angles.y = 180;
-            if (_rigidbody.velocity.x > 0f) angles.y = 0;
+            if (_rigidbody.velocity.x < 0f) angles.y = -90;
+            if (_rigidbody.velocity.x > 0f) angles.y = 90;
         }
 
-        transform.eulerAngles = angles;
+        _model.eulerAngles = angles;
         _model.localScale = localScale;
     }
 
