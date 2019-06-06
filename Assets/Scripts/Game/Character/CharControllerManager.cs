@@ -22,7 +22,7 @@ public class CharControllerManager : Singleton<CharControllerManager>
 
             if (_attracted)
             {
-                GetComponent<CharController>().ResetMovements();
+                GetComponent<CharController>().ResetMovements();                
             }
         }
     }

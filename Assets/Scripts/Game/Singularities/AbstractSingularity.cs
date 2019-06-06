@@ -29,10 +29,14 @@ public abstract class AbstractSingularity : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        _character.GetComponent<CharControllerManager>().Attracted = false;
+        if (other.CompareTag("Player"))
+        {
+            OnExit();            
+        }
     }
     #endregion
 
     protected abstract void OnEnter();
     protected abstract void OnStay();
+    protected abstract void OnExit();
 }

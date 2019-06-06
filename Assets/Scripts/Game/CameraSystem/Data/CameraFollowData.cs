@@ -14,6 +14,9 @@ public class CameraFollowData : ScriptableObject
     [Space]
     [SerializeField, Range(0, 100)] private float _panicLineMaxY = 70;
     [SerializeField, Range(0, 100)] private float _panicLineMinY = 30;
+    [Header("Zoom")]
+    [SerializeField] private float _zoomOut = 15;
+    [SerializeField] private float _zoomIn = 15;
 
     public Vector3 Speed { get => _speed; }
 
@@ -23,4 +26,7 @@ public class CameraFollowData : ScriptableObject
     public float DeltaFromCenterWidthPercent { get => _deltaFromCenterWidthPercent / 100f; }
     public float PanicLineMaxY { get => _panicLineMaxY / 100;}
     public float PanicLineMinY { get => _panicLineMinY / 100;}
+
+    public float ZoomOut { get => _zoomOut; }
+    public float ZoomIn { get => _zoomIn; }
 }

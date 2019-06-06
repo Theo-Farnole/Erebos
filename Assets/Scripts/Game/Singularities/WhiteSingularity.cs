@@ -17,9 +17,12 @@ public class WhiteSingularity : AbstractSingularity
     protected override void OnEnter()
     {
         RepulsePlayer();
+        CameraFollow.Instance.ZoomOut();
     }
 
     protected override void OnStay() {}
+
+    protected override void OnExit() {}
     #endregion
 
     private void RepulsePlayer()

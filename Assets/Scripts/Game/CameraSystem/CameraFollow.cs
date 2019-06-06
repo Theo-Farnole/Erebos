@@ -7,6 +7,8 @@ using UnityEngine.Serialization;
 public class CameraFollow : Singleton<CameraFollow>
 {
     #region Fields
+    public static readonly float MIN_ZOOM_THRESHOLD = 0.5f;
+
     [SerializeField] private CameraFollowData _data;
     [SerializeField] private bool _drawDebug = false;
     [Space]
@@ -17,9 +19,8 @@ public class CameraFollow : Singleton<CameraFollow>
     private Rigidbody _charRigidbody = null;
 
     private Vector2 _screenBounds;
-    private Rect _focusRect;
 
-    private Vector3 _wantedCameraPositionXY = Vector3.zero;
+    private Vector3 _wantedCameraPosition = Vector3.zero;
     private Vector3 _cameraInputOffset = Vector3.zero;
 
     private float _distanceToTarget = Mathf.Infinity;
@@ -30,6 +31,8 @@ public class CameraFollow : Singleton<CameraFollow>
     {
         _character = GameObject.FindGameObjectWithTag("Player").transform;
         _charRigidbody = _character.GetComponent<Rigidbody>();
+
+        _wantedCameraPosition = transform.position;
 
         // calculate in game width & height        
         _distanceToTarget = transform.position.z - _character.position.z;
@@ -51,28 +54,31 @@ public class CameraFollow : Singleton<CameraFollow>
 
     void Update()
     {
-        SetWantedPosition();
+        SetWantedPositionX();
+        SetWantedPositionY();
+        SetWantedPositionZ();
 
         //ProcessInput();
         Move();
     }
     #endregion
 
-    void SetWantedPosition()
+    void SetWantedPositionX()
     {
-        // setting X axis
-        _wantedCameraPositionXY.x = _character.position.x;
+        _wantedCameraPosition.x = _character.position.x;
 
         if (_charRigidbody.velocity.x > 0)
         {
-            _wantedCameraPositionXY.x += _screenBounds.x * _data.DeltaFromCenterWidthPercent;
+            _wantedCameraPosition.x += _screenBounds.x * _data.DeltaFromCenterWidthPercent;
         }
         else if (_charRigidbody.velocity.x < 0)
         {
-            _wantedCameraPositionXY.x -= _screenBounds.x * _data.DeltaFromCenterWidthPercent;
+            _wantedCameraPosition.x -= _screenBounds.x * _data.DeltaFromCenterWidthPercent;
         }
+    }
 
-        // setting Y axis
+    void SetWantedPositionY()
+    {
         float deltaAngle = -Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
 
         bool isPanicLineTop = _character.position.y > transform.position.y + (_data.PanicLineMaxY * _screenBounds.y) + deltaAngle;
@@ -80,17 +86,18 @@ public class CameraFollow : Singleton<CameraFollow>
 
         if (isPanicLineBot || isPanicLineTop)
         {
-            Debug.Log("CenterONPLayer() panic lines! \nb:" + isPanicLineBot + " t:" + isPanicLineTop);
-            
-            //_wantedCameraPositionXY.y = _character.position.y + deltaAngle;
 
-            //var pos = transform.position;
-            //pos.y = _character.position.y + deltaAngle;
-            //transform.position = pos;
         }
+    }
 
-        // settings Z axis
-        _wantedCameraPositionXY.z = transform.position.z;
+    void SetWantedPositionZ()
+    {
+        // has reached max zoom ?
+        if (transform.position.z - (_distanceToTarget - _data.ZoomOut) < MIN_ZOOM_THRESHOLD)
+        {
+            BackToNormalZoom();
+        }
+        
     }
 
     void ProcessInput()
@@ -108,12 +115,13 @@ public class CameraFollow : Singleton<CameraFollow>
     {
         Vector3 newPosition = Vector3.zero;
 
-        float distance = _character.position.x - transform.position.x;
-        newPosition.x = transform.position.x + distance / 32f;
-        newPosition.x = Mathf.Clamp(newPosition.x, _worldMinimumX, _worldMaximumX);
+        float xDistance = _character.position.x - transform.position.x;
+        newPosition.x = transform.position.x + xDistance / 32f;
+        newPosition.y = Mathf.Lerp(transform.position.y, _wantedCameraPosition.y, _data.Speed.y * Time.deltaTime);
+        newPosition.z = Mathf.Lerp(transform.position.z, _wantedCameraPosition.z, _data.Speed.z * Time.deltaTime);
 
-        newPosition.y = Mathf.Lerp(transform.position.y, _wantedCameraPositionXY.y, _data.Speed.y * Time.deltaTime);
-        newPosition.z = transform.position.z;
+        newPosition.x = Mathf.Clamp(newPosition.x, _worldMinimumX, _worldMaximumX);
+        newPosition.z = Mathf.Clamp(newPosition.z, _distanceToTarget - _data.ZoomOut, _distanceToTarget + _data.ZoomIn);
 
         transform.position = newPosition;
     }
@@ -121,16 +129,34 @@ public class CameraFollow : Singleton<CameraFollow>
     public void SmoothCenterOnCharacter()
     {
         // change target position
-        _wantedCameraPositionXY.x = _character.position.x;
-        _wantedCameraPositionXY.y = _character.position.y + Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
-        _wantedCameraPositionXY.z = _distanceToTarget;
+        _wantedCameraPosition.x = _character.position.x;
+        _wantedCameraPosition.y = _character.position.y + Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
     }
 
     void CenterOnPlayer()
     {
         SmoothCenterOnCharacter();
-        transform.position = _wantedCameraPositionXY;
+
+        //_wantedCameraPosition.z = _distanceToTarget;
+        transform.position = _wantedCameraPosition;
     }
+
+    #region Zooms & dezoom
+    public void BackToNormalZoom()
+    {
+        _wantedCameraPosition.z = _distanceToTarget;
+    }
+
+    public void ZoomIn()
+    {
+        _wantedCameraPosition.z = _distanceToTarget + _data.ZoomIn;
+    }
+
+    public void ZoomOut()
+    {
+        _wantedCameraPosition.z = _distanceToTarget - _data.ZoomOut;
+    }
+    #endregion
 
     private void OnDrawGizmos()
     {
@@ -192,6 +218,6 @@ public class CameraFollow : Singleton<CameraFollow>
 
         // draw wanted position
         Gizmos.color = Color.magenta;
-        Gizmos.DrawSphere((Vector2)_wantedCameraPositionXY + (Vector2)deltaAngle, 0.5f);
+        Gizmos.DrawSphere((Vector2)_wantedCameraPosition + (Vector2)deltaAngle, 0.5f);
     }
 }
