@@ -52,6 +52,7 @@ public class CharController : MonoBehaviour
     private bool _isDashing = false;
     private int _jumpsAvailable = 0;
     private bool _isStickingEnable = true;
+    private Coroutine _dashCoroutine = null;
 
     // cached variables
     private Rigidbody _rigidbody;
@@ -136,6 +137,11 @@ public class CharController : MonoBehaviour
         ProcessJumpInput();
 
         _rigidbody.useGravity = !(_isSticked || _isDashing);
+
+        if (_isDashing && (_collision.left || _collision.right))
+        {
+            EndDash();
+        }
     }
 
     void LateUpdate()
@@ -311,18 +317,21 @@ public class CharController : MonoBehaviour
 
         // dash boolean
         _isDashing = true;
-        StartCoroutine(CustomDelay.ExecuteAfterTime(_data.DashTime, () =>
-        {
-            _isDashing = false;
-            _rigidbody.velocity = _rigidbody.velocity.normalized * _data.DashInertia;
-
-            CharFeedbacks.Instance.StopDashSequence();
-        }
-        ));
+        _dashCoroutine = StartCoroutine(CustomDelay.ExecuteAfterTime(_data.DashTime, EndDash));
 
         // feedback
         float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
         CharFeedbacks.Instance.PlayDashSequence(angle);
+    }
+
+    private void EndDash()
+    {
+        _isDashing = false;
+        _rigidbody.velocity = _rigidbody.velocity.normalized * _data.DashInertia;
+
+        CharFeedbacks.Instance.StopDashSequence();
+
+        StopCoroutine(_dashCoroutine);
     }
 
     private void StickedJump()
