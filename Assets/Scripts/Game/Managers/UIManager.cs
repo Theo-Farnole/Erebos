@@ -35,9 +35,6 @@ public class UIManager : Singleton<UIManager>
         _buttonRestart.onClick.AddListener(() => GameManager.Instance.RestartCheckpoint());
         _buttonQuitPause.onClick.AddListener(() => UpdatePanelPause());
 
-        _textCollectible.gameObject.SetActive(false);
-        _imageCollectible.gameObject.SetActive(false);
-
         _panelWhiteFeather.SetActive(false);
         _panelBlackFeather.SetActive(false);
     }
@@ -66,59 +63,10 @@ public class UIManager : Singleton<UIManager>
     #region Collectibles
     public void StartDisplayCollectiblesText()
     {
-
-        // update text
         _textCollectible.text = GameManager.Instance.CurrentCollectibles + " / " + GameState.CurrentMaxCollectibles;
 
-        StartCoroutine(FadeOut(new Graphic[] { _textCollectible, _imageCollectible }, _fadeoutTime));
-    }
-
-
-    IEnumerator FadeOut(Graphic[] _graphics, float timeToFadout)
-    {
-        // active graphics & set their alpha to 1
-        foreach (Graphic g in _graphics)
-        {
-            g.gameObject.SetActive(true);
-
-            var color = g.color;
-            color.a = 1;
-            g.color = color;
-        }
-
-        bool everythingFadeOut;
-        float startingTime = Time.unscaledTime;
-
-
-        do
-        {
-            everythingFadeOut = true;
-            float deltaTime = Time.unscaledTime - startingTime;
-            float newAlpha = Mathf.Lerp(1, 0, deltaTime / timeToFadout);
-
-            if (newAlpha > 0f)
-            {
-                everythingFadeOut = false;
-            }
-
-            foreach (Graphic g in _graphics)
-            {
-                // change color
-                Color color = g.color;
-                color.a = newAlpha;
-                g.color = color;
-            }
-
-            yield return new WaitForEndOfFrame();
-        }
-        while (!everythingFadeOut);
-
-        // deactive for 
-        foreach (Graphic g in _graphics)
-        {
-            g.gameObject.SetActive(false);
-        }
-
+        _textCollectible.Fade(FadeType.FadeOut, _fadeoutTime);
+        _imageCollectible.Fade(FadeType.FadeOut, _fadeoutTime);
     }
     #endregion
 
