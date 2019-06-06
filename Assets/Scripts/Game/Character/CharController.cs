@@ -314,7 +314,7 @@ public class CharController : MonoBehaviour
         StartCoroutine(CustomDelay.ExecuteAfterTime(_data.DashTime, () =>
         {
             _isDashing = false;
-            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.velocity = _rigidbody.velocity.normalized * _data.DashInertia;
 
             CharFeedbacks.Instance.StopDashSequence();
         }
