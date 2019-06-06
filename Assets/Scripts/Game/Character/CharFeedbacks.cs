@@ -106,12 +106,12 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     #region Death & Respawn
     void PlayDeath()
     {
-        Instantiate(_prefabDeathPS, transform.position, Quaternion.identity);
+        Instantiate(_prefabDeathPS, transform.position, Quaternion.Euler(-90, 0, 0));
     }
 
     void PlayRespawn()
     {
-        Instantiate(_prefabRespawnPS, transform.position, Quaternion.identity);
+        Instantiate(_prefabRespawnPS, transform.position, Quaternion.Euler(-90, 0, 0));
     }
     #endregion
 
