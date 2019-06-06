@@ -11,12 +11,16 @@ public sealed class TranslateText : MonoBehaviour
     #endregion
 
     #region MonoBehaviour Callbacks
+    void Awake()
+    {
+        _text = GetComponent<TextMeshProUGUI>();
+    }
+
     void Start()
     {
         LanguageHandle d = new LanguageHandle(UpdateText);
         UIMenuManager.EventLanguageChangement += d;
 
-        _text = GetComponent<TextMeshProUGUI>();
         _key = _text.text;
 
         UpdateText();
