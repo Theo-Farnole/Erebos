@@ -66,7 +66,6 @@ public class UIManager : Singleton<UIManager>
     #region Collectibles
     public void StartDisplayCollectiblesText()
     {
-        Debug.Log("FadeOut");
 
         // update text
         _textCollectible.text = GameManager.Instance.CurrentCollectibles + " / " + GameState.CurrentMaxCollectibles;
@@ -108,8 +107,6 @@ public class UIManager : Singleton<UIManager>
                 Color color = g.color;
                 color.a = newAlpha;
                 g.color = color;
-
-                Debug.Log(g.name + " has an alpha of " + color.a);
             }
 
             yield return new WaitForEndOfFrame();
@@ -122,7 +119,6 @@ public class UIManager : Singleton<UIManager>
             g.gameObject.SetActive(false);
         }
 
-        Debug.Log("FadeOut ended");
     }
     #endregion
 
