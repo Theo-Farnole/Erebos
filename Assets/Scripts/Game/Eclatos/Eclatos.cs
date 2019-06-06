@@ -88,8 +88,6 @@ public class Eclatos : MonoBehaviour
 
     IEnumerator GotoPoints(Vector3[] position, Vector3[] oldPosition, Vector3[] eulerAngles, Vector3[] oldEulerAngles)
     {
-        Debug.Log("GotoPoints()");
-
         float startTime = Time.time;
 
         bool isCompleted;
