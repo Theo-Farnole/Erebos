@@ -6,7 +6,6 @@ using UnityEngine;
 public class CharControllerData : ScriptableObject
 {
     [Header("Walk")]
-    [SerializeField] private float _speed = 3f;
     [SerializeField] private float _maxVelocityOnX = 10f;
     [Space]
     [SerializeField] private float _turnSpeed = 60f;
@@ -25,7 +24,6 @@ public class CharControllerData : ScriptableObject
     [SerializeField] private float _airControlSpeed = 1f;
     
 
-    public float Speed { get => _speed; }
     public float MaxVelocityOnX { get => _maxVelocityOnX;  }
     public float TurnSpeed { get => _turnSpeed; }
 

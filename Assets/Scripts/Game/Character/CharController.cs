@@ -94,8 +94,7 @@ public class CharController : MonoBehaviour
     {
         get
         {
-
-            Debug.Log("_collision " + _collision);
+            //Debug.Log("_collision " + _collision);
 
             if (_collision.left && _collision.right && _collision.up && _collision.down
                 && _rigidbody.velocity == Vector3.zero)
@@ -202,9 +201,15 @@ public class CharController : MonoBehaviour
         {
             Vector3 vel = _rigidbody.velocity;
 
-            float acceleration = _collision.down ? _data.Speed : _data.AirControlSpeed;
+            if (_collision.down)
+            {
+                vel.x = _horizontal * _data.MaxVelocityOnX;
+            }
+            else
+            {
+                vel.x += _horizontal * _data.AirControlSpeed * Time.fixedDeltaTime *_rigidbody.mass;
+            }
 
-            vel.x += _horizontal * acceleration * Time.fixedDeltaTime * _rigidbody.mass;
             vel.x = Mathf.Clamp(vel.x, -_data.MaxVelocityOnX, _data.MaxVelocityOnX);
             _rigidbody.velocity = vel;
         }
