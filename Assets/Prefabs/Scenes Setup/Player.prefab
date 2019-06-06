@@ -125,9 +125,9 @@ MonoBehaviour:
     type: 3}
   _prefabBurstDash: {fileID: 7399400166872164486, guid: f4d3895bec9f1a94bab5306b9f891a73,
     type: 3}
-  _prefabHeadDash: {fileID: 8080836219120754306, guid: 2ec59b46bb4fcc84f8fb625ab5d0fdbc,
+  _prefabHeadDash: {fileID: 8080836219120754306, guid: 7af40dc75c11edd4ea7f15ddb68c624b,
     type: 3}
-  _prefabEndDash: {fileID: 212035726029398445, guid: e05cf9d0a91531b4e97b01dddafba95b,
+  _prefabEndDash: {fileID: 5473066595202488884, guid: 423325a95152d1141a233a81a2c89743,
     type: 3}
 --- !u!54 &1731791828621383589
 Rigidbody:
@@ -278,17 +278,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 1d829d20d5ec11d408c7e461276df070,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.12
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1d829d20d5ec11d408c7e461276df070,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.12
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1d829d20d5ec11d408c7e461276df070,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 3.12
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8992801175015860880, guid: 1d829d20d5ec11d408c7e461276df070,
         type: 3}

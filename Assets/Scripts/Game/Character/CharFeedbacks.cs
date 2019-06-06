@@ -118,11 +118,12 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
     #region Dash Sequence
     public void PlayDashSequence(float angle)
     {
-        Vector3 rotation = Quaternion.identity.eulerAngles + new Vector3(0, 0, angle);
-        Instantiate(_prefabBurstDash, transform.position, Quaternion.Euler(rotation));
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+        Instantiate(_prefabBurstDash, transform.position, rotation);
 
-        GameObject obj = Instantiate(_prefabHeadDash, transform.position, Quaternion.Euler(rotation));
+        GameObject obj = Instantiate(_prefabHeadDash, transform.position, rotation);
         obj.transform.parent = transform;
+        obj.transform.rotation = rotation;
 
         _isDashing = true;
     }
