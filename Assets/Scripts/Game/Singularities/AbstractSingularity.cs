@@ -23,6 +23,7 @@ public abstract class AbstractSingularity : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             OnStay();
+            CameraFollow.Instance.SmoothCenterOnCharacter();
         }
     }
 
