@@ -17,12 +17,16 @@ public class CharDeath : MonoBehaviour
     public static bool isDead = false;
 
     [HideInInspector] public Vector3 currentCheckpoint;
+
+    private CharController _charController = null;
     #endregion
 
     #region MonoBehaviour Callbacks
     void Awake()
     {
         currentCheckpoint = transform.position;
+
+        _charController = GetComponent<CharController>();
 
         // call respawn event with delay
         DeathHandle d1 = new DeathHandle(InvokeRespawn);
@@ -31,7 +35,7 @@ public class CharDeath : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.y <= DEATH_Y)
+        if (transform.position.y <= DEATH_Y || _charController.IsBlocked)
         {
             Death();
         }

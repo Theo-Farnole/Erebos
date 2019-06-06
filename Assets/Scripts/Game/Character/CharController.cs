@@ -89,6 +89,26 @@ public class CharController : MonoBehaviour
             CharFeedbacks.Instance.UpdateFormMaterial(_jumpsAvailable >= 1);
         }
     }
+
+    public bool IsBlocked
+    {
+        get
+        {
+
+            Debug.Log("_collision " + _collision);
+
+            if (_collision.left && _collision.right && _collision.up && _collision.down
+                && _rigidbody.velocity == Vector3.zero)
+            {
+                Debug.Log("Player get killed because he's block");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     #endregion
 
     #region MonoBehaviour Callbacks
