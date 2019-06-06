@@ -37,6 +37,9 @@ public class UIManager : Singleton<UIManager>
 
         _panelWhiteFeather.SetActive(false);
         _panelBlackFeather.SetActive(false);
+
+        _textCollectible.gameObject.SetActive(false);
+        _imageCollectible.gameObject.SetActive(false);
     }
 
     void Update()
@@ -64,6 +67,9 @@ public class UIManager : Singleton<UIManager>
     public void StartDisplayCollectiblesText()
     {
         _textCollectible.text = GameManager.Instance.CurrentCollectibles + " / " + GameState.CurrentMaxCollectibles;
+
+        _textCollectible.gameObject.SetActive(true);
+        _imageCollectible.gameObject.SetActive(true);
 
         _textCollectible.Fade(FadeType.FadeOut, _fadeoutTime);
         _imageCollectible.Fade(FadeType.FadeOut, _fadeoutTime);
