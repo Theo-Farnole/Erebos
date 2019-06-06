@@ -16,5 +16,5 @@ MonoBehaviour:
   _inputPercentOffset: 20
   _inputSpeed: 32
   _deltaFromCenterWidthPercent: 10
-  _panicLineMaxY: 70
-  _panicLineMinY: 30
+  _panicLineMaxY: 20
+  _panicLineMinY: 20
