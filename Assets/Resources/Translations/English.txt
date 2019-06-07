@@ -21,6 +21,13 @@ mainmenu.options.audio.general = General
 mainmenu.options.audio.ambiance = Ambiance
 mainmenu.options.audio.music = Music
 
+; pause menu
+pause.continue = Continue
+pause.stats = Stats
+pause.controls = Controls
+pause.restart = Restart
+pause.quit = Quit
+
 ; cinematics
 cinematics.1.0 = This land...
 cinematics.1.1 = I... I forgot its name...
