@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scenes Final/SC_Zone2_Final.unity
     guid: b20857a8a567e28489c28279b5d8ec06
+  - enabled: 1
+    path: Assets/Scenes/Scenes Final/SC_end.unity
+    guid: 9d74a80af851c0045b23cc57a3a251c3
   m_configObjects: {}

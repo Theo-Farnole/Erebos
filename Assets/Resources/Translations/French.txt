@@ -56,6 +56,13 @@ cinematics.7.0 = Par jalousie il m'attaqua et me bannie dans l'Erebes, esperant 
 cinematics.8.0 = Malheureusement pour lui, j'ai survécu a l'enfer et me dirige vers le monde des vivants plus forte que jamais. 
 cinematics.8.1 = Prend garde Poseidon, Athena revient pour toi
 
+; end
+end.wp = Bien joué, vous avez fini...
+end.thankyou = Merci d'avoir joué
+end.stats.header = Voici quelques stats
+end.stats.time = temps joué
+end.stats.death = morts
+
 ; tutorials
 game.tutorial.black = Vous avez trouvez une <b>plume du vide</b>!<br>En étant dans cette état, certains objetcs vont vous <b>attirer</b>. <br> <br> <i>Utilisez LT pour passer en forme du vide.</i> 
 game.tutorial.white = Vous avez trouvez une <b>plume éthérée</b>!<br>En étant dans cette état, certains objetcs vont vous <b>repousser</b>. <br> <br> <i>Utilisez LT pour passer en forme éthérée.</i> 

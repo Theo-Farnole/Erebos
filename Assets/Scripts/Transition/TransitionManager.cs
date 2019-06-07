@@ -20,7 +20,7 @@ public class TransitionManager : Singleton<TransitionManager>
     private Dictionary<SceneState, List<Transition>> _transitions = new Dictionary<SceneState, List<Transition>>();
     private AsyncOperation ao;
 
-    private int _currentTransitionIndex= -1;
+    private int _currentTransitionIndex = -1;
     private Transition _currentTransition;
     #endregion
 
@@ -34,14 +34,10 @@ public class TransitionManager : Singleton<TransitionManager>
 
     void Start()
     {
-        // load scene except if it's the end of the game
-        if (GameState.currentScene != SceneState.End)
-        {
-            string sceneToLoad = GameState.currentScene.ToScene();
+        string sceneToLoad = GameState.currentScene.ToScene();
 
-            ao = SceneManager.LoadSceneAsync(sceneToLoad);
-            ao.allowSceneActivation = false;
-        }
+        ao = SceneManager.LoadSceneAsync(sceneToLoad);
+        ao.allowSceneActivation = false;
 
         ChangeTransition();
     }

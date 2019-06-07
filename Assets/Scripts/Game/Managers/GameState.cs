@@ -20,7 +20,7 @@ public static class SceneStateExtension
                 return "SC_Zone2_Final";
 
             case SceneState.End:
-                return "End";
+                return "SC_End";
         }
 
         return string.Empty;
@@ -33,7 +33,8 @@ public static class GameState
     public static SceneState currentScene = SceneState.Tutorial;
     public static float[] speedrunTime = new float[3] { 0, 0, 0 };
     public static float[] deathCount = new float[3] { 0, 0, 0 };
-    private static int[] _maxCollectibles = new int[3] { 0, 0, 0 };
+    public static int[] maxCollectibles = new int[3] { 0, 0, 0 };
+    public static int[] Collectibles = new int[3] { 0, 0, 0 };
     #endregion
 
     #region Properties
@@ -46,19 +47,31 @@ public static class GameState
         }
     }
 
-    public static int CurrentMaxCollectibles
+    public static int CurrentCollectibles
     {
         get
         {
-            return _maxCollectibles[(int)currentScene];
+            return Collectibles[(int)currentScene];
         }
 
         set
         {
-            _maxCollectibles[(int)currentScene] = value;
+            Collectibles[(int)currentScene] = value;
         }
     }
 
+    public static int CurrentMaxCollectibles
+    {
+        get
+        {
+            return maxCollectibles[(int)currentScene];
+        }
+
+        set
+        {
+            maxCollectibles[(int)currentScene] = value;
+        }
+    }
 
     public static float CurrentDeathCount
     {
@@ -78,4 +91,6 @@ public static class GameState
     {
         speedrunTime[(int)currentScene] = Time.timeSinceLevelLoad;
     }
+
+
 }

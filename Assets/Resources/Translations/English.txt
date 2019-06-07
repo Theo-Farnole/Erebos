@@ -57,6 +57,13 @@ cinematics.7.0 = Of jalousie he attacked and banished me into the Erebos, hoping
 cinematics.8.0 = Unfortunately for him, I survived hell itself and I on my way toward the realm of the livings stronger than ever. 
 cinematics.8.1 = Beware Poseidon, for Athena is coming back for you
 
+; end
+end.wp = Well play, you finished...
+end.thankyou = Thank you for playing
+end.stats.header = Here some stats for you
+end.stats.time = time played
+end.stats.death = deaths
+
 ; tutorials
 game.tutorial.black = You finded the <b>void feather</b>!<br>In that state, some objects will <b>attract you</b><br><br><i>press LT to pass in the void form.</i> 
 game.tutorial.white = You finded the <b>etheral feather</b>!<br>In that state, some objects will <b>attract you</b><br><br><i>press LT to pass in the ethereal form.</i>  
