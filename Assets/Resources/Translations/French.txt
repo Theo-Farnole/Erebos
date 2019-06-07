@@ -45,7 +45,7 @@ cinematics.6.0 = Maintenant je me rappelle...
 cinematics.6.1 = Ce trident ... Cette magie... mon propre oncle ... 
 cinematics.6.2 = Poseidon.
 
-cinematics.7.0 = Par jalousie il m'attaqua et me banie dans l'Erebes, esperant que je meurt et pourisse ici bas.
+cinematics.7.0 = Par jalousie il m'attaqua et me bannie dans l'Erebes, esperant que je meurt et pourisse ici bas.
 cinematics.8.0 = Malheureusement pour lui, j'ai survécu a l'enfer et me dirige vers le monde des vivants plus forte que jamais. 
 cinematics.8.1 = Prend garde Poseidon, Athena revient pour toi
 
