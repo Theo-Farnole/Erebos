@@ -116,8 +116,8 @@ public class CharController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
 
-        _distToGround = GetComponent<Collider>().bounds.extents.y;
-        _distToSide = GetComponent<Collider>().bounds.extents.x;
+        _distToGround = _collider.bounds.extents.y;
+        _distToSide = _collider.bounds.extents.x;
     }
 
     void Start()
@@ -159,7 +159,8 @@ public class CharController : MonoBehaviour
 
         if (_isDashing && (_collision.left || _collision.right))
         {
-            EndDash();
+            Debug.Log("StopDash in wall !");
+            EndDash(false);
         }
     }
 
@@ -233,11 +234,13 @@ public class CharController : MonoBehaviour
 
         if (_isSticked)
         {
-            Unstick();
+            _rigidbody.velocity = Vector3.zero;
+
+            CheckIfUnsticked();
         }
         else
         {
-            Stick();
+            CheckIfSticked();
         }
 
         // override sticked
@@ -247,7 +250,7 @@ public class CharController : MonoBehaviour
         }
     }
 
-    private void Stick()
+    private void CheckIfSticked()
     {
         if (_isStickingEnable && !_collision.down && (_collision.right || _collision.left))
         {
@@ -259,7 +262,7 @@ public class CharController : MonoBehaviour
         }
     }
 
-    private void Unstick()
+    private void CheckIfUnsticked()
     {
         if (GamePad.GetButton(GamePad.Button.B, GamePad.Index.Any))
         {
@@ -342,21 +345,29 @@ public class CharController : MonoBehaviour
 
         // dash boolean
         _isDashing = true;
-        _dashCoroutine = StartCoroutine(CustomDelay.ExecuteAfterTime(_data.DashTime, EndDash));
+        _dashCoroutine = StartCoroutine(CustomDelay.ExecuteAfterTime(_data.DashTime, () => EndDash(true)));
 
         // feedback
         float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
         CharFeedbacks.Instance.PlayDashSequence(angle);
     }
 
-    private void EndDash()
+    private void EndDash(bool addVelocity)
     {
         _isDashing = false;
-        _rigidbody.velocity = _rigidbody.velocity.normalized * _data.DashInertia;
-
-        CharFeedbacks.Instance.StopDashSequence();
 
         StopCoroutine(_dashCoroutine);
+        CharFeedbacks.Instance.StopDashSequence();
+
+        // add velocity or reset
+        Vector3 velocity = Vector3.zero;
+
+        if (addVelocity)
+        {
+            velocity = _rigidbody.velocity.normalized * _data.DashInertia;
+        }
+
+        _rigidbody.velocity = velocity;
     }
 
     private void StickedJump()
