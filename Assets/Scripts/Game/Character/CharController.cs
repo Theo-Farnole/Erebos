@@ -179,6 +179,8 @@ public class CharController : MonoBehaviour
     {
         LookAtDirection();
         SetAnimatorValue();
+
+        DisableGC();
     }
     #endregion
 
