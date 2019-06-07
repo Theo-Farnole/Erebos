@@ -159,7 +159,6 @@ public class CharController : MonoBehaviour
 
         if (_isDashing && (_collision.left || _collision.right))
         {
-            Debug.Log("StopDash in wall !");
             EndDash(false);
         }
     }
@@ -213,6 +212,8 @@ public class CharController : MonoBehaviour
 
             vel.x = Mathf.Clamp(vel.x, -_data.MaxVelocityOnX, _data.MaxVelocityOnX);
             _rigidbody.velocity = vel;
+
+            AudioManager.Instance.PlayFootsteps();
         }
 
         // if sticked or not runnings
