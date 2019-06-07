@@ -53,8 +53,10 @@ public class UIManager : Singleton<UIManager>
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         });
 
-        //_buttonStats.onClick.AddListener(() => UpdatePanelPause());
-        _buttonQuit.onClick.AddListener(Application.Quit);
+        _buttonQuit.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene("SC_main_menu");
+        });
 
         _panelWhiteFeather.SetActive(false);
         _panelBlackFeather.SetActive(false);

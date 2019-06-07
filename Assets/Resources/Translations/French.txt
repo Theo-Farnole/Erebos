@@ -26,7 +26,7 @@ pause.continue = Continuer
 pause.stats = Statistiques
 pause.controls = Contrôles
 pause.restart = Redemarrer
-pause.quit = Quitter
+pause.quit = Retour au menu
 
 ; cinematics
 cinematics.1.0 = Cette terre...
