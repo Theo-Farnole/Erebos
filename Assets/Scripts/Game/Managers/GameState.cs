@@ -17,7 +17,7 @@ public static class SceneStateExtension
                 return "SC_Zone1_Final";
 
             case SceneState.ZoneTwo:
-                return "Zone2";
+                return "SC_Zone2_Final";
 
             case SceneState.End:
                 return "End";
