@@ -77,7 +77,16 @@ public class UIMenuManager : MonoBehaviour
         // return buttons
         foreach (Button b in _buttonsReturn)
         {
-            b.onClick.AddListener(() => ReturnButtonPressed());
+            b.onClick.AddListener(ReturnButtonPressed);
+            b.onClick.AddListener(() => AudioManager.Instance.PlaySoundUI(SoundUI.Button));
+        }
+
+        // set audio for every buttons
+        var buttons = FindObjectsOfType<Button>();
+
+        foreach (Button b in buttons)
+        {
+            b.onClick.AddListener(() => AudioManager.Instance.PlaySoundUI(SoundUI.Button));
         }
     }
 

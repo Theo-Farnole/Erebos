@@ -16,6 +16,11 @@ public enum SoundGeneral
     WallJump,
 };
 
+public enum SoundUI
+{
+    Button
+}
+
 public enum SoundMusic
 {
 };
@@ -31,6 +36,7 @@ public class AudioManager : Singleton<AudioManager>
     [System.Serializable]
     public class GeneralSounds
     {
+        #region Fields
         [SerializeField] private AudioSource _collectible;
         [Header("Mouvements")]
         [SerializeField] private AudioSource _jump;
@@ -50,7 +56,9 @@ public class AudioManager : Singleton<AudioManager>
         [SerializeField] private List<AudioSource> _footsteps = new List<AudioSource>();
 
         private Dictionary<SoundGeneral, AudioSource> _sounds = null;
+        #endregion
 
+        #region Properties
         public List<AudioSource> Footsteps { get => _footsteps; }
         public Dictionary<SoundGeneral, AudioSource> Sounds
         {
@@ -76,11 +84,41 @@ public class AudioManager : Singleton<AudioManager>
                 return _sounds;
             }
         }
+        #endregion
+    }
+
+    [System.Serializable]
+    public class UISounds
+    {
+        #region Fields
+        [SerializeField] private AudioSource _button;
+
+        private Dictionary<SoundUI, AudioSource> _sounds = null;
+        #endregion
+
+        #region Properties
+        public Dictionary<SoundUI, AudioSource> Sounds
+        {
+            get
+            {
+                if (_sounds == null)
+                {
+                    _sounds = new Dictionary<SoundUI, AudioSource>
+                    {
+                        { SoundUI.Button, _button}
+                    };
+                }
+
+                return _sounds;
+            }
+        }
+        #endregion
     }
     #endregion
 
     #region Fields
     [SerializeField] private GeneralSounds _generalSounds;
+    [SerializeField] private UISounds _uiSounds;
     #endregion
 
     public void PlaySoundGeneral(SoundGeneral sound)
@@ -90,6 +128,27 @@ public class AudioManager : Singleton<AudioManager>
         if (_generalSounds.Sounds[sound] != null)
         {
             _generalSounds.Sounds[sound].Play();
+        }
+        else
+        {
+            Debug.LogWarning(sound.ToString() + " isn't set in AudioManager!");
+        }
+    }
+
+    public void PlayFootsteps()
+    {
+        int random = Random.Range(0, _generalSounds.Footsteps.Count);
+
+        _generalSounds.Footsteps[random].Play();
+    }
+
+    public void PlaySoundUI(SoundUI sound)
+    {
+        float volume = SaveSystem.OptionsData.soundGeneral;
+
+        if (_uiSounds.Sounds[sound] != null)
+        {
+            _uiSounds.Sounds[sound].Play();
         }
         else
         {
