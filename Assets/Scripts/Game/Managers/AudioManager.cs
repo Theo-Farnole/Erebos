@@ -5,10 +5,10 @@ using UnityEngine;
 public enum SoundGeneral
 {
     Jump,
-    Footstep,
     Collectible,
     Dash,
-    FormChange,
+    FormToBlack,
+    FormToWhite,
     Checkpoint,
     Death,
     Respawn,
@@ -31,19 +31,27 @@ public class AudioManager : Singleton<AudioManager>
     [System.Serializable]
     public class GeneralSounds
     {
-        [SerializeField] private AudioSource _jump;
-        [SerializeField] private AudioSource _footstep;
         [SerializeField] private AudioSource _collectible;
+        [Header("Mouvements")]
+        [SerializeField] private AudioSource _jump;
         [SerializeField] private AudioSource _dash;
-        [SerializeField] private AudioSource _formChange;
+        [Space]
+        [SerializeField] private AudioSource _wallJump;
+        [SerializeField] private AudioSource _wallGrab;
+        [Header("Forms")]
+        [SerializeField] private AudioSource _formToBlack;
+        [SerializeField] private AudioSource _formToWhite;
+        [Header("Checkpoints & Death")]
         [SerializeField] private AudioSource _checkpoint;
+        [Space]
         [SerializeField] private AudioSource _death;
         [SerializeField] private AudioSource _respawn;
-        [SerializeField] private AudioSource _wallGrab;
-        [SerializeField] private AudioSource _wallJump;
+        [Space]
+        [SerializeField] private List<AudioSource> _footsteps = new List<AudioSource>();
 
         private Dictionary<SoundGeneral, AudioSource> _sounds = null;
 
+        public List<AudioSource> Footsteps { get => _footsteps; }
         public Dictionary<SoundGeneral, AudioSource> Sounds
         {
             get
@@ -53,10 +61,10 @@ public class AudioManager : Singleton<AudioManager>
                     _sounds = new Dictionary<SoundGeneral, AudioSource>
                     {
                         { SoundGeneral.Jump, _jump },
-                        { SoundGeneral.Footstep, _footstep },
                         { SoundGeneral.Collectible, _collectible },
                         { SoundGeneral.Dash, _dash },
-                        { SoundGeneral.FormChange, _formChange },
+                        { SoundGeneral.FormToBlack, _formToBlack},
+                        { SoundGeneral.FormToWhite, _formToWhite },
                         { SoundGeneral.Checkpoint, _checkpoint },
                         { SoundGeneral.Death, _death },
                         { SoundGeneral.Respawn, _respawn },

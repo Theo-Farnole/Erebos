@@ -40,7 +40,7 @@ public class CharControllerSingularity : MonoBehaviour
         {
             _form = value;
 
-            AudioManager.Instance.PlaySoundGeneral(SoundGeneral.FormChange);
+            AudioManager.Instance.PlaySoundGeneral(SoundGeneral.FormToBlack);
             UpdateFormMesh();
             EventForm?.Invoke(_form);
         }
