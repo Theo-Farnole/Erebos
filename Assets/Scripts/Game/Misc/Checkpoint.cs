@@ -14,21 +14,30 @@ public class Checkpoint : MonoBehaviour
     #region MonoBehaviour Callbacks
     void Awake()
     {
-        _braseroFX.SetActive(false);
-        _auraLight.SetActive(false);
+        SetActiveBrasero(false);
     }
 
-    public void ActiveBrasero()
+    void OnTriggerEnter(Collider other)
     {
-        if (_hasBeenTriggered)
-            return;
+        if (other.CompareTag("Player"))
+        {
+            if (_hasBeenTriggered)
+                return;
 
-        _hasBeenTriggered = true;
-
-        _braseroFX.SetActive(true);
-        _auraLight.SetActive(true);
-
-        AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Checkpoint);
+            _hasBeenTriggered = true;
+            SetActiveBrasero(true);
+        }
     }
     #endregion
+
+    private void SetActiveBrasero(bool active)
+    {
+        _braseroFX.SetActive(active);
+        _auraLight.SetActive(active);
+
+        if (active)
+        {
+            AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Checkpoint);
+        }
+    }
 }

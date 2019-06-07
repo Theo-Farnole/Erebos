@@ -51,7 +51,6 @@ public class CharDeath : MonoBehaviour
         if (other.CompareTag("Checkpoint"))
         {
             currentCheckpoint = other.transform.position;
-            other.GetComponent<Checkpoint>().ActiveBrasero();
         }
     }
 
