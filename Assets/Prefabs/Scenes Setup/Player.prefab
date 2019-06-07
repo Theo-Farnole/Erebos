@@ -395,14 +395,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1602480331233057389, guid: c7d24b28a6192c140a051b1c3f8e8588,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4973263849505826387, guid: c7d24b28a6192c140a051b1c3f8e8588,
         type: 3}
       propertyPath: prewarm
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1602480331233057389, guid: c7d24b28a6192c140a051b1c3f8e8588,
+    - target: {fileID: 4973263849505826387, guid: c7d24b28a6192c140a051b1c3f8e8588,
         type: 3}
-      propertyPath: m_LocalPosition.y
+      propertyPath: EmissionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225685288995636474, guid: c7d24b28a6192c140a051b1c3f8e8588,
+        type: 3}
+      propertyPath: prewarm
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
