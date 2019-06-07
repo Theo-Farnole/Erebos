@@ -22,7 +22,7 @@ mainmenu.options.audio.ambiance = Ambiance
 mainmenu.options.audio.music = Musique
 
 ; pause menu
-pause.continue = Continue
+pause.continue = Continuer
 pause.stats = Statistiques
 pause.controls = Contrôles
 pause.restart = Redemarrer
@@ -57,5 +57,5 @@ cinematics.8.0 = Malheureusement pour lui, j'ai survécu a l'enfer et me dirige 
 cinematics.8.1 = Prend garde Poseidon, Athena revient pour toi
 
 ; tutorials
-game.tutorial.black = Plume du vide, utiliser la touche "RT ou LT" pour passer en forme du vide. En etant dans cette état certains objets vont vous attirer. 
-game.tutorial.white = Plume éthérée, utiliser la touche "RT ou LT" pour passer en forme éthérée. En etant dans cette état certains objets vont vous repousser. 
+game.tutorial.black = Plume du vide, utiliser la touche "RT ou LT" pour passer en forme du vide.<br>En étant dans cette état certains objets vont vous attirer. 
+game.tutorial.white = Plume éthérée, utiliser la touche "RT ou LT" pour passer en forme éthérée.<br>En étant dans cette état certains objets vont vous repousser. 

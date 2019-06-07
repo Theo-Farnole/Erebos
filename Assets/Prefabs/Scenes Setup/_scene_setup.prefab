@@ -6927,8 +6927,8 @@ MonoBehaviour:
   _buttonQuit: {fileID: 1026029511688897798}
   _panelWhiteFeather: {fileID: 1917337009785321555}
   _panelBlackFeather: {fileID: 4082296369582348520}
-  _textWhiteFeather: {fileID: 0}
-  _textBlackFeather: {fileID: 0}
+  _textWhiteFeather: {fileID: 2789505479184099380}
+  _textBlackFeather: {fileID: 3064586745389809811}
 --- !u!1 &7671021392821172747
 GameObject:
   m_ObjectHideFlags: 0

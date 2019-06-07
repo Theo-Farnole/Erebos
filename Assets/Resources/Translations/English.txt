@@ -58,5 +58,5 @@ cinematics.8.0 = Unfortunately for him, I survived hell itself and I on my way t
 cinematics.8.1 = Beware Poseidon, for Athena is coming back for you
 
 ; tutorials
-game.tutorial.black = Void feather, press "RT or LT" to pass in the void form. In that state some objects will attract you. 
-game.tutorial.white = Etheral feather, press "RT or LT" to pass in the etheral form. In that state some objects will push you. 
+game.tutorial.black = Void feather, press "RT or LT" to pass in the void form.<br>In that state some objects will attract you. 
+game.tutorial.white = Etheral feather, press "RT or LT" to pass in the etheral form.<br>In that state some objects will push you. 
