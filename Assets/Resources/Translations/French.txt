@@ -64,5 +64,6 @@ end.stats.time = temps joué
 end.stats.death = morts
 
 ; tutorials
+game.tutorial.drop = Appuyez sur B pour lâcher le mur.
 game.tutorial.black = Vous avez trouvez une <b>plume du vide</b>!<br>En étant dans cette état, certains objetcs vont vous <b>attirer</b>. <br> <br> <i>Utilisez LT pour passer en forme du vide.</i> 
 game.tutorial.white = Vous avez trouvez une <b>plume éthérée</b>!<br>En étant dans cette état, certains objetcs vont vous <b>repousser</b>. <br> <br> <i>Utilisez LT pour passer en forme éthérée.</i> 

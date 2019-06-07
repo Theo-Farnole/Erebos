@@ -26,7 +26,11 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Button _buttonStats;
     [SerializeField] private Button _buttonRestart;
     [SerializeField] private Button _buttonQuit;
-    [Header("-- Feathers")]
+    [Header("-- Tutorials")]
+    [Header("-- Tutorials - IG text")]
+    [SerializeField] private TextMeshProUGUI _textIndicator; // used outside of this script
+
+    [Header("-- Tutorials - Feather")]
     [SerializeField] private float _tutorialFadeInTime = 1f;
     [Space]
     [SerializeField] private GameObject _panelWhiteFeather;
@@ -34,6 +38,10 @@ public class UIManager : Singleton<UIManager>
     [Space]
     [SerializeField] private TextMeshProUGUI _textWhiteFeather;
     [SerializeField] private TextMeshProUGUI _textBlackFeather;
+    #endregion
+
+    #region Properties
+    public TextMeshProUGUI TextIndicator { get => _textIndicator; }
     #endregion
 
     #region MonoBehaviour Callbacks
