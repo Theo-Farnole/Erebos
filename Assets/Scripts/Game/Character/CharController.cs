@@ -2,6 +2,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 // POST MORTEM NOTE
@@ -484,4 +486,34 @@ public class CharController : MonoBehaviour
         _animator.SetTrigger(_hashJump);
     }
     #endregion
+
+    /// <summary>
+    /// Avoid GC calls when the player is in the air
+    /// </summary>
+    private void DisableGC()
+    {
+        bool isInAir = _rigidbody.velocity.x != 0;
+
+        GCLatencyMode wantedMod = isInAir ? GCLatencyMode.LowLatency : GCLatencyMode.Interactive;
+
+
+        GCLatencyMode oldMode = GCSettings.LatencyMode;
+
+        // Make sure we can always go to the catch block, 
+        // so we can set the latency mode back to `oldMode`
+        RuntimeHelpers.PrepareConstrainedRegions();
+
+        try
+        {
+            GCSettings.LatencyMode = wantedMod;
+
+            // Generation 2 garbage collection is now
+            // deferred, except in extremely low-memory situations
+        }
+        finally
+        {
+            // ALWAYS set the latency mode back
+            GCSettings.LatencyMode = oldMode;
+        }
+    }
 }
