@@ -65,8 +65,6 @@ public class CharControllerSingularity : MonoBehaviour
         canGotoVoid = !(isInTutorial || isInFirstZone);
         canGotoEtheral = !(isInTutorial || isInFirstZone);
 
-        Form = Form.Normal;
-
         // on death, return to normal form
         DeathHandle d = new DeathHandle(() =>
         {
