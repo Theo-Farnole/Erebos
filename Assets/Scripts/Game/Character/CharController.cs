@@ -125,6 +125,9 @@ public class CharController : MonoBehaviour
         DeathHandle d1 = new DeathHandle(() =>
         {
             ResetMovements();
+
+            EndDash(false);
+
             _rigidbody.useGravity = false;
             _animator.SetTrigger(_hashDeath);
         });
