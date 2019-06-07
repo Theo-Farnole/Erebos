@@ -40,8 +40,17 @@ public class CharControllerSingularity : MonoBehaviour
         {
             _form = value;
 
-            AudioManager.Instance.PlaySoundGeneral(SoundGeneral.FormToBlack);
-            UpdateFormMesh();
+            switch (_form)
+            {
+                case Form.Ethereal:
+                    AudioManager.Instance.PlaySoundGeneral(SoundGeneral.FormToWhite);
+                    break;
+
+                case Form.Void:
+                    AudioManager.Instance.PlaySoundGeneral(SoundGeneral.FormToBlack);
+                    break;
+            }
+
             EventForm?.Invoke(_form);
         }
     }
@@ -110,21 +119,6 @@ public class CharControllerSingularity : MonoBehaviour
 
         _rightTriggerPressed = GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f ? true : false;
         _leftTriggerPressed = GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f ? true : false;
-    }
-
-    void UpdateFormMesh()
-    {
-        switch (Form)
-        {
-            case Form.Normal:
-                break;
-
-            case Form.Ethereal:
-                break;
-
-            case Form.Void:
-                break;
-        }
     }
 
     public void RotateAroundSingularity(Transform singularity, float currentAngleDelta)
