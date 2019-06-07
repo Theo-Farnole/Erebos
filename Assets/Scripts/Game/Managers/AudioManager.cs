@@ -119,8 +119,11 @@ public class AudioManager : Singleton<AudioManager>
     #region Fields
     [SerializeField] private GeneralSounds _generalSounds;
     [SerializeField] private UISounds _uiSounds;
+
+    private AudioSource _currentFootstep = null;
     #endregion
 
+    #region General Sounds
     public void PlaySoundGeneral(SoundGeneral sound)
     {
         float volume = SaveSystem.OptionsData.soundGeneral;
@@ -137,10 +140,17 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayFootsteps()
     {
-        int random = Random.Range(0, _generalSounds.Footsteps.Count);
+        if (_currentFootstep == null || (_currentFootstep != null && !_currentFootstep.isPlaying))
+        {
+            int random = Random.Range(0, _generalSounds.Footsteps.Count);
 
-        _generalSounds.Footsteps[random].Play();
+            _currentFootstep = _generalSounds.Footsteps[random];
+            _currentFootstep.Play();
+
+            Debug.Log("PlayFootstep");
+        }
     }
+    #endregion
 
     public void PlaySoundUI(SoundUI sound)
     {

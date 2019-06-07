@@ -213,7 +213,10 @@ public class CharController : MonoBehaviour
             vel.x = Mathf.Clamp(vel.x, -_data.MaxVelocityOnX, _data.MaxVelocityOnX);
             _rigidbody.velocity = vel;
 
-            AudioManager.Instance.PlayFootsteps();
+            if (_collision.down)
+            {
+                AudioManager.Instance.PlayFootsteps();
+            }
         }
 
         // if sticked or not runnings
