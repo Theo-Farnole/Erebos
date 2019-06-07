@@ -4,6 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// POST MORTEM NOTE
+// I should have made this class in another way.
+//
+// By using a state machine (Dash, Stick, etc..), 
+// I would have a smallest classes and more maintenable code.
+
+
 [SelectionBase]
 public class CharController : MonoBehaviour
 {
