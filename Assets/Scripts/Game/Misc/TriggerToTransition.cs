@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 public class TriggerToTransition : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private bool _hasBeenTriggered = false;
-
+    private bool _hasBeenTriggered = false;
     private AsyncOperation _ao = null;
     #endregion
 
