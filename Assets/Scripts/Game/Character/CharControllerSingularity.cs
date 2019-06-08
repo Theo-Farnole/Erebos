@@ -1,4 +1,5 @@
-﻿using GamepadInput;
+﻿using Erebos.Inputs;
+using GamepadInput;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +23,6 @@ public class CharControllerSingularity : Singleton<CharControllerSingularity>
     #endregion
 
     #region Private Fields
-    private bool _rightTriggerPressed = false;
-    private bool _leftTriggerPressed = false;
-
     private Form _form = Form.Normal;
     #endregion
     #endregion
@@ -90,8 +88,7 @@ public class CharControllerSingularity : Singleton<CharControllerSingularity>
         if (CharDeath.isDead || Time.timeScale == 0)
             return;
 
-        if (!_rightTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f ||
-         !_leftTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f)
+        if (InputProxy.Character.SwitchForm)
         {
             switch (Form)
             {
@@ -115,9 +112,6 @@ public class CharControllerSingularity : Singleton<CharControllerSingularity>
                     break;
             }
         }
-
-        _rightTriggerPressed = GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f ? true : false;
-        _leftTriggerPressed = GamePad.GetTrigger(GamePad.Trigger.LeftTrigger, GamePad.Index.One) > 0f ? true : false;
     }
 
     public void RotateAroundSingularity(Transform singularity, float currentAngleDelta)
@@ -125,7 +119,7 @@ public class CharControllerSingularity : Singleton<CharControllerSingularity>
         isRotatingAroundSingularity = true;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-        Vector2 input = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One);
+        Vector2 input = InputProxy.Character.LeftInput;
 
         if (input != Vector2.zero)
         {

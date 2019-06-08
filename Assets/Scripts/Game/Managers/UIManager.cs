@@ -1,4 +1,5 @@
-﻿using GamepadInput;
+﻿using Erebos.Inputs;
+using GamepadInput;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;

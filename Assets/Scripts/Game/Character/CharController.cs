@@ -1,4 +1,4 @@
-﻿using GamepadInput;
+﻿using Erebos.Inputs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -189,14 +189,14 @@ public class CharController : MonoBehaviour
 
     private void ManageInputs()
     {
-        _horizontal = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One).x;
+        _horizontal = InputProxy.Character.Horizontal;
 
-        if (Time.timeScale != 0 && GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One))
+        if (Time.timeScale != 0 && InputProxy.Character.JumpDown)
         {
             _jumpInput = true;
         }
 
-        else if (GamePad.GetButtonUp(GamePad.Button.A, GamePad.Index.One))
+        else if (InputProxy.Character.JumpUp)
         {
             _jumpInput = false;
         }
@@ -285,7 +285,7 @@ public class CharController : MonoBehaviour
 
     private void CheckIfUnsticked()
     {
-        if (GamePad.GetButton(GamePad.Button.B, GamePad.Index.Any))
+        if (InputProxy.Character.Unstick)
         {
             _animator.SetTrigger(_hashUnstick);
 
@@ -357,7 +357,7 @@ public class CharController : MonoBehaviour
     private void Dash()
     {
         // add force
-        Vector2 input = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.Any);
+        Vector2 input = InputProxy.Character.LeftInput;
         if (input == Vector2.zero) input = Vector2.up;// if no input, dash on up
 
         Vector3 force = (input.normalized * _data.DashDistance) / _data.DashTime;
