@@ -7,6 +7,9 @@ public enum FadeType { FadeIn, FadeOut }
 
 public static class GraphicExtension
 {
+    /// <summary>
+    /// Fade graphic component.
+    /// </summary>
     public static void Fade(this Graphic g, FadeType fadeType, float timeToFadout)
     {
         new Timer(g.gameObject, timeToFadout, (float f) =>

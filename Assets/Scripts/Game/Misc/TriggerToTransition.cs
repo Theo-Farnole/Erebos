@@ -25,10 +25,10 @@ public class TriggerToTransition : MonoBehaviour
             GameState.UpdateCurrentSpeedrunTime();
             GameState.currentScene++;
 
-            StartCoroutine(CustomDelay.ExecuteAfterTime(1f, () =>
+            this.ExecuteAfterTime(1f, () =>
             {
                 Initiate.Fade("SC_Transition", Color.black, 1f);
-            }));
+            });
         }
     }
     #endregion

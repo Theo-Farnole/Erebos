@@ -4,11 +4,17 @@ using UnityEngine;
 
 public static class GizmosPersistence
 {
-    public static void DrawPersistentLine(Vector3 p1, Vector2 p2, float lifetime = 3f)
+    /// <summary>
+    /// Draw a line that will be alive for X seconds.
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <param name="lifetime">Duration of the line in seconds</param>
+    public static void DrawPersistentLine(Vector3 from, Vector2 to, float lifetime = 3f)
     {
         var gizmos = new GameObject().AddComponent<GizmosLine>();
-        gizmos.p1 = p1;
-        gizmos.p2 = p2;
+        gizmos.from = from;
+        gizmos.to = to;
 
         GameObject.Destroy(gizmos.gameObject, lifetime);
     }

@@ -42,7 +42,15 @@ public static class GameState
     {
         get
         {
-            speedrunTime[(int)currentScene] = Time.timeSinceLevelLoad;
+            try
+            {
+                speedrunTime[(int)currentScene] = Time.timeSinceLevelLoad;
+            }
+            catch (System.IndexOutOfRangeException)
+            {
+
+            }
+
             return speedrunTime[(int)currentScene];
         }
     }

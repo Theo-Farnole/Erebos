@@ -9,7 +9,7 @@ using UnityEngine;
 // POST MORTEM NOTE
 // I should have made this class in another way.
 //
-// By using a state machine (Dash, Stick, etc..), 
+// By using a state machine (Dash, Stick, Attracted, etc..), 
 // I would have a smallest classes and more maintenable code.
 
 
@@ -80,6 +80,7 @@ public class CharController : MonoBehaviour
     private readonly int _hashDeath = Animator.StringToHash("Death");
     private readonly int _hashVelocity = Animator.StringToHash("Velocity");
     private readonly int _hashLeftCollision = Animator.StringToHash("LeftCollision");
+    private readonly int _hashSwitchForm = Animator.StringToHash("SwitchForm");
     #endregion
 
     #region Properties
@@ -141,6 +142,8 @@ public class CharController : MonoBehaviour
             _animator.SetTrigger(_hashDeath);
         });
         CharDeath.EventDeath += d1;
+
+        FormHandle d2 = new FormHandle((Form form) => _animator.SetTrigger(_hashSwitchForm));
     }
 
     void Update()
@@ -363,7 +366,7 @@ public class CharController : MonoBehaviour
 
         // dash boolean
         _isDashing = true;
-        _dashCoroutine = StartCoroutine(CustomDelay.ExecuteAfterTime(_data.DashTime, () => EndDash(true)));
+        _dashCoroutine = this.ExecuteAfterTime(_data.DashTime, () => EndDash(true));
 
         // feedback
         float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;

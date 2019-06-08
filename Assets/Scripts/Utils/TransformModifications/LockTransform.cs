@@ -15,10 +15,17 @@ public class LockTransform : MonoBehaviour
         _rotation = transform.rotation;
         _localPosition = transform.localPosition;
     }
-    
+
     void Update()
     {
-        transform.localPosition = _localPosition;
-        transform.rotation = _rotation;
+        if (_lockLocalPosition)
+        {
+            transform.localPosition = _localPosition;
+        }
+
+        if (_lockRotation)
+        {
+            transform.rotation = _rotation;
+        }
     }
 }

@@ -28,7 +28,7 @@ public class DisplayTextOnTriggerEnter : MonoBehaviour
             text.GetComponent<TranslateText>().DynamicTextUpdate();
 
             text.Fade(FadeType.FadeIn, _fadeInTime);
-            StartCoroutine(CustomDelay.ExecuteAfterTime(_idleTime, () => text.Fade(FadeType.FadeOut, _fadeOutTime)));
+            this.ExecuteAfterTime(_idleTime, () => text.Fade(FadeType.FadeOut, _fadeOutTime));
         }
     }
     #endregion

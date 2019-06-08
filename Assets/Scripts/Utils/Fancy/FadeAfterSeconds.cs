@@ -25,7 +25,7 @@ public class FadeAfterSeconds : MonoBehaviour
 
         if (graphic != null)
         {
-            StartCoroutine(CustomDelay.ExecuteAfterTime(_timeBeforeFade, () => graphic.Fade(_fadeType, _fadeDuration)));
+            this.ExecuteAfterTime(_timeBeforeFade, () => graphic.Fade(_fadeType, _fadeDuration));
         }
     }
 }
