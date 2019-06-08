@@ -9,14 +9,15 @@ public class TriggerToTransition : MonoBehaviour
     #region Fields
     [SerializeField] private bool _hasBeenTriggered = false;
 
-    private AsyncOperation _ao;
+    private AsyncOperation _ao = null;
     #endregion
 
     #region MonoBehaviour Callbacks
     void Start()
     {
-        _ao = SceneManager.LoadSceneAsync("SC_transition");
-        _ao.allowSceneActivation = false;
+        //_ao.allowSceneActivation = false;
+        //_ao = SceneManager.LoadSceneAsync("SC_transition");
+        //_ao.allowSceneActivation = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -26,6 +27,8 @@ public class TriggerToTransition : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Dans le trigger t'entends ! ");
+
             _hasBeenTriggered = true;
 
             SingletonExtension.ResetSingleton();
