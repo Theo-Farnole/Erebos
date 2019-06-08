@@ -9,7 +9,7 @@ using UnityEngine;
 // POST MORTEM NOTE
 // I should have made this class in another way.
 //
-// By using a state machine (Dash, Stick, etc..), 
+// By using a state machine (Dash, Stick, Attracted, etc..), 
 // I would have a smallest classes and more maintenable code.
 
 
