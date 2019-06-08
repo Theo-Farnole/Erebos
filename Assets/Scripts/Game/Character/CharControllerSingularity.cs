@@ -9,7 +9,7 @@ public delegate void FormHandle(Form form);
 public class CharControllerSingularity : MonoBehaviour
 {
     #region Fields
-    #region Publics Fields
+    #region Public Fields
     public static event FormHandle EventForm;
 
     [HideInInspector] public bool canGotoVoid = true;
