@@ -12,6 +12,10 @@ public static class GraphicExtension
     /// </summary>
     public static void Fade(this Graphic g, FadeType fadeType, float timeToFadout)
     {
+        g.StopAllCoroutines();
+
+        Debug.Log(g.transform.name + " " + fadeType + " with a duration of " + timeToFadout);
+
         new Timer(g, timeToFadout, (float f) =>
         {
             var color = g.color;
@@ -29,5 +33,12 @@ public static class GraphicExtension
 
             g.color = color;
         });
+    }
+
+    public static void SetTransparency(this Graphic g, float alpha)
+    {
+        Color c = g.color;
+        c.a = alpha;
+        g.color = c;
     }
 }

@@ -13,8 +13,7 @@ public class Timer
     /// <param name="task">float parameter is percent of progress of timer. Clamped between 0 and 1.</param>
     public Timer(MonoBehaviour ownerOfCoroutine, float duration, Action<float> task)
     {
-        var monoBehaviour = ownerOfCoroutine.GetComponent<MonoBehaviour>();
-        monoBehaviour.StartCoroutine(Coroutine(task, duration));
+        ownerOfCoroutine.StartCoroutine(Coroutine(task, duration));
     }
 
     IEnumerator Coroutine(Action<float> task, float duration)
@@ -30,7 +29,6 @@ public class Timer
             task(time);
 
             yield return new WaitForEndOfFrame();
-
         } while (time < 1);
     }
 }

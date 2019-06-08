@@ -15,17 +15,30 @@ public class Transition
 
     private int _currentDialogue = -1;
     private string _dialogueKey;
+
+    // cached var
     private TextMeshProUGUI _text;
+    private Image _image;
     #endregion
 
-    public void LoadVignette(ref Image image, ref TextMeshProUGUI text)
+    public void LoadVignette(Image image, TextMeshProUGUI text)
     {
-        _dialogueKey = "cinematics." + _cinematicIndex + ".";
-
+        // variables attributions
         _text = text;
+        _image = image;
+        _image.sprite = _sprite;
 
-        image.sprite = _sprite;
+        // dialogues
+        _dialogueKey = "cinematics." + _cinematicIndex + ".";
         ChangeDialogue();
+
+        // animation
+        _image.CrossFadeAlpha(1, 1, false);
+    }
+
+    public void UnloadVignette()
+    {
+        _image.CrossFadeAlpha(0, 1, false);
     }
 
     public void ChangeDialogue()
