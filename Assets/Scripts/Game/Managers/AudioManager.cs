@@ -146,8 +146,6 @@ public class AudioManager : Singleton<AudioManager>
 
             _currentFootstep = _generalSounds.Footsteps[random];
             _currentFootstep.Play();
-
-            Debug.Log("PlayFootstep");
         }
     }
     #endregion
