@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Camera Follow
   m_EditorClassIdentifier: 
   _speed: {x: 5, y: 3, z: 3}
-  _inputPercentOffset: 25
-  _inputSpeed: 5
+  _inputPercentOffset: 21.4
   _deltaFromCenterWidthPercent: 10
   _panicLineMaxY: 35
   _panicLineMinY: 20

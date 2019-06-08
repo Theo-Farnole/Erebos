@@ -34,10 +34,12 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private float _tutorialFadeInTime = 1f;
     [Space]
     [SerializeField] private GameObject _panelWhiteFeather;
-    [SerializeField] private GameObject _panelBlackFeather;
-    [Space]
     [SerializeField] private TextMeshProUGUI _textWhiteFeather;
+    [SerializeField] private GameObject _imageWhiteFeather;
+    [Space]
+    [SerializeField] private GameObject _panelBlackFeather;
     [SerializeField] private TextMeshProUGUI _textBlackFeather;
+    [SerializeField] private GameObject _imageBlackFeather;
     #endregion
 
     #region Properties
@@ -66,26 +68,33 @@ public class UIManager : Singleton<UIManager>
             SceneManager.LoadScene("SC_main_menu");
         });
 
-        _panelWhiteFeather.SetActive(false);
-        _panelBlackFeather.SetActive(false);
-
         _textCollectible.gameObject.SetActive(false);
         _imageCollectible.gameObject.SetActive(false);
+
+        _panelWhiteFeather.SetActive(false);
+        _panelBlackFeather.SetActive(false);
+        _imageWhiteFeather.SetActive(false);
+        _imageBlackFeather.SetActive(false);
     }
 
     void Update()
     {
-        // deactivate if on tutorial feather
-        if (GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One) ||
-        GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
+        if (_panelWhiteFeather.activeSelf && _panelWhiteFeather.GetComponent<Image>().color.a == 1)
         {
-            if (_panelWhiteFeather.activeSelf)
+            _imageWhiteFeather.SetActive(true);
+
+            if (InputProxy.SkipTutorial)
             {
                 _panelWhiteFeather.SetActive(false);
                 Time.timeScale = 1;
             }
+        }
 
-            if (_panelBlackFeather.activeSelf)
+        if (_panelBlackFeather.activeSelf && _panelBlackFeather.GetComponent<Image>().color.a == 1)
+        {
+            _imageBlackFeather.SetActive(true);
+
+            if (InputProxy.SkipTutorial)
             {
                 _panelBlackFeather.SetActive(false);
                 Time.timeScale = 1;
