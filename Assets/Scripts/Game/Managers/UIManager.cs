@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -18,13 +19,14 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private float _collectiblesFadeoutTime = 2.3f;
     [Header("-- Pause UI ")]
     [SerializeField] private GameObject _panelPause;
+    [SerializeField] private GameObject _panelControls;
     [Space]
     [Header("-- Pause UI - Timers")]
     [SerializeField] private TextMeshProUGUI[] _textSpeedRunsTimes = new TextMeshProUGUI[3];
     [SerializeField] private TextMeshProUGUI[] _textDeathCount = new TextMeshProUGUI[3];
     [Header("-- Pause UI - Buttons")]
     [SerializeField] private Button _buttonContinue;
-    [SerializeField] private Button _buttonStats;
+    [SerializeField] private Button _buttonControls;
     [SerializeField] private Button _buttonRestart;
     [SerializeField] private Button _buttonQuit;
     [Header("-- Tutorials")]
@@ -51,6 +53,7 @@ public class UIManager : Singleton<UIManager>
     void Start()
     {
         _panelPause.SetActive(false);
+        _panelControls.SetActive(false);
 
         // pause button
         _buttonContinue.onClick.AddListener(() =>
@@ -58,10 +61,20 @@ public class UIManager : Singleton<UIManager>
             Time.timeScale = 1;
             UpdatePanelPause();
         });
+
         _buttonRestart.onClick.AddListener(() =>
         {
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        });
+
+        _buttonControls.onClick.AddListener(() =>
+        {
+            _panelPause.SetActive(false);
+            _panelControls.SetActive(true);
+
+            EventSystem.current.SetSelectedGameObject(_panelControls.transform.GetChild(0).gameObject);
+            
         });
 
         _buttonQuit.onClick.AddListener(() =>
@@ -147,5 +160,8 @@ public class UIManager : Singleton<UIManager>
         bool isInPause = (Time.timeScale == 0);
 
         _panelPause.SetActive(isInPause);
+        _panelControls.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(_buttonContinue.gameObject);
     }
 }
