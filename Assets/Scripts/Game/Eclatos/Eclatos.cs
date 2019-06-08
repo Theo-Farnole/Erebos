@@ -16,20 +16,18 @@ public class Eclatos : MonoBehaviour
 
     private Vector3[] _positionVoid = new Vector3[4];
     private Vector3[] _eulerAngleVoid = new Vector3[4];
+
     private Vector3[] _positionEthereal = new Vector3[4];
     private Vector3[] _eulerAngleEthereal = new Vector3[4];
 
-    private Transform[] _points = new Transform[4];
+    private Transform[] _ecltaosPoints = new Transform[4];
     private static readonly float MIN_DISTANCE = 0.1f;
     private static readonly float MIN_ANGLE = 3f;
     #endregion
 
     #region MonoBehaviour Callbacks
-    void Start()
+    void Awake()
     {
-        FormHandle d = new FormHandle(OnFormChange);
-        CharControllerSingularity.EventForm += d;
-
         // register transform to points
         for (int i = 0; i < _pointsVoid.Length; i++)
         {
@@ -42,7 +40,12 @@ public class Eclatos : MonoBehaviour
             _positionEthereal[i] = _pointsEtheral[i].position;
             _eulerAngleEthereal[i] = _pointsEtheral[i].eulerAngles;
         }
+    }
 
+    void Start()
+    {
+        FormHandle d = new FormHandle(OnFormChange);
+        CharControllerSingularity.EventForm += d;
 
         // Hide useless transform
         switch (_startOnForm)
@@ -52,7 +55,7 @@ public class Eclatos : MonoBehaviour
                 break;
 
             case Form.Void:
-                _points = _pointsVoid;
+                _ecltaosPoints = _pointsVoid;
 
                 foreach (var t in _pointsEtheral)
                 {
@@ -61,7 +64,7 @@ public class Eclatos : MonoBehaviour
                 break;
 
             case Form.Ethereal:
-                _points = _pointsEtheral;
+                _ecltaosPoints = _pointsEtheral;
 
                 foreach (var t in _pointsVoid)
                 {
@@ -96,9 +99,9 @@ public class Eclatos : MonoBehaviour
         {
             isCompleted = true;
 
-            for (int i = 0; i < _points.Length; i++)
+            for (int i = 0; i < _ecltaosPoints.Length; i++)
             {
-                Transform t = _points[i];
+                Transform t = _ecltaosPoints[i];
 
                 float distancePosition = Vector3.Distance(t.position, position[i]);
                 float distanceAngle = Vector3.Distance(t.eulerAngles, eulerAngles[i]);

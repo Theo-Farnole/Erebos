@@ -11,7 +11,7 @@ public class Timer
     /// <param name="ownerOfCoroutine">MonoBehaviour which will start the Coroutine</param>
     /// <param name="duration">Duration of the timer</param>
     /// <param name="task">float parameter is percent of progress of timer. Clamped between 0 and 1.</param>
-    public Timer(GameObject ownerOfCoroutine, float duration, Action<float> task)
+    public Timer(MonoBehaviour ownerOfCoroutine, float duration, Action<float> task)
     {
         var monoBehaviour = ownerOfCoroutine.GetComponent<MonoBehaviour>();
         monoBehaviour.StartCoroutine(Coroutine(task, duration));

@@ -12,7 +12,7 @@ public static class GraphicExtension
     /// </summary>
     public static void Fade(this Graphic g, FadeType fadeType, float timeToFadout)
     {
-        new Timer(g.gameObject, timeToFadout, (float f) =>
+        new Timer(g, timeToFadout, (float f) =>
         {
             var color = g.color;
 
