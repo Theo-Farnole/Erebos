@@ -95,7 +95,6 @@ public class CameraFollow : Singleton<CameraFollow>
 
         if (isPanicLineBot || isPanicLineTop)
         {
-            Debug.Log("Panic line!");
             _wantedCameraPosition.y = _character.position.y + Mathf.Sin(-transform.eulerAngles.x * Mathf.Deg2Rad) * _distanceToTarget;
         }
     }
