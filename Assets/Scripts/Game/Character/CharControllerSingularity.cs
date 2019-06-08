@@ -125,14 +125,14 @@ public class CharControllerSingularity : MonoBehaviour
 
         Vector2 input = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One);
 
-        if (input == Vector2.zero)
-            return;
+        if (input != Vector2.zero)
+        {
+            float wantedAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
 
-        float wantedAngle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
-
-        Vector3 oldSingularityEulerAngles = singularity.eulerAngles;
-        Quaternion targetRot = Quaternion.Euler(Vector3.forward * (wantedAngle - currentAngleDelta));
-        singularity.rotation = Quaternion.RotateTowards(singularity.rotation, targetRot, _anglesPerSecond * Time.deltaTime);
+            Vector3 oldSingularityEulerAngles = singularity.eulerAngles;
+            Quaternion targetRot = Quaternion.Euler(Vector3.forward * (wantedAngle - currentAngleDelta));
+            singularity.rotation = Quaternion.RotateTowards(singularity.rotation, targetRot, _anglesPerSecond * Time.deltaTime);
+        }
 
         // mask
         Transform blackMask = CharFeedbacks.Instance.BlackMask.transform;
