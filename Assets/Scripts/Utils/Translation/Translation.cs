@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System;
 using System.IO;
+
+/// <author>
+/// http://www.demonixis.net/ajout-du-multilingue-dans-votre-jeux-avec-unity-3d/
+/// </author>
+
 public sealed class Translation : MonoBehaviour
 {
     public static readonly SystemLanguage[] Languages = { SystemLanguage.English, SystemLanguage.French };

@@ -363,7 +363,7 @@ public class CharController : MonoBehaviour
 
         // dash boolean
         _isDashing = true;
-        _dashCoroutine = StartCoroutine(CustomDelay.ExecuteAfterTime(_data.DashTime, () => EndDash(true)));
+        _dashCoroutine = this.ExecuteAfterTime(_data.DashTime, () => EndDash(true));
 
         // feedback
         float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;

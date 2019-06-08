@@ -75,13 +75,13 @@ public class CharDeath : MonoBehaviour
 
     private void InvokeRespawn()
     {
-        StartCoroutine(CustomDelay.ExecuteAfterTime(RESPAWN_TIME, () =>
+        this.ExecuteAfterTime(RESPAWN_TIME, () =>
         {
             transform.position = (Vector2)currentCheckpoint;
 
             isDead = false;
             EventRespawn?.Invoke();
             AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Respawn);
-        }));
+        });
     }
 }

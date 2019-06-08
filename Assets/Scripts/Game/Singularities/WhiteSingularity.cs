@@ -31,10 +31,10 @@ public class WhiteSingularity : AbstractSingularity
             return;
 
         _canRepulse = false;
-        StartCoroutine(CustomDelay.ExecuteAfterTime(REPULSE_DELAY, () =>
+        this.ExecuteAfterTime(REPULSE_DELAY, () =>
         {
             _canRepulse = true;
-        }));
+        });
 
         Vector3 dir = (_character.position - transform.position).normalized;
 
