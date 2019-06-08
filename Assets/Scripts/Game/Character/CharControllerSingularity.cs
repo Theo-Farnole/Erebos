@@ -87,7 +87,7 @@ public class CharControllerSingularity : Singleton<CharControllerSingularity>
 
     void ManageInputs()
     {
-        if (CharDeath.isDead)
+        if (CharDeath.isDead || Time.timeScale == 0)
             return;
 
         if (!_rightTriggerPressed && GamePad.GetTrigger(GamePad.Trigger.RightTrigger, GamePad.Index.One) > 0f ||
