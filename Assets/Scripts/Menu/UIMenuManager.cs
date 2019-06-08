@@ -101,7 +101,7 @@ public class UIMenuManager : MonoBehaviour
     {
         if (_ao != null)
         {
-            _ao.allowSceneActivation = true;
+            Initiate.Fade(_ao, Color.black, 1f);
         }
     }
 
