@@ -61,7 +61,7 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
 
     void Update()
     {
-        bool isInBlackSingularity = CharControllerManager.Instance.Attracted && _charControllerSingularity.Form == Form.Void;
+        bool isInBlackSingularity = CharControllerManager.Instance.Attracted;
 
         bool shouldBeActive = !(_isDashing || CharDeath.isDead || isInBlackSingularity);
 
