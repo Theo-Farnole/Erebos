@@ -80,6 +80,7 @@ public class CharController : MonoBehaviour
     private readonly int _hashDeath = Animator.StringToHash("Death");
     private readonly int _hashVelocity = Animator.StringToHash("Velocity");
     private readonly int _hashLeftCollision = Animator.StringToHash("LeftCollision");
+    private readonly int _hashSwitchForm = Animator.StringToHash("SwitchForm");
     #endregion
 
     #region Properties
@@ -141,6 +142,8 @@ public class CharController : MonoBehaviour
             _animator.SetTrigger(_hashDeath);
         });
         CharDeath.EventDeath += d1;
+
+        FormHandle d2 = new FormHandle((Form form) => _animator.SetTrigger(_hashSwitchForm));
     }
 
     void Update()
