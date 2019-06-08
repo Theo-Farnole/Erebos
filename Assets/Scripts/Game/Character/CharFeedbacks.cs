@@ -55,19 +55,21 @@ public class CharFeedbacks : Singleton<CharFeedbacks>
         FormHandle d3 = new FormHandle(PlayFormChange);
         CharControllerSingularity.EventForm += d3;
 
-        _blackMaskTrail = Instantiate(_prefabBlackMaskTrail, transform.position, Quaternion.identity);
-        _blackMaskTrail.GetComponent<FollowTransform>().transformToFollow = transform;
+        if (_prefabBlackMaskTrail != null)
+        {
+            _blackMaskTrail = Instantiate(_prefabBlackMaskTrail, transform.position, Quaternion.identity);
+            _blackMaskTrail.GetComponent<FollowTransform>().transformToFollow = transform;
+        }
     }
 
     void Update()
     {
-        bool isInBlackSingularity = CharControllerManager.Instance.Attracted;
+        // model SetActive
+        bool modelShouldBeActive = !(_isDashing || CharDeath.isDead || CharControllerSingularity.Instance.isRotatingAroundSingularity);
+        _model.SetActive(modelShouldBeActive);
 
-        bool shouldBeActive = !(_isDashing || CharDeath.isDead || isInBlackSingularity);
-
-        _model.SetActive(shouldBeActive);
-        _blackMask.SetActive(isInBlackSingularity);
-        _blackMaskTrail.SetActive(isInBlackSingularity);
+        // black mask
+        _blackMask.SetActive(CharControllerSingularity.Instance.isRotatingAroundSingularity);
     }
     #endregion
 

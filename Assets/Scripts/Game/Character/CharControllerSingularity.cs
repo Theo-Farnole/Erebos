@@ -6,7 +6,7 @@ using UnityEngine;
 public enum Form { Normal, Ethereal, Void };
 public delegate void FormHandle(Form form);
 
-public class CharControllerSingularity : MonoBehaviour
+public class CharControllerSingularity : Singleton<CharControllerSingularity>
 {
     #region Fields
     #region Public Fields
@@ -14,6 +14,7 @@ public class CharControllerSingularity : MonoBehaviour
 
     [HideInInspector] public bool canGotoVoid = true;
     [HideInInspector] public bool canGotoEtheral = true;
+    [HideInInspector] public bool isRotatingAroundSingularity = false;
     #endregion
 
     #region Serialize Fields
@@ -121,6 +122,7 @@ public class CharControllerSingularity : MonoBehaviour
 
     public void RotateAroundSingularity(Transform singularity, float currentAngleDelta)
     {
+        isRotatingAroundSingularity = true;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         Vector2 input = GamePad.GetAxis(GamePad.Axis.LeftStick, GamePad.Index.One);

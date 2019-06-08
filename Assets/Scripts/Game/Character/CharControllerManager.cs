@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class CharControllerManager : Singleton<CharControllerManager>
 {
+    #region Fields
     private bool _attracted = false;
 
+    private CharController _charController = null;
+    private CharControllerSingularity _charControllerSingularity = null;
+    private Rigidbody _charRigidbody = null;
+    #endregion
+
+    #region Properties
     public bool Attracted
     {
         get
@@ -17,17 +24,29 @@ public class CharControllerManager : Singleton<CharControllerManager>
         {
             _attracted = value;
 
-            GetComponent<CharController>().enabled = !_attracted;
+            _charController.enabled = !_attracted;
             GetComponent<Rigidbody>().useGravity = !_attracted;
 
             if (_attracted)
             {
-                GetComponent<CharController>().ResetMovements();                
+                _charController.ResetMovements();                
+            }
+            else
+            {
+                _charControllerSingularity.isRotatingAroundSingularity = false;
             }
         }
     }
+    #endregion
 
     #region MonoBehaviour Callbacks
+    void Awake()
+    {
+        _charController = GetComponent<CharController>();
+        _charControllerSingularity = GetComponent<CharControllerSingularity>();
+        _charRigidbody = GetComponent<Rigidbody>();
+    }
+
     void Start()
     {
         // on death, set attracted to false
