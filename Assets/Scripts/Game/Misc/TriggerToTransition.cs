@@ -8,10 +8,18 @@ public class TriggerToTransition : MonoBehaviour
 {
     #region Fields
     [SerializeField] private bool _hasBeenTriggered = false;
+
+    private AsyncOperation _ao;
     #endregion
 
     #region MonoBehaviour Callbacks
-    private void OnTriggerEnter(Collider other)
+    void Start()
+    {
+        _ao = SceneManager.LoadSceneAsync("SC_transition");
+        _ao.allowSceneActivation = false;
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (_hasBeenTriggered)
             return;
@@ -27,7 +35,7 @@ public class TriggerToTransition : MonoBehaviour
 
             this.ExecuteAfterTime(1f, () =>
             {
-                Initiate.Fade("SC_Transition", Color.black, 1f);
+                Initiate.Fade(_ao, Color.black, 1f);
             });
         }
     }

@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class TransitionManager : Singleton<TransitionManager>
 {
+    public static readonly float FADEOUT_DURATION = 1;
+
     #region Fields
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -23,7 +25,7 @@ public class TransitionManager : Singleton<TransitionManager>
     [SerializeField] private List<Transition> _transitionsEnd = new List<Transition>();
 
     private Dictionary<SceneState, List<Transition>> _transitions = new Dictionary<SceneState, List<Transition>>();
-    private AsyncOperation ao;
+    private AsyncOperation _ao;
 
     private int _currentTransitionIndex = -1;
     private Transition _currentTransition;
@@ -69,8 +71,8 @@ public class TransitionManager : Singleton<TransitionManager>
     {
         string sceneToLoad = GameState.currentScene.ToScene();
 
-        ao = SceneManager.LoadSceneAsync(sceneToLoad);
-        ao.allowSceneActivation = false;
+        _ao = SceneManager.LoadSceneAsync(sceneToLoad);
+        _ao.allowSceneActivation = false;
 
         ChangeTransition();
     }
@@ -91,11 +93,13 @@ public class TransitionManager : Singleton<TransitionManager>
     {
         _currentTransitionIndex++;
 
+        
+        // Load next Vignette or Scene
         if (_currentTransitionIndex < _transitions[GameState.currentScene].Count)
         {
             if (_currentTransition != null)
             {
-                _currentTransition.UnloadVignette();                
+                _currentTransition.UnloadVignette(FADEOUT_DURATION);
             }
 
             _currentTransition = _transitions[GameState.currentScene][_currentTransitionIndex];
@@ -103,11 +107,11 @@ public class TransitionManager : Singleton<TransitionManager>
         }
         else
         {
-            if (ao != null)
+            if (_ao != null)
             {
-                ao.allowSceneActivation = true;
+                //this.ExecuteAfterTime(FADEOUT_DURATION, () => ao.allowSceneActivation = true);
+                Initiate.Fade(_ao, Color.black, 1f);
             }
         }
     }
-
 }

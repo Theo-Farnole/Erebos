@@ -36,9 +36,9 @@ public class Transition
         _image.CrossFadeAlpha(1, 1, false);
     }
 
-    public void UnloadVignette()
+    public void UnloadVignette(float fadeoutDuration)
     {
-        _image.CrossFadeAlpha(0, 1, false);
+        _image.CrossFadeAlpha(0, fadeoutDuration, false);
     }
 
     public void ChangeDialogue()

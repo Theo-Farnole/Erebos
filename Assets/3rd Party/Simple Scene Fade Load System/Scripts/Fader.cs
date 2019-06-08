@@ -10,7 +10,7 @@ public class Fader : MonoBehaviour
     [HideInInspector]
     public float fadeDamp = 0.0f;
     [HideInInspector]
-    public string fadeScene;
+    public AsyncOperation ao;
     [HideInInspector]
     public float alpha = 0.0f;
     [HideInInspector]
@@ -78,7 +78,7 @@ public class Fader : MonoBehaviour
                 if (alpha == 1 && !startedLoading)
                 {
                     startedLoading = true;
-                    SceneManager.LoadScene(fadeScene);
+                    ao.allowSceneActivation = true;
                 }
 
             }

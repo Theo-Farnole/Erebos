@@ -6,7 +6,7 @@ public static class Initiate
     static bool areWeFading = false;
 
     //Create Fader object and assing the fade scripts and assign all the variables
-    public static void Fade(string scene, Color col, float multiplier)
+    public static void Fade(AsyncOperation ao, Color col, float multiplier)
     {
         if (areWeFading)
         {
@@ -24,7 +24,7 @@ public static class Initiate
 
         Fader scr = init.GetComponent<Fader>();
         scr.fadeDamp = multiplier;
-        scr.fadeScene = scene;
+        scr.ao = ao;
         scr.fadeColor = col;
         scr.start = true;
         areWeFading = true;
