@@ -66,7 +66,7 @@ public class CharController : MonoBehaviour
 
     // cached variables
     private Rigidbody _rigidbody;
-    private Collider _collider;
+    private CapsuleCollider _collider;
     private float _distToGround;
     private float _distToSide;
 
@@ -133,7 +133,7 @@ public class CharController : MonoBehaviour
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _collider = GetComponent<Collider>();
+        _collider = GetComponent<CapsuleCollider>();
 
         _distToGround = _collider.bounds.extents.y;
         _distToSide = _collider.bounds.extents.x;
@@ -365,8 +365,10 @@ public class CharController : MonoBehaviour
         if (input == Vector2.zero) input = Vector2.up;// if no input, dash on up
 
         Vector3 force = (input.normalized * _data.DashDistance) / _data.DashTime;
-
         _rigidbody.velocity = force;
+
+        // update collider size
+        _collider.height = 1;
 
         // dash boolean
         _isDashing = true;
@@ -384,15 +386,12 @@ public class CharController : MonoBehaviour
         StopCoroutine(_dashCoroutine);
         CharFeedbacks.Instance.StopDashSequence();
 
+        // back to normal size
+        _collider.height = 2;
+
         // add velocity or reset
-        Vector3 velocity = Vector3.zero;
-
-        if (addVelocity)
-        {
-            velocity = _rigidbody.velocity.normalized * _data.DashInertia;
-        }
-
-        _rigidbody.velocity = velocity;
+        Vector3 addVelocityVector = _rigidbody.velocity.normalized * _data.DashInertia;
+        _rigidbody.velocity = addVelocity ? addVelocityVector : Vector3.zero;
     }
 
     private void StickedJump()
