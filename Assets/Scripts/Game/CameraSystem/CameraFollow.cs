@@ -23,6 +23,7 @@ public class CameraFollow : Singleton<CameraFollow>
     // cached variables
     private Transform _character = null;
     private Rigidbody _charRigidbody = null;
+    private CharController _charController = null;
 
     private Vector2 _screenBounds;
     private float _distanceToTarget = Mathf.Infinity;
@@ -33,6 +34,7 @@ public class CameraFollow : Singleton<CameraFollow>
     {
         _character = GameObject.FindGameObjectWithTag("Player").transform;
         _charRigidbody = _character.GetComponent<Rigidbody>();
+        _charController = _charController.GetComponent<CharController>();
 
         _wantedCameraPosition = transform.position;
 
@@ -139,6 +141,12 @@ public class CameraFollow : Singleton<CameraFollow>
 
         // process input
         _cameraContainer.position = _cameraInputOffset;
+
+        // override if center need
+        if (_charController.CameraShouldCenter)
+        {
+            SmoothCenterOnCharacter();
+        }
     }
 
     #region Center

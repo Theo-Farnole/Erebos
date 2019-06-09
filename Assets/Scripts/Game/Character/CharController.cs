@@ -100,6 +100,14 @@ public class CharController : MonoBehaviour
             CharFeedbacks.Instance.UpdateFormMaterial(_jumpsAvailable >= 1);
         }
     }
+    
+    public bool CameraShouldCenter
+    {
+        get
+        {
+            return (_collision.down || _isSticked);
+        }
+    }
 
     public bool IsBlocked
     {
@@ -151,11 +159,6 @@ public class CharController : MonoBehaviour
     {
         if (CharDeath.isDead)
             return;
-
-        if (_collision.down || _isSticked)
-        {
-            CameraFollow.Instance.SmoothCenterOnCharacter();
-        }
 
         ManageInputs();
     }
