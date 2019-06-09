@@ -17,6 +17,8 @@ using UnityEngine;
 public class CharController : MonoBehaviour
 {
     public static readonly int MAX_JUMPS = 2;
+    public static readonly Vector3 HEAD_POSITION = 0.7f * Vector3.up;
+    public static readonly float RADIUS_GROUNDED_SPHERE = 0.4f;
 
     #region Fields
     class PlayerCollision
@@ -65,9 +67,12 @@ public class CharController : MonoBehaviour
 
     // cached variables
     private Rigidbody _rigidbody;
-    private Collider _collider;
+    private CapsuleCollider _collider;
     private float _distToGround;
     private float _distToSide;
+    private Vector3 _sphereOverlapPosition;
+
+    private int _layerMask;
 
     private readonly int _hashWalkBlend = Animator.StringToHash("WalkBlend");
     private readonly int _hashJump = Animator.StringToHash("Jump");
@@ -99,6 +104,14 @@ public class CharController : MonoBehaviour
             CharFeedbacks.Instance.UpdateFormMaterial(_jumpsAvailable >= 1);
         }
     }
+    
+    public bool CameraShouldCenter
+    {
+        get
+        {
+            return (_collision.down || _isSticked);
+        }
+    }
 
     public bool IsBlocked
     {
@@ -124,10 +137,13 @@ public class CharController : MonoBehaviour
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _collider = GetComponent<Collider>();
+        _collider = GetComponent<CapsuleCollider>();
 
         _distToGround = _collider.bounds.extents.y;
         _distToSide = _collider.bounds.extents.x;
+        _sphereOverlapPosition = ((_distToGround + 0.1f) - RADIUS_GROUNDED_SPHERE) * Vector3.down;
+
+        _layerMask = ~LayerMask.GetMask("Player");
     }
 
     void Start()
@@ -150,11 +166,6 @@ public class CharController : MonoBehaviour
     {
         if (CharDeath.isDead)
             return;
-
-        if (_collision.down || _isSticked)
-        {
-            CameraFollow.Instance.SmoothCenterOnCharacter();
-        }
 
         ManageInputs();
     }
@@ -204,10 +215,12 @@ public class CharController : MonoBehaviour
 
     private void UpdateCollisionsVariable()
     {
-        _collision.up = Physics.Raycast(transform.position, Vector3.up, _distToGround + 0.1f);
-        _collision.down = Physics.Raycast(transform.position, Vector3.down, _distToGround + 0.1f);
-        _collision.left = Physics.Raycast(transform.position, Vector3.left, _distToSide + 0.1f);
-        _collision.right = Physics.Raycast(transform.position, Vector3.right, _distToSide + 0.1f);
+        _collision.up = Physics.Raycast(transform.position, Vector3.up, _distToGround + 0.1f, _layerMask);
+        _collision.left = Physics.Raycast(transform.position + HEAD_POSITION, Vector3.left, _distToSide + 0.1f, _layerMask);
+        _collision.right = Physics.Raycast(transform.position + HEAD_POSITION, Vector3.right, _distToSide + 0.1f, _layerMask);
+
+        var colliders = Physics.OverlapSphere(transform.position + _sphereOverlapPosition, RADIUS_GROUNDED_SPHERE, _layerMask);
+        _collision.down = colliders.Length > 0;
     }
 
     #region Run Methods
@@ -361,8 +374,10 @@ public class CharController : MonoBehaviour
         if (input == Vector2.zero) input = Vector2.up;// if no input, dash on up
 
         Vector3 force = (input.normalized * _data.DashDistance) / _data.DashTime;
-
         _rigidbody.velocity = force;
+
+        // update collider size
+        _collider.height = 1;
 
         // dash boolean
         _isDashing = true;
@@ -380,15 +395,12 @@ public class CharController : MonoBehaviour
         StopCoroutine(_dashCoroutine);
         CharFeedbacks.Instance.StopDashSequence();
 
+        // back to normal size
+        _collider.height = 2;
+
         // add velocity or reset
-        Vector3 velocity = Vector3.zero;
-
-        if (addVelocity)
-        {
-            velocity = _rigidbody.velocity.normalized * _data.DashInertia;
-        }
-
-        _rigidbody.velocity = velocity;
+        Vector3 addVelocityVector = _rigidbody.velocity.normalized * _data.DashInertia;
+        _rigidbody.velocity = addVelocity ? addVelocityVector : Vector3.zero;
     }
 
     private void StickedJump()
@@ -520,5 +532,11 @@ public class CharController : MonoBehaviour
             // ALWAYS set the latency mode back
             GCSettings.LatencyMode = oldMode;
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawSphere(transform.position + _sphereOverlapPosition, RADIUS_GROUNDED_SPHERE);
     }
 }

@@ -722,7 +722,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 93343719}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9c725688d388004eb1b97513e192e3b, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &93343722
@@ -767,29 +767,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 93343723}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 93343721}
-        m_MethodName: SetActivPannel
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1172855578}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 93343721}
-        m_MethodName: SetActivPannel
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1552047183}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &93343723
@@ -3462,7 +3440,6 @@ GameObject:
   - component: {fileID: 781061717}
   - component: {fileID: 781061716}
   - component: {fileID: 781061715}
-  - component: {fileID: 781061714}
   m_Layer: 5
   m_Name: back_button
   m_TagString: Untagged
@@ -3490,18 +3467,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 66}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &781061714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781061712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9c725688d388004eb1b97513e192e3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &781061715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3544,29 +3509,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 781061716}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 781061714}
-        m_MethodName: SetActivPannel
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1552047183}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 781061714}
-        m_MethodName: SetActivPannel
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2002427225}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &781061716

@@ -23,6 +23,7 @@ public class CameraFollow : Singleton<CameraFollow>
     // cached variables
     private Transform _character = null;
     private Rigidbody _charRigidbody = null;
+    private CharController _charController = null;
 
     private Vector2 _screenBounds;
     private float _distanceToTarget = Mathf.Infinity;
@@ -31,8 +32,9 @@ public class CameraFollow : Singleton<CameraFollow>
     #region MonoBehaviour Callbacks
     void Awake()
     {
-        _character = GameObject.FindGameObjectWithTag("Player").transform;
-        _charRigidbody = _character.GetComponent<Rigidbody>();
+        _charController = CharControllerManager.Instance.GetComponent<CharController>();
+        _character = _charController.transform;
+        _charRigidbody = _charController.GetComponent<Rigidbody>();
 
         _wantedCameraPosition = transform.position;
 
@@ -139,6 +141,12 @@ public class CameraFollow : Singleton<CameraFollow>
 
         // process input
         _cameraContainer.position = _cameraInputOffset;
+
+        // override if center need
+        if (_charController.CameraShouldCenter)
+        {
+            SmoothCenterOnCharacter();
+        }
     }
 
     #region Center
@@ -236,8 +244,5 @@ public class CameraFollow : Singleton<CameraFollow>
         // draw wanted position
         Gizmos.color = Color.magenta;
         Gizmos.DrawSphere((Vector2)(_wantedCameraPosition + deltaAngle), 0.5f);
-
-        // draw process input
-        Gizmos.DrawCube((Vector2)(transform.position + _cameraInputOffset + deltaAngle), Vector3.one * 3);
     }
 }

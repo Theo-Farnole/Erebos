@@ -11,6 +11,20 @@ public class CheatsManager : MonoBehaviour
     private GameObject[] _checkpoints;
     #endregion
 
+    #region Properties
+    public GameObject[] Checkpoints
+    {
+        get
+        {
+            if (_checkpoints == null)
+            {
+                _checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+            }
+            return _checkpoints;
+        }
+    }
+    #endregion
+
     void Update()
     {
         if (GamePad.GetButtonDown(GamePad.Button.Back, GamePad.Index.One) || Input.GetKeyDown(KeyCode.KeypadEnter))
@@ -19,12 +33,8 @@ public class CheatsManager : MonoBehaviour
 
             if (_isActive)
             {
-                if (_checkpoints == null)
-                {
-                    _checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
-                }
-
                 CharControllerSingularity charControllerSingularity = CharControllerManager.Instance.GetComponent<CharControllerSingularity>();
+
                 charControllerSingularity.canGotoEtheral = true;
                 charControllerSingularity.canGotoVoid = true;
             }
@@ -45,9 +55,9 @@ public class CheatsManager : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Keypad8)) targetCP = 7;
             else if (Input.GetKeyDown(KeyCode.Keypad9)) targetCP = 8;
 
-            if (targetCP != -1 && targetCP < _checkpoints.Length)
+            if (targetCP != -1 && targetCP < Checkpoints.Length)
             {
-                CharControllerManager.Instance.transform.position = _checkpoints[targetCP].transform.position;
+                CharControllerManager.Instance.transform.position = Checkpoints[targetCP].transform.position;
             }
         }
     }
