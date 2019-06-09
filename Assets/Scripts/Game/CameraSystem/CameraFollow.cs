@@ -244,8 +244,5 @@ public class CameraFollow : Singleton<CameraFollow>
         // draw wanted position
         Gizmos.color = Color.magenta;
         Gizmos.DrawSphere((Vector2)(_wantedCameraPosition + deltaAngle), 0.5f);
-
-        // draw process input
-        Gizmos.DrawCube((Vector2)(transform.position + _cameraInputOffset + deltaAngle), Vector3.one * 3);
     }
 }
