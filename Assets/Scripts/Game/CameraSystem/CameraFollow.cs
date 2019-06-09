@@ -20,6 +20,8 @@ public class CameraFollow : Singleton<CameraFollow>
     private Vector3 _wantedCameraPosition = Vector3.zero;
     private Vector3 _cameraInputOffset = Vector3.zero;
 
+    private Vector3 _smoothDampVelocity = Vector3.zero;
+
     // cached variables
     private Transform _character = null;
     private Rigidbody _charRigidbody = null;
@@ -78,14 +80,14 @@ public class CameraFollow : Singleton<CameraFollow>
     {
         _wantedCameraPosition.x = _character.position.x;
 
-        if (_charRigidbody.velocity.x > 0)
-        {
-            _wantedCameraPosition.x += _screenBounds.x * _data.DeltaFromCenterWidthPercent;
-        }
-        else if (_charRigidbody.velocity.x < 0)
-        {
-            _wantedCameraPosition.x -= _screenBounds.x * _data.DeltaFromCenterWidthPercent;
-        }
+        //if (_charRigidbody.velocity.x > 0)
+        //{
+        //    _wantedCameraPosition.x += _screenBounds.x * _data.DeltaFromCenterWidthPercent;
+        //}
+        //else if (_charRigidbody.velocity.x < 0)
+        //{
+        //    _wantedCameraPosition.x -= _screenBounds.x * _data.DeltaFromCenterWidthPercent;
+        //}
     }
 
     void SetWantedPositionY()
@@ -129,8 +131,7 @@ public class CameraFollow : Singleton<CameraFollow>
     {
         Vector3 newPosition = Vector3.zero;
 
-        float xDistance = _character.position.x - transform.localPosition.x;
-        newPosition.x = transform.localPosition.x + xDistance / 32f;
+        newPosition.x = Mathf.SmoothDamp(transform.localPosition.x, _wantedCameraPosition.x, ref _smoothDampVelocity.x, _data.Speed.x * Time.deltaTime);
         newPosition.y = Mathf.Lerp(transform.localPosition.y, _wantedCameraPosition.y, _data.Speed.y * Time.deltaTime);
         newPosition.z = Mathf.Lerp(transform.localPosition.z, _wantedCameraPosition.z, _data.Speed.z * Time.deltaTime);
 
