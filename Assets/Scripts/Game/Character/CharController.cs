@@ -219,11 +219,6 @@ public class CharController : MonoBehaviour
 
         var colliders = Physics.OverlapSphere(transform.position + _distToGround * Vector3.down, RADIUS_GROUNDED_SPHERE, _layerMask);
         _collision.down = colliders.Length > 0;
-
-        foreach (var c in colliders)
-        {
-            Debug.Log("colliders: " + c.transform.name);
-        }
     }
 
     #region Run Methods
