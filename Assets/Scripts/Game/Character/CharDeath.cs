@@ -24,6 +24,7 @@ public class CharDeath : MonoBehaviour
     #region MonoBehaviour Callbacks
     void Awake()
     {
+        isDead = false;
         currentCheckpoint = transform.position;
 
         _charController = GetComponent<CharController>();
