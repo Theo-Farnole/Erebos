@@ -66,7 +66,7 @@ public class CharController : MonoBehaviour
 
     // cached variables
     private Rigidbody _rigidbody;
-    private Collider _collider;
+    private CapsuleCollider _collider;
     private float _distToGround;
     private float _distToSide;
 
@@ -133,7 +133,7 @@ public class CharController : MonoBehaviour
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _collider = GetComponent<Collider>();
+        _collider = GetComponent<CapsuleCollider>();
 
         _distToGround = _collider.bounds.extents.y;
         _distToSide = _collider.bounds.extents.x;
@@ -208,6 +208,9 @@ public class CharController : MonoBehaviour
 
     private void UpdateCollisionsVariable()
     {
+        _distToGround = _collider.bounds.extents.y;
+        _distToSide = _collider.bounds.extents.x;
+
         _collision.up = Physics.Raycast(transform.position, Vector3.up, _distToGround + 0.1f);
         _collision.down = Physics.Raycast(transform.position, Vector3.down, _distToGround + 0.1f);
         _collision.left = Physics.Raycast(transform.position + HEAD_POSITION, Vector3.left, _distToSide + 0.1f);
@@ -360,13 +363,16 @@ public class CharController : MonoBehaviour
 
     private void Dash()
     {
-        // add force
+        // apply force
         Vector2 input = InputProxy.Character.LeftInput;
         if (input == Vector2.zero) input = Vector2.up;// if no input, dash on up
 
         Vector3 force = (input.normalized * _data.DashDistance) / _data.DashTime;
-
         _rigidbody.velocity = force;
+
+        // modify direction of capsule collider
+        bool xAxis = Mathf.Abs(input.x) > Mathf.Abs(input.y);
+        _collider.direction = xAxis ? 0 : 1;
 
         // dash boolean
         _isDashing = true;
@@ -384,15 +390,11 @@ public class CharController : MonoBehaviour
         StopCoroutine(_dashCoroutine);
         CharFeedbacks.Instance.StopDashSequence();
 
+        _collider.direction = 1; // back to Y axis
+
         // add velocity or reset
-        Vector3 velocity = Vector3.zero;
-
-        if (addVelocity)
-        {
-            velocity = _rigidbody.velocity.normalized * _data.DashInertia;
-        }
-
-        _rigidbody.velocity = velocity;
+        Vector3 velocityToAdd =  _rigidbody.velocity.normalized * _data.DashInertia;
+        _rigidbody.velocity = addVelocity ? velocityToAdd : Vector3.zero;
     }
 
     private void StickedJump()
