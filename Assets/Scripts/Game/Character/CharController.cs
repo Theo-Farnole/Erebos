@@ -18,6 +18,7 @@ public class CharController : MonoBehaviour
 {
     public static readonly int MAX_JUMPS = 2;
     public static readonly Vector3 HEAD_POSITION = 0.7f * Vector3.up;
+    public static readonly float RADIUS_GROUNDED_SPHERE = 0.1f;
 
     #region Fields
     class PlayerCollision
@@ -69,6 +70,8 @@ public class CharController : MonoBehaviour
     private CapsuleCollider _collider;
     private float _distToGround;
     private float _distToSide;
+
+    private int _layerMask;
 
     private readonly int _hashWalkBlend = Animator.StringToHash("WalkBlend");
     private readonly int _hashJump = Animator.StringToHash("Jump");
@@ -137,6 +140,8 @@ public class CharController : MonoBehaviour
 
         _distToGround = _collider.bounds.extents.y;
         _distToSide = _collider.bounds.extents.x;
+
+        _layerMask = ~LayerMask.GetMask("Player");
     }
 
     void Start()
@@ -208,10 +213,17 @@ public class CharController : MonoBehaviour
 
     private void UpdateCollisionsVariable()
     {
-        _collision.up = Physics.Raycast(transform.position, Vector3.up, _distToGround + 0.1f);
-        _collision.down = Physics.Raycast(transform.position, Vector3.down, _distToGround + 0.1f);
-        _collision.left = Physics.Raycast(transform.position + HEAD_POSITION, Vector3.left, _distToSide + 0.1f);
-        _collision.right = Physics.Raycast(transform.position + HEAD_POSITION, Vector3.right, _distToSide + 0.1f);
+        _collision.up = Physics.Raycast(transform.position, Vector3.up, _distToGround + 0.1f, _layerMask);
+        _collision.left = Physics.Raycast(transform.position + HEAD_POSITION, Vector3.left, _distToSide + 0.1f, _layerMask);
+        _collision.right = Physics.Raycast(transform.position + HEAD_POSITION, Vector3.right, _distToSide + 0.1f, _layerMask);
+
+        var colliders = Physics.OverlapSphere(transform.position + _distToGround * Vector3.down, RADIUS_GROUNDED_SPHERE, _layerMask);
+        _collision.down = colliders.Length > 0;
+
+        foreach (var c in colliders)
+        {
+            Debug.Log("colliders: " + c.transform.name);
+        }
     }
 
     #region Run Methods
@@ -523,5 +535,11 @@ public class CharController : MonoBehaviour
             // ALWAYS set the latency mode back
             GCSettings.LatencyMode = oldMode;
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawSphere(transform.position + _distToGround * Vector3.down, RADIUS_GROUNDED_SPHERE);
     }
 }
