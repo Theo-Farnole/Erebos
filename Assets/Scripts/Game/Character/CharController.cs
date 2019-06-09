@@ -17,6 +17,7 @@ using UnityEngine;
 public class CharController : MonoBehaviour
 {
     public static readonly int MAX_JUMPS = 2;
+    public static readonly Vector3 HEAD_POSITION = 0.7f * Vector3.up;
 
     #region Fields
     class PlayerCollision
@@ -206,8 +207,8 @@ public class CharController : MonoBehaviour
     {
         _collision.up = Physics.Raycast(transform.position, Vector3.up, _distToGround + 0.1f);
         _collision.down = Physics.Raycast(transform.position, Vector3.down, _distToGround + 0.1f);
-        _collision.left = Physics.Raycast(transform.position, Vector3.left, _distToSide + 0.1f);
-        _collision.right = Physics.Raycast(transform.position, Vector3.right, _distToSide + 0.1f);
+        _collision.left = Physics.Raycast(transform.position + HEAD_POSITION, Vector3.left, _distToSide + 0.1f);
+        _collision.right = Physics.Raycast(transform.position + HEAD_POSITION, Vector3.right, _distToSide + 0.1f);
     }
 
     #region Run Methods
