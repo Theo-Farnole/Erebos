@@ -32,9 +32,9 @@ public class CameraFollow : Singleton<CameraFollow>
     #region MonoBehaviour Callbacks
     void Awake()
     {
-        _character = GameObject.FindGameObjectWithTag("Player").transform;
-        _charRigidbody = _character.GetComponent<Rigidbody>();
-        _charController = _charController.GetComponent<CharController>();
+        _charController = CharControllerManager.Instance.GetComponent<CharController>();
+        _character = _charController.transform;
+        _charRigidbody = _charController.GetComponent<Rigidbody>();
 
         _wantedCameraPosition = transform.position;
 
