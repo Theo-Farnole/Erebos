@@ -3,19 +3,16 @@ using System.Collections;
 using UnityEngine.UI;
 public static class Initiate
 {
-    static bool areWeFading = false;
-
     // Create Fader object and assing the fade scripts and assign all the variables
     public static void Fade(AsyncOperation ao, Color col, float multiplier)
     {
-        if (areWeFading)
+        var faders = GameObject.FindObjectsOfType<Fader>();
+
+        foreach (var f in faders)
         {
-            var currentFader = GameObject.FindObjectOfType<Fader>().gameObject;
-
-            Debug.Log("Already Fading: destroy old fader: " + currentFader);
-
-            GameObject.Destroy(currentFader);
+            GameObject.Destroy(f.gameObject);
         }
+
 
         GameObject init = new GameObject
         {
@@ -33,12 +30,6 @@ public static class Initiate
         scr.ao = ao;
         scr.fadeColor = col;
 
-        areWeFading = true;
         scr.InitiateFader();
-    }
-
-    public static void DoneFading()
-    {
-        areWeFading = false;
     }
 }

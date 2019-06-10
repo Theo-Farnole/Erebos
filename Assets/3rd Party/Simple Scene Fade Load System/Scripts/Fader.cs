@@ -22,7 +22,6 @@ public class Fader : MonoBehaviour
     #region MonoBehaviour Callbacks
     void OnDestroy()
     {
-        Debug.Log("Fader OnDestroy()");
         StopAllCoroutines();
     }
 
@@ -95,7 +94,6 @@ public class Fader : MonoBehaviour
             yield return null;
         }
 
-        Initiate.DoneFading();
 
         Debug.Log("Your scene has been loaded , and fading in has just ended");
 
