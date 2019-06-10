@@ -110,7 +110,7 @@ public class TransitionManager : Singleton<TransitionManager>
             {
                 _hasEnded = true;
 
-                Initiate.Fade(_ao, Color.black, 1f);
+                Initiate.Fade(GameState.currentScene.ToScene(), Color.black, 1f);
             }
         }
     }

@@ -65,7 +65,7 @@ public class UIManager : Singleton<UIManager>
         _buttonRestart.onClick.AddListener(() =>
         {
             Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Initiate.Fade(SceneManager.GetActiveScene().name, Color.black, 1);
         });
 
         _buttonControls.onClick.AddListener(() =>
@@ -79,7 +79,10 @@ public class UIManager : Singleton<UIManager>
 
         _buttonQuit.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("SC_main_menu");
+            Time.timeScale = 1;
+            Initiate.Fade("SC_main_menu", Color.black, 1);
+
+            UpdatePanelPause();
         });
 
         _textCollectible.gameObject.SetActive(false);

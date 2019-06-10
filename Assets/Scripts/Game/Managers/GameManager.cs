@@ -21,7 +21,7 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
-        if (GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
+        if (!Initiate.AreWeFading && GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
         {
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
             UIManager.Instance.UpdatePanelPause();

@@ -113,7 +113,7 @@ public class UIMenuManager : MonoBehaviour
         if (_ao != null)
         {
             _playedHasBeenPressed = true;
-            Initiate.Fade(_ao, Color.black, 1f);
+            Initiate.Fade(SceneState.Tutorial.ToScene(), Color.black, 1f);
         }
     }
 

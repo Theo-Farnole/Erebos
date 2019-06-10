@@ -3,22 +3,21 @@ using System.Collections;
 using UnityEngine.UI;
 public static class Initiate
 {
-    // Create Fader object and assing the fade scripts and assign all the variables
-    public static void Fade(AsyncOperation ao, Color col, float multiplier)
-    {
-        var faders = GameObject.FindObjectsOfType<Fader>();
+    static bool areWeFading = false;
 
-        foreach (var f in faders)
+    public static bool AreWeFading { get => areWeFading; }
+
+    //Create Fader object and assing the fade scripts and assign all the variables
+    public static void Fade(string scene, Color col, float multiplier)
+    {
+        if (areWeFading)
         {
-            GameObject.Destroy(f.gameObject);
+            Debug.Log("Already Fading");
+            return;
         }
 
-
-        GameObject init = new GameObject
-        {
-            name = "Fader"
-        };
-
+        GameObject init = new GameObject();
+        init.name = "Fader";
         Canvas myCanvas = init.AddComponent<Canvas>();
         myCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
         init.AddComponent<Fader>();
@@ -27,9 +26,15 @@ public static class Initiate
 
         Fader scr = init.GetComponent<Fader>();
         scr.fadeDamp = multiplier;
-        scr.ao = ao;
+        scr.fadeScene = scene;
         scr.fadeColor = col;
-
+        scr.start = true;
+        areWeFading = true;
         scr.InitiateFader();
+        
+    }
+
+    public static void DoneFading() {
+        areWeFading = false;
     }
 }

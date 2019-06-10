@@ -16,11 +16,11 @@ public class TriggerToTransition : MonoBehaviour
     {
         // ExecuteAfterTime is need:
         // without it, SC_transition load directly
-        this.ExecuteAfterTime(1f, () =>
-        {
-            _ao = SceneManager.LoadSceneAsync("SC_transition");
-            _ao.allowSceneActivation = false;
-        });
+        //this.ExecuteAfterTime(1f, () =>
+        //{
+        //    _ao = SceneManager.LoadSceneAsync("SC_transition");
+        //    _ao.allowSceneActivation = false;
+        //});
     }
 
     void OnTriggerEnter(Collider other)
@@ -37,7 +37,7 @@ public class TriggerToTransition : MonoBehaviour
 
             this.ExecuteAfterTime(1f, () =>
             {
-                Initiate.Fade(_ao, Color.black, 1f);
+                Initiate.Fade("SC_Transition", Color.black, 1f);
             });
         }
     }
