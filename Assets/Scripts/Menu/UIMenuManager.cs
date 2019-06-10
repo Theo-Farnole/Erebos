@@ -54,6 +54,7 @@ public class UIMenuManager : MonoBehaviour
     #region Privates Fields
     private PanelType _currentPanel = PanelType.MainMenu;
     private AsyncOperation _ao;
+    private bool _playedHasBeenPressed = false;
     #endregion
     #endregion
 
@@ -106,8 +107,12 @@ public class UIMenuManager : MonoBehaviour
 
     void LoadTutorial()
     {
+        if (_playedHasBeenPressed)
+            return;
+
         if (_ao != null)
         {
+            _playedHasBeenPressed = true;
             Initiate.Fade(_ao, Color.black, 1f);
         }
     }
