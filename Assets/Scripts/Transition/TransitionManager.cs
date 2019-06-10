@@ -30,7 +30,8 @@ public class TransitionManager : Singleton<TransitionManager>
     private int _currentTransitionIndex = -1;
     private Transition _currentTransition;
 
-    private int _alternator = 9999;
+    private int _alternator = -1;
+    private bool _hasEnded = false;
     #endregion
 
     #region Properties
@@ -107,9 +108,10 @@ public class TransitionManager : Singleton<TransitionManager>
         }
         else
         {
-            if (_ao != null)
+            if (!_hasEnded && _ao != null)
             {
-                //this.ExecuteAfterTime(FADEOUT_DURATION, () => ao.allowSceneActivation = true);
+                _hasEnded = true;
+
                 Initiate.Fade(_ao, Color.black, 1f);
             }
         }
