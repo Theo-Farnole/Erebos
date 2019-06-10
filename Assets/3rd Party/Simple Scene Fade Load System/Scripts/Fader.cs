@@ -5,96 +5,93 @@ using UnityEngine.UI;
 
 public class Fader : MonoBehaviour
 {
-    [HideInInspector]
-    public bool start = false;
-    [HideInInspector]
-    public float fadeDamp = 0.0f;
-    [HideInInspector]
-    public AsyncOperation ao;
-    [HideInInspector]
-    public float alpha = 0.0f;
-    [HideInInspector]
-    public Color fadeColor;
-    [HideInInspector]
-    public bool isFadeIn = false;
-    CanvasGroup myCanvas;
-    Image bg;
-    float lastTime = 0;
-    bool startedLoading = false;
-    //Set callback
+    #region Fields
+    [HideInInspector] public bool start = false;
+    [HideInInspector] public float fadeDamp = 0.0f;
+    [HideInInspector] public AsyncOperation ao;
+    [HideInInspector] public float alpha = 0.0f;
+    [HideInInspector] public Color fadeColor;
+    [HideInInspector] public bool isFadeIn = false;
+
+    private CanvasGroup _myCanvas;
+    private Image _background;
+    private float _lastTime = 0;
+    private bool _startedLoading = false;
+    #endregion
+
+    #region MonoBehaviour Callbacks
+    void OnDestroy()
+    {
+        Debug.Log("Fader OnDestroy()");
+        StopAllCoroutines();
+    }
+
     void OnEnable()
     {
+        //Set callback
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
     }
-    //Remove callback
+
     void OnDisable()
     {
+        //Remove callback
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
+    #endregion
 
     public void InitiateFader()
     {
-
         DontDestroyOnLoad(gameObject);
 
-        //Getting the visual elements
-        if (transform.GetComponent<CanvasGroup>())
-            myCanvas = transform.GetComponent<CanvasGroup>();
+        _myCanvas = transform.GetComponent<CanvasGroup>();
+        _background = transform.GetComponent<Image>();
 
-        if (transform.GetComponentInChildren<Image>())
+        if (_myCanvas && _background)
         {
-            bg = transform.GetComponent<Image>();
-            bg.color = fadeColor;
-        }
-        //Checking and starting the coroutine
-        if (myCanvas && bg)
-        {
-            myCanvas.alpha = 0.0f;
+            _background.color = fadeColor;
+            _myCanvas.alpha = 0.0f;
+
             StartCoroutine(FadeIt());
         }
         else
+        {
             Debug.LogWarning("Something is missing please reimport the package.");
+        }
     }
 
     IEnumerator FadeIt()
     {
+        _lastTime = Time.time;
 
-        while (!start)
-        {
-            //waiting to start
-            yield return null;
-        }
-        lastTime = Time.time;
-        float coDelta = lastTime;
+        float coDelta = _lastTime;
         bool hasFadedIn = false;
 
         while (!hasFadedIn)
         {
-            coDelta = Time.time - lastTime;
+            coDelta = Time.time - _lastTime;
+
             if (!isFadeIn)
             {
                 //Fade in
-                alpha = newAlpha(coDelta, 1, alpha);
-                if (alpha == 1 && !startedLoading)
+                alpha = GetNewAlpha(coDelta, 1, alpha);
+                if (alpha == 1 && !_startedLoading)
                 {
-                    startedLoading = true;
+                    _startedLoading = true;
                     ao.allowSceneActivation = true;
                 }
-
             }
             else
             {
                 //Fade out
-                alpha = newAlpha(coDelta, 0, alpha);
+                alpha = GetNewAlpha(coDelta, 0, alpha);
                 if (alpha == 0)
                 {
                     hasFadedIn = true;
                 }
-
-
             }
-            lastTime = Time.time;
-            myCanvas.alpha = alpha;
+
+            _lastTime = Time.time;
+            _myCanvas.alpha = alpha;
             yield return null;
         }
 
@@ -108,24 +105,22 @@ public class Fader : MonoBehaviour
     }
 
 
-    float newAlpha(float delta, int to, float currAlpha)
+    float GetNewAlpha(float delta, int to, float currAlpha)
     {
-
         switch (to)
         {
             case 0:
                 currAlpha -= fadeDamp * delta;
-                if (currAlpha <= 0)
-                    currAlpha = 0;
+
 
                 break;
             case 1:
                 currAlpha += fadeDamp * delta;
-                if (currAlpha >= 1)
-                    currAlpha = 1;
 
                 break;
         }
+
+        currAlpha = Mathf.Clamp(currAlpha, 0, 1);
 
         return currAlpha;
     }
@@ -133,7 +128,7 @@ public class Fader : MonoBehaviour
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         StartCoroutine(FadeIt());
-        //We can now fade in
+        
         isFadeIn = true;
     }
 }
