@@ -108,13 +108,10 @@ public class UIMenuManager : MonoBehaviour
     void LoadTutorial()
     {
         if (_playedHasBeenPressed)
-            return;
+            return;        
 
-        if (_ao != null)
-        {
-            _playedHasBeenPressed = true;
-            Initiate.Fade(SceneState.Tutorial.ToScene(), Color.black, 1f);
-        }
+        _playedHasBeenPressed = true;
+        Initiate.Fade(SceneState.Tutorial.ToScene(), Color.black, 1f);
     }
 
     void DisplayPanel(PanelType panel)

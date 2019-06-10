@@ -10,6 +10,8 @@ public class Fader : MonoBehaviour
     [HideInInspector]
     public float fadeDamp = 0.0f;
     [HideInInspector]
+    public AsyncOperation fadeAsyncOperation;
+    [HideInInspector]
     public string fadeScene;
     [HideInInspector]
     public float alpha = 0.0f;
@@ -64,6 +66,7 @@ public class Fader : MonoBehaviour
             //waiting to start
             yield return null;
         }
+
         lastTime = Time.time;
         float coDelta = lastTime;
         bool hasFadedIn = false;
@@ -78,7 +81,16 @@ public class Fader : MonoBehaviour
                 if (alpha == 1 && !startedLoading)
                 {
                     startedLoading = true;
-                    SceneManager.LoadScene(fadeScene);
+
+                    if (fadeAsyncOperation != null)
+                    {
+                        fadeAsyncOperation.allowSceneActivation = true;
+                    }
+
+                    if (fadeScene != null)
+                    {
+                        SceneManager.LoadScene(fadeScene);
+                    }
                 }
 
             }

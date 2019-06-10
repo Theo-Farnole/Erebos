@@ -43,6 +43,9 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject _panelBlackFeather;
     [SerializeField] private TextMeshProUGUI _textBlackFeather;
     [SerializeField] private GameObject _imageBlackFeather;
+
+    private bool _isRestarting = false;
+    private bool _isReturningToMainMenu = false;
     #endregion
 
     #region Properties
@@ -64,8 +67,15 @@ public class UIManager : Singleton<UIManager>
 
         _buttonRestart.onClick.AddListener(() =>
         {
+            if (_isRestarting)
+                return;
+
+            _isRestarting = true;
+
             Time.timeScale = 1;
             Initiate.Fade(SceneManager.GetActiveScene().name, Color.black, 1);
+
+            UpdatePanelPause();
         });
 
         _buttonControls.onClick.AddListener(() =>
@@ -79,6 +89,11 @@ public class UIManager : Singleton<UIManager>
 
         _buttonQuit.onClick.AddListener(() =>
         {
+            if (_isReturningToMainMenu)
+                return;
+
+            _isReturningToMainMenu = true;
+
             Time.timeScale = 1;
             Initiate.Fade("SC_main_menu", Color.black, 1);
 
