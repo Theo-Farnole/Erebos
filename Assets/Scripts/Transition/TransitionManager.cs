@@ -44,8 +44,6 @@ public class TransitionManager : Singleton<TransitionManager>
             if (_alternator > 1)
                 _alternator = 0;
 
-            Debug.Log("Alternator return: " + _alternator);
-
             return _alternator;
         }
     }
