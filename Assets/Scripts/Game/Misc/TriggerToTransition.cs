@@ -32,8 +32,6 @@ public class TriggerToTransition : MonoBehaviour
         {
             _hasBeenTriggered = true;
 
-            SingletonExtension.ResetSingleton();
-
             GameState.UpdateCurrentSpeedrunTime();
             GameState.currentScene++;
 

@@ -36,17 +36,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             _instance = value;
         }
     }
-}
 
-// NOTE: avoid this
-public static class SingletonExtension
-{
-    public static void ResetSingleton()
+    void OnDestroy()
     {
-        CharControllerManager.Instance = null;
-        CharFeedbacks.Instance = null;
-        GameManager.Instance = null;
-        UIManager.Instance = null;
-        DynamicsObjects.Instance = null;
+        _instance = null;
     }
 }
