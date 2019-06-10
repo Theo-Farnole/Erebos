@@ -57,6 +57,7 @@ public class UIMenuManager : MonoBehaviour
     #endregion
     #endregion
 
+    #region MonoBehaviour Callbacks
     void Awake()
     {
         LoadSettings();
@@ -96,6 +97,12 @@ public class UIMenuManager : MonoBehaviour
         _ao = SceneManager.LoadSceneAsync(SceneState.Tutorial.ToScene());
         _ao.allowSceneActivation = false;
     }
+
+    void OnDestroy()
+    {
+        EventLanguageChangement = null;
+    }
+    #endregion
 
     void LoadTutorial()
     {
