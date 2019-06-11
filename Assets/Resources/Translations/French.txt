@@ -24,7 +24,7 @@ mainmenu.options.audio.music = Musique
 ; pause menu
 pause.continue = Continuer
 pause.stats = Statistiques
-pause.controls = Contrôles
+pause.controls = Controles
 pause.restart = Redemarrer
 pause.quit = Retour au menu
 
