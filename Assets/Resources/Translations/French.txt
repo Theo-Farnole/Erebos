@@ -28,6 +28,15 @@ pause.controls = Controles
 pause.restart = Redemarrer
 pause.quit = Retour au menu
 
+; pause menu - controls
+pause.controls.move = Se deplacer
+pause.controls.jump = Sauter
+pause.controls.dash = Dasher
+pause.controls.wallgrab = S'accrocher
+pause.controls.walljump = Sauter d'un mur
+pause.controls.ungrabwall = Lacher le mur
+pause.controls.changeform = Changer d'etat
+
 ; cinematics
 cinematics.1.0 = Cette terre...
 cinematics.1.1 = J'ai...J'ai oublie son nom...

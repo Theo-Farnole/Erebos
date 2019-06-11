@@ -29,6 +29,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Button _buttonControls;
     [SerializeField] private Button _buttonRestart;
     [SerializeField] private Button _buttonQuit;
+    [Header("-- Pause UI - Contrôles")]
+    [SerializeField] private Scrollbar _verticalScrollbar;
     [Header("-- Tutorials")]
     [Header("-- Tutorials - IG text")]
     [SerializeField] private TextMeshProUGUI _textIndicator; // used outside of this script
@@ -83,7 +85,7 @@ public class UIManager : Singleton<UIManager>
             _panelPause.SetActive(false);
             _panelControls.SetActive(true);
 
-            EventSystem.current.SetSelectedGameObject(_panelControls.transform.GetChild(0).gameObject);
+            EventSystem.current.SetSelectedGameObject(_verticalScrollbar.gameObject);
             
         });
 

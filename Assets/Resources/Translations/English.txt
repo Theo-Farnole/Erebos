@@ -28,6 +28,15 @@ pause.controls = Controls
 pause.restart = Restart
 pause.quit = Return to menu
 
+; pause menu - controls
+pause.controls.move = Move
+pause.controls.jump = Jump
+pause.controls.dash = Dash
+pause.controls.wallgrab = Wall grab
+pause.controls.walljump = Wall jump
+pause.controls.ungrabwall = Ungrab
+pause.controls.changeform = Switch Form
+
 ; cinematics
 cinematics.1.0 = This land...
 cinematics.1.1 = I... I forgot its name...
