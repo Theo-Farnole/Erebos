@@ -22,6 +22,8 @@ public class DisplayTextOnTriggerEnter : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            _hasBeenTriggered = true;
+
             var text = UIManager.Instance.TextIndicator;
 
             text.text = _key;
