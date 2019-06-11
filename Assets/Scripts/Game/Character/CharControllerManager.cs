@@ -34,6 +34,7 @@ public class CharControllerManager : Singleton<CharControllerManager>
             else
             {
                 _charControllerSingularity.isRotatingAroundSingularity = false;
+                transform.parent = null;
             }
         }
     }

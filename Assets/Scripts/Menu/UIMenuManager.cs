@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Erebos.Inputs;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -24,6 +25,7 @@ public class UIMenuManager : MonoBehaviour
     #region Fields
     #region SerializeFields
     [SerializeField] private EventSystem _eventSystem;
+    [SerializeField] private GameObject _background;
     [Header("Panels")]
     [SerializeField] private GameObject _panelMainMenu;
     [SerializeField] private GameObject _panelOptionsGeneral;
@@ -43,8 +45,8 @@ public class UIMenuManager : MonoBehaviour
     [Space]
     [SerializeField] private Toggle _toggleVSync;
     [SerializeField] private TMP_Dropdown _dropdownFullscreen;
-    [Header("Returns buttons")]
-    [SerializeField] private List<Button> _buttonsReturn = new List<Button>();
+    [Header("Return label")]
+    [SerializeField] private GameObject _labelReturn;
     #endregion
 
     #region Public static fields
@@ -76,17 +78,8 @@ public class UIMenuManager : MonoBehaviour
         _buttonQuality.onClick.AddListener(() => DisplayPanel(PanelType.OptionsQuality));
         _buttonSound.onClick.AddListener(() => DisplayPanel(PanelType.OptionsSound));
 
-        // return buttons
-        foreach (Button b in _buttonsReturn)
-        {
-            b.onClick.AddListener(ReturnButtonPressed);
-            b.onClick.AddListener(() => AudioManager.Instance.PlaySoundUI(SoundUI.Button));
-        }
-
         // set audio for every buttons
-        var buttons = FindObjectsOfType<Button>();
-
-        foreach (Button b in buttons)
+        foreach (Button b in FindObjectsOfType<Button>())
         {
             b.onClick.AddListener(() => AudioManager.Instance.PlaySoundUI(SoundUI.Button));
         }
@@ -99,6 +92,14 @@ public class UIMenuManager : MonoBehaviour
         _ao.allowSceneActivation = false;
     }
 
+    void Update()
+    {
+        if (InputProxy.Menu.Back)
+        {
+            ReturnButtonPressed();
+        }
+    }
+
     void OnDestroy()
     {
         EventLanguageChangement = null;
@@ -108,7 +109,7 @@ public class UIMenuManager : MonoBehaviour
     void LoadTutorial()
     {
         if (_playedHasBeenPressed)
-            return;        
+            return;
 
         _playedHasBeenPressed = true;
         Initiate.Fade(SceneState.Tutorial.ToScene(), Color.black, 1f);
@@ -124,11 +125,17 @@ public class UIMenuManager : MonoBehaviour
         _panelOptionsQuality.SetActive(false);
         _panelCredits.SetActive(false);
 
+        _labelReturn.gameObject.SetActive(true);
+        _background.gameObject.SetActive(false);
+
         switch (panel)
         {
             case PanelType.MainMenu:
                 _panelMainMenu.SetActive(true);
                 _eventSystem.SetSelectedGameObject(_buttonPlay.gameObject);
+
+                _labelReturn.gameObject.SetActive(false);
+                _background.gameObject.SetActive(true);
                 break;
 
             case PanelType.OptionsGeneral:
@@ -138,7 +145,6 @@ public class UIMenuManager : MonoBehaviour
 
             case PanelType.OptionsSound:
                 _panelOptionsSound.SetActive(true);
-                //_eventSystem.firstSelectedGameObject = _buttonQuality.gameObject;    
                 break;
 
             case PanelType.OptionsQuality:
@@ -148,7 +154,6 @@ public class UIMenuManager : MonoBehaviour
 
             case PanelType.Credits:
                 _panelCredits.SetActive(true);
-                _eventSystem.SetSelectedGameObject(_buttonsReturn[3].gameObject);
                 break;
         }
     }
