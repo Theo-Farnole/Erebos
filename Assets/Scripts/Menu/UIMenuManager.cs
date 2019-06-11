@@ -58,6 +58,13 @@ public class UIMenuManager : MonoBehaviour
     {
         LoadSettings();
         DisplayPanel(PanelType.MainMenu);
+    }
+
+    void Start()
+    {
+        // doesn't work in Awake()
+        _ao = SceneManager.LoadSceneAsync(SceneState.Tutorial.ToScene());
+        _ao.allowSceneActivation = false;
 
         // main menu
         _buttonPlay.onClick.AddListener(LoadTutorial);  // load tutorial
@@ -73,13 +80,6 @@ public class UIMenuManager : MonoBehaviour
         {
             b.onClick.AddListener(() => AudioManager.Instance.PlaySoundUI(SoundUI.Button));
         }
-    }
-
-    void Start()
-    {
-        // doesn't work in Awake()
-        _ao = SceneManager.LoadSceneAsync(SceneState.Tutorial.ToScene());
-        _ao.allowSceneActivation = false;
     }
 
     void Update()
@@ -151,7 +151,6 @@ public class UIMenuManager : MonoBehaviour
 
     void SelectorLanguageChanged()
     {
-        Debug.Log("Update t'entends?");
         SaveSettings();
         Translation.ResetTranslations();
 

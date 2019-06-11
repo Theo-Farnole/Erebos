@@ -37,8 +37,13 @@ public sealed class TranslateText : MonoBehaviour
     /// </summary>
     public void DynamicTextUpdate()
     {
-        _key = _text.text;
-        UpdateText();
+        if (_text != null)
+        {
+            Debug.Log(transform.position + "DynamicText");
+
+            _key = _text.text;
+            UpdateText();
+        }
     }
 
     void UpdateText()
