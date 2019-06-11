@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SM_Eclatos_lambert2_BaseColor:
-        m_Texture: {fileID: 2800000, guid: cbe3486ede21ea7428f60aad62a188ca, type: 3}
+        m_Texture: {fileID: 2800000, guid: beb52ec70aa99064180dd0b7eac7b338, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
