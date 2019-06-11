@@ -32,8 +32,8 @@ RectTransform:
   m_Father: {fileID: 4296943715556771028}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.44663864}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1310,9 +1310,9 @@ RectTransform:
   m_Father: {fileID: 3474530783424096170}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 800, y: -519.89606}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3397066041907297751
@@ -1855,7 +1855,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 734bd1f7f25bc4547b3fddc8b89672b1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f19c7c343fcebca4888ce84a6a7bf88f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3181,7 +3181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3750960106658585608
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3524,7 +3524,8 @@ MonoBehaviour:
   m_text: game.tutorial.white
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8c98289ca11cae240980fd48b5bdcba5, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 8606599196676499096, guid: 8c98289ca11cae240980fd48b5bdcba5,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3590,13 +3591,13 @@ MonoBehaviour:
   m_margin: {x: 50, y: 0, z: 50, w: 0}
   m_textInfo:
     textComponent: {fileID: 5756323122694146919}
-    characterCount: 0
+    characterCount: 19
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 3
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 1
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -3643,7 +3644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3474530783424096170
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4010,9 +4011,9 @@ RectTransform:
   m_Father: {fileID: 3474530783424096170}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 800, y: -449.89606}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5397434242229162871
@@ -4729,9 +4730,9 @@ RectTransform:
   m_Father: {fileID: 3474530783424096170}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 800, y: -379.89606}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1168707319005958825
@@ -5638,7 +5639,8 @@ MonoBehaviour:
   m_text: game.tutorial.black
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8c98289ca11cae240980fd48b5bdcba5, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 8606599196676499096, guid: 8c98289ca11cae240980fd48b5bdcba5,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5704,13 +5706,13 @@ MonoBehaviour:
   m_margin: {x: 50, y: 0, z: 50, w: 0}
   m_textInfo:
     textComponent: {fileID: 4887347318734447552}
-    characterCount: 0
+    characterCount: 19
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 3
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 1
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -6048,7 +6050,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 734bd1f7f25bc4547b3fddc8b89672b1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f19c7c343fcebca4888ce84a6a7bf88f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
