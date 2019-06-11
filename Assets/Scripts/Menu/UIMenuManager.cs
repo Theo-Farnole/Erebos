@@ -16,7 +16,8 @@ public class UIMenuManager : MonoBehaviour
     {
         MainMenu,
         Options,
-        Credits
+        Credits,
+        PopUp
     };
     #endregion
 
@@ -28,6 +29,7 @@ public class UIMenuManager : MonoBehaviour
     [SerializeField] private GameObject _panelMainMenu;
     [SerializeField] private GameObject _panelOptionsGeneral;
     [SerializeField] private GameObject _panelCredits;
+    [SerializeField] private GameObject _panelPopUp;
     [Header("Main Menu")]
     [SerializeField] private Button _buttonPlay;
     [SerializeField] private Button _buttonOptions;
@@ -57,7 +59,7 @@ public class UIMenuManager : MonoBehaviour
     void Awake()
     {
         LoadSettings();
-        DisplayPanel(PanelType.MainMenu);
+        DisplayPanel(PanelType.PopUp);
     }
 
     void Start()
@@ -88,6 +90,11 @@ public class UIMenuManager : MonoBehaviour
         {
             ReturnButtonPressed();
         }
+
+        if (InputProxy.Menu.Validate && _panelPopUp.activeInHierarchy)
+        {
+            DisplayPanel(PanelType.MainMenu);
+        }
     }
 
     void OnDestroy()
@@ -112,6 +119,7 @@ public class UIMenuManager : MonoBehaviour
         _panelMainMenu.SetActive(false);
         _panelOptionsGeneral.SetActive(false);
         _panelCredits.SetActive(false);
+        _panelPopUp.SetActive(false);
 
         _labelReturn.gameObject.SetActive(true);
         _background.gameObject.SetActive(false);
@@ -133,6 +141,10 @@ public class UIMenuManager : MonoBehaviour
 
             case PanelType.Credits:
                 _panelCredits.SetActive(true);
+                break;
+
+            case PanelType.PopUp:
+                _panelPopUp.SetActive(true);
                 break;
         }
     }

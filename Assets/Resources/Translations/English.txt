@@ -5,6 +5,7 @@ mainmenu.credits = Credits
 mainmenu.quit = Quit
 mainmenu.subtitle = Athena's journey
 mainmenu.back = Back
+mainmenu.popup = Usage of a controller is highly recommanded.
 
 ; main menu - options
 mainmenu.options.video = Video Settings
