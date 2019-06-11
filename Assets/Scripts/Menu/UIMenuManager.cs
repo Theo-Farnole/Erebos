@@ -65,7 +65,8 @@ public class UIMenuManager : MonoBehaviour
         _buttonCredits.onClick.AddListener(() => DisplayPanel(PanelType.Credits));
         _buttonQuit.onClick.AddListener(Application.Quit);
 
-        _selectorLanguage.onValueChanged.AddListener(DropdownLanguageChanged);
+        // selector
+        _selectorLanguage.onValueChanged.AddListener(SelectorLanguageChanged);
 
         // set audio for every buttons
         foreach (Button b in FindObjectsOfType<Button>())
@@ -148,8 +149,9 @@ public class UIMenuManager : MonoBehaviour
         }
     }
 
-    void DropdownLanguageChanged()
+    void SelectorLanguageChanged()
     {
+        Debug.Log("Update t'entends?");
         SaveSettings();
         Translation.ResetTranslations();
 
@@ -159,18 +161,18 @@ public class UIMenuManager : MonoBehaviour
     #region Load/Save Settings Methods
     void LoadSettings()
     {
+        _selectorLanguage.Value = SaveSystem.OptionsData.Language;
+
         _toggleVSync.isOn = SaveSystem.OptionsData.enableVSync;
         _selectorFullscreen.Value = SaveSystem.OptionsData.FullScreenValue;
-
-        _selectorLanguage.Value = SaveSystem.OptionsData.Language;
     }
 
     void SaveSettings()
     {
+        SaveSystem.OptionsData.Language = _selectorLanguage.Value;
+
         SaveSystem.OptionsData.enableVSync = _toggleVSync.isOn;
         SaveSystem.OptionsData.FullScreenValue = _selectorFullscreen.Value;
-
-        SaveSystem.OptionsData.Language = _selectorLanguage.Value;
 
         SaveSystem.Save();
     }

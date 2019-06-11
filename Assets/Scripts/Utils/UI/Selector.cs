@@ -52,6 +52,7 @@ public class Selector : Selectable
             }
 
             _value = value;
+
             UpdateLabel();
         }
     }
@@ -89,21 +90,23 @@ public class Selector : Selectable
 
     void Selected()
     {
-        float h = InputProxy.Character.Horizontal;
-        bool isHorizontalDown = (h != 0) && (_isHorizontalPressed == false);
+        float horizontal = InputProxy.Character.Horizontal;
+        bool isHorizontalDown = (horizontal != 0) && (_isHorizontalPressed == false);
 
         if (isHorizontalDown)
         {
-            Debug.Log("Down delta: " + (int)Mathf.Sign(h));
-            Value += (int)Mathf.Sign(h);
+            Value += (int)Mathf.Sign(horizontal);
         }
 
-        _isHorizontalPressed = (h != 0);
+        _isHorizontalPressed = (horizontal != 0);
     }
 
     void UpdateLabel()
     {
-        Debug.Log("Update label with " + _value);
+
+        if (_options.Count > 1)
+        {
         _label.text = _options[Value];
+        }
     }
 }
