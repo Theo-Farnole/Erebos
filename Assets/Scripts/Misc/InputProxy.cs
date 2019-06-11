@@ -18,6 +18,17 @@ namespace Erebos.Inputs
             }
         }
 
+        public class Menu
+        {
+            public static bool Back
+            {
+                get
+                {
+                    return Input.GetKeyDown(KeyCode.Escape) || GamePad.GetButtonDown(GamePad.Button.B, GamePad.Index.One);
+                }
+            }
+        }
+
         public class Character
         {
             private static bool _rightTriggerDown = false;

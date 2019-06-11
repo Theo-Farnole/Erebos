@@ -67,7 +67,7 @@ public class CharControllerSingularity : Singleton<CharControllerSingularity>
         // on death, return to normal form
         DeathHandle d = new DeathHandle(() =>
         {
-            Form = Form.Normal;
+            Form = Form.Void;
         });
         CharDeath.EventDeath += d;
     }
