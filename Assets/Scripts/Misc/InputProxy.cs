@@ -27,6 +27,14 @@ namespace Erebos.Inputs
                     return Input.GetKeyDown(KeyCode.Escape) || GamePad.GetButtonDown(GamePad.Button.B, GamePad.Index.One);
                 }
             }
+
+            public static bool Validate
+            {
+                get
+                {
+                    return Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Space) || GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One);
+                }
+            }
         }
 
         public class Character

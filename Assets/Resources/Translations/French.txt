@@ -5,6 +5,7 @@ mainmenu.credits = Credits
 mainmenu.quit = Quitter
 mainmenu.subtitle = Le voyage d'Athena
 mainmenu.back = Retour
+mainmenu.popup = L'utilisation d'une manette est recommandee
 
 ; main menu - options
 mainmenu.options.video = Parametres Video

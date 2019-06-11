@@ -45,15 +45,10 @@ public class Selector : Selectable
                 value = 0;
             }
 
-            // Invoke Event
-            if (_value != value)
-            {
-                onValueChanged?.Invoke();
-            }
-
             _value = value;
-
             UpdateLabel();
+
+            onValueChanged?.Invoke();
         }
     }
     #endregion
@@ -61,8 +56,10 @@ public class Selector : Selectable
     #region MonoBehaviour Callbacks
     protected override void Awake()
     {
-        onValueChanged = new UnityEvent();
-        Value = 0;
+        if (onValueChanged == null)
+        {
+            onValueChanged = new UnityEvent();
+        }
     }
 
     void Update()
@@ -103,10 +100,9 @@ public class Selector : Selectable
 
     void UpdateLabel()
     {
-
         if (_options.Count > 1)
         {
-        _label.text = _options[Value];
+            _label.text = _options[Value];
         }
     }
 }
