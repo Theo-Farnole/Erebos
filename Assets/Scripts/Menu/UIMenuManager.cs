@@ -25,6 +25,7 @@ public class UIMenuManager : MonoBehaviour
     #region Fields
     #region SerializeFields
     [SerializeField] private EventSystem _eventSystem;
+    [SerializeField] private GameObject _background;
     [Header("Panels")]
     [SerializeField] private GameObject _panelMainMenu;
     [SerializeField] private GameObject _panelOptionsGeneral;
@@ -75,7 +76,7 @@ public class UIMenuManager : MonoBehaviour
 
         // quality panel
         _buttonQuality.onClick.AddListener(() => DisplayPanel(PanelType.OptionsQuality));
-        _buttonSound.onClick.AddListener(() => DisplayPanel(PanelType.OptionsSound));        
+        _buttonSound.onClick.AddListener(() => DisplayPanel(PanelType.OptionsSound));
 
         // set audio for every buttons
         foreach (Button b in FindObjectsOfType<Button>())
@@ -125,13 +126,16 @@ public class UIMenuManager : MonoBehaviour
         _panelCredits.SetActive(false);
 
         _labelReturn.gameObject.SetActive(true);
+        _background.gameObject.SetActive(false);
 
         switch (panel)
         {
             case PanelType.MainMenu:
                 _panelMainMenu.SetActive(true);
-                _labelReturn.gameObject.SetActive(false);
                 _eventSystem.SetSelectedGameObject(_buttonPlay.gameObject);
+
+                _labelReturn.gameObject.SetActive(false);
+                _background.gameObject.SetActive(true);
                 break;
 
             case PanelType.OptionsGeneral:
