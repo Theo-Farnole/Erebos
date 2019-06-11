@@ -9,17 +9,13 @@ mainmenu.back = Retour
 ; main menu - options
 mainmenu.options.video = Parametres Video
 mainmenu.options.audio = Parametres Audio
+mainmenu.options.language = Langage
 
 ; main menu - options video
 mainmenu.options.video.vsync = VSync
 mainmenu.options.video.fullscreen = Plein ecran
 mainmenu.options.video.windowed = Fenetre
 mainmenu.options.video.borderless = Sans bords
-
-; main menu - options audio
-mainmenu.options.audio.general = General
-mainmenu.options.audio.ambiance = Ambiance
-mainmenu.options.audio.music = Musique
 
 ; pause menu
 pause.continue = Continuer

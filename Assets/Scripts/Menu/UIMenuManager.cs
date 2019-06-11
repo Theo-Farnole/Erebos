@@ -15,9 +15,7 @@ public class UIMenuManager : MonoBehaviour
     private enum PanelType
     {
         MainMenu,
-        OptionsGeneral,
-        OptionsSound,
-        OptionsQuality,
+        Options,
         Credits
     };
     #endregion
@@ -29,22 +27,17 @@ public class UIMenuManager : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject _panelMainMenu;
     [SerializeField] private GameObject _panelOptionsGeneral;
-    [SerializeField] private GameObject _panelOptionsSound;
-    [SerializeField] private GameObject _panelOptionsQuality;
     [SerializeField] private GameObject _panelCredits;
     [Header("Main Menu")]
     [SerializeField] private Button _buttonPlay;
     [SerializeField] private Button _buttonOptions;
     [SerializeField] private Button _buttonCredits;
     [SerializeField] private Button _buttonQuit;
-    [Space]
-    [SerializeField] private TMP_Dropdown _dropdownLanguage;
-    [Header("Quality Panel")]
-    [SerializeField] private Button _buttonQuality;
-    [SerializeField] private Button _buttonSound;
+    [Header("Options Panel")]
+    [SerializeField] private Selector _selectorLanguage;
     [Space]
     [SerializeField] private Toggle _toggleVSync;
-    [SerializeField] private TMP_Dropdown _dropdownFullscreen;
+    [SerializeField] private Selector _selectorFullscreen;
     [Header("Return label")]
     [SerializeField] private GameObject _labelReturn;
     #endregion
@@ -68,15 +61,11 @@ public class UIMenuManager : MonoBehaviour
 
         // main menu
         _buttonPlay.onClick.AddListener(LoadTutorial);  // load tutorial
-        _buttonOptions.onClick.AddListener(() => DisplayPanel(PanelType.OptionsGeneral));
+        _buttonOptions.onClick.AddListener(() => DisplayPanel(PanelType.Options));
         _buttonCredits.onClick.AddListener(() => DisplayPanel(PanelType.Credits));
         _buttonQuit.onClick.AddListener(Application.Quit);
 
-        _dropdownLanguage.onValueChanged.AddListener(DropdownLanguageChanged);
-
-        // quality panel
-        _buttonQuality.onClick.AddListener(() => DisplayPanel(PanelType.OptionsQuality));
-        _buttonSound.onClick.AddListener(() => DisplayPanel(PanelType.OptionsSound));
+        _selectorLanguage.onValueChanged.AddListener(DropdownLanguageChanged);
 
         // set audio for every buttons
         foreach (Button b in FindObjectsOfType<Button>())
@@ -121,8 +110,6 @@ public class UIMenuManager : MonoBehaviour
 
         _panelMainMenu.SetActive(false);
         _panelOptionsGeneral.SetActive(false);
-        _panelOptionsSound.SetActive(false);
-        _panelOptionsQuality.SetActive(false);
         _panelCredits.SetActive(false);
 
         _labelReturn.gameObject.SetActive(true);
@@ -138,18 +125,9 @@ public class UIMenuManager : MonoBehaviour
                 _background.gameObject.SetActive(true);
                 break;
 
-            case PanelType.OptionsGeneral:
+            case PanelType.Options:
                 _panelOptionsGeneral.SetActive(true);
-                _eventSystem.SetSelectedGameObject(_buttonQuality.gameObject);
-                break;
-
-            case PanelType.OptionsSound:
-                _panelOptionsSound.SetActive(true);
-                break;
-
-            case PanelType.OptionsQuality:
-                _panelOptionsQuality.SetActive(true);
-                _eventSystem.SetSelectedGameObject(_toggleVSync.gameObject);
+                _eventSystem.SetSelectedGameObject(_selectorLanguage.gameObject);
                 break;
 
             case PanelType.Credits:
@@ -163,19 +141,14 @@ public class UIMenuManager : MonoBehaviour
         switch (_currentPanel)
         {
             case PanelType.Credits:
-            case PanelType.OptionsGeneral:
+            case PanelType.Options:
                 DisplayPanel(PanelType.MainMenu);
-                break;
-
-            case PanelType.OptionsSound:
-            case PanelType.OptionsQuality:
-                DisplayPanel(PanelType.OptionsGeneral);
                 SaveSettings();
                 break;
         }
     }
 
-    void DropdownLanguageChanged(int i)
+    void DropdownLanguageChanged()
     {
         SaveSettings();
         Translation.ResetTranslations();
@@ -187,20 +160,19 @@ public class UIMenuManager : MonoBehaviour
     void LoadSettings()
     {
         _toggleVSync.isOn = SaveSystem.OptionsData.enableVSync;
-        _dropdownFullscreen.SetValueWithoutNotify(SaveSystem.OptionsData.FullScreenValue);
+        _selectorFullscreen.Value = SaveSystem.OptionsData.FullScreenValue;
 
-        _dropdownLanguage.value = SaveSystem.OptionsData.Language;
+        _selectorLanguage.Value = SaveSystem.OptionsData.Language;
     }
 
     void SaveSettings()
     {
         SaveSystem.OptionsData.enableVSync = _toggleVSync.isOn;
-        SaveSystem.OptionsData.FullScreenValue = _dropdownFullscreen.value;
+        SaveSystem.OptionsData.FullScreenValue = _selectorFullscreen.Value;
 
-        SaveSystem.OptionsData.Language = _dropdownLanguage.value;
+        SaveSystem.OptionsData.Language = _selectorLanguage.Value;
 
         SaveSystem.Save();
-        Debug.Log("SaveSettings: " + SaveSystem.OptionsData.language);
     }
     #endregion
 }

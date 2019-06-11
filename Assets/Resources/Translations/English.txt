@@ -9,6 +9,7 @@ mainmenu.back = Back
 ; main menu - options
 mainmenu.options.video = Video Settings
 mainmenu.options.audio = Audio Settings
+mainmenu.options.language = Language
 
 ; main menu - options video
 mainmenu.options.video.vsync = VSync
