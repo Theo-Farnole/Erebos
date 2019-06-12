@@ -24,9 +24,6 @@ public enum SoundUI
 public enum SoundMusic
 {
 };
-public enum SoundAmbiance
-{
-};
 
 // NOTE:
 // Project convention: Never call PlaySound from event!
@@ -119,6 +116,7 @@ public class AudioManager : Singleton<AudioManager>
     #region Fields
     [SerializeField] private GeneralSounds _generalSounds;
     [SerializeField] private UISounds _uiSounds;
+    [SerializeField] private AudioSource _soundAmbiance;
 
     private AudioSource _currentFootstep = null;
     #endregion
@@ -164,25 +162,11 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
-    public void PlaySoundMusic(SoundMusic sound)
+    public void PlaySoundAmbiance()
     {
-        float volume = SaveSystem.OptionsData.soundMusique;
-
-        switch (sound)
+        if (_soundAmbiance != null)
         {
-            default:
-                break;
-        }
-    }
-
-    public void PlaySoundAmbiance(SoundAmbiance sound)
-    {
-        float volume = SaveSystem.OptionsData.soundAmbiance;
-
-        switch (sound)
-        {
-            default:
-                break;
+            _soundAmbiance.Play();
         }
     }
 }

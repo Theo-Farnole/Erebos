@@ -68,6 +68,8 @@ public class TransitionManager : Singleton<TransitionManager>
 
     void Start()
     {
+        AudioManager.Instance.PlaySoundAmbiance();
+
         string sceneToLoad = GameState.currentScene.ToScene();
 
         _ao = SceneManager.LoadSceneAsync(sceneToLoad);

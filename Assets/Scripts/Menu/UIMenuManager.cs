@@ -64,6 +64,8 @@ public class UIMenuManager : MonoBehaviour
 
     void Start()
     {
+        AudioManager.Instance.PlaySoundAmbiance();
+
         // doesn't work in Awake()
         _ao = SceneManager.LoadSceneAsync(SceneState.Tutorial.ToScene());
         _ao.allowSceneActivation = false;
