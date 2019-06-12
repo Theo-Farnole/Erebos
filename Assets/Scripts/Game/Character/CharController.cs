@@ -494,7 +494,7 @@ public class CharController : MonoBehaviour
         _animator.SetBool(_hashFall, isFalling);
         _animator.SetBool(_hashGrounded, isGrounded);
         _animator.SetFloat(_hashWalkBlend, Mathf.Abs(_horizontal));
-        _animator.SetBool(_hashIsInAir, _rigidbody.velocity.x != 0);
+        _animator.SetBool(_hashIsInAir, !isGrounded);
         _animator.SetBool(_hashWallGrab, _isSticked);
         _animator.SetFloat(_hashVelocity, velocity);
         _animator.SetBool(_hashLeftCollision, _collision.left);
