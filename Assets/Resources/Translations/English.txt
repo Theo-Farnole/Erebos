@@ -80,7 +80,7 @@ game.tutorial.drop = Press B to drop.
 game.tutorial.eclatos = Press LT / RT.
 
 game.tutorial.void.title = Void Feather
-game.tutorial.void.content = Press LT to pass in the void form.
+game.tutorial.void.content = Press RT to pass in the void form.
 
 game.tutorial.ethereal.title = Ethereal Feather
-game.tutorial.ethereal.content =Press LT to pass in the ethereal form.
+game.tutorial.ethereal.content =Press RT to pass in the ethereal form.
