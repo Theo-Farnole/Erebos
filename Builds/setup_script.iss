@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Erebos"
-#define MyAppVersion "b1.5"
+#define MyAppVersion "b1.6"
 #define MyAppPublisher "Pepite Studio"
 #define MyAppExeName "Erebos.exe"
 
@@ -30,8 +30,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\workspace\Unity\3D\Erebos\Builds\{#MyAppVersion}\Erebos.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\workspace\Unity\3D\Erebos\Builds\{#MyAppVersion}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Erebos\Builds\{#MyAppVersion}\Erebos.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Erebos\Builds\{#MyAppVersion}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
