@@ -74,7 +74,7 @@ game.tutorial.drop = Appuyez sur B pour lâcher le mur.
 game.tutorial.eclatos = Appuyez sur LT / RT.
 
 game.tutorial.void.title = Plumes du vide
-game.tutorial.void.content = Utilisez RT pour passer en forme du vide.
+game.tutorial.void.content = Utilisez RT pour passer en forme du vide.<br>Dans cette forme, certains objets vous attirent.
 
 game.tutorial.ethereal.title = Plumes etherees
-game.tutorial.ethereal.content = Utilisez RT pour passer en forme du etheree. 
+game.tutorial.ethereal.content = Utilisez RT pour passer en forme du etheree.<br>Dans cette forme, certains objets vous repoussent.
