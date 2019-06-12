@@ -52,6 +52,7 @@ public class CharDeath : MonoBehaviour
         if (other.CompareTag("Checkpoint"))
         {
             currentCheckpoint = other.transform.position;
+            GameManager.Instance.ValidateCollectibles();
         }
     }
 

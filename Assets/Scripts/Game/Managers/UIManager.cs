@@ -10,6 +10,8 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
+    public static readonly float BLINKING_TIME = 2;
+
 
     #region Fields
     [Header("-- InGame UI ")]
@@ -48,6 +50,8 @@ public class UIManager : Singleton<UIManager>
 
     private bool _isRestarting = false;
     private bool _isReturningToMainMenu = false;
+
+    private Coroutine _collectibleCoroutine = null;
     #endregion
 
     #region Properties
@@ -86,7 +90,7 @@ public class UIManager : Singleton<UIManager>
             _panelControls.SetActive(true);
 
             EventSystem.current.SetSelectedGameObject(_verticalScrollbar.gameObject);
-            
+
         });
 
         _buttonQuit.onClick.AddListener(() =>
@@ -102,8 +106,8 @@ public class UIManager : Singleton<UIManager>
             UpdatePanelPause();
         });
 
-        _textCollectible.gameObject.SetActive(false);
-        _imageCollectible.gameObject.SetActive(false);
+        _textCollectible.SetTransparency(0);
+        _imageCollectible.SetTransparency(0);
 
         _panelWhiteFeather.SetActive(false);
         _panelBlackFeather.SetActive(false);
@@ -140,13 +144,54 @@ public class UIManager : Singleton<UIManager>
     #region Collectibles
     public void StartDisplayCollectiblesText()
     {
-        _textCollectible.text = GameManager.Instance.CurrentCollectibles + " / " + GameState.CurrentMaxCollectibles;
+        StartGatherCollectible(false);
 
-        _textCollectible.gameObject.SetActive(true);
-        _imageCollectible.gameObject.SetActive(true);
+        _textCollectible.text = GameState.CurrentCollectibles + " / " + GameState.CurrentMaxCollectibles;
 
+        _textCollectible.SetTransparency(1);
         _textCollectible.Fade(FadeType.FadeOut, _collectiblesFadeoutTime);
+
+        _imageCollectible.SetTransparency(1);
         _imageCollectible.Fade(FadeType.FadeOut, _collectiblesFadeoutTime);
+    }
+
+    public void StartGatherCollectible(bool active)
+    {
+        if (active)
+        {
+            _collectibleCoroutine = StartCoroutine(GatherCoroutine());
+        }
+        else
+        {
+            if (_collectibleCoroutine != null)
+            {
+                StopCoroutine(_collectibleCoroutine);
+                _imageCollectible.StopAllCoroutines();
+            }
+            
+            _imageCollectible.SetTransparency(0);
+        }
+    }
+
+    private IEnumerator GatherCoroutine()
+    {
+        _imageCollectible.CrossFadeAlpha(0.5f, 1, false);
+
+        while (true)
+        {
+            switch (_imageCollectible.color.a)
+            {
+                case 0:
+                    _imageCollectible.Fade(FadeType.FadeIn, BLINKING_TIME);
+                    break;
+
+                case 1:
+                    _imageCollectible.Fade(FadeType.FadeOut, BLINKING_TIME);
+                    break;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
     }
     #endregion
 

@@ -19,6 +19,12 @@ public class GameManager : Singleton<GameManager>
         GameState.CurrentMaxCollectibles = FindObjectsOfType<Collectible>().Length;
     }
 
+    void Start()
+    {
+        var d1 = new RespawnHandle(FreeCollectibles);
+        CharDeath.EventRespawn += d1;
+    }
+
     void Update()
     {
         if (!Initiate.AreWeFading && GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
@@ -29,14 +35,36 @@ public class GameManager : Singleton<GameManager>
     }
     #endregion
 
-    public void AddCollectible()
+    #region Collectibles Methods
+    public void GatherCollectible()
     {
         _currentCollectibles++;
 
-        GameState.CurrentCollectibles++;
+        AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Collectible);
+
+        UIManager.Instance.StartGatherCollectible(true);
+    }
+
+    public void ValidateCollectibles()
+    {
+        if (_currentCollectibles == 0)
+            return;
+
+        GameState.CurrentCollectibles += _currentCollectibles;
+        _currentCollectibles = 0;
+
         UIManager.Instance.StartDisplayCollectiblesText();
         AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Collectible);
     }
+
+    void FreeCollectibles()
+    {
+        _currentCollectibles = 0;
+
+        UIManager.Instance.StartGatherCollectible(false);
+    }
+
+    #endregion
 
     public void RestartCheckpoint()
     {

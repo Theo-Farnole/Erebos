@@ -27,7 +27,7 @@ public class Collectible : MonoBehaviour
                 return;
             }
 
-            GameManager.Instance.AddCollectible();
+            GameManager.Instance.GatherCollectible();
 
             // play fx and destro collectible
             CharFeedbacks.Instance.PlayJumpPS();
