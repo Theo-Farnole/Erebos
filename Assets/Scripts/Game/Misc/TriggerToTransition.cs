@@ -34,6 +34,8 @@ public class TriggerToTransition : MonoBehaviour
         {
             _hasBeenTriggered = true;
 
+            GameManager.Instance.ValidateCollectibles();
+
             GameState.UpdateCurrentSpeedrunTime();
             GameState.currentScene++;
 
