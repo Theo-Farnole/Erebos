@@ -72,5 +72,9 @@ end.stats.death = morts
 ; tutorials
 game.tutorial.drop = Appuyez sur B pour lâcher le mur.
 game.tutorial.eclatos = Appuyez sur LT / RT.
-game.tutorial.black = Vous avez trouvez une <b>plume du vide</b>!<br>En etant dans cette etat, certains objets vont vous <b>attirer</b>. <br> <br> <i>Utilisez LT pour passer en forme du vide.</i> 
-game.tutorial.white = Vous avez trouvez une <b>plume etheree</b>!<br>En etant dans cette etat, certains objets vont vous <b>repousser</b>. <br> <br> <i>Utilisez LT pour passer en forme etheree.</i> 
+
+game.tutorial.void.title = Plumes du vide
+game.tutorial.void.content = Utilisez LT pour passer en forme du vide.
+
+game.tutorial.ethereal.title = Plumes etherees
+game.tutorial.ethereal.content = Utilisez LT pour passer en forme du etheree. 

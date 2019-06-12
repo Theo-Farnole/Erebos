@@ -78,5 +78,9 @@ end.stats.death = deaths
 ; tutorials
 game.tutorial.drop = Press B to drop.
 game.tutorial.eclatos = Press LT / RT.
-game.tutorial.black = You finded the <b>void feather</b>!<br>In that state, some objects will <b>attract you</b><br><br><i>press LT to pass in the void form.</i> 
-game.tutorial.white = You finded the <b>etheral feather</b>!<br>In that state, some objects will <b>attract you</b><br><br><i>press LT to pass in the ethereal form.</i>  
+
+game.tutorial.void.title = Void Feather
+game.tutorial.void.content = Press LT to pass in the void form.
+
+game.tutorial.ethereal.title = Ethereal Feather
+game.tutorial.ethereal.content =Press LT to pass in the ethereal form.
