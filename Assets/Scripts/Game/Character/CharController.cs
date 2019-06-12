@@ -300,7 +300,7 @@ public class CharController : MonoBehaviour
 
     private void CheckIfUnsticked()
     {
-        if (InputProxy.Character.Unstick)
+        if (InputProxy.Character.Unstick && !(_horizontal < 0 && _collision.left) && !(_horizontal > 0 && _collision.right))
         {
             _animator.SetTrigger(_hashUnstick);
 
