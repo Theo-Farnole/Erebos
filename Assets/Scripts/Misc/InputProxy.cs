@@ -11,9 +11,7 @@ namespace Erebos.Inputs
         {
             get
             {
-                return GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One) ||
-                    GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One) ||
-                    Input.GetKeyDown(KeyCode.A);
+                return InputProxy.Menu.Validate || Input.GetKeyDown(KeyCode.Space);
 
             }
         }
