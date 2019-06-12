@@ -16,8 +16,7 @@ public class CharDeath : MonoBehaviour
 
     public static bool isDead = false;
 
-    [HideInInspector] public Vector3 currentCheckpoint;
-
+    private Vector3 _currentCheckpoint;
     private CharController _charController = null;
     #endregion
 
@@ -25,7 +24,7 @@ public class CharDeath : MonoBehaviour
     void Awake()
     {
         isDead = false;
-        currentCheckpoint = transform.position;
+        _currentCheckpoint = transform.position;
 
         _charController = GetComponent<CharController>();
 
@@ -51,8 +50,12 @@ public class CharDeath : MonoBehaviour
 
         if (other.CompareTag("Checkpoint"))
         {
-            currentCheckpoint = other.transform.position;
-            GameManager.Instance.ValidateCollectibles();
+            if (_currentCheckpoint != other.transform.position)
+            {
+                GameManager.Instance.ValidateCollectibles();
+            }
+
+            _currentCheckpoint = other.transform.position;
         }
     }
 
@@ -79,7 +82,7 @@ public class CharDeath : MonoBehaviour
     {
         this.ExecuteAfterTime(RESPAWN_TIME, () =>
         {
-            transform.position = (Vector2)currentCheckpoint;
+            transform.position = (Vector2)_currentCheckpoint;
 
             isDead = false;
             EventRespawn?.Invoke();
