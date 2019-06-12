@@ -51,7 +51,7 @@ public class UIMenuManager : MonoBehaviour
     #region Privates Fields
     private PanelType _currentPanel = PanelType.MainMenu;
     private AsyncOperation _ao;
-    private bool _playedHasBeenPressed = false;
+    private bool _disablePlaying = true;
     #endregion
     #endregion
 
@@ -105,10 +105,12 @@ public class UIMenuManager : MonoBehaviour
 
     void LoadTutorial()
     {
-        if (_playedHasBeenPressed)
+        Debug.Log("clic");
+
+        if (_disablePlaying)
             return;
 
-        _playedHasBeenPressed = true;
+        _disablePlaying = true;
         Initiate.Fade(SceneState.Tutorial.ToScene(), Color.black, 1f);
     }
 
@@ -132,6 +134,8 @@ public class UIMenuManager : MonoBehaviour
 
                 _labelReturn.gameObject.SetActive(false);
                 _background.gameObject.SetActive(true);
+
+                this.ExecuteAfterTime(1f, () => _disablePlaying = false);
                 break;
 
             case PanelType.Options:
@@ -145,6 +149,9 @@ public class UIMenuManager : MonoBehaviour
 
             case PanelType.PopUp:
                 _panelPopUp.SetActive(true);
+                _panelMainMenu.SetActive(true);
+
+                _disablePlaying = true;
                 break;
         }
     }
