@@ -71,7 +71,7 @@ cinematics.8.1 = Beware Poseidon, for Athena is coming back for you
 ; end
 end.wp = Well play, you finished...
 end.thankyou = Thank you for playing
-end.stats.header = Here some stats for you
+end.stats.header = Stats
 end.stats.time = time played
 end.stats.death = deaths
 

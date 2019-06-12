@@ -394,8 +394,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 76.4
-  m_fontSizeBase: 76.4
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeBeforeFade: 15
   _fadeType: 0
-  _fadeDuration: 2
+  _fadeDuration: 1
 --- !u!222 &291680052
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -568,8 +568,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 76.4
-  m_fontSizeBase: 76.4
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -644,9 +644,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5149d37245e82624eaf4231308843586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBeforeFade: 21
+  _timeBeforeFade: 17
   _fadeType: 0
-  _fadeDuration: 2
+  _fadeDuration: 1
 --- !u!222 &411193596
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -980,7 +980,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166604882}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1032,7 +1032,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166604882}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5149d37245e82624eaf4231308843586, type: 3}
   m_Name: 
@@ -1128,8 +1128,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 76.4
-  m_fontSizeBase: 76.4
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1216,9 +1216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5149d37245e82624eaf4231308843586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBeforeFade: 18
+  _timeBeforeFade: 16
   _fadeType: 0
-  _fadeDuration: 2
+  _fadeDuration: 1
 --- !u!222 &1167288666
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1564,9 +1564,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5149d37245e82624eaf4231308843586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBeforeFade: 21
+  _timeBeforeFade: 17
   _fadeType: 0
-  _fadeDuration: 2
+  _fadeDuration: 1
 --- !u!1 &1911616694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,8 +1656,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 76.4
-  m_fontSizeBase: 76.4
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1732,9 +1732,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5149d37245e82624eaf4231308843586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBeforeFade: 18
+  _timeBeforeFade: 16
   _fadeType: 0
-  _fadeDuration: 2
+  _fadeDuration: 1
 --- !u!222 &1911616699
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1967,8 +1967,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 76.4
-  m_fontSizeBase: 76.4
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2057,7 +2057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeBeforeFade: 15
   _fadeType: 0
-  _fadeDuration: 2
+  _fadeDuration: 1
 --- !u!222 &1940516686
 CanvasRenderer:
   m_ObjectHideFlags: 0
