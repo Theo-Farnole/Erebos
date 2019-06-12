@@ -9,9 +9,15 @@ public class Collectible : MonoBehaviour
     [SerializeField] private GameObject _prefabDestroyPS = null;
 
     private bool _hasBeenTriggered = false;
+    private Vector3 _startingScale = Vector3.one;
     #endregion
 
     #region MonoBehaviour Callbacks
+    void Awake()
+    {
+        _startingScale = transform.localScale;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (_hasBeenTriggered)
@@ -27,7 +33,7 @@ public class Collectible : MonoBehaviour
                 return;
             }
 
-            GameManager.Instance.GatherCollectible();
+            GameManager.Instance.GatherCollectible(this);
 
             // play fx and destro collectible
             CharFeedbacks.Instance.PlayJumpPS();
@@ -48,6 +54,14 @@ public class Collectible : MonoBehaviour
         }
 
         Instantiate(_prefabDestroyPS, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void ResetScale()
+    {
+        _hasBeenTriggered = false;
+
+        transform.localScale = _startingScale;
+        gameObject.SetActive(true);
     }
 }

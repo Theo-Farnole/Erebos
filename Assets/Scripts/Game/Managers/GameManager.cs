@@ -6,11 +6,11 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     #region Fields
-    private int _currentCollectibles = 0;
+    private List<Collectible> _collectibles = new List<Collectible>();
     #endregion
 
     #region Properties
-    public int CurrentCollectibles { get => _currentCollectibles; }
+    public int CurrentCollectibles { get => _collectibles.Count; }
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -36,9 +36,9 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Collectibles Methods
-    public void GatherCollectible()
+    public void GatherCollectible(Collectible c)
     {
-        _currentCollectibles++;
+        _collectibles.Add(c);
 
         AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Collectible);
 
@@ -47,11 +47,11 @@ public class GameManager : Singleton<GameManager>
 
     public void ValidateCollectibles()
     {
-        if (_currentCollectibles == 0)
+        if (_collectibles.Count == 0)
             return;
 
-        GameState.CurrentCollectibles += _currentCollectibles;
-        _currentCollectibles = 0;
+        GameState.CurrentCollectibles += _collectibles.Count;
+        _collectibles.Clear();
 
         UIManager.Instance.StartDisplayCollectiblesText();
         AudioManager.Instance.PlaySoundGeneral(SoundGeneral.Collectible);
@@ -59,7 +59,11 @@ public class GameManager : Singleton<GameManager>
 
     void FreeCollectibles()
     {
-        _currentCollectibles = 0;
+        foreach (var c in _collectibles)
+        {
+            c.ResetScale();
+        }
+        _collectibles.Clear();
 
         UIManager.Instance.StartGatherCollectible(false);
     }
