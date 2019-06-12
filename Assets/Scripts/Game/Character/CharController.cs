@@ -187,12 +187,13 @@ public class CharController : MonoBehaviour
         {
             EndDash(false);
         }
+
+        SetAnimatorValue();
     }
 
     void LateUpdate()
     {
         LookAtDirection();
-        SetAnimatorValue();
 
         DisableGC();
     }
