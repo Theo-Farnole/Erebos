@@ -484,8 +484,8 @@ public class CharController : MonoBehaviour
         if (Time.timeScale == 0)
             return;
 
-        bool isFalling = _rigidbody.velocity.y < FALL_TRIGGER_MIN_Y;
         bool isGrounded = _collision.down;
+        bool isFalling = !isGrounded && _rigidbody.velocity.y < 0;
         float velocity = 0;
 
         if (_rigidbody.velocity.x > 0) velocity = 1;
