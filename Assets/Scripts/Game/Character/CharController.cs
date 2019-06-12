@@ -19,7 +19,7 @@ public class CharController : MonoBehaviour
     public static readonly int MAX_JUMPS = 2;
     public static readonly Vector3 HEAD_POSITION = 0.7f * Vector3.up;
     public static readonly float RADIUS_GROUNDED_SPHERE = 0.4f;
-    public static readonly float FALL_TRIGGER_MIN_Y = 0.1f;
+    public static readonly float FALL_TRIGGER_MIN_Y = -0.1f;
 
     #region Fields
     class PlayerCollision
