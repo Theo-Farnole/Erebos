@@ -44,8 +44,9 @@ public class UIMenuManager : MonoBehaviour
     [SerializeField] private GameObject _labelReturn;
     #endregion
 
-    #region Public static fields
+    #region Static fields
     public static LanguageHandle EventLanguageChangement;
+    private static bool _displayPopup = true;
     #endregion
 
     #region Privates Fields
@@ -59,7 +60,16 @@ public class UIMenuManager : MonoBehaviour
     void Awake()
     {
         LoadSettings();
-        DisplayPanel(PanelType.PopUp);
+
+        if (_displayPopup)
+        {
+            DisplayPanel(PanelType.PopUp);
+            _displayPopup = false;
+        }
+        else
+        {
+            DisplayPanel(PanelType.MainMenu);
+        }
     }
 
     void Start()
@@ -126,7 +136,7 @@ public class UIMenuManager : MonoBehaviour
         _panelPopUp.SetActive(false);
 
         _labelReturn.gameObject.SetActive(true);
-        _background.gameObject.SetActive(false);
+        _background.gameObject.SetActive(false);        
 
         switch (panel)
         {

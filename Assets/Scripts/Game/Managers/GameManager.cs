@@ -27,6 +27,9 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
+        bool isInPause = (Time.timeScale == 0);
+        Cursor.visible = isInPause;
+
         if (!Initiate.AreWeFading && GamePad.GetButtonDown(GamePad.Button.Start, GamePad.Index.One))
         {
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
