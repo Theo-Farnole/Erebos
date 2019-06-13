@@ -58,8 +58,8 @@ cinematics.6.0 = Maintenant je me rappelle...
 cinematics.6.1 = Ce trident ... Cette magie... Mon propre oncle ... 
 cinematics.6.2 = Poseidon.
 
-cinematics.7.0 = Par jalousie il m'attaqua et me bannie dans l'Erebes, esperant que je meurs et pourisse ici bas.
-cinematics.8.0 = Malheureusement pour lui, j'ai survecu a l'enfer et me dirige vers le monde des vivants plus forte que jamais. 
+cinematics.7.0 = Par jalousie il m'attaqua et me bannie dans l'Erebes,<br> esperant que je meurs et pourisse ici bas.
+cinematics.8.0 = Malheureusement pour lui, j'ai survecu a l'enfer... <br>Et me dirige vers le monde des vivants plus forte que jamais. 
 cinematics.8.1 = Prend garde Poseidon, Athena revient pour toi
 
 ; end
@@ -70,7 +70,7 @@ end.stats.time = temps joue
 end.stats.death = morts
 
 ; tutorials
-game.tutorial.drop = Appuyez sur B pour lâcher le mur.
+game.tutorial.drop = Appuyez sur B pour lacher le mur.
 game.tutorial.eclatos = Appuyez sur LT / RT.
 
 game.tutorial.void.title = Plumes du vide

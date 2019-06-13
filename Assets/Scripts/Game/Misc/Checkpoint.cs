@@ -32,8 +32,15 @@ public class Checkpoint : MonoBehaviour
 
     private void SetActiveBrasero(bool active)
     {
-        _braseroFX.SetActive(active);
-        _auraLight.SetActive(active);
+        if (_braseroFX != null)
+        {
+            _braseroFX.SetActive(active);
+        }
+
+        if (_auraLight != null)
+        {
+            _auraLight.SetActive(active);
+        }
 
         if (active)
         {
